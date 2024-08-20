@@ -43,7 +43,8 @@ function eventkoi() {
 	$plugin = new \EventKoi\Run();
 }
 
-// Run.
+// Hooks.
 register_activation_hook( __FILE__, 'activate_eventkoi' );
 register_deactivation_hook( __FILE__, 'deactivate_eventkoi' );
+
 eventkoi();
