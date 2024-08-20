@@ -2,7 +2,7 @@
 /**
  * Plugin Name: EventKoi
  * Plugin URI: https://eventkoi.com
- * Description: WordPress event plugin.
+ * Description: Event management and scheduling for WordPress.
  * Author: EventKoi
  * Author URI: https://eventkoi.com
  * Requires at least: 6.6

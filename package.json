@@ -1,7 +1,7 @@
 {
   "name": "eventkoi",
   "version": "1.0.0",
-  "description": "A WordPress plugin for managing events.",
+  "description": "Event management and scheduling for WordPress.",
   "author": "EventKoi",
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
