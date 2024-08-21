@@ -2,7 +2,8 @@
 /**
  * Fires during plugin deactivation.
  *
- * @package EventKoi
+ * @package    EventKoi
+ * @subpackage EventKoi\Core
  */
 
 namespace EventKoi\Core;

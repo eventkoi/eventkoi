@@ -21,6 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Define constants.
+define( 'EVENTKOI_VERSION', '1.0.0' );
+define( 'EVENTKOI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'EVENTKOI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'EVENTKOI_PLUGIN_FILE', __FILE__ );
+
 // Load the autoloader.
 require_once plugin_dir_path( __FILE__ ) . 'autoload.php';
 
@@ -34,4 +40,5 @@ register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\\Core\Deactivator
 function eventkoi() {
 	$plugin = new \EventKoi\Run();
 }
+
 eventkoi();

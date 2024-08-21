@@ -2,7 +2,8 @@
 /**
  * Fires during plugin activation.
  *
- * @package EventKoi
+ * @package    EventKoi
+ * @subpackage EventKoi\Core
  */
 
 namespace EventKoi\Core;

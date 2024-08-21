@@ -21,5 +21,11 @@ class Run {
 	 * Constructor.
 	 */
 	public function __construct() {
+
+		// Load inside admin only.
+		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+			$admin_menus   = new \EventKoi\Admin\Menus();
+			$admin_scripts = new \EventKoi\Admin\Scripts();
+		}
 	}
 }
