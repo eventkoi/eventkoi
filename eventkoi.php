@@ -14,6 +14,8 @@
  * @package EventKoi
  */
 
+namespace EventKoi;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,19 +24,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Load the autoloader.
 require_once plugin_dir_path( __FILE__ ) . 'autoload.php';
 
-/**
- * Triggers activation action.
- */
-function activate_eventkoi() {
-	\EventKoi\Core\Activator::activate();
-}
-
-/**
- * Triggers deactivation action.
- */
-function deactivate_eventkoi() {
-	\EventKoi\Core\Deactivator::deactivate();
-}
+// Hooks.
+register_activation_hook( __FILE__, array( __NAMESPACE__ . '\\Core\Activator', 'activate' ) );
+register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\\Core\Deactivator', 'deactivate' ) );
 
 /**
  * Initialize the plugin.
@@ -42,9 +34,4 @@ function deactivate_eventkoi() {
 function eventkoi() {
 	$plugin = new \EventKoi\Run();
 }
-
-// Hooks.
-register_activation_hook( __FILE__, 'activate_eventkoi' );
-register_deactivation_hook( __FILE__, 'deactivate_eventkoi' );
-
 eventkoi();
