@@ -8,8 +8,8 @@
   "scripts": {
     "start": "wp-scripts start",
     "build": "wp-scripts build",
-    "start-tw": "npx tailwindcss -i ./src/tailwind/index.css -o ./build/tailwind.css --watch",
-    "build-tw": "npx tailwindcss -i ./src/tailwind/index.css -o ./build/tailwind.css --minify",
+    "start-tw": "npx tailwindcss -i ./src/tailwind.css -o ./build/tailwind.css --watch",
+    "build-tw": "npx tailwindcss -i ./src/tailwind.css -o ./build/tailwind.css --minify",
     "check-engines": "wp-scripts check-engines",
     "check-licenses": "wp-scripts check-licenses",
     "packages-update": "wp-scripts packages-update"

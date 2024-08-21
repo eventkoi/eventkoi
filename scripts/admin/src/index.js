@@ -1,3 +1,3 @@
-import "@/css/global.scss";
+import "@/scss/global.scss";
 
 import "@/admin";
