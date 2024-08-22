@@ -950,10 +950,6 @@ body {
   min-height: 80px !important;
 }
 
-.min-h-\[calc\(100vh-32px\)\] {
-  min-height: calc(100vh - 32px) !important;
-}
-
 .min-h-\[calc\(100vh-46px\)\] {
   min-height: calc(100vh - 46px) !important;
 }
@@ -1493,11 +1489,6 @@ body {
 .px-0 {
   padding-left: 0px !important;
   padding-right: 0px !important;
-}
-
-.px-16 {
-  padding-left: 4rem !important;
-  padding-right: 4rem !important;
 }
 
 .px-2 {
@@ -2800,12 +2791,6 @@ body {
 
   .md\:max-w-\[420px\] {
     max-width: 420px !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lg\:min-h-\[calc\(100vh-32px\)\] {
-    min-height: calc(100vh - 32px) !important;
   }
 }
 

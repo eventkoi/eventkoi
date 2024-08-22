@@ -30,7 +30,6 @@ class Scripts {
 	 * Load scripts.
 	 */
 	public function admin_enqueue_scripts() {
-		global $post_type;
 
 		$screen = get_current_screen();
 
@@ -46,13 +45,11 @@ class Scripts {
 		wp_register_script( 'eventkoi-admin', $build_url . 'index.js', $asset_file['dependencies'], $asset_file['version'], true );
 		wp_enqueue_script( 'eventkoi-admin' );
 
-		// All JS args array here.
-		$args = array(
+		$eventkoi_params = array(
 			'version' => EVENTKOI_VERSION,
-			'options' => get_option( 'eventkoi' ),
 		);
 
-		wp_localize_script( 'eventkoi-admin', 'eventkoi_params', apply_filters( 'eventkoi_admin_js_args', $args ) );
+		wp_localize_script( 'eventkoi-admin', 'eventkoi_params', apply_filters( 'eventkoi_admin_params', $eventkoi_params ) );
 
 		wp_register_style( 'eventkoi-admin-tw', $build_url . 'tailwind.css', null, $asset_file['version'] );
 		wp_enqueue_style( 'eventkoi-admin-tw' );
