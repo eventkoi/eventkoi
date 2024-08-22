@@ -1,0 +1,25 @@
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/scss/global.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.wp-eventkoi #wpbody-content {
+  padding-bottom: 0;
+}
+.wp-eventkoi #wpcontent {
+  padding-left: 0;
+}
+.eventkoi-admin {
+  font-family: inter, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen-sans, ubuntu, cantarell, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+}
+.eventkoi-admin p {
+  font-size: 16px;
+}
+.eventkoi-admin li {
+  margin-bottom: 0px;
+}
+.eventkoi-admin a:hover, .eventkoi-admin a:focus {
+  box-shadow: none;
+  color: inherit;
+}
+
+/*# sourceMappingURL=index.css.map*/

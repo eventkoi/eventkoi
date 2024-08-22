@@ -7,15 +7,14 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { Auth } from "@/admin/auth";
 import { Dashboard } from "@/admin/dashboard";
 import { DashboardOverview } from "@/admin/dashboard/overview";
-import { NoMatch } from "@/admin/nomatch";
+import { Home } from "@/admin/home";
 
 import { Nav } from "@/components/nav";
 import { Toaster } from "@/components/ui/sonner";
 
-export function Admin(props) {
+export function Admin() {
   const location = useLocation();
 
   useEffect(() => {
@@ -37,17 +36,17 @@ export function Admin(props) {
   }, [location]);
 
   return (
-    <div className="flex flex-col w-full min-h-wpscreen bg-muted/40">
+    <div className="w-full flex flex-col min-h-[calc(100vh-46px)] md:min-h-[calc(100vh-32px)]">
       <Toaster richColors expand />
       <Nav />
       <Routes>
-        <Route index element={<Auth />} />
+        <Route index element={<Home />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<DashboardOverview />} />
           <Route path="overview" element={<DashboardOverview />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="*" element={<Home />} />
         </Route>
-        <Route path="*" element={<NoMatch />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );

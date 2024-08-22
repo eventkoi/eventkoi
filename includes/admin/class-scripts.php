@@ -40,8 +40,8 @@ class Scripts {
 			}
 		}
 
-		$asset_file = include EVENTKOI_PLUGIN_DIR . 'scripts/admin/build/index.asset.php';
-		$build_url  = EVENTKOI_PLUGIN_URL . 'scripts/admin/build/';
+		$asset_file = include EVENTKOI_PLUGIN_DIR . 'scripts/backend/build/index.asset.php';
+		$build_url  = EVENTKOI_PLUGIN_URL . 'scripts/backend/build/';
 
 		wp_register_script( 'eventkoi-admin', $build_url . 'index.js', $asset_file['dependencies'], $asset_file['version'], true );
 		wp_enqueue_script( 'eventkoi-admin' );

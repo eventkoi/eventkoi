@@ -13,12 +13,6 @@ module.exports = {
       },
     },
     extend: {
-      height: {
-        wpscreen: "calc(100vh - 32px)",
-      },
-      minHeight: {
-        wpscreen: "calc(100vh - 32px)",
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

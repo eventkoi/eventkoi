@@ -1,29 +1,19 @@
 import { cn } from "@/lib/utils";
 
 const sizes = {
-  h1: "text-2xl",
-  h3: "text-xl",
-  h4: "text-base",
+  1: "text-2xl",
+  3: "text-xl",
+  4: "text-base",
 };
 
-export function Heading(props) {
-  const { level, tagline, children } = props;
-
-  let headingLevel = level;
-
-  if (!headingLevel) {
-    headingLevel = 1;
-  }
-
-  const Tag = `h${headingLevel}`;
-
-  const size = sizes[Tag];
+export function Heading({ level = 1, tagline = null, children }) {
+  const Tag = `h${level}`;
 
   return (
     <div className="grid gap-1">
       <Tag
         className={cn(
-          size,
+          sizes.level,
           "font-medium text-foreground tracking-tight scroll-m-20"
         )}
       >

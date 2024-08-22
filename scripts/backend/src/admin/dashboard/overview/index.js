@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function DashboardOverview(props) {
+export function DashboardOverview() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

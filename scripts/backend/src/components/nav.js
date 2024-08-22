@@ -5,7 +5,7 @@ import { tabs } from "@/data/tabs";
 
 export function Nav(props) {
   return (
-    <header className="flex h-12 items-center border-b gap-6 px-6">
+    <header className="flex h-12 items-center border-b gap-6 px-8">
       <Logo />
       <Navbar tabs={tabs["main"]} />
       <div className="flex w-full justify-end">
