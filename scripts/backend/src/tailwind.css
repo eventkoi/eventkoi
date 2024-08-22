@@ -10,8 +10,8 @@
     --destructive-foreground: 0 0% 100%;
     --primary-foreground: 0 0% 100%;
 
-    --foreground: 0 1% 22%;
     --primary: 0 1% 22%;
+    --foreground: 0 1% 22%;
     --card-foreground: 0 1% 22%;
     --popover-foreground: 0 1% 22%;
     --secondary-foreground: 0 1% 22%;

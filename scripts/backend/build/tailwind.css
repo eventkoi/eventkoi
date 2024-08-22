@@ -452,8 +452,8 @@ video {
   --popover: 0 0% 100%;
   --destructive-foreground: 0 0% 100%;
   --primary-foreground: 0 0% 100%;
-  --foreground: 0 1% 22%;
   --primary: 0 1% 22%;
+  --foreground: 0 1% 22%;
   --card-foreground: 0 1% 22%;
   --popover-foreground: 0 1% 22%;
   --secondary-foreground: 0 1% 22%;
@@ -846,6 +846,21 @@ body {
   aspect-ratio: 1 / 1 !important;
 }
 
+.size-12 {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+.size-6 {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+.size-8 {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
 .h-1\.5 {
   height: 0.375rem !important;
 }
@@ -1134,6 +1149,16 @@ body {
 
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite !important;
 }
 
 .cursor-default {
@@ -1725,6 +1750,14 @@ body {
 
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground)) !important;
+}
+
+.text-success {
+  color: hsl(var(--success)) !important;
+}
+
+.text-primary\/30 {
+  color: hsl(var(--primary) / 0.3) !important;
 }
 
 .underline-offset-4 {
