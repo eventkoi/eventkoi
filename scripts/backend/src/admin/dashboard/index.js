@@ -11,7 +11,7 @@ export function Dashboard() {
   useEffect(() => {}, []);
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader size="large" />;
   }
 
   return (

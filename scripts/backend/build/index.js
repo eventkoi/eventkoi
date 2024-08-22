@@ -5016,7 +5016,9 @@ function Dashboard() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {}, []);
   if (isLoading) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_2__.Loader, null);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_2__.Loader, {
+      size: "large"
+    });
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_3__.Wrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mx-auto flex w-full gap-2 justify-between"
@@ -5194,11 +5196,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_spinner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/spinner */ "./src/components/ui/spinner.jsx");
 
 
-function Loader() {
+function Loader({
+  size
+}) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full flex-1 items-center justify-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_spinner__WEBPACK_IMPORTED_MODULE_1__.Spinner, {
-    size: "large"
+    size: size
   }));
 }
 

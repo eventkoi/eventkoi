@@ -1748,16 +1748,12 @@ body {
   color: hsl(var(--primary-foreground)) !important;
 }
 
-.text-secondary-foreground {
-  color: hsl(var(--secondary-foreground)) !important;
-}
-
-.text-success {
-  color: hsl(var(--success)) !important;
-}
-
 .text-primary\/30 {
   color: hsl(var(--primary) / 0.3) !important;
+}
+
+.text-secondary-foreground {
+  color: hsl(var(--secondary-foreground)) !important;
 }
 
 .underline-offset-4 {
