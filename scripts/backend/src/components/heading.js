@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 
 const sizes = {
-  1: "text-2xl",
-  3: "text-xl",
-  4: "text-base",
+  h1: "text-2xl",
+  h3: "text-xl",
+  h4: "text-base",
 };
 
 export function Heading({ level = 1, tagline = null, children }) {
@@ -13,7 +13,7 @@ export function Heading({ level = 1, tagline = null, children }) {
     <div className="grid gap-1">
       <Tag
         className={cn(
-          sizes.level,
+          sizes[Tag],
           "font-medium text-foreground tracking-tight scroll-m-20"
         )}
       >
