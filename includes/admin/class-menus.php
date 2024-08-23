@@ -147,7 +147,7 @@ class Menus {
 	public function add_menu_css() {
 		?>
 		<style type="text/css">
-			#adminmenu li.toplevel_page_eventkoi div.wp-menu-image.svg { background-size: 13px auto !important; }
+			#adminmenu li.toplevel_page_eventkoi div.wp-menu-image.svg { background-size: 12px auto !important; }
 		</style>
 		<?php
 	}
