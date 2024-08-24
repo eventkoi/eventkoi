@@ -8,11 +8,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { toast } from "sonner";
 
+import { CircleCheck, CircleDotDashed } from "lucide-react";
+
 /**
  * Support multi-column search.
  */
 const multiColumnSearch = (row, columnId, filterValue) => {
-  const searchableRowContent = `${row.original.name}`;
+  const searchableRowContent = `${row.original.title}`;
 
   return searchableRowContent.toLowerCase().includes(filterValue.toLowerCase());
 };
@@ -45,18 +47,15 @@ const columns = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
+    accessorKey: "title",
     header: ({ column }) => <SortButton title="Event name" column={column} />,
     cell: ({ row }) => {
-      const event = row.original;
+      const url = "#/events/" + parseInt(row.original.id);
       return (
         <div className="grid space-y-1">
           <div className="text-foreground">
-            <a
-              href={event.edit_url}
-              className="hover:underline hover:decoration-dotted"
-            >
-              {row.getValue("name")}
+            <a href={url} className="hover:underline hover:decoration-dotted">
+              {row.getValue("title")}
             </a>
           </div>
         </div>
@@ -72,11 +71,11 @@ const columns = [
 
       return (
         <div className="flex items-center space-x-2">
-          {status == "subscribed" && (
+          {status == "completed" && (
             <CircleCheck className="w-4 h-4 text-success" />
           )}
-          {status == "unsubscribed" && (
-            <CircleX className="w-4 h-4 text-destructive" />
+          {status == "draft" && (
+            <CircleDotDashed className="w-4 h-4 text-primary/60" />
           )}
           <div className="capitalize text-foreground">{status}</div>
         </div>
@@ -135,6 +134,7 @@ export function EventsOverview() {
         method: "get",
       })
       .then((response) => {
+        console.log(response);
         setData(response);
         setIsLoading(false);
         if (toastMessage) {

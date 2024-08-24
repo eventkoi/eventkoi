@@ -47,3 +47,21 @@ function eventkoi_current_theme_support() {
 
 	return false;
 }
+
+/**
+ * Display date.
+ *
+ * @param string $date A date string.
+ */
+function eventkoi_date_display( $date ) {
+
+	$date_format = 'Y-m-d h:i A';
+
+	if ( is_numeric( $date ) && (int) $date === $date ) {
+		$date = time();
+	} else {
+		$date = strtotime( $date );
+	}
+
+	return wp_date( $date_format, $date );
+}

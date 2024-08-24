@@ -1836,6 +1836,26 @@ body {
   color: hsl(var(--success)) !important;
 }
 
+.text-primary\/40 {
+  color: hsl(var(--primary) / 0.4) !important;
+}
+
+.text-muted {
+  color: hsl(var(--muted)) !important;
+}
+
+.text-primary\/20 {
+  color: hsl(var(--primary) / 0.2) !important;
+}
+
+.text-primary\/80 {
+  color: hsl(var(--primary) / 0.8) !important;
+}
+
+.text-primary\/60 {
+  color: hsl(var(--primary) / 0.6) !important;
+}
+
 .underline {
   text-decoration-line: underline !important;
 }

@@ -26,6 +26,7 @@ define( 'EVENTKOI_VERSION', '1.0.0' );
 define( 'EVENTKOI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'EVENTKOI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'EVENTKOI_PLUGIN_FILE', __FILE__ );
+define( 'EVENTKOI_API', 'eventkoi/v1' );
 
 // Load the autoloader.
 require_once plugin_dir_path( __FILE__ ) . 'autoload.php';

@@ -26,8 +26,10 @@ class Init {
 
 		// Loaded in both frontend and backend.
 		$post_types = new \EventKoi\Core\Post_Types();
+		$api        = new \EventKoi\API\REST();
 
 		$post_types::init();
+		$api::init();
 
 		// Load inside admin only.
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {

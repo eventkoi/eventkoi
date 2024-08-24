@@ -1,0 +1,47 @@
+<?php
+/**
+ * Events.
+ *
+ * @package    EventKoi
+ * @subpackage EventKoi\Core
+ */
+
+namespace EventKoi\Core;
+
+use EventKoi\Core\Event;
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Events.
+ */
+class Events {
+
+	/**
+	 * Init.
+	 */
+	public static function get_events() {
+
+		$args = array(
+			'post_type'      => 'event',
+			'orderby'        => 'modified',
+			'order'          => 'DESC',
+			'posts_per_page' => -1,
+			'post_status'    => array( 'publish', 'draft' ),
+		);
+
+		$query = new \WP_Query( $args );
+
+		$results = array();
+
+		foreach ( $query->posts as $post ) {
+			$event     = new Event( $post );
+			$results[] = $event::get_meta();
+		}
+
+		return $results;
+	}
+}

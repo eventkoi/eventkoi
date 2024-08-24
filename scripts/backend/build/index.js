@@ -14119,6 +14119,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
 /* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
 /* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+
 
 
 
@@ -14132,7 +14135,7 @@ __webpack_require__.r(__webpack_exports__);
  * Support multi-column search.
  */
 const multiColumnSearch = (row, columnId, filterValue) => {
-  const searchableRowContent = `${row.original.name}`;
+  const searchableRowContent = `${row.original.title}`;
   return searchableRowContent.toLowerCase().includes(filterValue.toLowerCase());
 };
 const columns = [{
@@ -14158,7 +14161,7 @@ const columns = [{
   enableSorting: false,
   enableHiding: false
 }, {
-  accessorKey: "name",
+  accessorKey: "title",
   header: ({
     column
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_4__.SortButton, {
@@ -14168,15 +14171,15 @@ const columns = [{
   cell: ({
     row
   }) => {
-    const event = row.original;
+    const url = "#/events/" + parseInt(row.original.id);
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "grid space-y-1"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "text-foreground"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: event.edit_url,
+      href: url,
       className: "hover:underline hover:decoration-dotted"
-    }, row.getValue("name"))));
+    }, row.getValue("title"))));
   },
   filterFn: multiColumnSearch
 }, {
@@ -14193,10 +14196,10 @@ const columns = [{
     const status = row.getValue("status");
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center space-x-2"
-    }, status == "subscribed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CircleCheck, {
+    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: "w-4 h-4 text-success"
-    }), status == "unsubscribed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CircleX, {
-      className: "w-4 h-4 text-destructive"
+    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      className: "w-4 h-4 text-primary/60"
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "capitalize text-foreground"
     }, status));
@@ -14269,6 +14272,7 @@ function EventsOverview() {
       path: "eventkoi/v1/events",
       method: "get"
     }).then(response => {
+      console.log(response);
       setData(response);
       setIsLoading(false);
       if (toastMessage) {
@@ -16530,6 +16534,75 @@ const ChevronsUpDown = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["def
 
 
 //# sourceMappingURL=chevrons-up-down.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/circle-check.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/circle-check.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CircleCheck)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const CircleCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("CircleCheck", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+]);
+
+
+//# sourceMappingURL=circle-check.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CircleDotDashed)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const CircleDotDashed = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("CircleDotDashed", [
+  ["path", { d: "M10.1 2.18a9.93 9.93 0 0 1 3.8 0", key: "1qdqn0" }],
+  ["path", { d: "M17.6 3.71a9.95 9.95 0 0 1 2.69 2.7", key: "1bq7p6" }],
+  ["path", { d: "M21.82 10.1a9.93 9.93 0 0 1 0 3.8", key: "1rlaqf" }],
+  ["path", { d: "M20.29 17.6a9.95 9.95 0 0 1-2.7 2.69", key: "1xk03u" }],
+  ["path", { d: "M13.9 21.82a9.94 9.94 0 0 1-3.8 0", key: "l7re25" }],
+  ["path", { d: "M6.4 20.29a9.95 9.95 0 0 1-2.69-2.7", key: "1v18p6" }],
+  ["path", { d: "M2.18 13.9a9.93 9.93 0 0 1 0-3.8", key: "xdo6bj" }],
+  ["path", { d: "M3.71 6.4a9.95 9.95 0 0 1 2.7-2.69", key: "1jjmaz" }],
+  ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }]
+]);
+
+
+//# sourceMappingURL=circle-dot-dashed.js.map
 
 
 /***/ }),
