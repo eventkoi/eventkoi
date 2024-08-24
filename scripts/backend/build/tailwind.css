@@ -1203,6 +1203,10 @@ body {
   flex-wrap: wrap !important;
 }
 
+.items-start {
+  align-items: flex-start !important;
+}
+
 .items-end {
   align-items: flex-end !important;
 }
@@ -1584,6 +1588,11 @@ body {
 .py-8 {
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
+}
+
+.px-6 {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
 }
 
 .pb-4 {
@@ -2820,6 +2829,14 @@ body {
 
   .md\:max-w-\[420px\] {
     max-width: 420px !important;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .md\:gap-8 {
+    gap: 2rem !important;
   }
 }
 

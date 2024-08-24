@@ -19,17 +19,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Scripts {
 
 	/**
-	 * Constructor.
+	 * Init.
 	 */
-	public function __construct() {
+	public static function init() {
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 999 );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ), 999 );
 	}
 
 	/**
 	 * Load scripts.
 	 */
-	public function admin_enqueue_scripts() {
+	public static function admin_enqueue_scripts() {
 
 		$screen = get_current_screen();
 

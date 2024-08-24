@@ -38,7 +38,7 @@ register_deactivation_hook( __FILE__, array( __NAMESPACE__ . '\\Core\Deactivator
  * Initialize the plugin.
  */
 function eventkoi() {
-	$plugin = new \EventKoi\Run();
+	$init = new \EventKoi\Init();
 }
 
 eventkoi();

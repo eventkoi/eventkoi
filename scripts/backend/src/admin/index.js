@@ -9,7 +9,14 @@ import {
 
 import { Dashboard } from "@/admin/dashboard";
 import { DashboardOverview } from "@/admin/dashboard/overview";
+import { Events } from "@/admin/events";
+import { EventAdd } from "@/admin/events/add";
+import { EventEdit } from "@/admin/events/edit";
+import { EventsOverview } from "@/admin/events/overview";
+import { EventTemplates } from "@/admin/events/templates";
 import { Home } from "@/admin/home";
+import { Settings } from "@/admin/settings";
+import { SettingsOverview } from "@/admin/settings/overview";
 
 import { Nav } from "@/components/nav";
 import { Toaster } from "@/components/ui/sonner";
@@ -44,6 +51,19 @@ export function Admin() {
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<DashboardOverview />} />
           <Route path="overview" element={<DashboardOverview />} />
+          <Route path="*" element={<Home />} />
+        </Route>
+        <Route path="events" element={<Events />}>
+          <Route index element={<EventsOverview />} />
+          <Route path="overview" element={<EventsOverview />} />
+          <Route path="templates" element={<EventTemplates />} />
+          <Route path="add" element={<EventAdd />} />
+          <Route path=":id" element={<EventEdit />} />
+          <Route path="*" element={<Home />} />
+        </Route>
+        <Route path="settings" element={<Settings />}>
+          <Route index element={<SettingsOverview />} />
+          <Route path="overview" element={<SettingsOverview />} />
           <Route path="*" element={<Home />} />
         </Route>
         <Route path="*" element={<Home />} />

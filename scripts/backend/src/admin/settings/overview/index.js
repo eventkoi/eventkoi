@@ -1,10 +1,10 @@
 import { Heading } from "@/components/heading";
 
-export function DashboardOverview() {
+export function SettingsOverview() {
   return (
     <>
       <div className="mx-auto flex w-full gap-2 justify-between">
-        <Heading>Dashboard</Heading>
+        <Heading>Settings</Heading>
       </div>
     </>
   );
