@@ -739,6 +739,14 @@ body {
   top: 100% !important;
 }
 
+.left-2\.5 {
+  left: 0.625rem !important;
+}
+
+.top-3 {
+  top: 0.75rem !important;
+}
+
 .z-10 {
   z-index: 10 !important;
 }
@@ -831,6 +839,10 @@ body {
 }
 
 .table {
+  display: table !important;
+}
+
+.\!table {
   display: table !important;
 }
 
@@ -941,6 +953,10 @@ body {
   height: 1px !important;
 }
 
+.h-40 {
+  height: 10rem !important;
+}
+
 .max-h-96 {
   max-height: 24rem !important;
 }
@@ -967,6 +983,10 @@ body {
 
 .min-h-\[calc\(100vh-46px\)\] {
   min-height: calc(100vh - 46px) !important;
+}
+
+.min-h-6 {
+  min-height: 1.5rem !important;
 }
 
 .w-10 {
@@ -1048,6 +1068,26 @@ body {
 
 .w-px {
   width: 1px !important;
+}
+
+.w-\[180px\] {
+  width: 180px !important;
+}
+
+.w-\[150px\] {
+  width: 150px !important;
+}
+
+.w-\[250px\] {
+  width: 250px !important;
+}
+
+.w-auto {
+  width: auto !important;
+}
+
+.w-\[70px\] {
+  width: 70px !important;
 }
 
 .min-w-0 {
@@ -1203,16 +1243,16 @@ body {
   flex-wrap: wrap !important;
 }
 
-.items-start {
-  align-items: flex-start !important;
-}
-
 .items-end {
   align-items: flex-end !important;
 }
 
 .items-center {
   align-items: center !important;
+}
+
+.justify-start {
+  justify-content: flex-start !important;
 }
 
 .justify-end {
@@ -1297,12 +1337,32 @@ body {
   margin-bottom: calc(1rem * var(--tw-space-y-reverse)) !important;
 }
 
+.space-x-12 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0 !important;
+  margin-right: calc(3rem * var(--tw-space-x-reverse)) !important;
+  margin-left: calc(3rem * calc(1 - var(--tw-space-x-reverse))) !important;
+}
+
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0 !important;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse)) !important;
+  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse))) !important;
+}
+
+.self-start {
+  align-self: flex-start !important;
+}
+
 .overflow-auto {
   overflow: auto !important;
 }
 
 .overflow-hidden {
   overflow: hidden !important;
+}
+
+.overflow-x-auto {
+  overflow-x: auto !important;
 }
 
 .overflow-y-auto {
@@ -1425,6 +1485,10 @@ body {
 
 .border-transparent {
   border-color: transparent !important;
+}
+
+.border-foreground {
+  border-color: hsl(var(--foreground)) !important;
 }
 
 .border-l-transparent {
@@ -1590,11 +1654,6 @@ body {
   padding-bottom: 2rem !important;
 }
 
-.px-6 {
-  padding-left: 1.5rem !important;
-  padding-right: 1.5rem !important;
-}
-
 .pb-4 {
   padding-bottom: 1rem !important;
 }
@@ -1651,6 +1710,10 @@ body {
   text-align: center !important;
 }
 
+.text-right {
+  text-align: right !important;
+}
+
 .align-middle {
   vertical-align: middle !important;
 }
@@ -1699,6 +1762,10 @@ body {
 
 .font-semibold {
   font-weight: 600 !important;
+}
+
+.capitalize {
+  text-transform: capitalize !important;
 }
 
 .leading-none {
@@ -1763,6 +1830,18 @@ body {
 
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground)) !important;
+}
+
+.text-success {
+  color: hsl(var(--success)) !important;
+}
+
+.underline {
+  text-decoration-line: underline !important;
+}
+
+.decoration-dotted {
+  text-decoration-style: dotted !important;
 }
 
 .underline-offset-4 {
@@ -1962,6 +2041,14 @@ body {
   color: hsl(var(--muted-foreground)) !important;
 }
 
+.placeholder\:text-muted-foreground\/70::-moz-placeholder {
+  color: hsl(var(--muted-foreground) / 0.7) !important;
+}
+
+.placeholder\:text-muted-foreground\/70::placeholder {
+  color: hsl(var(--muted-foreground) / 0.7) !important;
+}
+
 .after\:absolute::after {
   content: var(--tw-content) !important;
   position: absolute !important;
@@ -2058,6 +2145,10 @@ body {
   border-color: hsl(var(--muted-foreground) / 0.5) !important;
 }
 
+.hover\:border-card-foreground:hover {
+  border-color: hsl(var(--card-foreground)) !important;
+}
+
 .hover\:bg-accent:hover {
   background-color: hsl(var(--accent)) !important;
 }
@@ -2098,6 +2189,10 @@ body {
   background-color: hsl(var(--secondary) / 0.8) !important;
 }
 
+.hover\:bg-\[transparent\]:hover {
+  background-color: transparent !important;
+}
+
 .hover\:text-accent-foreground:hover {
   color: hsl(var(--accent-foreground)) !important;
 }
@@ -2116,6 +2211,10 @@ body {
 
 .hover\:underline:hover {
   text-decoration-line: underline !important;
+}
+
+.hover\:decoration-dotted:hover {
+  text-decoration-style: dotted !important;
 }
 
 .hover\:opacity-100:hover {
@@ -2830,13 +2929,11 @@ body {
   .md\:max-w-\[420px\] {
     max-width: 420px !important;
   }
+}
 
-  .md\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  .md\:gap-8 {
-    gap: 2rem !important;
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex !important;
   }
 }
 
