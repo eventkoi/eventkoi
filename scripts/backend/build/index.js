@@ -15189,10 +15189,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function RowsPerPage(props) {
-  const {
-    table
-  } = props;
+function RowsPerPage({
+  table
+}) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {

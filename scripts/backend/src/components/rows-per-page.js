@@ -7,9 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function RowsPerPage(props) {
-  const { table } = props;
-
+export function RowsPerPage({ table }) {
   return (
     <div className="flex items-center space-x-2">
       <Label htmlFor="rows_per_page" className="text-sm font-normal">
