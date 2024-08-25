@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Event {
 
 	/**
-	 * Event object or ID.
+	 * Event object.
 	 *
 	 * @var $event.
 	 */
@@ -63,6 +63,6 @@ class Event {
 			'date'          => $date_modified,
 		);
 
-		return apply_filters( 'eventkoi_event_meta', $meta, $event->ID );
+		return apply_filters( 'eventkoi_get_event_meta', $meta, $event->ID );
 	}
 }

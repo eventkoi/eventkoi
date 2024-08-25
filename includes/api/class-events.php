@@ -44,7 +44,9 @@ class Events {
 	 */
 	public static function get_results( $request ) {
 
-		$route = $request->get_route();
+		if ( empty( $request ) ) {
+			die( -1 );
+		}
 
 		$response = Query::get_events();
 

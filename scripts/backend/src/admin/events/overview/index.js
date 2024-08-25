@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import apiRequest from "@wordpress/api-fetch";
+
 import { AddButton } from "@/components/add-button";
 import { DataTable } from "@/components/data-table";
 import { Heading } from "@/components/heading";
@@ -128,11 +130,10 @@ export function EventsOverview() {
   const [data, setData] = useState([]);
 
   const fetchResults = async (toastMessage = null) => {
-    await wp
-      .apiRequest({
-        path: "eventkoi/v1/events",
-        method: "get",
-      })
+    await apiRequest({
+      path: "eventkoi/v1/events",
+      method: "get",
+    })
       .then((response) => {
         console.log(response);
         setData(response);

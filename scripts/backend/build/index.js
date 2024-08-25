@@ -14113,14 +14113,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
-/* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
-/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
-/* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
-/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
-/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
+/* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
+/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
+/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+
 
 
 
@@ -14144,7 +14147,7 @@ const columns = [{
     table
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-center min-h-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_5__.Checkbox, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__.Checkbox, {
     checked: table.getIsAllPageRowsSelected() || table.getIsSomePageRowsSelected() && "indeterminate",
     onCheckedChange: value => table.toggleAllPageRowsSelected(!!value),
     "aria-label": "Select all"
@@ -14153,7 +14156,7 @@ const columns = [{
     row
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-center min-h-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_5__.Checkbox, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__.Checkbox, {
     checked: row.getIsSelected(),
     onCheckedChange: value => row.toggleSelected(!!value),
     "aria-label": "Select row"
@@ -14164,7 +14167,7 @@ const columns = [{
   accessorKey: "title",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_4__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
     title: "Event name",
     column: column
   }),
@@ -14186,7 +14189,7 @@ const columns = [{
   accessorKey: "status",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_4__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
     title: "Status",
     column: column
   }),
@@ -14196,9 +14199,9 @@ const columns = [{
     const status = row.getValue("status");
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center space-x-2"
-    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
       className: "w-4 h-4 text-success"
-    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
       className: "w-4 h-4 text-primary/60"
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "capitalize text-foreground"
@@ -14209,7 +14212,7 @@ const columns = [{
   accessorKey: "date",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_4__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
     title: "Date",
     column: column
   }),
@@ -14227,7 +14230,7 @@ const columns = [{
     column
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-right"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_4__.SortButton, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
     title: "Category",
     column: column
   })),
@@ -14268,7 +14271,7 @@ function EventsOverview() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const fetchResults = async (toastMessage = null) => {
-    await wp.apiRequest({
+    await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: "eventkoi/v1/events",
       method: "get"
     }).then(response => {
@@ -14276,7 +14279,7 @@ function EventsOverview() {
       setData(response);
       setIsLoading(false);
       if (toastMessage) {
-        sonner__WEBPACK_IMPORTED_MODULE_6__.toast.success(toastMessage);
+        sonner__WEBPACK_IMPORTED_MODULE_7__.toast.success(toastMessage);
       }
     }).catch(error => {
       setIsLoading(false);
@@ -14289,10 +14292,10 @@ function EventsOverview() {
     className: "flex flex-col gap-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mx-auto flex w-full gap-2 justify-between"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_3__.Heading, null, "Events"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_add_button__WEBPACK_IMPORTED_MODULE_1__.AddButton, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_4__.Heading, null, "Events"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_add_button__WEBPACK_IMPORTED_MODULE_2__.AddButton, {
     title: "Create event",
     url: "/events/add"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_data_table__WEBPACK_IMPORTED_MODULE_2__.DataTable, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_data_table__WEBPACK_IMPORTED_MODULE_3__.DataTable, {
     data: data,
     columns: columns,
     empty: "No events are found.",
@@ -24729,6 +24732,16 @@ module.exports = window["React"];
 /***/ ((module) => {
 
 module.exports = window["ReactDOM"];
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 
