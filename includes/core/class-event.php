@@ -46,6 +46,10 @@ class Event {
 
 		$event = self::$event;
 
+		if ( empty( $event->ID ) ) {
+			return array();
+		}
+
 		$title = $event->post_title ? $event->post_title : __( 'Untitled event', 'eventkoi' );
 
 		if ( strtotime( $event->post_modified_gmt ) > 0 ) {
