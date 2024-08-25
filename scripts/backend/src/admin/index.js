@@ -10,7 +10,6 @@ import {
 import { Dashboard } from "@/admin/dashboard";
 import { DashboardOverview } from "@/admin/dashboard/overview";
 import { Events } from "@/admin/events";
-import { EventAdd } from "@/admin/events/add";
 import { EventEdit } from "@/admin/events/edit";
 import { EventsOverview } from "@/admin/events/overview";
 import { EventTemplates } from "@/admin/events/templates";
@@ -57,7 +56,7 @@ export function Admin() {
           <Route index element={<EventsOverview />} />
           <Route path="overview" element={<EventsOverview />} />
           <Route path="templates" element={<EventTemplates />} />
-          <Route path="add" element={<EventAdd />} />
+          <Route path="add" element={<EventEdit />} />
           <Route path=":id" element={<EventEdit />} />
           <Route path="*" element={<Home />} />
         </Route>

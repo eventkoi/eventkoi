@@ -9,6 +9,7 @@
 namespace EventKoi\API;
 
 use EventKoi\API\Events;
+use EventKoi\API\Event;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -35,6 +36,7 @@ class REST {
 
 		// Init API endpoints.
 		Events::init();
+		Event::init();
 	}
 
 	/**
