@@ -131,7 +131,7 @@ export function EventsOverview() {
 
   const fetchResults = async (toastMessage = null) => {
     await apiRequest({
-      path: "eventkoi/v1/events",
+      path: `${eventkoi_params.api}/events`,
       method: "get",
     })
       .then((response) => {

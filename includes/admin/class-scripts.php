@@ -47,6 +47,7 @@ class Scripts {
 
 		$eventkoi_params = array(
 			'version' => EVENTKOI_VERSION,
+			'api'     => EVENTKOI_API,
 		);
 
 		wp_localize_script( 'eventkoi-admin', 'eventkoi_params', apply_filters( 'eventkoi_admin_params', $eventkoi_params ) );

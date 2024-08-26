@@ -14048,8 +14048,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_event_setup__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/event-setup */ "./src/components/event-setup.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 
 
 
@@ -14262,7 +14262,7 @@ function EventsOverview() {
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const fetchResults = async (toastMessage = null) => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: "eventkoi/v1/events",
+      path: `${eventkoi_params.api}/events`,
       method: "get"
     }).then(response => {
       console.log(response);
@@ -15023,7 +15023,7 @@ function EventSetup({
   const [event, setEvent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   const getEvent = async () => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: `eventkoi/v1/event?id=${id}`,
+      path: `${eventkoi_params.api}/event?id=${id}`,
       method: "get"
     }).then(response => {
       console.log(response);
@@ -15032,7 +15032,7 @@ function EventSetup({
         setLoading(false);
       }, 700);
     }).catch(error => {
-      console.log(error);
+      setLoading(false);
     });
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {

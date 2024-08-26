@@ -16,7 +16,7 @@ export function EventSetup({ id = 0 }) {
 
   const getEvent = async () => {
     await apiRequest({
-      path: `eventkoi/v1/event?id=${id}`,
+      path: `${eventkoi_params.api}/event?id=${id}`,
       method: "get",
     })
       .then((response) => {
@@ -27,7 +27,7 @@ export function EventSetup({ id = 0 }) {
         }, 700);
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
       });
   };
 
