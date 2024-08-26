@@ -55,7 +55,7 @@ function eventkoi_current_theme_support() {
  */
 function eventkoi_date_display( $date ) {
 
-	$date_format = 'Y-m-d h:i A';
+	$date_format = eventkoi_get_default_date_format();
 
 	if ( is_numeric( $date ) && (int) $date === $date ) {
 		$date = time();
@@ -64,4 +64,22 @@ function eventkoi_date_display( $date ) {
 	}
 
 	return wp_date( $date_format, $date );
+}
+
+/**
+ * Get default date format.
+ */
+function eventkoi_get_default_date_format() {
+	$date_format = 'Y-m-d h:i A';
+
+	return apply_filters( 'eventkoi_get_default_date_format', $date_format );
+}
+
+/**
+ * Get local timezone.
+ */
+function eventkoi_timezone() {
+	$timezone = wp_timezone_string();
+
+	return apply_filters( 'eventkoi_timezone', $timezone );
 }

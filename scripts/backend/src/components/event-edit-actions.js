@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -29,24 +28,24 @@ export function EventEditActions({ loading, event }) {
   return (
     <Box>
       <Button variant="ghost" asChild className={buttonClass}>
-        <Link href="">
+        <a href={event?.url}>
           <Globe className="mr-4 w-5 h-5" />
           View event page
-        </Link>
+        </a>
       </Button>
 
       <Button variant="ghost" asChild className={buttonClass}>
-        <Link href="">
+        <a href="">
           <PenLine className="mr-4 w-5 h-5" />
           Edit event page
-        </Link>
+        </a>
       </Button>
 
       <Button variant="ghost" asChild className={buttonClass}>
-        <Link href="">
+        <a href="">
           <FilePlus className="mr-4 w-5 h-5" />
           Edit event template
-        </Link>
+        </a>
       </Button>
     </Box>
   );

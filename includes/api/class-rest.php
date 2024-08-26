@@ -40,29 +40,25 @@ class REST {
 	}
 
 	/**
-	 * Validate user authentication.
+	 * This is for endpoints that should be publicly accessible.
 	 *
 	 * @param object $request The request that is being passed to API.
 	 */
-	public static function authenticate( $request ) {
+	public static function allow_all( $request ) {
 
 		if ( empty( $request ) ) {
 			return false;
 		}
 
-		if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
-	 * Validate user admin.
+	 * Only logged in users and admins.
 	 *
 	 * @param object $request The request that is being passed to API.
 	 */
-	public static function authenticate_as_admin( $request ) {
+	public static function allow_super_admins( $request ) {
 
 		if ( empty( $request ) ) {
 			return false;

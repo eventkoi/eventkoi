@@ -32,7 +32,7 @@ class Events {
 			array(
 				'methods'             => 'get',
 				'callback'            => array( __CLASS__, 'get_results' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'authenticate' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'allow_all' ),
 			)
 		);
 	}
