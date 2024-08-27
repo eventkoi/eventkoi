@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import { LoaderCircle } from "lucide-react";
-import React from "react";
 
 const spinnerVariants = cva("flex-col items-center justify-center", {
   variants: {
@@ -15,7 +14,7 @@ const spinnerVariants = cva("flex-col items-center justify-center", {
   },
 });
 
-const loaderVariants = cva("animate-spin text-primary/30", {
+const loaderVariants = cva("animate-spin text-primary/20", {
   variants: {
     size: {
       small: "size-6",

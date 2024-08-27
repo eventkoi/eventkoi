@@ -17,8 +17,9 @@ export function StatusFilters(props) {
             key={`status-${i}`}
             to={`/${base}?status=${status.key}`}
             className={cn(
-              "flex items-center hover:underline hover:decoration-dotted text-foreground",
-              selected && "underline decoration-dotted font-medium"
+              "flex items-center hover:underline hover:decoration-dotted underline-offset-4 text-foreground",
+              selected &&
+                "underline decoration-dotted underline-offset-4 font-medium"
             )}
           >
             {status.title}

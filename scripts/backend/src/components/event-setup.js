@@ -1,68 +1,84 @@
 import apiRequest from "@wordpress/api-fetch";
 import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { Loader } from "@/components/loader";
 
-import { Heading } from "@/components/heading";
-import { UserBreadcrumb } from "@/components/user-breadcrumb";
-
-import { EventEditActions } from "@/components/event-edit-actions";
-import { EventEditDetails } from "@/components/event-edit-details";
-import { EventEditMain } from "@/components/event-edit-main";
+const tabs = [
+  { name: "main", title: "Main info" },
+  { name: "details", title: "Additional details" },
+];
 
 export function EventSetup({ id = 0 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [loading, setLoading] = useState(true);
   const [event, setEvent] = useState(null);
 
+  var parent = location.pathname?.split("/");
+  var view = parent[3];
+
+  const active =
+    "font-medium px-3 py-3 rounded-lg text-foreground bg-foreground/5";
+
+  const heading = event?.id ? "Edit event" : "Add event";
+
   const getEvent = async () => {
     await apiRequest({
-      path: `${eventkoi_params.api}/event?id=${id}`,
+      path: `${eventkoi_params.api}/event?id=${parseInt(id)}`,
       method: "get",
     })
       .then((response) => {
         console.log(response);
-        setTimeout(() => {
-          setEvent(response);
-          setLoading(false);
-        }, 700);
+        setEvent(response);
+        setLoading(false);
       })
       .catch((error) => {
+        console.log(error);
         setLoading(false);
       });
   };
 
   useEffect(() => {
+    if (!view) {
+      navigate("main");
+    }
+  }, [location]);
+
+  useEffect(() => {
     getEvent();
   }, []);
 
-  const heading = event?.id ? "Edit event" : "Add event";
-
   return (
-    <div className="flex flex-col gap-8">
-      <div className="w-full flex flex-col gap-2">
-        <UserBreadcrumb
-          path="events"
-          parent="Events"
-          active={heading}
-          loading={loading}
-        />
-        {loading ? (
-          <div className="flex items-center h-8">
-            <Skeleton className="bg-primary/10 h-3 w-[150px]" />
-          </div>
-        ) : (
-          <Heading>{heading}</Heading>
-        )}
-      </div>
-      <div className="grid gap-8 grid-cols-12 text-card-foreground items-start">
-        <div className="flex flex-col gap-8 col-span-8">
-          <EventEditMain loading={loading} event={event} />
-          <EventEditDetails loading={loading} event={event} />
+    <div className="w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr]">
+      <nav className="grid gap-1 text-sm text-muted-foreground">
+        {tabs.map(function (item, i) {
+          let activeTabClass = "font-medium px-3 py-3 rounded-lg";
+          if (parent && view && view === item.name) {
+            activeTabClass = active;
+          }
+          if (parent && !view && item.name === "main") {
+            activeTabClass = active;
+          }
+          return (
+            <Link
+              key={`setting-tab-${i}`}
+              to={item.name}
+              className={activeTabClass}
+            >
+              {item.title}
+            </Link>
+          );
+        })}
+      </nav>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="grid">
+          <Outlet event={event} />
         </div>
-        <div className="flex flex-col gap-8 col-span-4">
-          <EventEditActions loading={loading} event={event} />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

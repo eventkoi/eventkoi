@@ -1,3 +1,5 @@
+import apiRequest from "@wordpress/api-fetch";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,14 +15,11 @@ import {
 
 import { EllipsisVertical } from "lucide-react";
 
-export function BulkActions(props) {
-  const { table, base, fetchResults, addTo } = props;
-
+export function BulkActions({ table, base, fetchResults, addTo }) {
   const runAction = async (action) => {
     let selectedRows = table.getFilteredSelectedRowModel().rows;
 
     let ids = [];
-
     selectedRows.forEach((item, index) => {
       ids.push(item.original.id);
     });
@@ -31,32 +30,22 @@ export function BulkActions(props) {
       base: base,
     };
 
-    let method = "post";
-    if (action === "delete") {
-      method = "delete";
-    }
-
-    let endpoint = base;
-
-    if (action === "duplicate") {
-      endpoint = "duplicate";
-    }
-
     if (base === "events") {
       data.trash = "yes";
     }
 
-    let response = await wp
-      .apiRequest({
-        path: `eventkoi/v1/${endpoint}`,
-        method: method,
-        data: JSON.stringify(data),
-      })
+    await apiRequest({
+      path: `${eventkoi_params.api}/${action}_${base}`,
+      method: "post",
+      data: data,
+    })
       .then((response) => {
         table.setRowSelection({});
         fetchResults(response.success);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

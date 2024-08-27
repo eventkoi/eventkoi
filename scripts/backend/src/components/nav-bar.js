@@ -23,7 +23,7 @@ export function Navbar({ tabs, isSub, asDiv }) {
     if (parseInt(parent[2]) > 0) {
       page = defaultRoute;
     }
-    if (parent[2] === "add") {
+    if (["add"].includes(parent[2])) {
       page = defaultRoute;
     }
   }

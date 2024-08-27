@@ -44,4 +44,28 @@ class Events {
 
 		return $results;
 	}
+
+	/**
+	 * Delete events.
+	 *
+	 * @param array $ids An array of events IDs to delete.
+	 * @param bool  $force_delete If true, events will be permanently deleted.
+	 */
+	public static function delete_events( $ids = array(), $force_delete = false ) {
+
+		foreach ( $ids as $id ) {
+			if ( $force_delete ) {
+				wp_delete_post( $id, $force_delete );
+			} else {
+				wp_trash_post( $id );
+			}
+		}
+
+		$result = array(
+			'ids'     => $ids,
+			'success' => _n( 'Event moved to trash.', 'Events moved to trash.', count( $ids ), 'eventkoi' ),
+		);
+
+		return $result;
+	}
 }

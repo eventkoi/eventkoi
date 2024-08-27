@@ -56,7 +56,10 @@ const columns = [
       return (
         <div className="grid space-y-1">
           <div className="text-foreground">
-            <a href={url} className="hover:underline hover:decoration-dotted">
+            <a
+              href={url}
+              className="hover:underline hover:decoration-dotted underline-offset-4"
+            >
               {row.getValue("title")}
             </a>
           </div>
@@ -135,7 +138,6 @@ export function EventsOverview() {
       method: "get",
     })
       .then((response) => {
-        console.log(response);
         setData(response);
         setIsLoading(false);
         if (toastMessage) {
@@ -143,6 +145,7 @@ export function EventsOverview() {
         }
       })
       .catch((error) => {
+        console.log(error);
         setIsLoading(false);
       });
   };
