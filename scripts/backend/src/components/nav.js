@@ -21,7 +21,8 @@ export function Nav({ isEvent = false }) {
     <header
       className={cn(
         "flex text-sm h-12 items-center border-b gap-6 px-8",
-        isEvent && "h-20 gap-2 shadow-sm border-none"
+        isEvent &&
+          "sticky top-0 z-[100000] bg-muted h-20 gap-2 shadow-sm border-none"
       )}
     >
       <Logo />
