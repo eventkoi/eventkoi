@@ -14978,6 +14978,48 @@ function DateWithRange() {
 
 /***/ }),
 
+/***/ "./src/components/event-nav-back.js":
+/*!******************************************!*\
+  !*** ./src/components/event-nav-back.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventNavBack: () => (/* binding */ EventNavBack)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+
+
+
+
+
+function EventNavBack({
+  heading
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "space-y-[1px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "link",
+    className: "p-0 h-auto text-muted-foreground font-normal",
+    asChild: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    to: "/events"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: "mr-2 h-4 w-4"
+  }), "Back to all events")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_1__.Heading, {
+    level: 3,
+    className: "pl-6"
+  }, heading));
+}
+
+/***/ }),
+
 /***/ "./src/components/event-nav-bar.js":
 /*!*****************************************!*\
   !*** ./src/components/event-nav-bar.js ***!
@@ -15012,7 +15054,9 @@ function EventNavBar() {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "default",
     className: "rounded-r-none"
-  }, "Publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenu, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuTrigger, {
+  }, "Publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenu, {
+    modal: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuTrigger, {
     asChild: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "default",
@@ -15021,7 +15065,7 @@ function EventNavBar() {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
     className: "w-4 h-4"
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuContent, {
-    className: "w-56",
+    className: "w-56 z-[510]",
     align: "end"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuItem, null, "Schedule publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuItem, {
     disabled: true
@@ -15100,11 +15144,12 @@ const sizes = {
 function Heading({
   level = 1,
   tagline = null,
+  className,
   children
 }) {
   const Tag = `h${level}`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "grid gap-1"
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("grid gap-1", className)
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Tag, {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(sizes[Tag], "font-medium text-foreground tracking-tight scroll-m-20")
   }, children), tagline && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
@@ -15267,14 +15312,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _components_event_nav_bar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-nav-bar */ "./src/components/event-nav-bar.js");
-/* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
-/* harmony import */ var _components_nav_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/nav-bar */ "./src/components/nav-bar.js");
-/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+/* harmony import */ var _components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-nav-back */ "./src/components/event-nav-back.js");
+/* harmony import */ var _components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-nav-bar */ "./src/components/event-nav-bar.js");
+/* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
+/* harmony import */ var _components_nav_bar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/nav-bar */ "./src/components/nav-bar.js");
 /* harmony import */ var _data_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/data/tabs */ "./src/data/tabs.js");
-
 
 
 
@@ -15291,23 +15333,19 @@ function Nav({
   if (split[1] && (parseInt(split[1]) > 0 || split[1].includes("add"))) {
     isEvent = true;
   }
+  const heading = parseInt(split[1]) > 0 ? "Edit event" : "Add event";
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", isEvent && "sticky top-0 z-[100000] bg-muted h-20 gap-2 shadow-sm border-none")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_3__.Logo, null), !isEvent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_4__.Navbar, {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", isEvent && "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-none")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), !isEvent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_5__.Navbar, {
     tabs: _data_tabs__WEBPACK_IMPORTED_MODULE_6__.tabs["main"]
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__.Button, {
-    variant: "link",
-    asChild: true
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
-    to: "/events"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    className: "mr-2 h-4 w-4"
-  }), "Back")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
+    heading: heading
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full justify-end"
-  }, !isEvent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_4__.Navbar, {
+  }, !isEvent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_5__.Navbar, {
     tabs: _data_tabs__WEBPACK_IMPORTED_MODULE_6__.tabs["side"],
     asDiv: true
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_2__.EventNavBar, null)));
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, null)));
 }
 
 /***/ }),

@@ -6,11 +6,11 @@ const sizes = {
   h4: "text-base",
 };
 
-export function Heading({ level = 1, tagline = null, children }) {
+export function Heading({ level = 1, tagline = null, className, children }) {
   const Tag = `h${level}`;
 
   return (
-    <div className="grid gap-1">
+    <div className={cn("grid gap-1", className)}>
       <Tag
         className={cn(
           sizes[Tag],

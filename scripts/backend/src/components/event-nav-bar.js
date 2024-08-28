@@ -20,13 +20,13 @@ export function EventNavBar() {
         <Button variant="default" className="rounded-r-none">
           Publish
         </Button>
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant="default" size="icon" className="rounded-l-none">
               <ChevronDown className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end">
+          <DropdownMenuContent className="w-56 z-[510]" align="end">
             <DropdownMenuItem>Schedule publish</DropdownMenuItem>
             <DropdownMenuItem disabled>Create duplicate event</DropdownMenuItem>
             <DropdownMenuSeparator />
