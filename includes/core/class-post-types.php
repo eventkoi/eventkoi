@@ -25,6 +25,7 @@ class Post_Types {
 
 		add_action( 'init', array( __CLASS__, 'register_post_types' ), 5 );
 		add_action( 'eventkoi_after_register_post_type', array( __CLASS__, 'maybe_flush_rewrite_rules' ) );
+		add_action( 'get_edit_post_link', array( __CLASS__, 'update_edit_event_link' ), 10, 2 );
 	}
 
 	/**
@@ -97,6 +98,7 @@ class Post_Types {
 					'supports'            => $supports,
 					'has_archive'         => false,
 					'show_in_nav_menus'   => true,
+					'show_in_menu'        => '_eventkoi',
 					'show_in_rest'        => true,
 				)
 			)
@@ -120,5 +122,21 @@ class Post_Types {
 	 */
 	public static function flush_rewrite_rules() {
 		flush_rewrite_rules();
+	}
+
+	/**
+	 * Update the edit event links.
+	 *
+	 * @param string $link    The edit link.
+	 * @param int    $post_id Post ID.
+	 */
+	public static function update_edit_event_link( $link, $post_id ) {
+
+		$event = new \EventKoi\Core\Event( $post_id );
+		if ( $event::get_id() ) {
+			return admin_url( 'admin.php?page=eventkoi#/events/' . $event::get_id() . '/main' );
+		}
+
+		return $link;
 	}
 }

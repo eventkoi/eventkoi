@@ -10,7 +10,7 @@ import { Box } from "@/components/box";
 import { PencilLine } from "lucide-react";
 
 export function EventEditMain() {
-  const [eventId, event, setEvent] = useOutletContext();
+  const [event, setEvent] = useOutletContext();
 
   const [isTyping, setIsTyping] = useState(false);
 

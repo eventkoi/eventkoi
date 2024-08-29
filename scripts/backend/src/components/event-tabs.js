@@ -5,7 +5,7 @@ const tabs = [
   { name: "details", title: "Additional details" },
 ];
 
-export function EventTabs({ eventId, event, setEvent, location }) {
+export function EventTabs({ event, setEvent, location }) {
   var parent = location.pathname?.split("/");
   var view = parent[3];
 

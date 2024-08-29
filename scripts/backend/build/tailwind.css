@@ -1138,6 +1138,14 @@ body {
   width: 1px !important;
 }
 
+.w-40 {
+  width: 10rem !important;
+}
+
+.w-60 {
+  width: 15rem !important;
+}
+
 .min-w-0 {
   min-width: 0px !important;
 }
@@ -1269,6 +1277,10 @@ body {
   -webkit-user-select: none !important;
      -moz-user-select: none !important;
           user-select: none !important;
+}
+
+.resize {
+  resize: both !important;
 }
 
 .scroll-m-20 {
@@ -1510,6 +1522,10 @@ body {
   border-width: 2px !important;
 }
 
+.border-0 {
+  border-width: 0px !important;
+}
+
 .border-y {
   border-top-width: 1px !important;
   border-bottom-width: 1px !important;
@@ -1641,6 +1657,20 @@ body {
 
 .bg-transparent {
   background-color: transparent !important;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
+}
+
+.bg-black\/85 {
+  background-color: rgb(0 0 0 / 0.85) !important;
+}
+
+.bg-\[\#222222\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(34 34 34 / var(--tw-bg-opacity)) !important;
 }
 
 .fill-current {
@@ -1852,6 +1882,10 @@ body {
   line-height: 1rem !important;
 }
 
+.text-\[13px\] {
+  font-size: 13px !important;
+}
+
 .font-medium {
   font-weight: 500 !important;
 }
@@ -1870,6 +1904,10 @@ body {
 
 .leading-none {
   line-height: 1 !important;
+}
+
+.leading-5 {
+  line-height: 1.25rem !important;
 }
 
 .tracking-tight {
@@ -1932,16 +1970,16 @@ body {
   color: hsl(var(--primary) / 0.6) !important;
 }
 
+.text-ring {
+  color: hsl(var(--ring)) !important;
+}
+
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground)) !important;
 }
 
 .text-success {
   color: hsl(var(--success)) !important;
-}
-
-.text-ring {
-  color: hsl(var(--ring)) !important;
 }
 
 .underline {
@@ -1962,6 +2000,10 @@ body {
 
 .underline-offset-\[7px\] {
   text-underline-offset: 7px !important;
+}
+
+.underline-offset-2 {
+  text-underline-offset: 2px !important;
 }
 
 .opacity-0 {
@@ -2337,6 +2379,10 @@ body {
   text-decoration-line: underline !important;
 }
 
+.hover\:no-underline:hover {
+  text-decoration-line: none !important;
+}
+
 .hover\:decoration-dotted:hover {
   text-decoration-style: dotted !important;
 }
@@ -2421,6 +2467,20 @@ body {
 
 .focus-visible\:ring-offset-background:focus-visible {
   --tw-ring-offset-color: hsl(var(--background)) !important;
+}
+
+.active\:ring-2:active {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
+.active\:ring-ring:active {
+  --tw-ring-color: hsl(var(--ring)) !important;
+}
+
+.active\:ring-offset-2:active {
+  --tw-ring-offset-width: 2px !important;
 }
 
 .disabled\:pointer-events-none:disabled {

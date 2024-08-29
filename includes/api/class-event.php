@@ -35,10 +35,20 @@ class Event {
 				'permission_callback' => array( '\EventKoi\API\REST', 'allow_all' ),
 			)
 		);
+
+		register_rest_route(
+			EVENTKOI_API,
+			'/update_event',
+			array(
+				'methods'             => 'post',
+				'callback'            => array( __CLASS__, 'update_event' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+			)
+		);
 	}
 
 	/**
-	 * Get results.
+	 * Get a single event.
 	 *
 	 * @param object $request The request that is being passed to API.
 	 */
@@ -51,6 +61,28 @@ class Event {
 		$id       = $request->get_param( 'id' );
 		$event    = new SingleEvent( $id );
 		$response = $event::get_meta();
+
+		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Update a single event.
+	 *
+	 * @param object $request The request that is being passed to API.
+	 */
+	public static function update_event( $request ) {
+
+		if ( empty( $request ) ) {
+			die( -1 );
+		}
+
+		$data = json_decode( $request->get_body(), true );
+
+		$event  = ! empty( $data['event'] ) ? $data['event'] : null;
+		$status = ! empty( $data['status'] ) ? $data['status'] : 'draft';
+
+		$query    = new SingleEvent( $event['id'] );
+		$response = $query::update( $event, $status );
 
 		return rest_ensure_response( $response );
 	}

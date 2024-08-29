@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 import { ChevronLeft } from "lucide-react";
 
-export function EventNavBack({ eventId, event, setEvent }) {
-  const heading = eventId > 0 ? "Edit event" : "Add event";
+export function EventNavBack({ event, setEvent }) {
+  const heading = event?.id > 0 ? "Edit event" : "Add event";
 
   return (
     <div className="space-y-[1px]">

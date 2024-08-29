@@ -66,6 +66,62 @@ class Event {
 	}
 
 	/**
+	 * Update event.
+	 *
+	 * @param array  $meta An array with event meta.
+	 * @param string $status A pre-defeind event status.
+	 */
+	public static function update( $meta = array(), $status = 'draft' ) {
+
+		$meta = apply_filters( 'eventkoi_pre_update_event_meta', $meta, $meta['id'] );
+
+		$id    = $meta['id'];
+		$title = $meta['title'];
+
+		if ( 0 === $id ) {
+			$args = array(
+				'post_type'   => 'event',
+				'post_status' => $status,
+				'post_title'  => $title,
+				'post_name'   => sanitize_title_with_dashes( $title, '', 'save' ),
+				'post_author' => get_current_user_id(),
+			);
+
+			$last_id        = wp_insert_post( $args );
+			$event          = get_post( $last_id );
+			self::$event    = $event;
+			self::$event_id = ! empty( $event->ID ) ? $event->ID : 0;
+
+			return array_merge(
+				array(
+					'update_endpoint' => true,
+					'message'         => __( 'Event created.', 'eventkoi' ),
+				),
+				self::get_meta(),
+			);
+		}
+
+		$args = array(
+			'ID'          => $id,
+			'post_title'  => $title,
+			'post_name'   => sanitize_title_with_dashes( $title, '', 'save' ),
+			'post_status' => $status,
+		);
+
+		$last_id        = wp_update_post( $args );
+		$event          = get_post( $last_id );
+		self::$event    = $event;
+		self::$event_id = ! empty( $event->ID ) ? $event->ID : 0;
+
+		return array_merge(
+			array(
+				'message' => __( 'Event updated.', 'eventkoi' ),
+			),
+			self::get_meta(),
+		);
+	}
+
+	/**
 	 * Get event ID.
 	 */
 	public static function get_id() {
@@ -100,7 +156,7 @@ class Event {
 	 * Get event status.
 	 */
 	public static function get_status() {
-		$status = 'draft';
+		$status = ! empty( self::$event->post_status ) ? self::$event->post_status : 'draft';
 
 		return apply_filters( 'eventkoi_get_event_status', $status, self::$event_id, self::$event );
 	}

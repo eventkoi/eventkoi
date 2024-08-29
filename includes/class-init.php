@@ -33,10 +33,12 @@ class Init {
 
 		// Load inside admin only.
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-			$admin_menus   = new \EventKoi\Admin\Menus();
-			$admin_scripts = new \EventKoi\Admin\Scripts();
+			$admin_menus     = new \EventKoi\Admin\Menus();
+			$admin_redirects = new \EventKoi\Admin\Redirects();
+			$admin_scripts   = new \EventKoi\Admin\Scripts();
 
 			$admin_menus::init();
+			$admin_redirects::init();
 			$admin_scripts::init();
 		}
 	}

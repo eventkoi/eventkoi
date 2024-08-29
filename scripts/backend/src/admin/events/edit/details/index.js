@@ -4,11 +4,11 @@ import { Box } from "@/components/box";
 import { Heading } from "@/components/heading";
 
 export function EventEditDetails() {
-  const [eventId, event, setEvent] = useOutletContext();
+  const [event, setEvent] = useOutletContext();
 
   return (
     <Box>
-      <Heading level={3}>Additional details {eventId}</Heading>
+      <Heading level={3}>Additional details</Heading>
     </Box>
   );
 }

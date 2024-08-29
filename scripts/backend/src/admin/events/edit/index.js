@@ -51,17 +51,12 @@ export function EventEdit() {
 
   return (
     <>
-      <EventHeader eventId={eventId} event={event} setEvent={setEvent} />
+      <EventHeader event={event} setEvent={setEvent} />
       <Wrapper>
         <div className="w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]">
-          <EventTabs
-            eventId={eventId}
-            event={event}
-            setEvent={setEvent}
-            location={location}
-          />
+          <EventTabs event={event} setEvent={setEvent} location={location} />
           <div className="grid">
-            <Outlet context={[eventId, event, setEvent]} />
+            <Outlet context={[event, setEvent]} />
           </div>
         </div>
       </Wrapper>

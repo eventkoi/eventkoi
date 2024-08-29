@@ -22,8 +22,19 @@ import { SettingsOverview } from "@/admin/settings/overview";
 import { Nav } from "@/components/nav";
 import { Toaster } from "@/components/ui/sonner";
 
+import { useWindowDimensions } from "@/lib/use-window-dimensions";
+
 export function Admin() {
   const location = useLocation();
+  const { height, width } = useWindowDimensions();
+
+  let offset = 0;
+  if (width >= 960) {
+    offset = 160;
+  }
+  if (width < 960 && width > 780) {
+    offset = 32;
+  }
 
   useEffect(() => {
     jQuery(".wp-toolbar").css({ backgroundColor: "inherit" });
@@ -45,7 +56,17 @@ export function Admin() {
 
   return (
     <div className="w-full flex flex-col min-h-[calc(100vh-46px)] md:min-h-[calc(100vh-32px)]">
-      <Toaster richColors expand />
+      <Toaster
+        expand
+        position="bottom-left"
+        visibleToasts={2}
+        toastOptions={{
+          unstyled: true,
+          style: {
+            left: offset,
+          },
+        }}
+      />
       <Nav />
       <Routes>
         <Route index element={<Home />} />
