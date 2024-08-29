@@ -121,8 +121,8 @@ const columns = [
 
 const statusFilters = [
   { key: "all", title: "All", hideCount: true, isSelected: true },
-  { key: "upcoming", title: "Upcoming" },
   { key: "live", title: "Live" },
+  { key: "upcoming", title: "Upcoming" },
   { key: "draft", title: "Draft" },
   { key: "completed", title: "Completed" },
   { key: "trash", title: "Trash" },

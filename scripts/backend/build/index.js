@@ -14078,34 +14078,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_event_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-header */ "./src/components/event-header.js");
+/* harmony import */ var _components_event_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-tabs */ "./src/components/event-tabs.js");
+/* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/wrapper */ "./src/components/wrapper.js");
 
 
 
 
-const tabs = [{
-  name: "main",
-  title: "Main info"
-}, {
-  name: "details",
-  title: "Additional details"
-}];
+
+
+
 function EventEdit() {
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
-  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useLocation)();
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
+  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
   const {
     id
-  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useParams)();
+  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)();
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [event, setEvent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   var parent = location.pathname?.split("/");
   var view = parent[3];
-  const active = "font-medium px-3 py-3 rounded-lg text-foreground bg-foreground/5";
-  const heading = event?.id ? "Edit event" : "Add event";
+  let eventId = parseInt(id) || 0;
   const getEvent = async () => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: `${eventkoi_params.api}/event?id=${parseInt(id)}`,
+      path: `${eventkoi_params.api}/event?id=${eventId}`,
       method: "get"
     }).then(response => {
       console.log(response);
@@ -14124,28 +14121,22 @@ function EventEdit() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     getEvent();
   }, []);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_header__WEBPACK_IMPORTED_MODULE_2__.EventHeader, {
+    eventId: eventId,
+    event: event,
+    setEvent: setEvent
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_4__.Wrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("nav", {
-    className: "grid gap-1 text-sm text-muted-foreground"
-  }, tabs.map(function (item, i) {
-    let activeTabClass = "font-medium px-3 py-3 rounded-lg";
-    if (parent && view && view === item.name) {
-      activeTabClass = active;
-    }
-    if (parent && !view && item.name === "main") {
-      activeTabClass = active;
-    }
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-      key: `setting-tab-${i}`,
-      to: item.name,
-      className: activeTabClass
-    }, item.title);
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_tabs__WEBPACK_IMPORTED_MODULE_3__.EventTabs, {
+    eventId: eventId,
+    event: event,
+    setEvent: setEvent,
+    location: location
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Outlet, {
-    context: [event, setEvent]
-  })));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Outlet, {
+    context: [eventId, event, setEvent]
+  })))));
 }
 
 /***/ }),
@@ -14162,14 +14153,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
+
+
+
+
 
 
 
 function EventEditMain() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useOutletContext)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, "test");
+  const [eventId, event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useOutletContext)();
+  const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  if (!event) {
+    return null;
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_3__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "max-w-[450px]"
+  }, isTyping ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
+    type: "text",
+    value: event?.title,
+    onChange: e => {
+      setEvent(prevState => ({
+        ...prevState,
+        title: e.target.value
+      }));
+    },
+    autoFocus: true,
+    onBlur: () => setIsTyping(false),
+    onKeyDown: e => e.key === "Enter" && setIsTyping(false)
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("inline-flex pr-6 relative cursor-pointer underline underline-offset-[7px] text-muted-foreground font-medium text-lg", event?.title && "text-foreground no-underline"),
+    onClick: () => {
+      setIsTyping(true);
+    }
+  }, event?.title ? event?.title : "Click to add event name", event?.title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: "absolute top-1 right-0 w-5 h-5 text-ring"
+  }))));
 }
 
 /***/ }),
@@ -14194,6 +14217,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Events() {
+  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useLocation)();
+  const path = location.pathname.split("events");
+  if (path[1]) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Outlet, null);
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sub_nav__WEBPACK_IMPORTED_MODULE_1__.Subnav, {
     root: "events"
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_2__.Wrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Outlet, null)));
@@ -14352,11 +14380,11 @@ const statusFilters = [{
   hideCount: true,
   isSelected: true
 }, {
-  key: "upcoming",
-  title: "Upcoming"
-}, {
   key: "live",
   title: "Live"
+}, {
+  key: "upcoming",
+  title: "Upcoming"
 }, {
   key: "draft",
   title: "Draft"
@@ -14978,6 +15006,44 @@ function DateWithRange() {
 
 /***/ }),
 
+/***/ "./src/components/event-header.js":
+/*!****************************************!*\
+  !*** ./src/components/event-header.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventHeader: () => (/* binding */ EventHeader)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var _components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-nav-back */ "./src/components/event-nav-back.js");
+/* harmony import */ var _components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-nav-bar */ "./src/components/event-nav-bar.js");
+/* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
+
+
+
+
+
+function EventHeader({
+  eventId,
+  event,
+  setEvent
+}) {
+  const heading = eventId > 0 ? "Edit event" : "Add event";
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-none")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
+    heading: heading
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex w-full justify-end"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, null)));
+}
+
+/***/ }),
+
 /***/ "./src/components/event-nav-back.js":
 /*!******************************************!*\
   !*** ./src/components/event-nav-back.js ***!
@@ -15070,6 +15136,57 @@ function EventNavBar() {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuItem, null, "Schedule publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuItem, {
     disabled: true
   }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuSeparator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.DropdownMenuItem, null, "Move to trash")))));
+}
+
+/***/ }),
+
+/***/ "./src/components/event-tabs.js":
+/*!**************************************!*\
+  !*** ./src/components/event-tabs.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventTabs: () => (/* binding */ EventTabs)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+
+
+const tabs = [{
+  name: "main",
+  title: "Main info"
+}, {
+  name: "details",
+  title: "Additional details"
+}];
+function EventTabs({
+  eventId,
+  event,
+  setEvent,
+  location
+}) {
+  var parent = location.pathname?.split("/");
+  var view = parent[3];
+  const active = "font-medium px-3 py-3 rounded-lg text-foreground bg-foreground/5";
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("nav", {
+    className: "grid gap-1 text-sm text-muted-foreground"
+  }, tabs.map(function (item, i) {
+    let activeTabClass = "font-medium px-3 py-3 rounded-lg";
+    if (parent && view && view === item.name) {
+      activeTabClass = active;
+    }
+    if (parent && !view && item.name === "main") {
+      activeTabClass = active;
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      key: `setting-tab-${i}`,
+      to: item.name,
+      className: activeTabClass
+    }, item.title);
+  }));
 }
 
 /***/ }),
@@ -15311,14 +15428,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-nav-back */ "./src/components/event-nav-back.js");
-/* harmony import */ var _components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-nav-bar */ "./src/components/event-nav-bar.js");
-/* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
-/* harmony import */ var _components_nav_bar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/nav-bar */ "./src/components/nav-bar.js");
-/* harmony import */ var _data_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/data/tabs */ "./src/data/tabs.js");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
+/* harmony import */ var _components_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/nav-bar */ "./src/components/nav-bar.js");
+/* harmony import */ var _data_tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/data/tabs */ "./src/data/tabs.js");
 
 
 
@@ -15328,24 +15441,24 @@ __webpack_require__.r(__webpack_exports__);
 function Nav({
   isEvent = false
 }) {
-  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useLocation)();
+  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
   const split = location.pathname.split("events/");
   if (split[1] && (parseInt(split[1]) > 0 || split[1].includes("add"))) {
     isEvent = true;
   }
-  const heading = parseInt(split[1]) > 0 ? "Edit event" : "Add event";
+  if (isEvent) {
+    return null;
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", isEvent && "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-none")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), !isEvent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_5__.Navbar, {
-    tabs: _data_tabs__WEBPACK_IMPORTED_MODULE_6__.tabs["main"]
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
-    heading: heading
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_2__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_3__.Navbar, {
+    tabs: _data_tabs__WEBPACK_IMPORTED_MODULE_4__.tabs["main"]
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full justify-end"
-  }, !isEvent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_5__.Navbar, {
-    tabs: _data_tabs__WEBPACK_IMPORTED_MODULE_6__.tabs["side"],
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_nav_bar__WEBPACK_IMPORTED_MODULE_3__.Navbar, {
+    tabs: _data_tabs__WEBPACK_IMPORTED_MODULE_4__.tabs["side"],
     asDiv: true
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, null)));
+  })));
 }
 
 /***/ }),
@@ -15591,13 +15704,6 @@ function Subnav({
   root
 }) {
   const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useLocation)();
-  if (!_data_tabs__WEBPACK_IMPORTED_MODULE_3__.tabs[root]) {
-    return null;
-  }
-  const split = location.pathname.split("events/");
-  if (split[1] && (parseInt(split[1]) > 0 || split[1].includes("add"))) {
-    return null;
-  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex text-sm h-12 items-center border-b gap-6 px-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_1__.Logo, {
@@ -15927,7 +16033,7 @@ const DropdownMenuItem = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
   ...props
 }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.Item, {
   ref: ref,
-  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50", inset && "pl-8", className),
+  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50", inset && "pl-8", className),
   ...props
 }));
 DropdownMenuItem.displayName = _radix_ui_react_dropdown_menu__WEBPACK_IMPORTED_MODULE_2__.Item.displayName;
@@ -16017,7 +16123,7 @@ const Input = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
 }, ref) => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: type,
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50", className),
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50", className),
     ref: ref,
     ...props
   });
@@ -16947,6 +17053,38 @@ const ListFilter = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default
 
 
 //# sourceMappingURL=list-filter.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/pencil-line.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PencilLine)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const PencilLine = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("PencilLine", [
+  ["path", { d: "M12 20h9", key: "t2du7b" }],
+  ["path", { d: "M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z", key: "ymcmye" }],
+  ["path", { d: "m15 5 3 3", key: "1w25hb" }]
+]);
+
+
+//# sourceMappingURL=pencil-line.js.map
 
 
 /***/ }),

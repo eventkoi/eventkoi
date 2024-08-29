@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
 
-import { EventNavBack } from "@/components/event-nav-back";
-import { EventNavBar } from "@/components/event-nav-bar";
 import { Logo } from "@/components/logo";
 import { Navbar } from "@/components/nav-bar";
 
@@ -16,7 +14,9 @@ export function Nav({ isEvent = false }) {
     isEvent = true;
   }
 
-  const heading = parseInt(split[1]) > 0 ? "Edit event" : "Add event";
+  if (isEvent) {
+    return null;
+  }
 
   return (
     <header
@@ -26,13 +26,9 @@ export function Nav({ isEvent = false }) {
       )}
     >
       <Logo />
-      {!isEvent ? (
-        <Navbar tabs={tabs["main"]} />
-      ) : (
-        <EventNavBack heading={heading} />
-      )}
+      <Navbar tabs={tabs["main"]} />
       <div className="flex w-full justify-end">
-        {!isEvent ? <Navbar tabs={tabs["side"]} asDiv /> : <EventNavBar />}
+        <Navbar tabs={tabs["side"]} asDiv />
       </div>
     </header>
   );

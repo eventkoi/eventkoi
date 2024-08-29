@@ -52,10 +52,6 @@ class Event {
 	 */
 	public static function get_meta() {
 
-		if ( empty( self::get_id() ) ) {
-			return array();
-		}
-
 		$meta = array(
 			'id'       => self::get_id(),
 			'title'    => self::get_title(),
@@ -82,7 +78,7 @@ class Event {
 	 * Get event title.
 	 */
 	public static function get_title() {
-		$title = self::$event->post_title ? self::$event->post_title : __( 'Untitled event', 'eventkoi' );
+		$title = self::$event->post_title ? self::$event->post_title : '';
 
 		return apply_filters( 'eventkoi_get_event_title', $title, self::$event_id, self::$event );
 	}
@@ -92,6 +88,10 @@ class Event {
 	 */
 	public static function get_url() {
 		$url = get_permalink( self::$event_id );
+
+		if ( ! $url ) {
+			$url = '';
+		}
 
 		return apply_filters( 'eventkoi_get_event_url', $url, self::$event_id, self::$event );
 	}

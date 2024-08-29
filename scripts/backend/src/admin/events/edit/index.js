@@ -1,23 +1,15 @@
 import apiRequest from "@wordpress/api-fetch";
 
 import { useEffect, useState } from "react";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 
-const tabs = [
-  { name: "main", title: "Main info" },
-  { name: "details", title: "Additional details" },
-];
+import { EventHeader } from "@/components/event-header";
+import { EventTabs } from "@/components/event-tabs";
+import { Wrapper } from "@/components/wrapper";
 
 export function EventEdit() {
   const navigate = useNavigate();
   const location = useLocation();
-
   const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
@@ -25,15 +17,11 @@ export function EventEdit() {
 
   var parent = location.pathname?.split("/");
   var view = parent[3];
-
-  const active =
-    "font-medium px-3 py-3 rounded-lg text-foreground bg-foreground/5";
-
-  const heading = event?.id ? "Edit event" : "Add event";
+  let eventId = parseInt(id) || 0;
 
   const getEvent = async () => {
     await apiRequest({
-      path: `${eventkoi_params.api}/event?id=${parseInt(id)}`,
+      path: `${eventkoi_params.api}/event?id=${eventId}`,
       method: "get",
     })
       .then((response) => {
@@ -58,30 +46,21 @@ export function EventEdit() {
   }, []);
 
   return (
-    <div className="w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]">
-      <nav className="grid gap-1 text-sm text-muted-foreground">
-        {tabs.map(function (item, i) {
-          let activeTabClass = "font-medium px-3 py-3 rounded-lg";
-          if (parent && view && view === item.name) {
-            activeTabClass = active;
-          }
-          if (parent && !view && item.name === "main") {
-            activeTabClass = active;
-          }
-          return (
-            <Link
-              key={`setting-tab-${i}`}
-              to={item.name}
-              className={activeTabClass}
-            >
-              {item.title}
-            </Link>
-          );
-        })}
-      </nav>
-      <div className="grid">
-        <Outlet context={[event, setEvent]} />
-      </div>
-    </div>
+    <>
+      <EventHeader eventId={eventId} event={event} setEvent={setEvent} />
+      <Wrapper>
+        <div className="w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]">
+          <EventTabs
+            eventId={eventId}
+            event={event}
+            setEvent={setEvent}
+            location={location}
+          />
+          <div className="grid">
+            <Outlet context={[eventId, event, setEvent]} />
+          </div>
+        </div>
+      </Wrapper>
+    </>
   );
 }
