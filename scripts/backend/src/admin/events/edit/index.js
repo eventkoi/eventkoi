@@ -45,6 +45,10 @@ export function EventEdit() {
     getEvent();
   }, []);
 
+  if (eventId && !event?.id) {
+    return null;
+  }
+
   return (
     <>
       <EventHeader eventId={eventId} event={event} setEvent={setEvent} />

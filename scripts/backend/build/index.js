@@ -14056,10 +14056,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventEditDetails() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useOutletContext)();
+  const [eventId, event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useOutletContext)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_2__.Heading, {
     level: 3
-  }, "Additional details"));
+  }, "Additional details ", eventId));
 }
 
 /***/ }),
@@ -14121,6 +14121,9 @@ function EventEdit() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     getEvent();
   }, []);
+  if (eventId && !event?.id) {
+    return null;
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_header__WEBPACK_IMPORTED_MODULE_2__.EventHeader, {
     eventId: eventId,
     event: event,
@@ -14168,9 +14171,6 @@ __webpack_require__.r(__webpack_exports__);
 function EventEditMain() {
   const [eventId, event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useOutletContext)();
   const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  if (!event) {
-    return null;
-  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_3__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "max-w-[450px]"
   }, isTyping ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
@@ -15035,14 +15035,19 @@ function EventHeader({
   event,
   setEvent
 }) {
-  const heading = eventId > 0 ? "Edit event" : "Add event";
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-none")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
-    heading: heading
+    eventId: eventId,
+    event: event,
+    setEvent: setEvent
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full justify-end"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, null)));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, {
+    eventId: eventId,
+    event: event,
+    setEvent: setEvent
+  })));
 }
 
 /***/ }),
@@ -15069,8 +15074,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventNavBack({
-  heading
+  eventId,
+  event,
+  setEvent
 }) {
+  const heading = eventId > 0 ? "Edit event" : "Add event";
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "space-y-[1px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
@@ -15108,7 +15116,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function EventNavBar() {
+function EventNavBar({
+  eventId,
+  event,
+  setEvent
+}) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {

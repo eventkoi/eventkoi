@@ -78,7 +78,7 @@ class Event {
 	 * Get event title.
 	 */
 	public static function get_title() {
-		$title = self::$event->post_title ? self::$event->post_title : '';
+		$title = ! empty( self::$event->post_title ) ? self::$event->post_title : '';
 
 		return apply_filters( 'eventkoi_get_event_title', $title, self::$event_id, self::$event );
 	}
@@ -109,7 +109,7 @@ class Event {
 	 * Get event modified date.
 	 */
 	public static function get_date_modified() {
-		if ( strtotime( self::$event->post_modified_gmt ) > 0 ) {
+		if ( ! empty( self::$event->post_modified_gmt ) && strtotime( self::$event->post_modified_gmt ) > 0 ) {
 			$date = eventkoi_date_display( self::$event->post_modified_gmt );
 		} else {
 			$date = '';
@@ -122,7 +122,7 @@ class Event {
 	 * Get event modified date (GMT).
 	 */
 	public static function get_date_modified_gmt() {
-		if ( strtotime( self::$event->post_modified_gmt ) > 0 ) {
+		if ( ! empty( self::$event->post_modified_gmt ) && strtotime( self::$event->post_modified_gmt ) > 0 ) {
 			$date = date_i18n( eventkoi_get_default_date_format(), strtotime( self::$event->post_modified_gmt ) );
 		} else {
 			$date = '';

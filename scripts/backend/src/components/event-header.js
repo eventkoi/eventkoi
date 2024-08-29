@@ -5,8 +5,6 @@ import { EventNavBar } from "@/components/event-nav-bar";
 import { Logo } from "@/components/logo";
 
 export function EventHeader({ eventId, event, setEvent }) {
-  const heading = eventId > 0 ? "Edit event" : "Add event";
-
   return (
     <header
       className={cn(
@@ -15,9 +13,9 @@ export function EventHeader({ eventId, event, setEvent }) {
       )}
     >
       <Logo />
-      <EventNavBack heading={heading} />
+      <EventNavBack eventId={eventId} event={event} setEvent={setEvent} />
       <div className="flex w-full justify-end">
-        <EventNavBar />
+        <EventNavBar eventId={eventId} event={event} setEvent={setEvent} />
       </div>
     </header>
   );

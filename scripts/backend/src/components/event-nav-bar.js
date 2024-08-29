@@ -9,7 +9,7 @@ import {
 
 import { ChevronDown } from "lucide-react";
 
-export function EventNavBar() {
+export function EventNavBar({ eventId, event, setEvent }) {
   return (
     <div className="flex gap-2">
       <Button variant="ghost">Save draft</Button>

@@ -14,10 +14,6 @@ export function EventEditMain() {
 
   const [isTyping, setIsTyping] = useState(false);
 
-  if (!event) {
-    return null;
-  }
-
   return (
     <Box>
       <div className="max-w-[450px]">
