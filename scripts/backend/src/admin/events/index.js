@@ -9,7 +9,10 @@ export function Events() {
   const path = location.pathname.split("events");
 
   if (path[1]) {
-    return <Outlet />;
+    let id = path[1].split("/");
+    if (path[1].includes("add") || (id[1] && parseInt(id[1]) > 0)) {
+      return <Outlet />;
+    }
   }
 
   return (

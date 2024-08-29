@@ -14220,7 +14220,10 @@ function Events() {
   const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useLocation)();
   const path = location.pathname.split("events");
   if (path[1]) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Outlet, null);
+    let id = path[1].split("/");
+    if (path[1].includes("add") || id[1] && parseInt(id[1]) > 0) {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Outlet, null);
+    }
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sub_nav__WEBPACK_IMPORTED_MODULE_1__.Subnav, {
     root: "events"
@@ -15704,6 +15707,13 @@ function Subnav({
   root
 }) {
   const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useLocation)();
+  if (!_data_tabs__WEBPACK_IMPORTED_MODULE_3__.tabs[root]) {
+    return null;
+  }
+  const split = location.pathname.split("events/");
+  if (split[1] && (parseInt(split[1]) > 0 || split[1].includes("add"))) {
+    return null;
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex text-sm h-12 items-center border-b gap-6 px-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_1__.Logo, {
