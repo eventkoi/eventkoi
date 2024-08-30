@@ -45,6 +45,7 @@ export function DataTable({
   statusFilters,
   filterName,
   addTo,
+  queryStatus,
 }) {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -79,6 +80,7 @@ export function DataTable({
             base={base}
             fetchResults={fetchResults}
             addTo={addTo}
+            queryStatus={queryStatus}
           />
         </div>
         <div className="flex items-center space-x-4">
@@ -94,7 +96,11 @@ export function DataTable({
       <div className="flex items-center justify-between">
         {!hideStatusFilters && (
           <div className="flex items-center text-sm space-x-6">
-            <StatusFilters statusFilters={statusFilters} base={base} />
+            <StatusFilters
+              statusFilters={statusFilters}
+              base={base}
+              data={data}
+            />
           </div>
         )}
         <div className="text-sm text-muted-foreground">
@@ -109,7 +115,16 @@ export function DataTable({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="h-10">
+                    <TableHead
+                      key={header.id}
+                      className={cn(
+                        "h-10",
+                        header.id === "select" && "w-[50px]",
+                        header.id === "title" && "w-1/4",
+                        header.id === "date" && "w-1/4",
+                        header.id === "status" && "w-1/6"
+                      )}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(

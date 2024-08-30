@@ -1073,6 +1073,10 @@ body {
   width: 14rem !important;
 }
 
+.w-60 {
+  width: 15rem !important;
+}
+
 .w-64 {
   width: 16rem !important;
 }
@@ -1142,8 +1146,16 @@ body {
   width: 10rem !important;
 }
 
-.w-60 {
-  width: 15rem !important;
+.w-1\/4 {
+  width: 25% !important;
+}
+
+.w-1\/6 {
+  width: 16.666667% !important;
+}
+
+.w-\[50px\] {
+  width: 50px !important;
 }
 
 .min-w-0 {
@@ -1518,12 +1530,12 @@ body {
   border-width: 1px !important;
 }
 
-.border-2 {
-  border-width: 2px !important;
-}
-
 .border-0 {
   border-width: 0px !important;
+}
+
+.border-2 {
+  border-width: 2px !important;
 }
 
 .border-y {
@@ -1599,6 +1611,11 @@ body {
   border-top-color: transparent !important;
 }
 
+.bg-\[\#222222\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(34 34 34 / var(--tw-bg-opacity)) !important;
+}
+
 .bg-accent {
   background-color: hsl(var(--accent)) !important;
 }
@@ -1657,20 +1674,6 @@ body {
 
 .bg-transparent {
   background-color: transparent !important;
-}
-
-.bg-black {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
-}
-
-.bg-black\/85 {
-  background-color: rgb(0 0 0 / 0.85) !important;
-}
-
-.bg-\[\#222222\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(34 34 34 / var(--tw-bg-opacity)) !important;
 }
 
 .fill-current {
@@ -1882,10 +1885,6 @@ body {
   line-height: 1rem !important;
 }
 
-.text-\[13px\] {
-  font-size: 13px !important;
-}
-
 .font-medium {
   font-weight: 500 !important;
 }
@@ -1902,12 +1901,12 @@ body {
   text-transform: capitalize !important;
 }
 
-.leading-none {
-  line-height: 1 !important;
-}
-
 .leading-5 {
   line-height: 1.25rem !important;
+}
+
+.leading-none {
+  line-height: 1 !important;
 }
 
 .tracking-tight {
@@ -1982,6 +1981,10 @@ body {
   color: hsl(var(--success)) !important;
 }
 
+.text-primary\/40 {
+  color: hsl(var(--primary) / 0.4) !important;
+}
+
 .underline {
   text-decoration-line: underline !important;
 }
@@ -1994,16 +1997,16 @@ body {
   text-decoration-style: dotted !important;
 }
 
+.underline-offset-2 {
+  text-underline-offset: 2px !important;
+}
+
 .underline-offset-4 {
   text-underline-offset: 4px !important;
 }
 
 .underline-offset-\[7px\] {
   text-underline-offset: 7px !important;
-}
-
-.underline-offset-2 {
-  text-underline-offset: 2px !important;
 }
 
 .opacity-0 {

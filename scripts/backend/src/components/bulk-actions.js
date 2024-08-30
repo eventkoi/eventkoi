@@ -15,7 +15,7 @@ import {
 
 import { EllipsisVertical } from "lucide-react";
 
-export function BulkActions({ table, base, fetchResults, addTo }) {
+export function BulkActions({ table, base, fetchResults, addTo, queryStatus }) {
   const runAction = async (action) => {
     let selectedRows = table.getFilteredSelectedRowModel().rows;
 
@@ -30,12 +30,10 @@ export function BulkActions({ table, base, fetchResults, addTo }) {
       base: base,
     };
 
-    if (base === "events") {
-      data.trash = "yes";
-    }
+    const apiURL = `${eventkoi_params.api}/${action}_${base}`;
 
     await apiRequest({
-      path: `${eventkoi_params.api}/${action}_${base}`,
+      path: apiURL,
       method: "post",
       data: data,
     })
@@ -43,9 +41,7 @@ export function BulkActions({ table, base, fetchResults, addTo }) {
         table.setRowSelection({});
         fetchResults(response.success);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   return (
@@ -57,44 +53,66 @@ export function BulkActions({ table, base, fetchResults, addTo }) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-[180px]">
-        <DropdownMenuItem
-          disabled={table.getFilteredSelectedRowModel().rows.length == 0}
-          onClick={() => {
-            runAction("duplicate");
-          }}
-        >
-          <span>Duplicate</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          disabled={table.getFilteredSelectedRowModel().rows.length == 0}
-          onClick={() => {
-            runAction("delete");
-          }}
-        >
-          <span>
-            {["categories"].includes(base) ? "Delete" : "Move to trash"}
-          </span>
-        </DropdownMenuItem>
+        {queryStatus == "trash" ? (
+          <>
+            <DropdownMenuItem
+              disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+              onClick={() => {
+                runAction("restore");
+              }}
+            >
+              <span>Restore</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+              onClick={() => {
+                runAction("remove");
+              }}
+            >
+              <span>Delete permanently</span>
+            </DropdownMenuItem>
+          </>
+        ) : (
+          <>
+            <DropdownMenuItem
+              disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+              onClick={() => {
+                runAction("duplicate");
+              }}
+            >
+              <span>Duplicate</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+              onClick={() => {
+                runAction("delete");
+              }}
+            >
+              <span>
+                {["categories"].includes(base) ? "Delete" : "Move to trash"}
+              </span>
+            </DropdownMenuItem>
+            {addTo && table.getFilteredSelectedRowModel().rows.length > 0 && (
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <span>{addTo}</span>
+                </DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuCheckboxItem>Panel</DropdownMenuCheckboxItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+            )}
 
-        {addTo && table.getFilteredSelectedRowModel().rows.length > 0 && (
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <span>{addTo}</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuCheckboxItem>Panel</DropdownMenuCheckboxItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-        )}
-
-        {addTo && table.getFilteredSelectedRowModel().rows.length == 0 && (
-          <DropdownMenuItem
-            disabled={table.getFilteredSelectedRowModel().rows.length == 0}
-          >
-            <span>{addTo}</span>
-          </DropdownMenuItem>
+            {addTo && table.getFilteredSelectedRowModel().rows.length == 0 && (
+              <DropdownMenuItem
+                disabled={table.getFilteredSelectedRowModel().rows.length == 0}
+              >
+                <span>{addTo}</span>
+              </DropdownMenuItem>
+            )}
+          </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

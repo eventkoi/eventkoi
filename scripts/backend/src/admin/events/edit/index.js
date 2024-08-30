@@ -25,12 +25,10 @@ export function EventEdit() {
       method: "get",
     })
       .then((response) => {
-        console.log(response);
         setEvent(response);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
       });
   };

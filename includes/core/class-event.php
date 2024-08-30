@@ -58,8 +58,14 @@ class Event {
 		$meta = array(
 			'id'       => self::get_id(),
 			'title'    => self::get_title(),
-			'date'     => self::get_date_modified(),
-			'date_gmt' => self::get_date_modified_gmt(),
+			'date'     => array(
+				'start'        => self::get_start_date(),
+				'start_gmt'    => self::get_start_date( true ),
+				'end'          => self::get_end_date(),
+				'end_gmt'      => self::get_end_date( true ),
+				'modified'     => self::get_modified_date(),
+				'modified_gmt' => self::get_modified_date( true ),
+			),
 			'status'   => self::get_status(),
 			'url'      => self::get_url(),
 			'timezone' => eventkoi_timezone(),
@@ -165,28 +171,47 @@ class Event {
 	}
 
 	/**
-	 * Get event modified date.
+	 * Get event start date.
+	 *
+	 *  @param bool $gmt If true, GMT time will be returned.
 	 */
-	public static function get_date_modified() {
-		if ( ! empty( self::$event->post_modified_gmt ) && strtotime( self::$event->post_modified_gmt ) > 0 ) {
-			$date = eventkoi_date_display( self::$event->post_modified_gmt );
-		} else {
-			$date = '';
-		}
+	public static function get_start_date( $gmt = false ) {
+		$date = get_post_meta( self::$event_id, 'start_date', true );
+		$date = eventkoi_date_i18n( $date, $gmt );
 
-		return apply_filters( 'eventkoi_get_event_modified_date', $date, self::$event_id, self::$event );
+		$hook = $gmt ? 'eventkoi_get_event_start_date_gmt' : 'eventkoi_get_event_start_date';
+
+		return apply_filters( $hook, $date, self::$event_id, self::$event );
 	}
 
 	/**
-	 * Get event modified date (GMT).
+	 * Get event end date.
+	 *
+	 *  @param bool $gmt If true, GMT time will be returned.
 	 */
-	public static function get_date_modified_gmt() {
+	public static function get_end_date( $gmt = false ) {
+		$date = get_post_meta( self::$event_id, 'end_date', true );
+		$date = eventkoi_date_i18n( $date, $gmt );
+
+		$hook = $gmt ? 'eventkoi_get_event_end_date_gmt' : 'eventkoi_get_event_end_date';
+
+		return apply_filters( $hook, $date, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event modified date.
+	 *
+	 * @param bool $gmt If true, GMT time will be returned.
+	 */
+	public static function get_modified_date( $gmt = false ) {
 		if ( ! empty( self::$event->post_modified_gmt ) && strtotime( self::$event->post_modified_gmt ) > 0 ) {
-			$date = date_i18n( eventkoi_get_default_date_format(), strtotime( self::$event->post_modified_gmt ) );
+			$date = eventkoi_date_i18n( self::$event->post_modified_gmt, $gmt );
 		} else {
 			$date = '';
 		}
 
-		return apply_filters( 'eventkoi_get_event_modified_date_gmt', $date, self::$event_id, self::$event );
+		$hook = $gmt ? 'eventkoi_get_event_modified_date_gmt' : 'eventkoi_get_event_modified_date';
+
+		return apply_filters( $hook, $date, self::$event_id, self::$event );
 	}
 }

@@ -44,21 +44,21 @@ class Events {
 			if ( 'completed' === $args['status'] ) {
 				$query_args['meta_query'] = array( // phpcs:ignore
 					array(
-						'key'     => 'end_timestamp_gmt',
-						'value'   => time(),
-						'compare' => '>',
+						'key'     => 'end_date',
+						'value'   => eventkoi_gmt_date(),
+						'compare' => '<',
 					),
 				);
 			} elseif ( 'live' === $args['status'] ) {
 				$query_args['meta_query'] = array( // phpcs:ignore
 					'relation' => 'AND',
 					array(
-						'key'     => 'start_timestamp_gmt',
+						'key'     => 'start_date',
 						'value'   => time(),
 						'compare' => '<',
 					),
 					array(
-						'key'     => 'end_timestamp_gmt',
+						'key'     => 'end_date',
 						'value'   => time(),
 						'compare' => '<',
 					),
@@ -66,8 +66,8 @@ class Events {
 			} elseif ( 'upcoming' === $args['status'] ) {
 				$query_args['meta_query'] = array( // phpcs:ignore
 					array(
-						'key'     => 'start_timestamp_gmt',
-						'value'   => time(),
+						'key'     => 'start_date',
+						'value'   => eventkoi_gmt_date(),
 						'compare' => '>',
 					),
 				);
@@ -96,21 +96,57 @@ class Events {
 	 * Delete events.
 	 *
 	 * @param array $ids An array of events IDs to delete.
-	 * @param bool  $force_delete If true, events will be permanently deleted.
 	 */
-	public static function delete_events( $ids = array(), $force_delete = false ) {
+	public static function delete_events( $ids = array() ) {
 
 		foreach ( $ids as $id ) {
-			if ( $force_delete ) {
-				wp_delete_post( $id, $force_delete );
-			} else {
-				wp_trash_post( $id );
-			}
+			wp_trash_post( $id );
 		}
 
 		$result = array(
 			'ids'     => $ids,
 			'success' => _n( 'Event moved to trash.', 'Events moved to trash.', count( $ids ), 'eventkoi' ),
+		);
+
+		return $result;
+	}
+
+	/**
+	 * Remove events permanently.
+	 *
+	 * @param array $ids An array of events IDs to delete.
+	 */
+	public static function remove_events( $ids = array() ) {
+
+		foreach ( $ids as $id ) {
+			wp_delete_post( $id, true );
+		}
+
+		$result = array(
+			'ids'     => $ids,
+			'success' => _n( 'Event removed permanently.', 'Events removed permanently.', count( $ids ), 'eventkoi' ),
+		);
+
+		return $result;
+	}
+
+	/**
+	 * Restore events.
+	 *
+	 * @param array $ids An array of events IDs to restore.
+	 */
+	public static function restore_events( $ids = array() ) {
+
+		foreach ( $ids as $id ) {
+			delete_post_meta( $id, 'start_date' );
+			delete_post_meta( $id, 'end_date' );
+
+			wp_untrash_post( $id );
+		}
+
+		$result = array(
+			'ids'     => $ids,
+			'success' => _n( 'Event restored successfully.', 'Events restored successfully.', count( $ids ), 'eventkoi' ),
 		);
 
 		return $result;
@@ -130,14 +166,14 @@ class Events {
 
 		$live = self::get_events(
 			array(
-				'status'      => 'upcoming',
+				'status'      => 'live',
 				'counts_only' => true,
 			)
 		);
 
 		$completed = self::get_events(
 			array(
-				'status'      => 'upcoming',
+				'status'      => 'completed',
 				'counts_only' => true,
 			)
 		);

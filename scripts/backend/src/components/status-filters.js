@@ -1,16 +1,33 @@
-import { cn } from "@/lib/utils";
+import apiRequest from "@wordpress/api-fetch";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-export function StatusFilters({ statusFilters, base }) {
+import { cn } from "@/lib/utils";
+
+export function StatusFilters({ statusFilters, base, data }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryStatus = searchParams.get("status");
+
+  const [counts, setCounts] = useState(eventkoi_params.counts[base]);
+
+  useEffect(() => {
+    apiRequest({
+      path: `${eventkoi_params.api}/get_event_counts`,
+      method: "get",
+    })
+      .then((response) => {
+        setCounts(response);
+        console.log("Recalculated counts.");
+      })
+      .catch(() => {});
+  }, [data]);
 
   return (
     <>
       {statusFilters?.map(function (status, i) {
         let selected =
           (!queryStatus && status.key === "all") || queryStatus === status.key;
-        let count = eventkoi_params.counts[base][status.key];
+        let count = counts[status.key];
         return (
           <Link
             key={`status-${i}`}

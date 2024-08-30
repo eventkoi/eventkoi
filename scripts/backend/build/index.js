@@ -14105,11 +14105,9 @@ function EventEdit() {
       path: `${eventkoi_params.api}/event?id=${eventId}`,
       method: "get"
     }).then(response => {
-      console.log(response);
       setEvent(response);
       setLoading(false);
     }).catch(error => {
-      console.log(error);
       setLoading(false);
     });
   };
@@ -14242,7 +14240,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
@@ -14251,8 +14249,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
 /* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
 /* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/ban.js");
+
 
 
 
@@ -14306,13 +14307,14 @@ const columns = [{
     row
   }) => {
     const url = "#/events/" + parseInt(row.original.id);
+    const status = row.original.status;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "grid space-y-1"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "text-foreground"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: url,
-      className: "hover:underline hover:decoration-dotted underline-offset-4"
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_8__.cn)("hover:underline hover:decoration-dotted underline-offset-4", status === "trash" && "text-muted-foreground pointer-events-none")
     }, row.getValue("title"))));
   },
   filterFn: multiColumnSearch
@@ -14330,10 +14332,12 @@ const columns = [{
     const status = row.getValue("status");
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center space-x-2"
-    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
       className: "w-4 h-4 text-success"
-    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
       className: "w-4 h-4 text-primary/60"
+    }), status == "trash" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      className: "w-4 h-4 text-primary/40"
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "capitalize text-foreground"
     }, status));
@@ -14350,9 +14354,10 @@ const columns = [{
   cell: ({
     row
   }) => {
+    const date = row.original.date;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "text-foreground"
-    }, row.getValue("date"));
+    }, date.start);
   },
   filterFn: multiColumnSearch
 }, {
@@ -14401,14 +14406,13 @@ const statusFilters = [{
 function EventsOverview() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useSearchParams)();
+  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_12__.useSearchParams)();
   const queryStatus = searchParams.get("status");
   const fetchResults = async (toastMessage = null) => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: `${eventkoi_params.api}/events?status=${queryStatus}`,
       method: "get"
     }).then(response => {
-      console.log(response);
       setData(response);
       setIsLoading(false);
       if (toastMessage) {
@@ -14420,7 +14424,6 @@ function EventsOverview() {
         });
       }
     }).catch(error => {
-      console.log(error);
       setIsLoading(false);
     });
   };
@@ -14443,7 +14446,8 @@ function EventsOverview() {
     filterName: "Category",
     addTo: `Add to category`,
     isLoading: isLoading,
-    fetchResults: fetchResults
+    fetchResults: fetchResults,
+    queryStatus: queryStatus
   }));
 }
 
@@ -14783,7 +14787,8 @@ function BulkActions({
   table,
   base,
   fetchResults,
-  addTo
+  addTo,
+  queryStatus
 }) {
   const runAction = async action => {
     let selectedRows = table.getFilteredSelectedRowModel().rows;
@@ -14796,19 +14801,15 @@ function BulkActions({
       action: action,
       base: base
     };
-    if (base === "events") {
-      data.trash = "yes";
-    }
+    const apiURL = `${eventkoi_params.api}/${action}_${base}`;
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: `${eventkoi_params.api}/${action}_${base}`,
+      path: apiURL,
       method: "post",
       data: data
     }).then(response => {
       table.setRowSelection({});
       fetchResults(response.success);
-    }).catch(error => {
-      console.log(error);
-    });
+    }).catch(error => {});
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenu, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuTrigger, {
     asChild: true
@@ -14820,7 +14821,17 @@ function BulkActions({
   }), "Bulk actions")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuContent, {
     align: "start",
     className: "w-[180px]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+  }, queryStatus == "trash" ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+    disabled: table.getFilteredSelectedRowModel().rows.length == 0,
+    onClick: () => {
+      runAction("restore");
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Restore")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+    disabled: table.getFilteredSelectedRowModel().rows.length == 0,
+    onClick: () => {
+      runAction("remove");
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Delete permanently"))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     disabled: table.getFilteredSelectedRowModel().rows.length == 0,
     onClick: () => {
       runAction("duplicate");
@@ -14832,7 +14843,7 @@ function BulkActions({
     }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, ["categories"].includes(base) ? "Delete" : "Move to trash")), addTo && table.getFilteredSelectedRowModel().rows.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSub, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSubTrigger, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, addTo)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuPortal, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSubContent, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuCheckboxItem, null, "Panel")))), addTo && table.getFilteredSelectedRowModel().rows.length == 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     disabled: table.getFilteredSelectedRowModel().rows.length == 0
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, addTo))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, addTo)))));
 }
 
 /***/ }),
@@ -14889,7 +14900,8 @@ function DataTable({
   activeId,
   statusFilters,
   filterName,
-  addTo
+  addTo,
+  queryStatus
 }) {
   const [sorting, setSorting] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [columnFilters, setColumnFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
@@ -14923,7 +14935,8 @@ function DataTable({
     table: table,
     base: base,
     fetchResults: fetchResults,
-    addTo: addTo
+    addTo: addTo,
+    queryStatus: queryStatus
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center space-x-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_filters__WEBPACK_IMPORTED_MODULE_4__.Filters, {
@@ -14937,7 +14950,8 @@ function DataTable({
     className: "flex items-center text-sm space-x-6"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_status_filters__WEBPACK_IMPORTED_MODULE_7__.StatusFilters, {
     statusFilters: statusFilters,
-    base: base
+    base: base,
+    data: data
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-muted-foreground"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_selected_rows__WEBPACK_IMPORTED_MODULE_9__.TableSelectedRows, {
@@ -14950,7 +14964,7 @@ function DataTable({
   }, headerGroup.headers.map(header => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableHead, {
       key: header.id,
-      className: "h-10"
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("h-10", header.id === "select" && "w-[50px]", header.id === "title" && "w-1/4", header.id === "date" && "w-1/4", header.id === "status" && "w-1/6")
     }, header.isPlaceholder ? null : (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_10__.flexRender)(header.column.columnDef.header, header.getContext()));
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableBody, null, table.getRowModel().rows?.length ? table.getRowModel().rows.map(row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, {
     key: row.id,
@@ -15162,7 +15176,6 @@ function EventNavBar({
         status: status
       }
     }).then(response => {
-      console.log(response);
       setSaving(false);
       setEvent(response);
       if (response.message) {
@@ -15182,7 +15195,6 @@ function EventNavBar({
         window.location.hash = window.location.hash.replace("add", response.id);
       }
     }).catch(error => {
-      console.log(error);
       setSaving(false);
     });
   };
@@ -15742,24 +15754,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
+
 
 
 
 function StatusFilters({
   statusFilters,
-  base
+  base,
+  data
 }) {
-  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useSearchParams)();
+  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useSearchParams)();
   const queryStatus = searchParams.get("status");
+  const [counts, setCounts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(eventkoi_params.counts[base]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: `${eventkoi_params.api}/get_event_counts`,
+      method: "get"
+    }).then(response => {
+      setCounts(response);
+      console.log("Recalculated counts.");
+    }).catch(() => {});
+  }, [data]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, statusFilters?.map(function (status, i) {
     let selected = !queryStatus && status.key === "all" || queryStatus === status.key;
-    let count = eventkoi_params.counts[base][status.key];
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    let count = counts[status.key];
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       key: `status-${i}`,
       to: `/${base}?status=${status.key}`,
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex items-center hover:underline hover:decoration-dotted underline-offset-4 text-foreground", selected && "underline decoration-dotted underline-offset-4 font-medium")
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_2__.cn)("flex items-center hover:underline hover:decoration-dotted underline-offset-4 text-foreground", selected && "underline decoration-dotted underline-offset-4 font-medium")
     }, status.title, !status.hideCount && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, " (", count, ")"));
   }));
 }
@@ -16811,6 +16838,37 @@ var defaultAttributes = {
 
 
 //# sourceMappingURL=defaultAttributes.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/ban.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/ban.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Ban)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Ban = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Ban", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m4.9 4.9 14.2 14.2", key: "1m5liu" }]
+]);
+
+
+//# sourceMappingURL=ban.js.map
 
 
 /***/ }),

@@ -11,7 +11,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { toast } from "sonner";
 
-import { CircleCheck, CircleDotDashed } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Ban, CircleCheck, CircleDotDashed } from "lucide-react";
 
 /**
  * Support multi-column search.
@@ -54,12 +55,17 @@ const columns = [
     header: ({ column }) => <SortButton title="Event name" column={column} />,
     cell: ({ row }) => {
       const url = "#/events/" + parseInt(row.original.id);
+      const status = row.original.status;
       return (
         <div className="grid space-y-1">
           <div className="text-foreground">
             <a
               href={url}
-              className="hover:underline hover:decoration-dotted underline-offset-4"
+              className={cn(
+                "hover:underline hover:decoration-dotted underline-offset-4",
+                status === "trash" &&
+                  "text-muted-foreground pointer-events-none"
+              )}
             >
               {row.getValue("title")}
             </a>
@@ -83,6 +89,7 @@ const columns = [
           {status == "draft" && (
             <CircleDotDashed className="w-4 h-4 text-primary/60" />
           )}
+          {status == "trash" && <Ban className="w-4 h-4 text-primary/40" />}
           <div className="capitalize text-foreground">{status}</div>
         </div>
       );
@@ -93,7 +100,8 @@ const columns = [
     accessorKey: "date",
     header: ({ column }) => <SortButton title="Date" column={column} />,
     cell: ({ row }) => {
-      return <div className="text-foreground">{row.getValue("date")}</div>;
+      const date = row.original.date;
+      return <div className="text-foreground">{date.start}</div>;
     },
     filterFn: multiColumnSearch,
   },
@@ -142,7 +150,6 @@ export function EventsOverview() {
       method: "get",
     })
       .then((response) => {
-        console.log(response);
         setData(response);
         setIsLoading(false);
         if (toastMessage) {
@@ -158,7 +165,6 @@ export function EventsOverview() {
         }
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
       });
   };
@@ -183,6 +189,7 @@ export function EventsOverview() {
         addTo={`Add to category`}
         isLoading={isLoading}
         fetchResults={fetchResults}
+        queryStatus={queryStatus}
       />
     </div>
   );

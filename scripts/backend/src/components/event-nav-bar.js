@@ -32,7 +32,6 @@ export function EventNavBar({ event, setEvent }) {
       },
     })
       .then((response) => {
-        console.log(response);
         setSaving(false);
         setEvent(response);
         if (response.message) {
@@ -62,7 +61,6 @@ export function EventNavBar({ event, setEvent }) {
         }
       })
       .catch((error) => {
-        console.log(error);
         setSaving(false);
       });
   };
