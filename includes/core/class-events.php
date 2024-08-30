@@ -51,10 +51,16 @@ class Events {
 				);
 			} elseif ( 'live' === $args['status'] ) {
 				$query_args['meta_query'] = array( // phpcs:ignore
+					'relation' => 'AND',
+					array(
+						'key'     => 'start_timestamp_gmt',
+						'value'   => time(),
+						'compare' => '<',
+					),
 					array(
 						'key'     => 'end_timestamp_gmt',
 						'value'   => time(),
-						'compare' => '>',
+						'compare' => '<',
 					),
 				);
 			} elseif ( 'upcoming' === $args['status'] ) {
