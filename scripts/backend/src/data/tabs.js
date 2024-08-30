@@ -6,7 +6,7 @@ export const tabs = {
   ],
   side: [],
   events: [
-    { href: "overview", title: "Events" },
+    { href: "", title: "Events" },
     { href: "templates", title: "Event templates" },
   ],
 };

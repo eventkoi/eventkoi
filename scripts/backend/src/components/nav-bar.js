@@ -10,7 +10,7 @@ export function Navbar({ tabs, isSub, asDiv }) {
 
   let page = parent ? parent[1] : null;
 
-  let defaultRoute = "overview";
+  let defaultRoute = "";
 
   if (parent[2] && isSub) {
     page = parent[2];

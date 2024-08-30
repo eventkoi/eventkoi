@@ -22,15 +22,25 @@ class Events {
 
 	/**
 	 * Init.
+	 *
+	 * @param array $args Array of arguments to pass.
 	 */
-	public static function get_events() {
+	public static function get_events( $args = array() ) {
+
+		$status = array( 'publish', 'draft' );
+
+		if ( ! empty( $args['status'] ) ) {
+			if ( 'trash' === $args['status'] ) {
+				$status = array( 'trash' );
+			}
+		}
 
 		$args = array(
 			'post_type'      => 'event',
 			'orderby'        => 'modified',
 			'order'          => 'DESC',
 			'posts_per_page' => -1,
-			'post_status'    => array( 'publish', 'draft' ),
+			'post_status'    => $status,
 		);
 
 		$query = new \WP_Query( $args );

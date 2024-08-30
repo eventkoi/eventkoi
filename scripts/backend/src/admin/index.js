@@ -77,7 +77,7 @@ export function Admin() {
         </Route>
         <Route path="events" element={<Events />}>
           <Route index element={<EventsOverview />} />
-          <Route path="overview" element={<EventsOverview />} />
+          <Route path="" element={<EventsOverview />} />
           <Route path="templates" element={<EventTemplates />} />
           <Route path=":id" element={<EventEdit />}>
             <Route path="main" element={<EventEditMain />} />

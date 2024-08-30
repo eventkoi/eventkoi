@@ -58,7 +58,9 @@ class Events {
 			die( -1 );
 		}
 
-		$response = Query::get_events();
+		$status = $request->get_param( 'status' );
+
+		$response = Query::get_events( array( 'status' => $status ) );
 
 		return rest_ensure_response( $response );
 	}

@@ -14242,6 +14242,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
@@ -14252,6 +14253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+
 
 
 
@@ -14399,11 +14401,14 @@ const statusFilters = [{
 function EventsOverview() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useSearchParams)();
+  const queryStatus = searchParams.get("status");
   const fetchResults = async (toastMessage = null) => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: `${eventkoi_params.api}/events`,
+      path: `${eventkoi_params.api}/events?status=${queryStatus}`,
       method: "get"
     }).then(response => {
+      console.log(response);
       setData(response);
       setIsLoading(false);
       if (toastMessage) {
@@ -14421,7 +14426,7 @@ function EventsOverview() {
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     fetchResults();
-  }, []);
+  }, [queryStatus]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -14591,7 +14596,7 @@ function Admin() {
     index: true,
     element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_admin_events_overview__WEBPACK_IMPORTED_MODULE_8__.EventsOverview, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
-    path: "overview",
+    path: "",
     element: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_admin_events_overview__WEBPACK_IMPORTED_MODULE_8__.EventsOverview, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
     path: "templates",
@@ -15465,7 +15470,7 @@ function Navbar({
   const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useLocation)();
   var parent = location.pathname?.split("/");
   let page = parent ? parent[1] : null;
-  let defaultRoute = "overview";
+  let defaultRoute = "";
   if (parent[2] && isSub) {
     page = parent[2];
   }
@@ -16615,7 +16620,7 @@ const tabs = {
   }],
   side: [],
   events: [{
-    href: "overview",
+    href: "",
     title: "Events"
   }, {
     href: "templates",

@@ -41,6 +41,9 @@ class Event {
 
 		if ( is_numeric( $event ) ) {
 			$event = get_post( $event );
+			if ( ! empty( $event->post_type ) && 'event' !== $event->post_type ) {
+				$event = array();
+			}
 		}
 
 		self::$event    = $event;

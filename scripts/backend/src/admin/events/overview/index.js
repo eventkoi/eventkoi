@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import apiRequest from "@wordpress/api-fetch";
 
@@ -132,12 +133,16 @@ export function EventsOverview() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryStatus = searchParams.get("status");
+
   const fetchResults = async (toastMessage = null) => {
     await apiRequest({
-      path: `${eventkoi_params.api}/events`,
+      path: `${eventkoi_params.api}/events?status=${queryStatus}`,
       method: "get",
     })
       .then((response) => {
+        console.log(response);
         setData(response);
         setIsLoading(false);
         if (toastMessage) {
@@ -160,7 +165,7 @@ export function EventsOverview() {
 
   useEffect(() => {
     fetchResults();
-  }, []);
+  }, [queryStatus]);
 
   return (
     <div className="flex flex-col gap-8">
