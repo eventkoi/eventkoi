@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Link, useSearchParams } from "react-router-dom";
 
-export function StatusFilters(props) {
-  const { statusFilters, base } = props;
-
+export function StatusFilters({ statusFilters, base }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryStatus = searchParams.get("status");
 
@@ -12,6 +10,7 @@ export function StatusFilters(props) {
       {statusFilters?.map(function (status, i) {
         let selected =
           (!queryStatus && status.key === "all") || queryStatus === status.key;
+        let count = eventkoi_params.counts[base][status.key];
         return (
           <Link
             key={`status-${i}`}
@@ -23,7 +22,7 @@ export function StatusFilters(props) {
             )}
           >
             {status.title}
-            {!status.hideCount && <> (0)</>}
+            {!status.hideCount && <> ({count})</>}
           </Link>
         );
       })}

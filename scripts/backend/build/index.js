@@ -15747,20 +15747,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function StatusFilters(props) {
-  const {
-    statusFilters,
-    base
-  } = props;
+function StatusFilters({
+  statusFilters,
+  base
+}) {
   const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useSearchParams)();
   const queryStatus = searchParams.get("status");
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, statusFilters?.map(function (status, i) {
     let selected = !queryStatus && status.key === "all" || queryStatus === status.key;
+    let count = eventkoi_params.counts[base][status.key];
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
       key: `status-${i}`,
       to: `/${base}?status=${status.key}`,
       className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex items-center hover:underline hover:decoration-dotted underline-offset-4 text-foreground", selected && "underline decoration-dotted underline-offset-4 font-medium")
-    }, status.title, !status.hideCount && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, " (0)"));
+    }, status.title, !status.hideCount && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, " (", count, ")"));
   }));
 }
 

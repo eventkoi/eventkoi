@@ -27,24 +27,55 @@ class Events {
 	 */
 	public static function get_events( $args = array() ) {
 
-		$status = array( 'publish', 'draft' );
-
-		if ( ! empty( $args['status'] ) ) {
-			if ( 'trash' === $args['status'] ) {
-				$status = array( 'trash' );
-			}
-		}
-
-		$args = array(
+		$query_args = array(
 			'post_type'      => 'event',
 			'orderby'        => 'modified',
 			'order'          => 'DESC',
 			'posts_per_page' => -1,
-			'post_status'    => $status,
+			'post_status'    => array( 'publish', 'draft' ),
 		);
 
-		$query = new \WP_Query( $args );
+		// Get events based on status.
+		if ( ! empty( $args['status'] ) ) {
+			if ( in_array( $args['status'], array( 'draft', 'trash' ), true ) ) {
+				$query_args['post_status'] = array( $args['status'] );
+			}
 
+			if ( 'completed' === $args['status'] ) {
+				$query_args['meta_query'] = array( // phpcs:ignore
+					array(
+						'key'     => 'end_timestamp_gmt',
+						'value'   => time(),
+						'compare' => '>',
+					),
+				);
+			} elseif ( 'live' === $args['status'] ) {
+				$query_args['meta_query'] = array( // phpcs:ignore
+					array(
+						'key'     => 'end_timestamp_gmt',
+						'value'   => time(),
+						'compare' => '>',
+					),
+				);
+			} elseif ( 'upcoming' === $args['status'] ) {
+				$query_args['meta_query'] = array( // phpcs:ignore
+					array(
+						'key'     => 'start_timestamp_gmt',
+						'value'   => time(),
+						'compare' => '>',
+					),
+				);
+			}
+		}
+
+		$query = new \WP_Query( $query_args );
+
+		// Return counts only.
+		if ( ! empty( $args['counts_only'] ) ) {
+			return $query->found_posts;
+		}
+
+		// Return all events including their meta.
 		$results = array();
 
 		foreach ( $query->posts as $post ) {
@@ -74,6 +105,43 @@ class Events {
 		$result = array(
 			'ids'     => $ids,
 			'success' => _n( 'Event moved to trash.', 'Events moved to trash.', count( $ids ), 'eventkoi' ),
+		);
+
+		return $result;
+	}
+
+	/**
+	 * Get events counts.
+	 */
+	public static function get_counts() {
+
+		$upcoming = self::get_events(
+			array(
+				'status'      => 'upcoming',
+				'counts_only' => true,
+			)
+		);
+
+		$live = self::get_events(
+			array(
+				'status'      => 'upcoming',
+				'counts_only' => true,
+			)
+		);
+
+		$completed = self::get_events(
+			array(
+				'status'      => 'upcoming',
+				'counts_only' => true,
+			)
+		);
+
+		$result = array(
+			'upcoming'  => absint( $upcoming ),
+			'live'      => absint( $live ),
+			'completed' => absint( $completed ),
+			'draft'     => wp_count_posts( 'event' )->draft,
+			'trash'     => wp_count_posts( 'event' )->trash,
 		);
 
 		return $result;

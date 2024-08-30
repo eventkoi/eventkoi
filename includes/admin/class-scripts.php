@@ -45,9 +45,14 @@ class Scripts {
 		wp_register_script( 'eventkoi-admin', $build_url . 'index.js', $asset_file['dependencies'], $asset_file['version'], true );
 		wp_enqueue_script( 'eventkoi-admin' );
 
+		$events = new \EventKoi\Core\Events();
+
 		$eventkoi_params = array(
 			'version' => EVENTKOI_VERSION,
 			'api'     => EVENTKOI_API,
+			'counts'  => array(
+				'events' => $events::get_counts(),
+			),
 		);
 
 		wp_localize_script( 'eventkoi-admin', 'eventkoi_params', apply_filters( 'eventkoi_admin_params', $eventkoi_params ) );
