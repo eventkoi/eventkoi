@@ -85,11 +85,7 @@ export function EventEdit() {
     getEvent();
   }, []);
 
-  if (eventId && !event?.id) {
-    return null;
-  }
-
-  if (loading) {
+  if (loading || (eventId && !event?.id)) {
     return (
       <div className="w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative">
         <Loader />

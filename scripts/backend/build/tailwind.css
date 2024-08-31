@@ -1033,6 +1033,10 @@ body {
   min-height: calc(100vh - 46px) !important;
 }
 
+.min-h-40 {
+  min-height: 10rem !important;
+}
+
 .w-10 {
   width: 2.5rem !important;
 }

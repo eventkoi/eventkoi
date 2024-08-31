@@ -14153,10 +14153,7 @@ function EventEdit() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     getEvent();
   }, []);
-  if (eventId && !event?.id) {
-    return null;
-  }
-  if (loading) {
+  if (loading || eventId && !event?.id) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_4__.Loader, null));
@@ -14373,7 +14370,7 @@ const columns = [{
   cell: ({
     row
   }) => {
-    const url = "#/events/" + parseInt(row.original.id);
+    const url = "#/events/" + parseInt(row.original.id) + "/main";
     const status = row.original.status;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "grid space-y-1"
@@ -14471,7 +14468,7 @@ const statusFilters = [{
   title: "Trash"
 }];
 function EventsOverview() {
-  const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_12__.useSearchParams)();
   const queryStatus = searchParams.get("status");
@@ -14481,8 +14478,8 @@ function EventsOverview() {
       method: "get"
     }).then(response => {
       console.log(response);
-      setData(response);
       setIsLoading(false);
+      setData(response);
       if (toastMessage) {
         const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_7__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
@@ -14496,8 +14493,10 @@ function EventsOverview() {
     });
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setData([]);
+    setIsLoading(true);
     fetchResults();
-  }, [queryStatus]);
+  }, [searchParams]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -14929,16 +14928,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var _tanstack_react_table__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @tanstack/react-table */ "./node_modules/@tanstack/react-table/build/lib/index.mjs");
-/* harmony import */ var _tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tanstack/react-table */ "./node_modules/@tanstack/table-core/build/lib/index.mjs");
+/* harmony import */ var _tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @tanstack/react-table */ "./node_modules/@tanstack/react-table/build/lib/index.mjs");
+/* harmony import */ var _tanstack_react_table__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @tanstack/react-table */ "./node_modules/@tanstack/table-core/build/lib/index.mjs");
 /* harmony import */ var _components_ui_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/table */ "./src/components/ui/table.jsx");
 /* harmony import */ var _components_bulk_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/bulk-actions */ "./src/components/bulk-actions.js");
 /* harmony import */ var _components_filters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/filters */ "./src/components/filters.js");
-/* harmony import */ var _components_pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/pagination */ "./src/components/pagination.js");
-/* harmony import */ var _components_rows_per_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/rows-per-page */ "./src/components/rows-per-page.js");
-/* harmony import */ var _components_status_filters__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/status-filters */ "./src/components/status-filters.js");
-/* harmony import */ var _components_table_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components/table-page */ "./src/components/table-page.js");
-/* harmony import */ var _components_table_selected_rows__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/components/table-selected-rows */ "./src/components/table-selected-rows.js");
+/* harmony import */ var _components_loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/loader */ "./src/components/loader.js");
+/* harmony import */ var _components_pagination__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/pagination */ "./src/components/pagination.js");
+/* harmony import */ var _components_rows_per_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/rows-per-page */ "./src/components/rows-per-page.js");
+/* harmony import */ var _components_status_filters__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components/status-filters */ "./src/components/status-filters.js");
+/* harmony import */ var _components_table_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/components/table-page */ "./src/components/table-page.js");
+/* harmony import */ var _components_table_selected_rows__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/components/table-selected-rows */ "./src/components/table-selected-rows.js");
+
 
 
 
@@ -14975,15 +14976,15 @@ function DataTable({
   const [columnFilters, setColumnFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [columnVisibility, setColumnVisibility] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [rowSelection, setRowSelection] = React.useState({});
-  const table = (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_10__.useReactTable)({
+  const table = (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.useReactTable)({
     data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.getCoreRowModel)(),
-    getPaginationRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.getPaginationRowModel)(),
-    getSortedRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.getSortedRowModel)(),
-    getFilteredRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.getFilteredRowModel)(),
+    getCoreRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_12__.getCoreRowModel)(),
+    getPaginationRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_12__.getPaginationRowModel)(),
+    getSortedRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_12__.getSortedRowModel)(),
+    getFilteredRowModel: (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_12__.getFilteredRowModel)(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     state: {
@@ -15016,13 +15017,13 @@ function DataTable({
     className: "flex items-center justify-between"
   }, !hideStatusFilters && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center text-sm space-x-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_status_filters__WEBPACK_IMPORTED_MODULE_7__.StatusFilters, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_status_filters__WEBPACK_IMPORTED_MODULE_8__.StatusFilters, {
     statusFilters: statusFilters,
     base: base,
     data: data
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-muted-foreground"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_selected_rows__WEBPACK_IMPORTED_MODULE_9__.TableSelectedRows, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_selected_rows__WEBPACK_IMPORTED_MODULE_10__.TableSelectedRows, {
     table: table,
     compact: compact
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15033,32 +15034,32 @@ function DataTable({
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableHead, {
       key: header.id,
       className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("h-10", header.id === "select" && "w-[50px]", header.id === "title" && "w-1/4", header.id === "date" && "w-1/4", header.id === "status" && "w-1/6")
-    }, header.isPlaceholder ? null : (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_10__.flexRender)(header.column.columnDef.header, header.getContext()));
+    }, header.isPlaceholder ? null : (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.flexRender)(header.column.columnDef.header, header.getContext()));
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableBody, null, table.getRowModel().rows?.length ? table.getRowModel().rows.map(row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, {
     key: row.id,
     "data-state": row.getIsSelected() && "selected"
   }, row.getVisibleCells().map(cell => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableCell, {
     key: cell.id,
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(activeId == row.original.id && cell.id.indexOf("name") >= 1 && "font-medium underline decoration-dotted")
-  }, (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_10__.flexRender)(cell.column.columnDef.cell, cell.getContext()))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableCell, {
+  }, (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.flexRender)(cell.column.columnDef.cell, cell.getContext()))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableCell, {
     colSpan: columns.length,
     className: "h-40 text-center text-muted-foreground text-sm"
-  }, empty ? isLoading ? "Loading data…" : empty : "No data was found."))))), !hideBottomBar && table.getRowModel().rows?.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, isLoading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_5__.Loader, null) : empty))))), !hideBottomBar && table.getRowModel().rows?.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-between"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-sm text-muted-foreground"
-  }, !hideBottomSelected && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_selected_rows__WEBPACK_IMPORTED_MODULE_9__.TableSelectedRows, {
+  }, !hideBottomSelected && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_selected_rows__WEBPACK_IMPORTED_MODULE_10__.TableSelectedRows, {
     table: table,
     compact: compact
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center space-x-12 text-foreground"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_rows_per_page__WEBPACK_IMPORTED_MODULE_6__.RowsPerPage, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_rows_per_page__WEBPACK_IMPORTED_MODULE_7__.RowsPerPage, {
     table: table
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center space-x-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_page__WEBPACK_IMPORTED_MODULE_8__.TablePage, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_table_page__WEBPACK_IMPORTED_MODULE_9__.TablePage, {
     table: table
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_pagination__WEBPACK_IMPORTED_MODULE_5__.Pagination, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_pagination__WEBPACK_IMPORTED_MODULE_6__.Pagination, {
     table: table
   })))));
 }
@@ -15499,7 +15500,7 @@ function Loader({
   size
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex w-full min-h-72 flex-1 items-center justify-center"
+    className: "flex w-full h-full flex-1 items-center justify-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_spinner__WEBPACK_IMPORTED_MODULE_1__.Spinner, {
     size: size
   }));

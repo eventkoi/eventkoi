@@ -21,6 +21,7 @@ import {
 
 import { BulkActions } from "@/components/bulk-actions";
 import { Filters } from "@/components/filters";
+import { Loader } from "@/components/loader";
 import { Pagination } from "@/components/pagination";
 import { RowsPerPage } from "@/components/rows-per-page";
 import { StatusFilters } from "@/components/status-filters";
@@ -167,11 +168,7 @@ export function DataTable({
                   colSpan={columns.length}
                   className="h-40 text-center text-muted-foreground text-sm"
                 >
-                  {empty
-                    ? isLoading
-                      ? "Loading data…"
-                      : empty
-                    : "No data was found."}
+                  {isLoading ? <Loader /> : empty}
                 </TableCell>
               </TableRow>
             )}

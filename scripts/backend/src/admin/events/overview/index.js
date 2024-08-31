@@ -54,7 +54,7 @@ const columns = [
     accessorKey: "title",
     header: ({ column }) => <SortButton title="Event name" column={column} />,
     cell: ({ row }) => {
-      const url = "#/events/" + parseInt(row.original.id);
+      const url = "#/events/" + parseInt(row.original.id) + "/main";
       const status = row.original.status;
       return (
         <div className="grid space-y-1">
@@ -138,7 +138,7 @@ const statusFilters = [
 ];
 
 export function EventsOverview() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState([]);
   const [data, setData] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -151,8 +151,9 @@ export function EventsOverview() {
     })
       .then((response) => {
         console.log(response);
-        setData(response);
         setIsLoading(false);
+        setData(response);
+
         if (toastMessage) {
           const toastId = toast(
             <div
@@ -171,8 +172,10 @@ export function EventsOverview() {
   };
 
   useEffect(() => {
+    setData([]);
+    setIsLoading(true);
     fetchResults();
-  }, [queryStatus]);
+  }, [searchParams]);
 
   return (
     <div className="flex flex-col gap-8">
