@@ -1,6 +1,7 @@
 import apiRequest from "@wordpress/api-fetch";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,10 +16,41 @@ import { toast } from "sonner";
 
 import { ChevronDown } from "lucide-react";
 
-export function EventNavBar({ event, setEvent }) {
+export function EventNavBar({ loading, setLoading, event, setEvent }) {
+  const navigate = useNavigate();
+
   const [saving, setSaving] = useState(false);
 
   let disabled = (!event?.id && !event?.title) || saving;
+
+  const trashEvent = async () => {
+    setLoading(true);
+    await apiRequest({
+      path: `${eventkoi_params.api}/delete_event`,
+      method: "post",
+      data: {
+        event_id: event?.id,
+      },
+    })
+      .then((response) => {
+        setLoading(false);
+        navigate("/events");
+        if (response.success) {
+          const toastId = toast(
+            <div
+              className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
+              onClick={() => toast.dismiss(toastId)}
+            >
+              {response.success}
+            </div>,
+            { duration: 4000 }
+          );
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
 
   const saveEvent = async (status) => {
     setSaving(true);
@@ -109,7 +141,14 @@ export function EventNavBar({ event, setEvent }) {
             <DropdownMenuItem>Schedule publish</DropdownMenuItem>
             <DropdownMenuItem disabled>Create duplicate event</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Move to trash</DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-destructive focus:text-destructive"
+              onClick={() => {
+                trashEvent();
+              }}
+            >
+              Move to trash
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

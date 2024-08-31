@@ -178,7 +178,7 @@ class Events {
 			)
 		);
 
-		$result = array(
+		$counts = array(
 			'upcoming'  => absint( $upcoming ),
 			'live'      => absint( $live ),
 			'completed' => absint( $completed ),
@@ -186,6 +186,6 @@ class Events {
 			'trash'     => wp_count_posts( 'event' )->trash,
 		);
 
-		return $result;
+		return apply_filters( 'eventkoi_get_event_counts', $counts );
 	}
 }

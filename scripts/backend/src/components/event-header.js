@@ -4,7 +4,7 @@ import { EventNavBack } from "@/components/event-nav-back";
 import { EventNavBar } from "@/components/event-nav-bar";
 import { Logo } from "@/components/logo";
 
-export function EventHeader({ event, setEvent }) {
+export function EventHeader({ loading, setLoading, event, setEvent }) {
   return (
     <header
       className={cn(
@@ -15,7 +15,12 @@ export function EventHeader({ event, setEvent }) {
       <Logo />
       <EventNavBack event={event} setEvent={setEvent} />
       <div className="flex w-full justify-end">
-        <EventNavBar event={event} setEvent={setEvent} />
+        <EventNavBar
+          loading={loading}
+          setLoading={setLoading}
+          event={event}
+          setEvent={setEvent}
+        />
       </div>
     </header>
   );

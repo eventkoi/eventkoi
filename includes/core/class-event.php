@@ -51,6 +51,19 @@ class Event {
 	}
 
 	/**
+	 * Get event.
+	 *
+	 * @param int $event_id ID for an event.
+	 */
+	public static function get_event( $event_id ) {
+		$event          = get_post( $event_id );
+		self::$event    = $event;
+		self::$event_id = ! empty( $event->ID ) ? $event->ID : 0;
+
+		return self::get_meta();
+	}
+
+	/**
 	 * Get meta.
 	 */
 	public static function get_meta() {
@@ -181,7 +194,7 @@ class Event {
 
 		$hook = $gmt ? 'eventkoi_get_event_start_date_gmt' : 'eventkoi_get_event_start_date';
 
-		return apply_filters( $hook, $date, self::$event_id, self::$event );
+		return apply_filters( $hook, (string) $date, self::$event_id, self::$event );
 	}
 
 	/**
@@ -195,7 +208,7 @@ class Event {
 
 		$hook = $gmt ? 'eventkoi_get_event_end_date_gmt' : 'eventkoi_get_event_end_date';
 
-		return apply_filters( $hook, $date, self::$event_id, self::$event );
+		return apply_filters( $hook, (string) $date, self::$event_id, self::$event );
 	}
 
 	/**
@@ -212,6 +225,39 @@ class Event {
 
 		$hook = $gmt ? 'eventkoi_get_event_modified_date_gmt' : 'eventkoi_get_event_modified_date';
 
-		return apply_filters( $hook, $date, self::$event_id, self::$event );
+		return apply_filters( $hook, (string) $date, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Restore a single event.
+	 *
+	 * @param int $event_id ID of an event.
+	 */
+	public static function restore_event( $event_id = 0 ) {
+
+		wp_untrash_post( $event_id );
+
+		$result = array(
+			'event'   => self::get_event( $event_id ),
+			'success' => __( 'Event restored successfully.', 'eventkoi' ),
+		);
+
+		return $result;
+	}
+
+	/**
+	 * Delete a single event.
+	 *
+	 * @param int $event_id ID of an event.
+	 */
+	public static function delete_event( $event_id = 0 ) {
+
+		wp_trash_post( $event_id );
+
+		$result = array(
+			'success' => __( 'Event moved to Trash.', 'eventkoi' ),
+		);
+
+		return $result;
 	}
 }

@@ -759,6 +759,10 @@ body {
   top: 100% !important;
 }
 
+.left-4 {
+  left: 1rem !important;
+}
+
 .z-10 {
   z-index: 10 !important;
 }
@@ -1985,6 +1989,14 @@ body {
   color: hsl(var(--primary) / 0.4) !important;
 }
 
+.text-muted {
+  color: hsl(var(--muted)) !important;
+}
+
+.text-muted-foreground\/40 {
+  color: hsl(var(--muted-foreground) / 0.4) !important;
+}
+
 .underline {
   text-decoration-line: underline !important;
 }
@@ -2378,6 +2390,10 @@ body {
   color: hsl(var(--primary-foreground)) !important;
 }
 
+.hover\:text-destructive:hover {
+  color: hsl(var(--destructive)) !important;
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline !important;
 }
@@ -2408,6 +2424,10 @@ body {
 
 .focus\:text-primary-foreground:focus {
   color: hsl(var(--primary-foreground)) !important;
+}
+
+.focus\:text-destructive:focus {
+  color: hsl(var(--destructive)) !important;
 }
 
 .focus\:opacity-100:focus {

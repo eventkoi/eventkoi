@@ -45,6 +45,26 @@ class Event {
 				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
 			)
 		);
+
+		register_rest_route(
+			EVENTKOI_API,
+			'/restore_event',
+			array(
+				'methods'             => 'post',
+				'callback'            => array( __CLASS__, 'restore_event' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+			)
+		);
+
+		register_rest_route(
+			EVENTKOI_API,
+			'/delete_event',
+			array(
+				'methods'             => 'post',
+				'callback'            => array( __CLASS__, 'delete_event' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+			)
+		);
 	}
 
 	/**
@@ -83,6 +103,34 @@ class Event {
 
 		$query    = new SingleEvent( $event['id'] );
 		$response = $query::update( $event, $status );
+
+		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Restore a single event.
+	 *
+	 * @param object $request The request that is being passed to API.
+	 */
+	public static function restore_event( $request ) {
+
+		$data     = json_decode( $request->get_body(), true );
+		$event_id = ! empty( $data['event_id'] ) ? absint( $data['event_id'] ) : 0;
+		$response = SingleEvent::restore_event( $event_id );
+
+		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Delete a single event.
+	 *
+	 * @param object $request The request that is being passed to API.
+	 */
+	public static function delete_event( $request ) {
+
+		$data     = json_decode( $request->get_body(), true );
+		$event_id = ! empty( $data['event_id'] ) ? absint( $data['event_id'] ) : 0;
+		$response = SingleEvent::delete_event( $event_id );
 
 		return rest_ensure_response( $response );
 	}

@@ -17,7 +17,6 @@ export function StatusFilters({ statusFilters, base, data }) {
     })
       .then((response) => {
         setCounts(response);
-        console.log("Recalculated counts.");
       })
       .catch(() => {});
   }, [data]);

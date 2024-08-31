@@ -150,6 +150,7 @@ export function EventsOverview() {
       method: "get",
     })
       .then((response) => {
+        console.log(response);
         setData(response);
         setIsLoading(false);
         if (toastMessage) {

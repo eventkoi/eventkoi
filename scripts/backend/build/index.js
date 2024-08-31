@@ -14078,10 +14078,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _components_event_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-header */ "./src/components/event-header.js");
 /* harmony import */ var _components_event_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-tabs */ "./src/components/event-tabs.js");
-/* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/wrapper */ "./src/components/wrapper.js");
+/* harmony import */ var _components_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/loader */ "./src/components/loader.js");
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/wrapper */ "./src/components/wrapper.js");
+/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js");
+
+
+
+
 
 
 
@@ -14090,21 +14100,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventEdit() {
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
-  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useLocation)();
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useNavigate)();
+  const location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)();
   const {
     id
-  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useParams)();
+  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useParams)();
   const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [event, setEvent] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
   var parent = location.pathname?.split("/");
   var view = parent[3];
   let eventId = parseInt(id) || 0;
+  const restoreEvent = async () => {
+    setLoading(true);
+    await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: `${eventkoi_params.api}/restore_event`,
+      method: "post",
+      data: {
+        event_id: event?.id
+      }
+    }).then(response => {
+      setEvent(response.event);
+      setLoading(false);
+      if (response.success) {
+        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_7__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
+          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_7__.toast.dismiss(toastId)
+        }, response.success), {
+          duration: 4000
+        });
+      }
+    }).catch(error => {
+      setLoading(false);
+    });
+  };
   const getEvent = async () => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: `${eventkoi_params.api}/event?id=${eventId}`,
       method: "get"
     }).then(response => {
+      console.log(response);
       setEvent(response);
       setLoading(false);
     }).catch(error => {
@@ -14122,10 +14156,43 @@ function EventEdit() {
   if (eventId && !event?.id) {
     return null;
   }
+  if (loading) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_4__.Loader, null));
+  }
+  if (event?.status === "trash") {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "absolute top-4 left-4"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__.Button, {
+      variant: "link",
+      asChild: true
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
+      to: "/events"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      className: "mr-2 h-4 w-4"
+    }), "Back"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      className: "w-10 h-10 text-muted-foreground",
+      strokeWidth: 1
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "text-base text-muted-foreground"
+    }, "Event has moved to Trash. Restore it before you can edit."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "pt-4"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_5__.Button, {
+      variant: "default",
+      onClick: () => {
+        restoreEvent();
+      }
+    }, "Restore event")));
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_header__WEBPACK_IMPORTED_MODULE_2__.EventHeader, {
+    loading: loading,
+    setLoading: setLoading,
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_4__.Wrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_6__.Wrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_tabs__WEBPACK_IMPORTED_MODULE_3__.EventTabs, {
     event: event,
@@ -14133,7 +14200,7 @@ function EventEdit() {
     location: location
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Outlet, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Outlet, {
     context: [event, setEvent]
   })))));
 }
@@ -14413,6 +14480,7 @@ function EventsOverview() {
       path: `${eventkoi_params.api}/events?status=${queryStatus}`,
       method: "get"
     }).then(response => {
+      console.log(response);
       setData(response);
       setIsLoading(false);
       if (toastMessage) {
@@ -15073,6 +15141,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventHeader({
+  loading,
+  setLoading,
   event,
   setEvent
 }) {
@@ -15084,6 +15154,8 @@ function EventHeader({
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full justify-end"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, {
+    loading: loading,
+    setLoading: setLoading,
     event: event,
     setEvent: setEvent
   })));
@@ -15149,10 +15221,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var _components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/dropdown-menu */ "./src/components/ui/dropdown-menu.jsx");
 /* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-down.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-down.js");
+
 
 
 
@@ -15161,11 +15235,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventNavBar({
+  loading,
+  setLoading,
   event,
   setEvent
 }) {
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
   const [saving, setSaving] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   let disabled = !event?.id && !event?.title || saving;
+  const trashEvent = async () => {
+    setLoading(true);
+    await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: `${eventkoi_params.api}/delete_event`,
+      method: "post",
+      data: {
+        event_id: event?.id
+      }
+    }).then(response => {
+      setLoading(false);
+      navigate("/events");
+      if (response.success) {
+        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_4__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+          className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
+          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_4__.toast.dismiss(toastId)
+        }, response.success), {
+          duration: 4000
+        });
+      }
+    }).catch(() => {
+      setLoading(false);
+    });
+  };
   const saveEvent = async status => {
     setSaving(true);
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
@@ -15228,14 +15328,19 @@ function EventNavBar({
     size: "icon",
     className: "rounded-l-none",
     disabled: disabled
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: "w-4 h-4"
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuContent, {
     className: "w-56 z-[510]",
     align: "end"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, null, "Schedule publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     disabled: true
-  }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, null, "Move to trash")))));
+  }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+    className: "text-destructive focus:text-destructive",
+    onClick: () => {
+      trashEvent();
+    }
+  }, "Move to trash")))));
 }
 
 /***/ }),
@@ -15371,6 +15476,33 @@ function Heading({
   }, children), tagline && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "block text-sm text-muted-foreground font-normal"
   }, tagline));
+}
+
+/***/ }),
+
+/***/ "./src/components/loader.js":
+/*!**********************************!*\
+  !*** ./src/components/loader.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Loader: () => (/* binding */ Loader)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_spinner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/spinner */ "./src/components/ui/spinner.jsx");
+
+
+function Loader({
+  size
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex w-full min-h-72 flex-1 items-center justify-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_spinner__WEBPACK_IMPORTED_MODULE_1__.Spinner, {
+    size: size
+  }));
 }
 
 /***/ }),
@@ -15777,7 +15909,6 @@ function StatusFilters({
       method: "get"
     }).then(response => {
       setCounts(response);
-      console.log("Recalculated counts.");
     }).catch(() => {});
   }, [data]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, statusFilters?.map(function (status, i) {
@@ -16496,6 +16627,67 @@ const Toaster = ({
   });
 };
 
+
+/***/ }),
+
+/***/ "./src/components/ui/spinner.jsx":
+/*!***************************************!*\
+  !*** ./src/components/ui/spinner.jsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Spinner: () => (/* binding */ Spinner)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var class_variance_authority__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! class-variance-authority */ "./node_modules/class-variance-authority/dist/index.mjs");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+
+
+
+
+const spinnerVariants = (0,class_variance_authority__WEBPACK_IMPORTED_MODULE_2__.cva)("flex-col items-center justify-center", {
+  variants: {
+    show: {
+      true: "flex",
+      false: "hidden"
+    }
+  },
+  defaultVariants: {
+    show: true
+  }
+});
+const loaderVariants = (0,class_variance_authority__WEBPACK_IMPORTED_MODULE_2__.cva)("animate-spin text-primary/20", {
+  variants: {
+    size: {
+      small: "size-6",
+      medium: "size-8",
+      large: "size-12"
+    }
+  },
+  defaultVariants: {
+    size: "medium"
+  }
+});
+function Spinner({
+  size,
+  show,
+  children,
+  className
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: spinnerVariants({
+      show
+    })
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(loaderVariants({
+      size
+    }), className)
+  }), children);
+}
 
 /***/ }),
 
@@ -17246,6 +17438,36 @@ const ListFilter = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/loader-circle.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ LoaderCircle)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const LoaderCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("LoaderCircle", [
+  ["path", { d: "M21 12a9 9 0 1 1-6.219-8.56", key: "13zald" }]
+]);
+
+
+//# sourceMappingURL=loader-circle.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/pencil-line.js ***!
@@ -17336,6 +17558,44 @@ const SquarePen = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"
 
 
 //# sourceMappingURL=square-pen.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/triangle-alert.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TriangleAlert)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const TriangleAlert = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("TriangleAlert", [
+  [
+    "path",
+    {
+      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+      key: "wmoenq"
+    }
+  ],
+  ["path", { d: "M12 9v4", key: "juzpu7" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
+]);
+
+
+//# sourceMappingURL=triangle-alert.js.map
 
 
 /***/ }),
