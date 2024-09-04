@@ -48,9 +48,12 @@ class Scripts {
 		$events = new \EventKoi\Core\Events();
 
 		$eventkoi_params = array(
-			'version' => EVENTKOI_VERSION,
-			'api'     => EVENTKOI_API,
-			'counts'  => array(
+			'version'  => EVENTKOI_VERSION,
+			'api'      => EVENTKOI_API,
+			'date_now' => wp_date( 'j M Y', time() ),
+			'date_24h' => wp_date( 'j M Y', strtotime( '+1 day', time() ) ),
+			'time_now' => wp_date( 'g:i A', strtotime( '+1 hour', time() ) ),
+			'counts'   => array(
 				'events' => $events::get_counts(),
 			),
 		);

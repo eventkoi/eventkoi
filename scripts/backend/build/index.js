@@ -14217,11 +14217,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
-/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
-
+/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var _components_event_date__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-date */ "./src/components/event-date.js");
+/* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
 
 
 
@@ -14231,28 +14229,17 @@ __webpack_require__.r(__webpack_exports__);
 function EventEditMain() {
   const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useOutletContext)();
   const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_3__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "max-w-[450px]"
-  }, isTyping ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
-    type: "text",
-    value: event?.title,
-    onChange: e => {
-      setEvent(prevState => ({
-        ...prevState,
-        title: e.target.value
-      }));
-    },
-    autoFocus: true,
-    onBlur: () => setIsTyping(false),
-    onKeyDown: e => e.key === "Enter" && setIsTyping(false)
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("inline-flex pr-6 relative cursor-pointer underline underline-offset-[7px] text-muted-foreground font-medium text-lg", event?.title && "text-foreground no-underline"),
-    onClick: () => {
-      setIsTyping(true);
-    }
-  }, event?.title ? event?.title : "Click to add event name", event?.title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    className: "absolute top-1 right-0 w-5 h-5 text-ring"
-  }))));
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "max-w-[480px] space-y-8"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_3__.EventName, {
+    event: event,
+    setEvent: setEvent,
+    isTyping: isTyping,
+    setIsTyping: setIsTyping
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_date__WEBPACK_IMPORTED_MODULE_2__.EventDate, {
+    event: event,
+    setEvent: setEvent
+  })));
 }
 
 /***/ }),
@@ -15120,6 +15107,147 @@ function DateWithRange() {
 
 /***/ }),
 
+/***/ "./src/components/event-date.js":
+/*!**************************************!*\
+  !*** ./src/components/event-date.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventDate: () => (/* binding */ EventDate)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/add.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var _components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/calendar */ "./src/components/ui/calendar.jsx");
+/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_popover__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/ui/popover */ "./src/components/ui/popover.jsx");
+/* harmony import */ var _components_time_picker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components/time-picker */ "./src/components/time-picker.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/calendar.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/move-right.js");
+
+
+
+
+
+
+
+
+
+
+
+
+function EventDate({
+  event,
+  setEvent
+}) {
+  const {
+    date_now,
+    date_24h,
+    time_now
+  } = eventkoi_params;
+  const [date, setDate] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)();
+  const [period, setPeriod] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("PM");
+
+  /**
+   * carry over the current time when a user clicks a new day
+   * instead of resetting to 00:00
+   */
+  const handleSelect = newDay => {
+    console.log(newDay);
+    if (!newDay) {
+      setDate();
+      return;
+    }
+    if (!date) {
+      setDate(newDay);
+      return;
+    }
+    const diff = newDay.getTime() - date.getTime();
+    const diffInDays = diff / (1000 * 60 * 60 * 24);
+    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.add)(date, {
+      days: Math.ceil(diffInDays)
+    });
+    setDate(newDateFull);
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-4 items-start"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_6__.Label, {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(event?.tbc && "text-muted-foreground")
+  }, "Start"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.Popover, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverTrigger, {
+    asChild: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "outline",
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-[280px] justify-start text-left font-normal", !date && "text-muted-foreground")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    className: "mr-2 h-4 w-4"
+  }), date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_11__.format)(date, "PPP HH:mm:ss") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, "Pick a date"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverContent, {
+    className: "w-auto p-0"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar, {
+    mode: "single",
+    selected: date,
+    onSelect: d => handleSelect(d),
+    initialFocus: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3 border-t border-border"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_time_picker__WEBPACK_IMPORTED_MODULE_8__.TimePicker, {
+    setDate: setDate,
+    date: date,
+    period: period,
+    setPeriod: setPeriod
+  })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "mt-8"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    className: "text-muted-foreground w-6 h-6",
+    strokeWidth: 1.5
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_6__.Label, {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(event?.tbc && "text-muted-foreground")
+  }, "End"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_5__.Input, {
+    placeholder: date_24h,
+    className: "w-3/5",
+    disabled: event?.tbc
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_5__.Input, {
+    placeholder: time_now,
+    className: "w-2/5",
+    disabled: event?.tbc
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center space-x-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__.Checkbox, {
+    id: "tbc",
+    checked: event?.tbc,
+    onCheckedChange: bool => {
+      setEvent(prevState => ({
+        ...prevState,
+        tbc: bool
+      }));
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "tbc",
+    className: "peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  }, "Date and time not confirmed.")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Current timezone is: ", event?.timezone, ".", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: "underline"
+  }, "Change timezone.")));
+}
+
+/***/ }),
+
 /***/ "./src/components/event-header.js":
 /*!****************************************!*\
   !*** ./src/components/event-header.js ***!
@@ -15159,6 +15287,55 @@ function EventHeader({
     setLoading: setLoading,
     event: event,
     setEvent: setEvent
+  })));
+}
+
+/***/ }),
+
+/***/ "./src/components/event-name.js":
+/*!**************************************!*\
+  !*** ./src/components/event-name.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventName: () => (/* binding */ EventName)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
+
+
+
+
+function EventName({
+  event,
+  setEvent,
+  isTyping,
+  setIsTyping
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, isTyping ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
+    type: "text",
+    value: event?.title,
+    onChange: e => {
+      setEvent(prevState => ({
+        ...prevState,
+        title: e.target.value
+      }));
+    },
+    autoFocus: true,
+    onBlur: () => setIsTyping(false),
+    onKeyDown: e => e.key === "Enter" && setIsTyping(false)
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("inline-flex pr-6 relative cursor-pointer underline underline-offset-[7px] text-muted-foreground font-medium text-lg", event?.title && "text-foreground no-underline"),
+    onClick: () => {
+      setIsTyping(true);
+    }
+  }, event?.title ? event?.title : "Click to add event name", event?.title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: "absolute top-1 right-0 w-5 h-5 text-ring"
   })));
 }
 
@@ -15277,6 +15454,7 @@ function EventNavBar({
         status: status
       }
     }).then(response => {
+      console.log(response);
       setSaving(false);
       setEvent(response);
       if (response.message) {
@@ -16016,6 +16194,82 @@ function TableSelectedRows(props) {
 
 /***/ }),
 
+/***/ "./src/components/time-picker.js":
+/*!***************************************!*\
+  !*** ./src/components/time-picker.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TimePicker: () => (/* binding */ TimePicker)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_period_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/period-select */ "./src/components/ui/period-select.jsx");
+/* harmony import */ var _components_ui_time_picker_input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/time-picker-input */ "./src/components/ui/time-picker-input.jsx");
+"use client";
+
+
+
+
+
+
+function TimePicker({
+  date,
+  setDate,
+  period,
+  setPeriod
+}) {
+  const minuteRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+  const hourRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+  const secondRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+  const periodRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-end gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid gap-1 text-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "hours",
+    className: "text-xs"
+  }, "Hours"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_time_picker_input__WEBPACK_IMPORTED_MODULE_3__.TimePickerInput, {
+    picker: "12hours",
+    period: period,
+    date: date,
+    setDate: setDate,
+    ref: hourRef,
+    onRightFocus: () => minuteRef.current?.focus()
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid gap-1 text-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "minutes",
+    className: "text-xs"
+  }, "Minutes"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_time_picker_input__WEBPACK_IMPORTED_MODULE_3__.TimePickerInput, {
+    picker: "minutes",
+    id: "minutes12",
+    date: date,
+    setDate: setDate,
+    ref: minuteRef,
+    onLeftFocus: () => hourRef.current?.focus(),
+    onRightFocus: () => secondRef.current?.focus()
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid gap-1 text-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "period",
+    className: "text-xs"
+  }, "Period"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_period_select__WEBPACK_IMPORTED_MODULE_2__.TimePeriodSelect, {
+    period: period,
+    setPeriod: setPeriod,
+    date: date,
+    setDate: setDate,
+    ref: periodRef,
+    onLeftFocus: () => secondRef.current?.focus()
+  })));
+}
+
+/***/ }),
+
 /***/ "./src/components/ui/button.jsx":
 /*!**************************************!*\
   !*** ./src/components/ui/button.jsx ***!
@@ -16376,7 +16630,7 @@ const Input = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
 }, ref) => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: type,
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50", className),
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full rounded-md border border-input bg-background shadow-none px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:bg-secondary", className),
     ref: ref,
     ...props
   });
@@ -16419,6 +16673,70 @@ const Label = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
 }));
 Label.displayName = _radix_ui_react_label__WEBPACK_IMPORTED_MODULE_3__.Root.displayName;
 
+
+/***/ }),
+
+/***/ "./src/components/ui/period-select.jsx":
+/*!*********************************************!*\
+  !*** ./src/components/ui/period-select.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TimePeriodSelect: () => (/* binding */ TimePeriodSelect)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/select */ "./src/components/ui/select.jsx");
+/* harmony import */ var _components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/time-picker-utils */ "./src/components/ui/time-picker-utils.jsx");
+"use client";
+
+
+
+
+
+const TimePeriodSelect = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  period,
+  setPeriod,
+  date,
+  setDate,
+  onLeftFocus,
+  onRightFocus
+}, ref) => {
+  const handleKeyDown = e => {
+    if (e.key === "ArrowRight") onRightFocus?.();
+    if (e.key === "ArrowLeft") onLeftFocus?.();
+  };
+  const handleValueChange = value => {
+    setPeriod(value);
+
+    /**
+     * trigger an update whenever the user switches between AM and PM;
+     * otherwise user must manually change the hour each time
+     */
+    if (date) {
+      const tempDate = new Date(date);
+      const hours = (0,_components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__.display12HourValue)(date.getHours());
+      setDate((0,_components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__.setDateByType)(tempDate, hours.toString(), "12hours", period === "AM" ? "PM" : "AM"));
+    }
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex h-10 items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_1__.Select, {
+    defaultValue: period,
+    onValueChange: value => handleValueChange(value)
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_1__.SelectTrigger, {
+    ref: ref,
+    className: "w-[65px] focus:bg-accent focus:text-accent-foreground",
+    onKeyDown: handleKeyDown
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_1__.SelectValue, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_1__.SelectContent, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_1__.SelectItem, {
+    value: "AM"
+  }, "AM"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_1__.SelectItem, {
+    value: "PM"
+  }, "PM"))));
+});
+TimePeriodSelect.displayName = "TimePeriodSelect";
 
 /***/ }),
 
@@ -16790,6 +17108,339 @@ const TableCaption = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
 }));
 TableCaption.displayName = "TableCaption";
 
+
+/***/ }),
+
+/***/ "./src/components/ui/time-picker-input.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/ui/time-picker-input.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TimePickerInput: () => (/* binding */ TimePickerInput)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var _components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/time-picker-utils */ "./src/components/ui/time-picker-utils.jsx");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
+
+
+
+
+const TimePickerInput = react__WEBPACK_IMPORTED_MODULE_0___default().forwardRef(({
+  className,
+  type = "tel",
+  value,
+  id,
+  name,
+  date = new Date(new Date().setHours(0, 0, 0, 0)),
+  setDate,
+  onChange,
+  onKeyDown,
+  picker,
+  period,
+  onLeftFocus,
+  onRightFocus,
+  ...props
+}, ref) => {
+  const [flag, setFlag] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(false);
+  const [prevIntKey, setPrevIntKey] = react__WEBPACK_IMPORTED_MODULE_0___default().useState("0");
+
+  /**
+   * allow the user to enter the second digit within 2 seconds
+   * otherwise start again with entering first digit
+   */
+  react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(() => {
+    if (flag) {
+      const timer = setTimeout(() => {
+        setFlag(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [flag]);
+  const calculatedValue = react__WEBPACK_IMPORTED_MODULE_0___default().useMemo(() => {
+    return (0,_components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__.getDateByType)(date, picker);
+  }, [date, picker]);
+  const calculateNewValue = key => {
+    /*
+     * If picker is '12hours' and the first digit is 0, then the second digit is automatically set to 1.
+     * The second entered digit will break the condition and the value will be set to 10-12.
+     */
+    if (picker === "12hours") {
+      if (flag && calculatedValue.slice(1, 2) === "1" && prevIntKey === "0") return "0" + key;
+    }
+    return !flag ? "0" + key : calculatedValue.slice(1, 2) + key;
+  };
+  const handleKeyDown = e => {
+    if (e.key === "Tab") return;
+    e.preventDefault();
+    if (e.key === "ArrowRight") onRightFocus?.();
+    if (e.key === "ArrowLeft") onLeftFocus?.();
+    if (["ArrowUp", "ArrowDown"].includes(e.key)) {
+      const step = e.key === "ArrowUp" ? 1 : -1;
+      const newValue = (0,_components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__.getArrowByType)(calculatedValue, step, picker);
+      if (flag) setFlag(false);
+      const tempDate = new Date(date);
+      setDate((0,_components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__.setDateByType)(tempDate, newValue, picker, period));
+    }
+    if (e.key >= "0" && e.key <= "9") {
+      if (picker === "12hours") setPrevIntKey(e.key);
+      const newValue = calculateNewValue(e.key);
+      if (flag) onRightFocus?.();
+      setFlag(prev => !prev);
+      const tempDate = new Date(date);
+      setDate((0,_components_ui_time_picker_utils__WEBPACK_IMPORTED_MODULE_2__.setDateByType)(tempDate, newValue, picker, period));
+    }
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
+    ref: ref,
+    id: id || picker,
+    name: name || picker,
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_3__.cn)("w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none", className),
+    value: value || calculatedValue,
+    onChange: e => {
+      e.preventDefault();
+      onChange?.(e);
+    },
+    type: type,
+    inputMode: "decimal",
+    onKeyDown: e => {
+      onKeyDown?.(e);
+      handleKeyDown(e);
+    },
+    ...props
+  });
+});
+TimePickerInput.displayName = "TimePickerInput";
+
+
+/***/ }),
+
+/***/ "./src/components/ui/time-picker-utils.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/ui/time-picker-utils.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   convert12HourTo24Hour: () => (/* binding */ convert12HourTo24Hour),
+/* harmony export */   display12HourValue: () => (/* binding */ display12HourValue),
+/* harmony export */   getArrowByType: () => (/* binding */ getArrowByType),
+/* harmony export */   getDateByType: () => (/* binding */ getDateByType),
+/* harmony export */   getValid12Hour: () => (/* binding */ getValid12Hour),
+/* harmony export */   getValidArrow12Hour: () => (/* binding */ getValidArrow12Hour),
+/* harmony export */   getValidArrowHour: () => (/* binding */ getValidArrowHour),
+/* harmony export */   getValidArrowMinuteOrSecond: () => (/* binding */ getValidArrowMinuteOrSecond),
+/* harmony export */   getValidArrowNumber: () => (/* binding */ getValidArrowNumber),
+/* harmony export */   getValidHour: () => (/* binding */ getValidHour),
+/* harmony export */   getValidMinuteOrSecond: () => (/* binding */ getValidMinuteOrSecond),
+/* harmony export */   getValidNumber: () => (/* binding */ getValidNumber),
+/* harmony export */   isValid12Hour: () => (/* binding */ isValid12Hour),
+/* harmony export */   isValidHour: () => (/* binding */ isValidHour),
+/* harmony export */   isValidMinuteOrSecond: () => (/* binding */ isValidMinuteOrSecond),
+/* harmony export */   set12Hours: () => (/* binding */ set12Hours),
+/* harmony export */   setDateByType: () => (/* binding */ setDateByType),
+/* harmony export */   setHours: () => (/* binding */ setHours),
+/* harmony export */   setMinutes: () => (/* binding */ setMinutes),
+/* harmony export */   setSeconds: () => (/* binding */ setSeconds)
+/* harmony export */ });
+/**
+ * regular expression to check for valid hour format (01-23)
+ */
+function isValidHour(value) {
+  return /^(0[0-9]|1[0-9]|2[0-3])$/.test(value);
+}
+
+/**
+ * regular expression to check for valid 12 hour format (01-12)
+ */
+function isValid12Hour(value) {
+  return /^(0[1-9]|1[0-2])$/.test(value);
+}
+
+/**
+ * regular expression to check for valid minute format (00-59)
+ */
+function isValidMinuteOrSecond(value) {
+  return /^[0-5][0-9]$/.test(value);
+}
+function getValidNumber(value, {
+  max,
+  min = 0,
+  loop = false
+}) {
+  let numericValue = parseInt(value, 10);
+  if (!isNaN(numericValue)) {
+    if (!loop) {
+      if (numericValue > max) numericValue = max;
+      if (numericValue < min) numericValue = min;
+    } else {
+      if (numericValue > max) numericValue = min;
+      if (numericValue < min) numericValue = max;
+    }
+    return numericValue.toString().padStart(2, "0");
+  }
+  return "00";
+}
+function getValidHour(value) {
+  if (isValidHour(value)) return value;
+  return getValidNumber(value, {
+    max: 23
+  });
+}
+function getValid12Hour(value) {
+  if (isValid12Hour(value)) return value;
+  return getValidNumber(value, {
+    min: 1,
+    max: 12
+  });
+}
+function getValidMinuteOrSecond(value) {
+  if (isValidMinuteOrSecond(value)) return value;
+  return getValidNumber(value, {
+    max: 59
+  });
+}
+function getValidArrowNumber(value, {
+  min,
+  max,
+  step
+}) {
+  let numericValue = parseInt(value, 10);
+  if (!isNaN(numericValue)) {
+    numericValue += step;
+    return getValidNumber(String(numericValue), {
+      min,
+      max,
+      loop: true
+    });
+  }
+  return "00";
+}
+function getValidArrowHour(value, step) {
+  return getValidArrowNumber(value, {
+    min: 0,
+    max: 23,
+    step
+  });
+}
+function getValidArrow12Hour(value, step) {
+  return getValidArrowNumber(value, {
+    min: 1,
+    max: 12,
+    step
+  });
+}
+function getValidArrowMinuteOrSecond(value, step) {
+  return getValidArrowNumber(value, {
+    min: 0,
+    max: 59,
+    step
+  });
+}
+function setMinutes(date, value) {
+  const minutes = getValidMinuteOrSecond(value);
+  date.setMinutes(parseInt(minutes, 10));
+  return date;
+}
+function setSeconds(date, value) {
+  const seconds = getValidMinuteOrSecond(value);
+  date.setSeconds(parseInt(seconds, 10));
+  return date;
+}
+function setHours(date, value) {
+  const hours = getValidHour(value);
+  date.setHours(parseInt(hours, 10));
+  return date;
+}
+function set12Hours(date, value, period) {
+  const hours = parseInt(getValid12Hour(value), 10);
+  const convertedHours = convert12HourTo24Hour(hours, period);
+  date.setHours(convertedHours);
+  return date;
+}
+function setDateByType(date, value, type, period) {
+  switch (type) {
+    case "minutes":
+      return setMinutes(date, value);
+    case "seconds":
+      return setSeconds(date, value);
+    case "hours":
+      return setHours(date, value);
+    case "12hours":
+      {
+        if (!period) return date;
+        return set12Hours(date, value, period);
+      }
+    default:
+      return date;
+  }
+}
+function getDateByType(date, type) {
+  switch (type) {
+    case "minutes":
+      return getValidMinuteOrSecond(String(date.getMinutes()));
+    case "seconds":
+      return getValidMinuteOrSecond(String(date.getSeconds()));
+    case "hours":
+      return getValidHour(String(date.getHours()));
+    case "12hours":
+      const hours = display12HourValue(date.getHours());
+      return getValid12Hour(String(hours));
+    default:
+      return "00";
+  }
+}
+function getArrowByType(value, step, type) {
+  switch (type) {
+    case "minutes":
+      return getValidArrowMinuteOrSecond(value, step);
+    case "seconds":
+      return getValidArrowMinuteOrSecond(value, step);
+    case "hours":
+      return getValidArrowHour(value, step);
+    case "12hours":
+      return getValidArrow12Hour(value, step);
+    default:
+      return "00";
+  }
+}
+
+/**
+ * handles value change of 12-hour input
+ * 12:00 PM is 12:00
+ * 12:00 AM is 00:00
+ */
+function convert12HourTo24Hour(hour, period) {
+  if (period === "PM") {
+    if (hour <= 11) {
+      return hour + 12;
+    } else {
+      return hour;
+    }
+  } else if (period === "AM") {
+    if (hour === 12) return 0;
+    return hour;
+  }
+  return hour;
+}
+
+/**
+ * time is stored in the 24-hour form,
+ * but needs to be displayed to the user
+ * in its 12-hour representation
+ */
+function display12HourValue(hours) {
+  if (hours === 0 || hours === 12) return "12";
+  if (hours >= 22) return `${hours - 12}`;
+  if (hours % 12 > 9) return `${hours}`;
+  return `0${hours % 12}`;
+}
 
 /***/ }),
 
@@ -17465,6 +18116,37 @@ const LoaderCircle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defau
 
 
 //# sourceMappingURL=loader-circle.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/move-right.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/move-right.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MoveRight)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const MoveRight = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("MoveRight", [
+  ["path", { d: "M18 8L22 12L18 16", key: "1r0oui" }],
+  ["path", { d: "M2 12H22", key: "1m8cig" }]
+]);
+
+
+//# sourceMappingURL=move-right.js.map
 
 
 /***/ }),
@@ -38115,6 +38797,101 @@ function message(token, format, input) {
   const subject = token[0] === "Y" ? "years" : "days of the month";
   return `Use \`${token.toLowerCase()}\` instead of \`${token}\` (in \`${format}\`) for formatting ${subject} to the input \`${input}\`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md`;
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/date-fns/add.mjs":
+/*!***************************************!*\
+  !*** ./node_modules/date-fns/add.mjs ***!
+  \***************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   add: () => (/* binding */ add),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _addDays_mjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addDays.mjs */ "./node_modules/date-fns/addDays.mjs");
+/* harmony import */ var _addMonths_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addMonths.mjs */ "./node_modules/date-fns/addMonths.mjs");
+/* harmony import */ var _constructFrom_mjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constructFrom.mjs */ "./node_modules/date-fns/constructFrom.mjs");
+/* harmony import */ var _toDate_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./toDate.mjs */ "./node_modules/date-fns/toDate.mjs");
+
+
+
+
+
+/**
+ * @name add
+ * @category Common Helpers
+ * @summary Add the specified years, months, weeks, days, hours, minutes and seconds to the given date.
+ *
+ * @description
+ * Add the specified years, months, weeks, days, hours, minutes and seconds to the given date.
+ *
+ * @typeParam DateType - The `Date` type, the function operates on. Gets inferred from passed arguments. Allows to use extensions like [`UTCDate`](https://github.com/date-fns/utc).
+ *
+ * @param date - The date to be changed
+ * @param duration - The object with years, months, weeks, days, hours, minutes and seconds to be added.
+ *
+ * | Key            | Description                        |
+ * |----------------|------------------------------------|
+ * | years          | Amount of years to be added        |
+ * | months         | Amount of months to be added       |
+ * | weeks          | Amount of weeks to be added        |
+ * | days           | Amount of days to be added         |
+ * | hours          | Amount of hours to be added        |
+ * | minutes        | Amount of minutes to be added      |
+ * | seconds        | Amount of seconds to be added      |
+ *
+ * All values default to 0
+ *
+ * @returns The new date with the seconds added
+ *
+ * @example
+ * // Add the following duration to 1 September 2014, 10:19:50
+ * const result = add(new Date(2014, 8, 1, 10, 19, 50), {
+ *   years: 2,
+ *   months: 9,
+ *   weeks: 1,
+ *   days: 7,
+ *   hours: 5,\\-7
+ *   minutes: 9,
+ *   seconds: 30,
+ * })
+ * //=> Thu Jun 15 2017 15:29:20
+ */
+function add(date, duration) {
+  const {
+    years = 0,
+    months = 0,
+    weeks = 0,
+    days = 0,
+    hours = 0,
+    minutes = 0,
+    seconds = 0,
+  } = duration;
+
+  // Add years and months
+  const _date = (0,_toDate_mjs__WEBPACK_IMPORTED_MODULE_0__.toDate)(date);
+  const dateWithMonths =
+    months || years ? (0,_addMonths_mjs__WEBPACK_IMPORTED_MODULE_1__.addMonths)(_date, months + years * 12) : _date;
+
+  // Add weeks and days
+  const dateWithDays =
+    days || weeks ? (0,_addDays_mjs__WEBPACK_IMPORTED_MODULE_2__.addDays)(dateWithMonths, days + weeks * 7) : dateWithMonths;
+
+  // Add days, hours, minutes and seconds
+  const minutesToAdd = minutes + hours * 60;
+  const secondsToAdd = seconds + minutesToAdd * 60;
+  const msToAdd = secondsToAdd * 1000;
+  const finalDate = (0,_constructFrom_mjs__WEBPACK_IMPORTED_MODULE_3__.constructFrom)(date, dateWithDays.getTime() + msToAdd);
+
+  return finalDate;
+}
+
+// Fallback for modularized imports:
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (add);
 
 
 /***/ }),

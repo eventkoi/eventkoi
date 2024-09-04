@@ -81,6 +81,7 @@ class Event {
 			),
 			'status'   => self::get_status(),
 			'url'      => self::get_url(),
+			'tbc'      => self::get_tbc(),
 			'timezone' => eventkoi_timezone(),
 		);
 
@@ -114,6 +115,8 @@ class Event {
 			self::$event    = $event;
 			self::$event_id = ! empty( $event->ID ) ? $event->ID : 0;
 
+			self::update_meta( $meta );
+
 			return array_merge(
 				array(
 					'update_endpoint' => true,
@@ -135,12 +138,25 @@ class Event {
 		self::$event    = $event;
 		self::$event_id = ! empty( $event->ID ) ? $event->ID : 0;
 
+		self::update_meta( $meta );
+
 		return array_merge(
 			array(
 				'message' => __( 'Event updated.', 'eventkoi' ),
 			),
 			self::get_meta(),
 		);
+	}
+
+	/**
+	 * Update event meta.
+	 *
+	 * @param array $meta An array with event meta.
+	 */
+	public static function update_meta( $meta = array(), ) {
+		$tbc = ! empty( $meta['tbc'] );
+
+		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
 	}
 
 	/**
@@ -226,6 +242,15 @@ class Event {
 		$hook = $gmt ? 'eventkoi_get_event_modified_date_gmt' : 'eventkoi_get_event_modified_date';
 
 		return apply_filters( $hook, (string) $date, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event to be confirmed status.
+	 */
+	public static function get_tbc() {
+		$tbc = get_post_meta( self::$event_id, 'tbc', true );
+
+		return apply_filters( 'eventkoi_get_event_tbc', (bool) $tbc, self::$event_id, self::$event );
 	}
 
 	/**
