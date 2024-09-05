@@ -154,11 +154,20 @@ class Event {
 	 * @param array $meta An array with event meta.
 	 */
 	public static function update_meta( $meta = array(), ) {
+		// Hook to allow chnages to event metadata.
+		$meta = apply_filters( 'eventkoi_update_event_meta', $meta, self::$event_id, self::$event );
+
+		do_action( 'eventkoi_before_update_event_meta', $meta, self::$event_id, self::$event );
+
 		$tbc        = ! empty( $meta['tbc'] );
 		$start_date = ! empty( $meta['date']['start'] ) ? esc_attr( $meta['date']['start'] ) : '';
+		$end_date   = ! empty( $meta['date']['end'] ) ? esc_attr( $meta['date']['end'] ) : '';
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
-		update_post_meta( self::$event_id, 'start_date', $start_date );
+		update_post_meta( self::$event_id, 'start_date', get_gmt_from_date( $start_date, eventkoi_get_default_date_format() ) );
+		update_post_meta( self::$event_id, 'end_date', get_gmt_from_date( $end_date, eventkoi_get_default_date_format() ) );
+
+		do_action( 'eventkoi_after_update_event_meta', $meta, self::$event_id, self::$event );
 	}
 
 	/**

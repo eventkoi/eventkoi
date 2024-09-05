@@ -15118,17 +15118,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/add.mjs");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/add.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var _components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/calendar */ "./src/components/ui/calendar.jsx");
 /* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
-/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
-/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
-/* harmony import */ var _components_ui_popover__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/ui/popover */ "./src/components/ui/popover.jsx");
-/* harmony import */ var _components_time_picker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components/time-picker */ "./src/components/time-picker.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/move-right.js");
-
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_popover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/popover */ "./src/components/ui/popover.jsx");
+/* harmony import */ var _components_time_picker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/time-picker */ "./src/components/time-picker.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/move-right.js");
 
 
 
@@ -15150,35 +15148,57 @@ function EventDate({
     time_now
   } = eventkoi_params;
   const [period, setPeriod] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("AM");
-  let date = event.date.start ? new Date(event.date.start) : undefined;
-
-  /**
-   * carry over the current time when a user clicks a new day
-   * instead of resetting to 00:00
-   */
-  const handleSelect = newDay => {
+  let startDate = event.date.start ? new Date(event.date.start) : undefined;
+  let endDate = event.date.end ? new Date(event.date.end) : undefined;
+  const handleStartSelect = newDay => {
     if (!newDay) {
-      updateDate();
+      updateStartDate();
       return;
     }
-    if (!date) {
-      updateDate(newDay);
+    if (!startDate) {
+      updateStartDate(newDay);
       return;
     }
-    date = new Date(date);
-    const diff = newDay.getTime() - date.getTime();
+    startDate = new Date(startDate);
+    const diff = newDay.getTime() - startDate.getTime();
     const diffInDays = diff / (1000 * 60 * 60 * 24);
-    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.add)(date, {
+    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_8__.add)(startDate, {
       days: Math.ceil(diffInDays)
     });
-    updateDate(newDateFull);
+    updateStartDate(newDateFull);
   };
-  const updateDate = date => {
+  const handleEndSelect = newDay => {
+    if (!newDay) {
+      updateEndDate();
+      return;
+    }
+    if (!endDate) {
+      updateEndDate(newDay);
+      return;
+    }
+    endDate = new Date(endDate);
+    const diff = newDay.getTime() - endDate.getTime();
+    const diffInDays = diff / (1000 * 60 * 60 * 24);
+    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_8__.add)(endDate, {
+      days: Math.ceil(diffInDays)
+    });
+    updateEndDate(newDateFull);
+  };
+  const updateStartDate = date => {
     setEvent(prevState => ({
       ...prevState,
       date: {
         ...prevState.date,
-        start: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.format)(date, "yyyy-MM-dd hh:mm a") : ""
+        start: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(date, "yyyy-MM-dd hh:mm a") : ""
+      }
+    }));
+  };
+  const updateEndDate = date => {
+    setEvent(prevState => ({
+      ...prevState,
+      date: {
+        ...prevState.date,
+        end: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(date, "yyyy-MM-dd hh:mm a") : ""
       }
     }));
   };
@@ -15191,51 +15211,64 @@ function EventDate({
     className: "flex gap-4 items-start"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_6__.Label, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_5__.Label, {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(event?.tbc && "text-muted-foreground")
   }, "Start"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.Popover, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverTrigger, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_6__.Popover, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_6__.PopoverTrigger, {
     asChild: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "outline",
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-[250px] justify-start text-left font-normal", !date && "text-muted-foreground/60 hover:text-muted-foreground/60", event?.tbc && "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground/60 disabled:opacity-100"),
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-auto justify-start text-left font-normal", !startDate && "text-muted-foreground/60 hover:text-muted-foreground/60", event?.tbc && "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground/60 disabled:opacity-100"),
     disabled: event?.tbc
-  }, date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.format)(date, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverContent, {
+  }, startDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(startDate, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_6__.PopoverContent, {
     align: "start",
     className: "w-auto p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar, {
     mode: "single",
-    selected: date,
-    onSelect: d => handleSelect(d),
+    selected: startDate,
+    onSelect: d => handleStartSelect(d),
     initialFocus: true
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "p-3 border-t border-border"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_time_picker__WEBPACK_IMPORTED_MODULE_8__.TimePicker, {
-    setDate: updateDate,
-    date: date,
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_time_picker__WEBPACK_IMPORTED_MODULE_7__.TimePicker, {
+    setDate: updateStartDate,
+    date: startDate,
     period: period,
     setPeriod: setPeriod
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-8"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
     className: "text-muted-foreground w-6 h-6",
     strokeWidth: 1.5
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_6__.Label, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_5__.Label, {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(event?.tbc && "text-muted-foreground")
   }, "End"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_5__.Input, {
-    placeholder: date_24h,
-    className: "w-3/5",
+    className: "flex"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_6__.Popover, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_6__.PopoverTrigger, {
+    asChild: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "outline",
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-auto justify-start text-left font-normal", !endDate && "text-muted-foreground/60 hover:text-muted-foreground/60", event?.tbc && "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground/60 disabled:opacity-100"),
     disabled: event?.tbc
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_5__.Input, {
-    placeholder: time_now,
-    className: "w-2/5",
-    disabled: event?.tbc
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, endDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(endDate, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_6__.PopoverContent, {
+    align: "start",
+    className: "w-auto p-0"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar, {
+    mode: "single",
+    selected: endDate,
+    onSelect: d => handleEndSelect(d),
+    initialFocus: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-3 border-t border-border"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_time_picker__WEBPACK_IMPORTED_MODULE_7__.TimePicker, {
+    setDate: updateEndDate,
+    date: endDate,
+    period: period,
+    setPeriod: setPeriod
+  }))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__.Checkbox, {
     id: "tbc",
