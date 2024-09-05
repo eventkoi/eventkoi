@@ -150,7 +150,6 @@ export function EventsOverview() {
       method: "get",
     })
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
         setData(response);
 

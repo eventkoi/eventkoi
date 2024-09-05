@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { add, format } from "date-fns";
@@ -16,33 +16,48 @@ import {
 
 import { TimePicker } from "@/components/time-picker";
 
-import { Calendar as CalendarIcon, MoveRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 
 export function EventDate({ event, setEvent }) {
   const { date_now, date_24h, time_now } = eventkoi_params;
 
-  const [date, setDate] = useState();
-  const [period, setPeriod] = useState("PM");
+  const [period, setPeriod] = useState("AM");
+
+  let date = event.date.start ? new Date(event.date.start) : undefined;
 
   /**
    * carry over the current time when a user clicks a new day
    * instead of resetting to 00:00
    */
   const handleSelect = (newDay) => {
-    console.log(newDay);
     if (!newDay) {
-      setDate();
+      updateDate();
       return;
     }
     if (!date) {
-      setDate(newDay);
+      updateDate(newDay);
       return;
     }
+    date = new Date(date);
     const diff = newDay.getTime() - date.getTime();
     const diffInDays = diff / (1000 * 60 * 60 * 24);
     const newDateFull = add(date, { days: Math.ceil(diffInDays) });
-    setDate(newDateFull);
+    updateDate(newDateFull);
   };
+
+  const updateDate = (date) => {
+    setEvent((prevState) => ({
+      ...prevState,
+      date: {
+        ...prevState.date,
+        start: date ? format(date, "yyyy-MM-dd hh:mm a") : "",
+      },
+    }));
+  };
+
+  useEffect(() => {
+    console.log(event);
+  }, [event]);
 
   return (
     <div className="flex flex-col gap-3">
@@ -57,19 +72,24 @@ export function EventDate({ event, setEvent }) {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[280px] justify-start text-left font-normal",
-                    !date && "text-muted-foreground"
+                    "w-[250px] justify-start text-left font-normal",
+                    !date &&
+                      "text-muted-foreground/60 hover:text-muted-foreground/60",
+                    event?.tbc &&
+                      "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground/60 disabled:opacity-100"
                   )}
+                  disabled={event?.tbc}
                 >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
                   {date ? (
-                    format(date, "PPP HH:mm:ss")
+                    format(date, "d MMM yyyy h:mm a")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>
+                      {date_now} {time_now}
+                    </span>
                   )}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
+              <PopoverContent align="start" className="w-auto p-0">
                 <Calendar
                   mode="single"
                   selected={date}
@@ -78,7 +98,7 @@ export function EventDate({ event, setEvent }) {
                 />
                 <div className="p-3 border-t border-border">
                   <TimePicker
-                    setDate={setDate}
+                    setDate={updateDate}
                     date={date}
                     period={period}
                     setPeriod={setPeriod}

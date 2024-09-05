@@ -66,7 +66,6 @@ export function EventEdit() {
       method: "get",
     })
       .then((response) => {
-        console.log(response);
         setEvent(response);
         setLoading(false);
       })

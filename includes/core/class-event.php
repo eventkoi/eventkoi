@@ -154,9 +154,11 @@ class Event {
 	 * @param array $meta An array with event meta.
 	 */
 	public static function update_meta( $meta = array(), ) {
-		$tbc = ! empty( $meta['tbc'] );
+		$tbc        = ! empty( $meta['tbc'] );
+		$start_date = ! empty( $meta['date']['start'] ) ? esc_attr( $meta['date']['start'] ) : '';
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
+		update_post_meta( self::$event_id, 'start_date', $start_date );
 	}
 
 	/**
