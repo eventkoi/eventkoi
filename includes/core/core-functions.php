@@ -58,6 +58,19 @@ function eventkoi_get_default_date_format() {
 }
 
 /**
+ * Get GMT time from date given.
+ *
+ * @param string $date A date.
+ */
+function eventkoi_get_gmt_from_date( $date ) {
+	if ( ! $date ) {
+		return '';
+	}
+
+	return get_gmt_from_date( $date, eventkoi_get_default_date_format() );
+}
+
+/**
  * Returns date based on GMT date string.
  *
  * @param string $date A date.

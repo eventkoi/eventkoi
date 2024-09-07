@@ -14290,19 +14290,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
-/* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
-/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
-/* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
-/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
-/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/ban.js");
+/* harmony import */ var _components_ui_badge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/badge */ "./src/components/ui/badge.jsx");
+/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
+/* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
+/* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
+/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/clock-3.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/ban.js");
 
 
 
@@ -14315,6 +14318,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const statuses = {
+  live: "Live",
+  completed: "Completed",
+  tbc: "Unconfirmed",
+  upcoming: "Upcoming",
+  publish: "Upcoming",
+  draft: "Draft",
+  trash: "Trash"
+};
 
 /**
  * Support multi-column search.
@@ -14323,13 +14336,23 @@ const multiColumnSearch = (row, columnId, filterValue) => {
   const searchableRowContent = `${row.original.title}`;
   return searchableRowContent.toLowerCase().includes(filterValue.toLowerCase());
 };
+
+/**
+ * Sort by status.
+ */
+const sortStatusFn = (rowA, rowB, _columnId) => {
+  const statusA = rowA.original.status;
+  const statusB = rowB.original.status;
+  const statusOrder = ["live", "upcoming", "publish", "tbc", "draft", "completed", "trash"];
+  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
+};
 const columns = [{
   id: "select",
   header: ({
     table
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-center min-h-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__.Checkbox, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_3__.Checkbox, {
     checked: table.getIsAllPageRowsSelected() || table.getIsSomePageRowsSelected() && "indeterminate",
     onCheckedChange: value => table.toggleAllPageRowsSelected(!!value),
     "aria-label": "Select all"
@@ -14338,7 +14361,7 @@ const columns = [{
     row
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-center min-h-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_6__.Checkbox, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_3__.Checkbox, {
     checked: row.getIsSelected(),
     onCheckedChange: value => row.toggleSelected(!!value),
     "aria-label": "Select row"
@@ -14349,7 +14372,7 @@ const columns = [{
   accessorKey: "title",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
     title: "Event name",
     column: column
   }),
@@ -14361,18 +14384,27 @@ const columns = [{
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "grid space-y-1"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "text-foreground"
+      className: "flex gap-2 items-center text-foreground"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: url,
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_8__.cn)("hover:underline hover:decoration-dotted underline-offset-4", status === "trash" && "text-muted-foreground pointer-events-none")
-    }, row.getValue("title"))));
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("hover:underline hover:decoration-dotted underline-offset-4", status === "trash" && "text-muted-foreground pointer-events-none")
+    }, row.getValue("title")), row.original.wp_status === "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
+      variant: "outline"
+    }, "Draft"), status == "live" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "relative flex h-1.5 w-1.5"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-25"
+    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "relative inline-flex rounded-full h-1.5 w-1.5 bg-destructive"
+    }))));
   },
-  filterFn: multiColumnSearch
+  filterFn: multiColumnSearch,
+  sortingFn: "alphanumeric"
 }, {
   accessorKey: "status",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
     title: "Status",
     column: column
   }),
@@ -14382,55 +14414,84 @@ const columns = [{
     const status = row.getValue("status");
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center space-x-2"
-    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }, status == "completed" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
       className: "w-4 h-4 text-success"
-    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    }), status == "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
       className: "w-4 h-4 text-primary/60"
-    }), status == "trash" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), status == "tbc" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
+      className: "w-4 h-4 text-primary/60"
+    }), status == "upcoming" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      className: "w-4 h-4 text-[#48BEFA]"
+    }), status == "live" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      className: "w-4 h-4 text-destructive"
+    }), status == "publish" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      className: "w-4 h-4 text-[#48BEFA]"
+    }), status == "trash" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], {
       className: "w-4 h-4 text-primary/40"
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "capitalize text-foreground"
-    }, status));
+    }, statuses[status]));
   },
-  filterFn: multiColumnSearch
+  filterFn: multiColumnSearch,
+  sortingFn: sortStatusFn
 }, {
-  accessorKey: "date",
+  accessorKey: "start_date",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
-    title: "Date",
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
+    title: "Starts",
     column: column
   }),
   cell: ({
     row
   }) => {
-    const date = row.original.date;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "text-foreground"
-    }, date.start);
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("text-foreground", row.original.tbc && "text-muted-foreground/80")
+    }, row.getValue("start_date"));
   },
-  filterFn: multiColumnSearch
+  filterFn: multiColumnSearch,
+  sortingFn: "alphanumeric",
+  sortUndefined: "last",
+  invertSorting: true
 }, {
-  accessorKey: "category",
+  accessorKey: "end_date",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-right"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_5__.SortButton, {
-    title: "Category",
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
+    title: "Ends",
     column: column
-  })),
+  }),
   cell: ({
     row
   }) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "text-right text-foreground"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: "#",
-      className: "text-foreground hover:underline hover:decoration-dotted"
-    }, row.getValue("category")));
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("text-foreground", row.original.tbc && "text-muted-foreground/80")
+    }, row.getValue("end_date"));
   },
-  filterFn: multiColumnSearch
+  filterFn: multiColumnSearch,
+  sortingFn: "alphanumeric",
+  sortUndefined: "last",
+  invertSorting: true
+}, {
+  accessorKey: "modified_date",
+  header: ({
+    column
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
+    title: "Last modified",
+    column: column
+  }),
+  cell: ({
+    row
+  }) => {
+    const event = row.original;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "text-foreground"
+    }, row.getValue("modified_date"));
+  },
+  filterFn: multiColumnSearch,
+  sortingFn: "alphanumeric",
+  sortUndefined: "last",
+  invertSorting: true
 }];
 const statusFilters = [{
   key: "all",
@@ -14456,7 +14517,7 @@ const statusFilters = [{
 function EventsOverview() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_12__.useSearchParams)();
+  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_15__.useSearchParams)();
   const queryStatus = searchParams.get("status");
   const fetchResults = async (toastMessage = null) => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
@@ -14466,9 +14527,9 @@ function EventsOverview() {
       setIsLoading(false);
       setData(response);
       if (toastMessage) {
-        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_7__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_8__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
-          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_7__.toast.dismiss(toastId)
+          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_8__.toast.dismiss(toastId)
         }, toastMessage), {
           duration: 4000
         });
@@ -14482,24 +14543,26 @@ function EventsOverview() {
     setIsLoading(true);
     fetchResults();
   }, [searchParams]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    console.log(data);
+  }, [data]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mx-auto flex w-full gap-2 justify-between"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_4__.Heading, null, "Events"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_add_button__WEBPACK_IMPORTED_MODULE_2__.AddButton, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_6__.Heading, null, "Events"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_add_button__WEBPACK_IMPORTED_MODULE_4__.AddButton, {
     title: "Create event",
     url: "/events/add"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_data_table__WEBPACK_IMPORTED_MODULE_3__.DataTable, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_data_table__WEBPACK_IMPORTED_MODULE_5__.DataTable, {
     data: data,
     columns: columns,
     empty: "No events are found.",
     base: "events",
     statusFilters: statusFilters,
-    filterName: "Category",
-    addTo: `Add to category`,
     isLoading: isLoading,
     fetchResults: fetchResults,
-    queryStatus: queryStatus
+    queryStatus: queryStatus,
+    hideCategories: true
   }));
 }
 
@@ -14957,7 +15020,10 @@ function DataTable({
   addTo,
   queryStatus
 }) {
-  const [sorting, setSorting] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [sorting, setSorting] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
+    id: "status",
+    desc: false
+  }]);
   const [columnFilters, setColumnFilters] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [columnVisibility, setColumnVisibility] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -15018,14 +15084,14 @@ function DataTable({
   }, headerGroup.headers.map(header => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableHead, {
       key: header.id,
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("h-10", header.id === "select" && "w-[50px]", header.id === "title" && "w-1/4", header.id === "date" && "w-1/4", header.id === "status" && "w-1/6")
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("h-10", header.id === "select" && "w-[50px]", header.id === "title" && "w-auto", header.id === "start_date" && "w-1/6", header.id === "end_date" && "w-1/6", header.id === "modified_date" && "w-1/6 text-right", header.id === "status" && "w-1/6")
     }, header.isPlaceholder ? null : (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.flexRender)(header.column.columnDef.header, header.getContext()));
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableBody, null, table.getRowModel().rows?.length ? table.getRowModel().rows.map(row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, {
     key: row.id,
     "data-state": row.getIsSelected() && "selected"
   }, row.getVisibleCells().map(cell => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableCell, {
     key: cell.id,
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(activeId == row.original.id && cell.id.indexOf("name") >= 1 && "font-medium underline decoration-dotted")
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)(activeId == row.original.id && cell.id.indexOf("name") >= 1 && "font-medium underline decoration-dotted", cell.id.indexOf("modified") >= 1 && "text-right")
   }, (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.flexRender)(cell.column.columnDef.cell, cell.getContext()))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableCell, {
     colSpan: columns.length,
     className: "h-40 text-center text-muted-foreground text-sm"
@@ -15144,12 +15210,22 @@ function EventDate({
 }) {
   const {
     date_now,
-    date_24h,
     time_now
   } = eventkoi_params;
-  const [period, setPeriod] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("AM");
-  let startDate = event.date.start ? new Date(event.date.start) : undefined;
-  let endDate = event.date.end ? new Date(event.date.end) : undefined;
+  let startDate = event.start_date ? new Date(event.start_date) : undefined;
+  let endDate = event.end_date ? new Date(event.end_date) : undefined;
+  let startPeriodVar = "AM",
+    endPeriodVar = "AM";
+  if (startDate) {
+    var hours = startDate.getHours();
+    startPeriodVar = hours >= 12 ? "PM" : "AM";
+  }
+  if (endDate) {
+    var hours = endDate.getHours();
+    endPeriodVar = hours >= 12 ? "PM" : "AM";
+  }
+  const [startPeriod, setStartPeriod] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(startPeriodVar);
+  const [endPeriod, setEndPeriod] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(endPeriodVar);
   const handleStartSelect = newDay => {
     if (!newDay) {
       updateStartDate();
@@ -15234,8 +15310,8 @@ function EventDate({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_time_picker__WEBPACK_IMPORTED_MODULE_7__.TimePicker, {
     setDate: updateStartDate,
     date: startDate,
-    period: period,
-    setPeriod: setPeriod
+    period: startPeriod,
+    setPeriod: setStartPeriod
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -15266,8 +15342,8 @@ function EventDate({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_time_picker__WEBPACK_IMPORTED_MODULE_7__.TimePicker, {
     setDate: updateEndDate,
     date: endDate,
-    period: period,
-    setPeriod: setPeriod
+    period: endPeriod,
+    setPeriod: setEndPeriod
   }))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__.Checkbox, {
@@ -16078,11 +16154,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function SortButton(props) {
-  const {
-    column,
-    title
-  } = props;
+function SortButton({
+  title,
+  column
+}) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "ghost",
     className: "p-0 hover:bg-[transparent]",
@@ -16300,6 +16375,54 @@ function TimePicker({
 
 /***/ }),
 
+/***/ "./src/components/ui/badge.jsx":
+/*!*************************************!*\
+  !*** ./src/components/ui/badge.jsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Badge: () => (/* binding */ Badge),
+/* harmony export */   badgeVariants: () => (/* binding */ badgeVariants)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var class_variance_authority__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! class-variance-authority */ "./node_modules/class-variance-authority/dist/index.mjs");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
+
+
+
+const badgeVariants = (0,class_variance_authority__WEBPACK_IMPORTED_MODULE_1__.cva)("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
+  variants: {
+    variant: {
+      default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+      secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      destructive: "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+      outline: "text-foreground"
+    }
+  },
+  defaultVariants: {
+    variant: "default"
+  }
+});
+function Badge({
+  className,
+  variant,
+  ...props
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_2__.cn)(badgeVariants({
+      variant
+    }), className),
+    ...props
+  });
+}
+
+
+/***/ }),
+
 /***/ "./src/components/ui/button.jsx":
 /*!**************************************!*\
   !*** ./src/components/ui/button.jsx ***!
@@ -16326,7 +16449,7 @@ const buttonVariants = (0,class_variance_authority__WEBPACK_IMPORTED_MODULE_1__.
     variant: {
       default: "bg-primary text-primary-foreground hover:bg-primary/90",
       destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-      outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+      outline: "border border-input bg-background hover:bg-accent text-foreground hover:text-accent-foreground",
       secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
       ghost: "hover:bg-input hover:text-accent-foreground",
       link: "text-primary underline-offset-4 hover:underline"
@@ -17957,6 +18080,38 @@ const ChevronsUpDown = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["def
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/circle-alert.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/circle-alert.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CircleAlert)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const CircleAlert = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("CircleAlert", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+]);
+
+
+//# sourceMappingURL=circle-alert.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/circle-check.js":
 /*!******************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/circle-check.js ***!
@@ -18052,6 +18207,37 @@ const Circle = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
 
 
 //# sourceMappingURL=circle.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/clock-3.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/clock-3.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Clock3)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Clock3 = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Clock3", [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16.5 12", key: "1aq6pp" }]
+]);
+
+
+//# sourceMappingURL=clock-3.js.map
 
 
 /***/ }),

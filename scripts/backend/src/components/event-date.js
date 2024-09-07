@@ -18,12 +18,26 @@ import { TimePicker } from "@/components/time-picker";
 import { MoveRight } from "lucide-react";
 
 export function EventDate({ event, setEvent }) {
-  const { date_now, date_24h, time_now } = eventkoi_params;
+  const { date_now, time_now } = eventkoi_params;
 
-  const [period, setPeriod] = useState("AM");
+  let startDate = event.start_date ? new Date(event.start_date) : undefined;
+  let endDate = event.end_date ? new Date(event.end_date) : undefined;
 
-  let startDate = event.date.start ? new Date(event.date.start) : undefined;
-  let endDate = event.date.end ? new Date(event.date.end) : undefined;
+  let startPeriodVar = "AM",
+    endPeriodVar = "AM";
+
+  if (startDate) {
+    var hours = startDate.getHours();
+    startPeriodVar = hours >= 12 ? "PM" : "AM";
+  }
+
+  if (endDate) {
+    var hours = endDate.getHours();
+    endPeriodVar = hours >= 12 ? "PM" : "AM";
+  }
+
+  const [startPeriod, setStartPeriod] = useState(startPeriodVar);
+  const [endPeriod, setEndPeriod] = useState(endPeriodVar);
 
   const handleStartSelect = (newDay) => {
     if (!newDay) {
@@ -122,8 +136,8 @@ export function EventDate({ event, setEvent }) {
                   <TimePicker
                     setDate={updateStartDate}
                     date={startDate}
-                    period={period}
-                    setPeriod={setPeriod}
+                    period={startPeriod}
+                    setPeriod={setStartPeriod}
                   />
                 </div>
               </PopoverContent>
@@ -174,8 +188,8 @@ export function EventDate({ event, setEvent }) {
                   <TimePicker
                     setDate={updateEndDate}
                     date={endDate}
-                    period={period}
-                    setPeriod={setPeriod}
+                    period={endPeriod}
+                    setPeriod={setEndPeriod}
                   />
                 </div>
               </PopoverContent>

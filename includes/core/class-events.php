@@ -54,21 +54,27 @@ class Events {
 					'relation' => 'AND',
 					array(
 						'key'     => 'start_date',
-						'value'   => time(),
+						'value'   => eventkoi_gmt_date(),
 						'compare' => '<',
 					),
 					array(
 						'key'     => 'end_date',
-						'value'   => time(),
-						'compare' => '<',
+						'value'   => eventkoi_gmt_date(),
+						'compare' => '>',
 					),
 				);
 			} elseif ( 'upcoming' === $args['status'] ) {
+				$query_args['post_status'] = array( 'publish' );
 				$query_args['meta_query'] = array( // phpcs:ignore
+					'relation' => 'OR',
 					array(
 						'key'     => 'start_date',
 						'value'   => eventkoi_gmt_date(),
 						'compare' => '>',
+					),
+					array(
+						'key'     => 'start_date',
+						'compare' => 'NOT EXISTS',
 					),
 				);
 			}

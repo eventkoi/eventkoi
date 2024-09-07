@@ -48,7 +48,12 @@ export function DataTable({
   addTo,
   queryStatus,
 }) {
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState([
+    {
+      id: "status",
+      desc: false,
+    },
+  ]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -121,8 +126,10 @@ export function DataTable({
                       className={cn(
                         "h-10",
                         header.id === "select" && "w-[50px]",
-                        header.id === "title" && "w-1/4",
-                        header.id === "date" && "w-1/4",
+                        header.id === "title" && "w-auto",
+                        header.id === "start_date" && "w-1/6",
+                        header.id === "end_date" && "w-1/6",
+                        header.id === "modified_date" && "w-1/6 text-right",
                         header.id === "status" && "w-1/6"
                       )}
                     >
@@ -151,7 +158,8 @@ export function DataTable({
                       className={cn(
                         activeId == row.original.id &&
                           cell.id.indexOf("name") >= 1 &&
-                          "font-medium underline decoration-dotted"
+                          "font-medium underline decoration-dotted",
+                        cell.id.indexOf("modified") >= 1 && "text-right"
                       )}
                     >
                       {flexRender(

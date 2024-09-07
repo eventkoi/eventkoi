@@ -69,20 +69,19 @@ class Event {
 	public static function get_meta() {
 
 		$meta = array(
-			'id'       => self::get_id(),
-			'title'    => self::get_title(),
-			'date'     => array(
-				'start'        => self::get_start_date(),
-				'start_gmt'    => self::get_start_date( true ),
-				'end'          => self::get_end_date(),
-				'end_gmt'      => self::get_end_date( true ),
-				'modified'     => self::get_modified_date(),
-				'modified_gmt' => self::get_modified_date( true ),
-			),
-			'status'   => self::get_status(),
-			'url'      => self::get_url(),
-			'tbc'      => self::get_tbc(),
-			'timezone' => eventkoi_timezone(),
+			'id'                => self::get_id(),
+			'title'             => self::get_title(),
+			'start_date'        => self::get_start_date(),
+			'start_date_gmt'    => self::get_start_date( true ),
+			'end_date'          => self::get_end_date(),
+			'end_date_gmt'      => self::get_end_date( true ),
+			'modified_date'     => self::get_modified_date(),
+			'modified_date_gmt' => self::get_modified_date( true ),
+			'status'            => self::get_status(),
+			'wp_status'         => self::get_wp_status(),
+			'url'               => self::get_url(),
+			'tbc'               => self::get_tbc(),
+			'timezone'          => eventkoi_timezone(),
 		);
 
 		return apply_filters( 'eventkoi_get_event_meta', $meta, self::$event_id, self::$event );
@@ -153,7 +152,7 @@ class Event {
 	 *
 	 * @param array $meta An array with event meta.
 	 */
-	public static function update_meta( $meta = array(), ) {
+	public static function update_meta( $meta = array() ) {
 		// Hook to allow chnages to event metadata.
 		$meta = apply_filters( 'eventkoi_update_event_meta', $meta, self::$event_id, self::$event );
 
@@ -164,8 +163,18 @@ class Event {
 		$end_date   = ! empty( $meta['date']['end'] ) ? esc_attr( $meta['date']['end'] ) : '';
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
-		update_post_meta( self::$event_id, 'start_date', get_gmt_from_date( $start_date, eventkoi_get_default_date_format() ) );
-		update_post_meta( self::$event_id, 'end_date', get_gmt_from_date( $end_date, eventkoi_get_default_date_format() ) );
+
+		if ( $start_date ) {
+			update_post_meta( self::$event_id, 'start_date', eventkoi_get_gmt_from_date( $start_date ) );
+		} else {
+			delete_post_meta( self::$event_id, 'start_date' );
+		}
+
+		if ( $end_date ) {
+			update_post_meta( self::$event_id, 'end_date', eventkoi_get_gmt_from_date( $end_date ) );
+		} else {
+			delete_post_meta( self::$event_id, 'end_date' );
+		}
 
 		do_action( 'eventkoi_after_update_event_meta', $meta, self::$event_id, self::$event );
 	}
@@ -207,7 +216,36 @@ class Event {
 	public static function get_status() {
 		$status = ! empty( self::$event->post_status ) ? self::$event->post_status : 'draft';
 
+		$starts = self::get_start_date( true );
+		$ends   = self::get_end_date( true );
+
+		if ( $starts && $ends && ! in_array( $status, array( 'trash' ), true ) ) {
+			if ( $ends < eventkoi_gmt_date() ) {
+				$status = 'completed';
+			} else {
+				$status = 'upcoming';
+				if ( self::get_tbc() ) {
+					$status = 'tbc';
+				}
+			}
+		}
+
+		if ( $starts && $ends ) {
+			if ( $starts < eventkoi_gmt_date() && $ends >= eventkoi_gmt_date() ) {
+				$status = 'live';
+			}
+		}
+
 		return apply_filters( 'eventkoi_get_event_status', $status, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event status from WordPress.
+	 */
+	public static function get_wp_status() {
+		$status = ! empty( self::$event->post_status ) ? self::$event->post_status : 'draft';
+
+		return apply_filters( 'eventkoi_get_event_core_status', $status, self::$event_id, self::$event );
 	}
 
 	/**

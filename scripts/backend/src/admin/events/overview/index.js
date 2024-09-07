@@ -3,16 +3,34 @@ import { useSearchParams } from "react-router-dom";
 
 import apiRequest from "@wordpress/api-fetch";
 
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+
 import { AddButton } from "@/components/add-button";
 import { DataTable } from "@/components/data-table";
 import { Heading } from "@/components/heading";
 import { SortButton } from "@/components/sort-button";
-import { Checkbox } from "@/components/ui/checkbox";
 
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
-import { Ban, CircleCheck, CircleDotDashed } from "lucide-react";
+import {
+  Ban,
+  CircleAlert,
+  CircleCheck,
+  CircleDotDashed,
+  Clock3,
+} from "lucide-react";
+
+const statuses = {
+  live: "Live",
+  completed: "Completed",
+  tbc: "Unconfirmed",
+  upcoming: "Upcoming",
+  publish: "Upcoming",
+  draft: "Draft",
+  trash: "Trash",
+};
 
 /**
  * Support multi-column search.
@@ -21,6 +39,24 @@ const multiColumnSearch = (row, columnId, filterValue) => {
   const searchableRowContent = `${row.original.title}`;
 
   return searchableRowContent.toLowerCase().includes(filterValue.toLowerCase());
+};
+
+/**
+ * Sort by status.
+ */
+const sortStatusFn = (rowA, rowB, _columnId) => {
+  const statusA = rowA.original.status;
+  const statusB = rowB.original.status;
+  const statusOrder = [
+    "live",
+    "upcoming",
+    "publish",
+    "tbc",
+    "draft",
+    "completed",
+    "trash",
+  ];
+  return statusOrder.indexOf(statusA) - statusOrder.indexOf(statusB);
 };
 
 const columns = [
@@ -58,7 +94,7 @@ const columns = [
       const status = row.original.status;
       return (
         <div className="grid space-y-1">
-          <div className="text-foreground">
+          <div className="flex gap-2 items-center text-foreground">
             <a
               href={url}
               className={cn(
@@ -69,11 +105,21 @@ const columns = [
             >
               {row.getValue("title")}
             </a>
+            {row.original.wp_status === "draft" && (
+              <Badge variant="outline">Draft</Badge>
+            )}
+            {status == "live" && (
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-25"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-destructive"></span>
+              </span>
+            )}
           </div>
         </div>
       );
     },
     filterFn: multiColumnSearch,
+    sortingFn: "alphanumeric",
   },
   {
     accessorKey: "status",
@@ -89,42 +135,79 @@ const columns = [
           {status == "draft" && (
             <CircleDotDashed className="w-4 h-4 text-primary/60" />
           )}
+          {status == "tbc" && (
+            <CircleDotDashed className="w-4 h-4 text-primary/60" />
+          )}
+          {status == "upcoming" && (
+            <Clock3 className="w-4 h-4 text-[#48BEFA]" />
+          )}
+          {status == "live" && (
+            <CircleAlert className="w-4 h-4 text-destructive" />
+          )}
+          {status == "publish" && <Clock3 className="w-4 h-4 text-[#48BEFA]" />}
           {status == "trash" && <Ban className="w-4 h-4 text-primary/40" />}
-          <div className="capitalize text-foreground">{status}</div>
+          <div className="capitalize text-foreground">{statuses[status]}</div>
         </div>
       );
     },
     filterFn: multiColumnSearch,
+    sortingFn: sortStatusFn,
   },
   {
-    accessorKey: "date",
-    header: ({ column }) => <SortButton title="Date" column={column} />,
-    cell: ({ row }) => {
-      const date = row.original.date;
-      return <div className="text-foreground">{date.start}</div>;
-    },
-    filterFn: multiColumnSearch,
-  },
-  {
-    accessorKey: "category",
-    header: ({ column }) => (
-      <div className="text-right">
-        <SortButton title="Category" column={column} />
-      </div>
-    ),
+    accessorKey: "start_date",
+    header: ({ column }) => <SortButton title="Starts" column={column} />,
     cell: ({ row }) => {
       return (
-        <div className="text-right text-foreground">
-          <a
-            href="#"
-            className="text-foreground hover:underline hover:decoration-dotted"
-          >
-            {row.getValue("category")}
-          </a>
+        <div
+          className={cn(
+            "text-foreground",
+            row.original.tbc && "text-muted-foreground/80"
+          )}
+        >
+          {row.getValue("start_date")}
         </div>
       );
     },
     filterFn: multiColumnSearch,
+    sortingFn: "alphanumeric",
+    sortUndefined: "last",
+    invertSorting: true,
+  },
+  {
+    accessorKey: "end_date",
+    header: ({ column }) => <SortButton title="Ends" column={column} />,
+    cell: ({ row }) => {
+      return (
+        <div
+          className={cn(
+            "text-foreground",
+            row.original.tbc && "text-muted-foreground/80"
+          )}
+        >
+          {row.getValue("end_date")}
+        </div>
+      );
+    },
+    filterFn: multiColumnSearch,
+    sortingFn: "alphanumeric",
+    sortUndefined: "last",
+    invertSorting: true,
+  },
+  {
+    accessorKey: "modified_date",
+    header: ({ column }) => (
+      <SortButton title="Last modified" column={column} />
+    ),
+    cell: ({ row }) => {
+      const event = row.original;
+      return (
+        <div className="text-foreground">{row.getValue("modified_date")}</div>
+      );
+    },
+    filterFn: multiColumnSearch,
+    sortingFn: "alphanumeric",
+    sortUndefined: "last",
+    invertSorting: true,
   },
 ];
 
@@ -176,6 +259,10 @@ export function EventsOverview() {
     fetchResults();
   }, [searchParams]);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div className="flex flex-col gap-8">
       <div className="mx-auto flex w-full gap-2 justify-between">
@@ -188,11 +275,10 @@ export function EventsOverview() {
         empty={"No events are found."}
         base="events"
         statusFilters={statusFilters}
-        filterName="Category"
-        addTo={`Add to category`}
         isLoading={isLoading}
         fetchResults={fetchResults}
         queryStatus={queryStatus}
+        hideCategories
       />
     </div>
   );

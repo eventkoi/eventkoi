@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 
-export function SortButton(props) {
-  const { column, title } = props;
-
+export function SortButton({ title, column }) {
   return (
     <Button
       variant="ghost"
