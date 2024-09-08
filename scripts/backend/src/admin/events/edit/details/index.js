@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 
 import { Box } from "@/components/box";
+import { EventDescription } from "@/components/event-description";
 import { Heading } from "@/components/heading";
 
 export function EventEditDetails() {
@@ -8,7 +9,10 @@ export function EventEditDetails() {
 
   return (
     <Box>
-      <Heading level={3}>Additional details</Heading>
+      <div className="max-w-[480px] space-y-10 pb-6">
+        <Heading level={3}>Additional details</Heading>
+        <EventDescription event={event} setEvent={setEvent} />
+      </div>
     </Box>
   );
 }

@@ -14048,18 +14048,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_event_description__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-description */ "./src/components/event-description.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+
 
 
 
 
 function EventEditDetails() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useOutletContext)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_2__.Heading, {
+  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useOutletContext)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "max-w-[480px] space-y-10 pb-6"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_3__.Heading, {
     level: 3
-  }, "Additional details"));
+  }, "Additional details"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_description__WEBPACK_IMPORTED_MODULE_2__.EventDescription, {
+    event: event,
+    setEvent: setEvent
+  })));
 }
 
 /***/ }),
@@ -15364,6 +15371,47 @@ function EventDate({
 
 /***/ }),
 
+/***/ "./src/components/event-description.js":
+/*!*********************************************!*\
+  !*** ./src/components/event-description.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventDescription: () => (/* binding */ EventDescription)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_textarea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/textarea */ "./src/components/ui/textarea.jsx");
+
+
+
+function EventDescription({
+  event,
+  setEvent
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "description"
+  }, "Event description"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_textarea__WEBPACK_IMPORTED_MODULE_2__.Textarea, {
+    id: "description",
+    placeholder: "Share details of this event with your guests.",
+    className: "min-h-[110px]",
+    value: event?.description,
+    onChange: e => {
+      setEvent(prevState => ({
+        ...prevState,
+        description: e.target.value
+      }));
+    }
+  }));
+}
+
+/***/ }),
+
 /***/ "./src/components/event-header.js":
 /*!****************************************!*\
   !*** ./src/components/event-header.js ***!
@@ -15655,6 +15703,7 @@ function EventNavBar({
         "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
+      console.log(response);
       setSaving(false);
       setEvent(response);
       if (response.message) {
@@ -17443,6 +17492,37 @@ const TabsContent = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
   ...props
 }));
 TabsContent.displayName = _radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.Content.displayName;
+
+
+/***/ }),
+
+/***/ "./src/components/ui/textarea.jsx":
+/*!****************************************!*\
+  !*** ./src/components/ui/textarea.jsx ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Textarea: () => (/* binding */ Textarea)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
+
+
+const Textarea = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  className,
+  ...props
+}, ref) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50", className),
+    ref: ref,
+    ...props
+  });
+});
+Textarea.displayName = "Textarea";
 
 
 /***/ }),

@@ -66,6 +66,7 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       },
     })
       .then((response) => {
+        console.log(response);
         setSaving(false);
         setEvent(response);
         if (response.message) {

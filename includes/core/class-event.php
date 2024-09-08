@@ -71,6 +71,7 @@ class Event {
 		$meta = array(
 			'id'                => self::get_id(),
 			'title'             => self::get_title(),
+			'description'       => self::get_description(),
 			'start_date'        => self::get_start_date(),
 			'start_date_gmt'    => self::get_start_date( true ),
 			'end_date'          => self::get_end_date(),
@@ -168,11 +169,13 @@ class Event {
 		$type        = ! empty( $meta['type'] ) ? esc_attr( $meta['type'] ) : 'inperson';
 		$location    = ! empty( $meta['location'] ) ? esc_attr( $meta['location'] ) : '';
 		$virtual_url = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
+		$description = ! empty( $meta['description'] ) ? sanitize_text_field( htmlentities( $meta['description'] ) ) : '';
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
 		update_post_meta( self::$event_id, 'type', (string) $type );
 		update_post_meta( self::$event_id, 'location', (string) $location );
 		update_post_meta( self::$event_id, 'virtual_url', (string) $virtual_url );
+		update_post_meta( self::$event_id, 'description', normalize_whitespace( $description ) );
 
 		if ( $start_date ) {
 			update_post_meta( self::$event_id, 'start_date', eventkoi_get_gmt_from_date( $start_date ) );
@@ -354,6 +357,15 @@ class Event {
 		}
 
 		return apply_filters( 'eventkoi_get_event_template', (string) $template, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event description.
+	 */
+	public static function get_description() {
+		$description = get_post_meta( self::$event_id, 'description', true );
+
+		return apply_filters( 'eventkoi_get_event_description', html_entity_decode( normalize_whitespace( $description ) ), self::$event_id, self::$event );
 	}
 
 	/**
