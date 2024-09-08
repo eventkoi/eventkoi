@@ -65,7 +65,6 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       .then((response) => {
         setSaving(false);
         setEvent(response);
-        console.log(response);
         if (response.message) {
           const toastId = toast(
             <div

@@ -259,10 +259,6 @@ export function EventsOverview() {
     fetchResults();
   }, [searchParams]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <div className="flex flex-col gap-8">
       <div className="mx-auto flex w-full gap-2 justify-between">

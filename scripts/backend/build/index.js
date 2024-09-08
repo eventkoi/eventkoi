@@ -14548,9 +14548,6 @@ function EventsOverview() {
     setIsLoading(true);
     fetchResults();
   }, [searchParams]);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    console.log(data);
-  }, [data]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15652,7 +15649,6 @@ function EventNavBar({
     }).then(response => {
       setSaving(false);
       setEvent(response);
-      console.log(response);
       if (response.message) {
         const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_4__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
