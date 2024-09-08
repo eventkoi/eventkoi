@@ -16,7 +16,7 @@ export function EventLocation({ event, setEvent }) {
       className="w-auto"
       onValueChange={onTabChange}
     >
-      <TabsList className="border rounded-lg">
+      <TabsList className="border border-input rounded-lg">
         <TabsTrigger value="inperson" className="rounded-lg">
           In person event
         </TabsTrigger>

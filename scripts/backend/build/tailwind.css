@@ -1524,6 +1524,12 @@ body {
   margin-bottom: calc(1px * var(--tw-space-y-reverse)) !important;
 }
 
+.space-y-10 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0 !important;
+  margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse))) !important;
+  margin-bottom: calc(2.5rem * var(--tw-space-y-reverse)) !important;
+}
+
 .self-start {
   align-self: flex-start !important;
 }

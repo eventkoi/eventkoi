@@ -9,7 +9,7 @@ export function EventHeader({ loading, setLoading, event, setEvent }) {
     <header
       className={cn(
         "flex text-sm h-12 items-center border-b gap-6 px-8",
-        "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-none"
+        "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-b"
       )}
     >
       <Logo />

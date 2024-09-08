@@ -84,6 +84,7 @@ class Event {
 			'type'              => self::get_type(),
 			'location'          => self::get_location(),
 			'virtual_url'       => self::get_virtual_url(),
+			'template'          => self::get_template(),
 			'timezone'          => eventkoi_timezone(),
 		);
 
@@ -340,6 +341,19 @@ class Event {
 		$virtual_url = get_post_meta( self::$event_id, 'virtual_url', true );
 
 		return apply_filters( 'eventkoi_get_event_virtual_url', (string) $virtual_url, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event template.
+	 */
+	public static function get_template() {
+		$template = get_post_meta( self::$event_id, 'template', true );
+
+		if ( empty( $template ) ) {
+			$template = 'default';
+		}
+
+		return apply_filters( 'eventkoi_get_event_template', (string) $template, self::$event_id, self::$event );
 	}
 
 	/**

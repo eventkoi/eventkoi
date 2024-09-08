@@ -61,6 +61,9 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
         event: event,
         status: status,
       },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key,
+      },
     })
       .then((response) => {
         setSaving(false);
@@ -138,7 +141,9 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 z-[510]" align="end">
             <DropdownMenuItem>Schedule publish</DropdownMenuItem>
-            <DropdownMenuItem disabled>Create duplicate event</DropdownMenuItem>
+            <DropdownMenuItem disabled={!event?.id}>
+              Create duplicate event
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="text-destructive focus:text-destructive"

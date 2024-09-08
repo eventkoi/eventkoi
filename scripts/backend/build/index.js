@@ -14215,11 +14215,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
 /* harmony import */ var _components_event_date__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-date */ "./src/components/event-date.js");
 /* harmony import */ var _components_event_location__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-location */ "./src/components/event-location.js");
 /* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
+/* harmony import */ var _components_event_template__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event-template */ "./src/components/event-template.js");
+
 
 
 
@@ -14228,10 +14230,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventEditMain() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useOutletContext)();
+  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useOutletContext)();
   const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "max-w-[480px] space-y-8 pb-6"
+    className: "max-w-[480px] space-y-10 pb-6"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_4__.EventName, {
     event: event,
     setEvent: setEvent,
@@ -14241,6 +14243,9 @@ function EventEditMain() {
     event: event,
     setEvent: setEvent
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_location__WEBPACK_IMPORTED_MODULE_3__.EventLocation, {
+    event: event,
+    setEvent: setEvent
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_template__WEBPACK_IMPORTED_MODULE_5__.EventTemplate, {
     event: event,
     setEvent: setEvent
   })));
@@ -15387,7 +15392,7 @@ function EventHeader({
   setEvent
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-none")
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-b")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
     event: event,
     setEvent: setEvent
@@ -15437,7 +15442,7 @@ function EventLocation({
     className: "w-auto",
     onValueChange: onTabChange
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsList, {
-    className: "border rounded-lg"
+    className: "border border-input rounded-lg"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsTrigger, {
     value: "inperson",
     className: "rounded-lg"
@@ -15645,6 +15650,9 @@ function EventNavBar({
       data: {
         event: event,
         status: status
+      },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
       setSaving(false);
@@ -15705,7 +15713,7 @@ function EventNavBar({
     className: "w-56 z-[510]",
     align: "end"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, null, "Schedule publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
-    disabled: true
+    disabled: !event?.id
   }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     className: "text-destructive focus:text-destructive",
     onClick: () => {
@@ -15762,6 +15770,51 @@ function EventTabs({
       className: activeTabClass
     }, item.title);
   }));
+}
+
+/***/ }),
+
+/***/ "./src/components/event-template.js":
+/*!******************************************!*\
+  !*** ./src/components/event-template.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventTemplate: () => (/* binding */ EventTemplate)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/select */ "./src/components/ui/select.jsx");
+
+
+
+function EventTemplate({
+  event,
+  setEvent
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "template"
+  }, "Select event template"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.Select, {
+    value: event?.template,
+    onValueChange: value => {
+      setEvent(prevState => ({
+        ...prevState,
+        template: value
+      }));
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectTrigger, {
+    id: "template",
+    className: "w-[250px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectValue, {
+    placeholder: "Select a template"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectContent, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectItem, {
+    value: "default"
+  }, "Default template"))));
 }
 
 /***/ }),
@@ -16858,7 +16911,7 @@ const Input = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
 }, ref) => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: type,
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full rounded-md border border-input bg-background shadow-none px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:bg-secondary", className),
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full rounded-md border border-input bg-background shadow-none px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-secondary", className),
     ref: ref,
     ...props
   });
