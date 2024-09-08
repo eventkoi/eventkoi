@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { add, format } from "date-fns";
@@ -74,26 +74,16 @@ export function EventDate({ event, setEvent }) {
   const updateStartDate = (date) => {
     setEvent((prevState) => ({
       ...prevState,
-      date: {
-        ...prevState.date,
-        start: date ? format(date, "yyyy-MM-dd hh:mm a") : "",
-      },
+      start_date: date ? format(date, "yyyy-MM-dd hh:mm a") : "",
     }));
   };
 
   const updateEndDate = (date) => {
     setEvent((prevState) => ({
       ...prevState,
-      date: {
-        ...prevState.date,
-        end: date ? format(date, "yyyy-MM-dd hh:mm a") : "",
-      },
+      end_date: date ? format(date, "yyyy-MM-dd hh:mm a") : "",
     }));
   };
-
-  useEffect(() => {
-    console.log(event);
-  }, [event]);
 
   return (
     <div className="flex flex-col gap-3">

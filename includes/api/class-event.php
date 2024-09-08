@@ -32,7 +32,7 @@ class Event {
 			array(
 				'methods'             => 'get',
 				'callback'            => array( __CLASS__, 'get_result' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_all' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'public_api' ),
 			)
 		);
 
@@ -42,7 +42,7 @@ class Event {
 			array(
 				'methods'             => 'post',
 				'callback'            => array( __CLASS__, 'update_event' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
 
@@ -52,7 +52,7 @@ class Event {
 			array(
 				'methods'             => 'post',
 				'callback'            => array( __CLASS__, 'restore_event' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
 
@@ -62,7 +62,7 @@ class Event {
 			array(
 				'methods'             => 'post',
 				'callback'            => array( __CLASS__, 'delete_event' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
 	}

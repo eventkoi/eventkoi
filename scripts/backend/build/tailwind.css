@@ -858,6 +858,10 @@ body {
   margin-top: auto !important;
 }
 
+.mt-6 {
+  margin-top: 1.5rem !important;
+}
+
 .block {
   display: block !important;
 }
@@ -995,6 +999,18 @@ body {
 
 .h-1 {
   height: 0.25rem !important;
+}
+
+.h-\[10px\] {
+  height: 10px !important;
+}
+
+.h-\[4px\] {
+  height: 4px !important;
+}
+
+.h-\[5px\] {
+  height: 5px !important;
 }
 
 .max-h-96 {
@@ -1178,6 +1194,22 @@ body {
   width: 0.375rem !important;
 }
 
+.w-\[10px\] {
+  width: 10px !important;
+}
+
+.w-\[4px\] {
+  width: 4px !important;
+}
+
+.w-\[5px\] {
+  width: 5px !important;
+}
+
+.w-\[400px\] {
+  width: 400px !important;
+}
+
 .min-w-0 {
   min-width: 0px !important;
 }
@@ -1336,6 +1368,10 @@ body {
 
 .grid-cols-\[200px_1fr\] {
   grid-template-columns: 200px 1fr !important;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
 
 .flex-row {
@@ -1888,6 +1924,10 @@ body {
 
 .pt-4 {
   padding-top: 1rem !important;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem !important;
 }
 
 .text-left {

@@ -36,7 +36,7 @@ const statuses = {
  * Support multi-column search.
  */
 const multiColumnSearch = (row, columnId, filterValue) => {
-  const searchableRowContent = `${row.original.title}`;
+  const searchableRowContent = `${row.original.title} ${row.original.status}`;
 
   return searchableRowContent.toLowerCase().includes(filterValue.toLowerCase());
 };
@@ -109,9 +109,9 @@ const columns = [
               <Badge variant="outline">Draft</Badge>
             )}
             {status == "live" && (
-              <span className="relative flex h-1.5 w-1.5">
+              <span className="relative flex h-[5px] w-[5px]">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-25"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-destructive"></span>
+                <span className="relative inline-flex rounded-full h-[5px] w-[5px] bg-destructive"></span>
               </span>
             )}
           </div>

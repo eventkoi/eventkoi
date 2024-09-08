@@ -14215,10 +14215,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
 /* harmony import */ var _components_event_date__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-date */ "./src/components/event-date.js");
-/* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
+/* harmony import */ var _components_event_location__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-location */ "./src/components/event-location.js");
+/* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
+
 
 
 
@@ -14226,16 +14228,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventEditMain() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useOutletContext)();
+  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useOutletContext)();
   const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "max-w-[480px] space-y-8"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_3__.EventName, {
+    className: "max-w-[480px] space-y-8 pb-6"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_4__.EventName, {
     event: event,
     setEvent: setEvent,
     isTyping: isTyping,
     setIsTyping: setIsTyping
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_date__WEBPACK_IMPORTED_MODULE_2__.EventDate, {
+    event: event,
+    setEvent: setEvent
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_location__WEBPACK_IMPORTED_MODULE_3__.EventLocation, {
     event: event,
     setEvent: setEvent
   })));
@@ -14333,7 +14338,7 @@ const statuses = {
  * Support multi-column search.
  */
 const multiColumnSearch = (row, columnId, filterValue) => {
-  const searchableRowContent = `${row.original.title}`;
+  const searchableRowContent = `${row.original.title} ${row.original.status}`;
   return searchableRowContent.toLowerCase().includes(filterValue.toLowerCase());
 };
 
@@ -14391,11 +14396,11 @@ const columns = [{
     }, row.getValue("title")), row.original.wp_status === "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
       variant: "outline"
     }, "Draft"), status == "live" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "relative flex h-1.5 w-1.5"
+      className: "relative flex h-[5px] w-[5px]"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
       className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-25"
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "relative inline-flex rounded-full h-1.5 w-1.5 bg-destructive"
+      className: "relative inline-flex rounded-full h-[5px] w-[5px] bg-destructive"
     }))));
   },
   filterFn: multiColumnSearch,
@@ -15263,24 +15268,15 @@ function EventDate({
   const updateStartDate = date => {
     setEvent(prevState => ({
       ...prevState,
-      date: {
-        ...prevState.date,
-        start: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(date, "yyyy-MM-dd hh:mm a") : ""
-      }
+      start_date: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(date, "yyyy-MM-dd hh:mm a") : ""
     }));
   };
   const updateEndDate = date => {
     setEvent(prevState => ({
       ...prevState,
-      date: {
-        ...prevState.date,
-        end: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(date, "yyyy-MM-dd hh:mm a") : ""
-      }
+      end_date: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.format)(date, "yyyy-MM-dd hh:mm a") : ""
     }));
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    console.log(event);
-  }, [event]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15406,6 +15402,88 @@ function EventHeader({
     event: event,
     setEvent: setEvent
   })));
+}
+
+/***/ }),
+
+/***/ "./src/components/event-location.js":
+/*!******************************************!*\
+  !*** ./src/components/event-location.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventLocation: () => (/* binding */ EventLocation)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/tabs */ "./src/components/ui/tabs.jsx");
+
+
+
+
+function EventLocation({
+  event,
+  setEvent
+}) {
+  const onTabChange = value => {
+    setEvent(prevState => ({
+      ...prevState,
+      type: value
+    }));
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.Tabs, {
+    defaultValue: event?.type,
+    className: "w-auto",
+    onValueChange: onTabChange
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsList, {
+    className: "border rounded-lg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsTrigger, {
+    value: "inperson",
+    className: "rounded-lg"
+  }, "In person event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsTrigger, {
+    value: "virtual",
+    className: "rounded-lg"
+  }, "Virtual event")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsContent, {
+    value: "inperson",
+    className: "mt-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
+    htmlFor: "location"
+  }, "Location"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
+    type: "text",
+    id: "location",
+    value: event?.location,
+    placeholder: "Venue name and address",
+    onChange: e => {
+      setEvent(prevState => ({
+        ...prevState,
+        location: e.target.value
+      }));
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsContent, {
+    value: "virtual",
+    className: "mt-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
+    htmlFor: "virtual_url"
+  }, "URL"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
+    type: "text",
+    id: "virtual_url",
+    value: event?.virtual_url,
+    placeholder: "Web address of your event",
+    onChange: e => {
+      setEvent(prevState => ({
+        ...prevState,
+        virtual_url: e.target.value
+      }));
+    }
+  }))));
 }
 
 /***/ }),
@@ -15574,6 +15652,7 @@ function EventNavBar({
     }).then(response => {
       setSaving(false);
       setEvent(response);
+      console.log(response);
       if (response.message) {
         const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_4__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
@@ -17260,6 +17339,61 @@ const TableCaption = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
   ...props
 }));
 TableCaption.displayName = "TableCaption";
+
+
+/***/ }),
+
+/***/ "./src/components/ui/tabs.jsx":
+/*!************************************!*\
+  !*** ./src/components/ui/tabs.jsx ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Tabs: () => (/* binding */ Tabs),
+/* harmony export */   TabsContent: () => (/* binding */ TabsContent),
+/* harmony export */   TabsList: () => (/* binding */ TabsList),
+/* harmony export */   TabsTrigger: () => (/* binding */ TabsTrigger)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @radix-ui/react-tabs */ "./node_modules/@radix-ui/react-tabs/dist/index.mjs");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+"use client";
+
+
+
+
+
+const Tabs = _radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.Root;
+const TabsList = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  className,
+  ...props
+}, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.List, {
+  ref: ref,
+  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground", className),
+  ...props
+}));
+TabsList.displayName = _radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.List.displayName;
+const TabsTrigger = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  className,
+  ...props
+}, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.Trigger, {
+  ref: ref,
+  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm", className),
+  ...props
+}));
+TabsTrigger.displayName = _radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.Trigger.displayName;
+const TabsContent = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  className,
+  ...props
+}, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.Content, {
+  ref: ref,
+  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", className),
+  ...props
+}));
+TabsContent.displayName = _radix_ui_react_tabs__WEBPACK_IMPORTED_MODULE_2__.Content.displayName;
 
 
 /***/ }),
@@ -33807,6 +33941,227 @@ function getElementRef(element) {
   return element.props.ref || element.ref;
 }
 var Root = Slot;
+
+//# sourceMappingURL=index.mjs.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@radix-ui/react-tabs/dist/index.mjs":
+/*!**********************************************************!*\
+  !*** ./node_modules/@radix-ui/react-tabs/dist/index.mjs ***!
+  \**********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Content: () => (/* binding */ Content),
+/* harmony export */   List: () => (/* binding */ List),
+/* harmony export */   Root: () => (/* binding */ Root2),
+/* harmony export */   Tabs: () => (/* binding */ Tabs),
+/* harmony export */   TabsContent: () => (/* binding */ TabsContent),
+/* harmony export */   TabsList: () => (/* binding */ TabsList),
+/* harmony export */   TabsTrigger: () => (/* binding */ TabsTrigger),
+/* harmony export */   Trigger: () => (/* binding */ Trigger),
+/* harmony export */   createTabsScope: () => (/* binding */ createTabsScope)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _radix_ui_primitive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @radix-ui/primitive */ "./node_modules/@radix-ui/primitive/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @radix-ui/react-context */ "./node_modules/@radix-ui/react-context/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_roving_focus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @radix-ui/react-roving-focus */ "./node_modules/@radix-ui/react-roving-focus/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_presence__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @radix-ui/react-presence */ "./node_modules/@radix-ui/react-presence/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @radix-ui/react-primitive */ "./node_modules/@radix-ui/react-primitive/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_direction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @radix-ui/react-direction */ "./node_modules/@radix-ui/react-direction/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_use_controllable_state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @radix-ui/react-use-controllable-state */ "./node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs");
+/* harmony import */ var _radix_ui_react_id__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @radix-ui/react-id */ "./node_modules/@radix-ui/react-id/dist/index.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+"use client";
+
+// packages/react/tabs/src/Tabs.tsx
+
+
+
+
+
+
+
+
+
+
+
+var TABS_NAME = "Tabs";
+var [createTabsContext, createTabsScope] = (0,_radix_ui_react_context__WEBPACK_IMPORTED_MODULE_2__.createContextScope)(TABS_NAME, [
+  _radix_ui_react_roving_focus__WEBPACK_IMPORTED_MODULE_3__.createRovingFocusGroupScope
+]);
+var useRovingFocusGroupScope = (0,_radix_ui_react_roving_focus__WEBPACK_IMPORTED_MODULE_3__.createRovingFocusGroupScope)();
+var [TabsProvider, useTabsContext] = createTabsContext(TABS_NAME);
+var Tabs = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      __scopeTabs,
+      value: valueProp,
+      onValueChange,
+      defaultValue,
+      orientation = "horizontal",
+      dir,
+      activationMode = "automatic",
+      ...tabsProps
+    } = props;
+    const direction = (0,_radix_ui_react_direction__WEBPACK_IMPORTED_MODULE_4__.useDirection)(dir);
+    const [value, setValue] = (0,_radix_ui_react_use_controllable_state__WEBPACK_IMPORTED_MODULE_5__.useControllableState)({
+      prop: valueProp,
+      onChange: onValueChange,
+      defaultProp: defaultValue
+    });
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+      TabsProvider,
+      {
+        scope: __scopeTabs,
+        baseId: (0,_radix_ui_react_id__WEBPACK_IMPORTED_MODULE_6__.useId)(),
+        value,
+        onValueChange: setValue,
+        orientation,
+        dir: direction,
+        activationMode,
+        children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+          _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_7__.Primitive.div,
+          {
+            dir: direction,
+            "data-orientation": orientation,
+            ...tabsProps,
+            ref: forwardedRef
+          }
+        )
+      }
+    );
+  }
+);
+Tabs.displayName = TABS_NAME;
+var TAB_LIST_NAME = "TabsList";
+var TabsList = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeTabs, loop = true, ...listProps } = props;
+    const context = useTabsContext(TAB_LIST_NAME, __scopeTabs);
+    const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+      _radix_ui_react_roving_focus__WEBPACK_IMPORTED_MODULE_3__.Root,
+      {
+        asChild: true,
+        ...rovingFocusGroupScope,
+        orientation: context.orientation,
+        dir: context.dir,
+        loop,
+        children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+          _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_7__.Primitive.div,
+          {
+            role: "tablist",
+            "aria-orientation": context.orientation,
+            ...listProps,
+            ref: forwardedRef
+          }
+        )
+      }
+    );
+  }
+);
+TabsList.displayName = TAB_LIST_NAME;
+var TRIGGER_NAME = "TabsTrigger";
+var TabsTrigger = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeTabs, value, disabled = false, ...triggerProps } = props;
+    const context = useTabsContext(TRIGGER_NAME, __scopeTabs);
+    const rovingFocusGroupScope = useRovingFocusGroupScope(__scopeTabs);
+    const triggerId = makeTriggerId(context.baseId, value);
+    const contentId = makeContentId(context.baseId, value);
+    const isSelected = value === context.value;
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+      _radix_ui_react_roving_focus__WEBPACK_IMPORTED_MODULE_3__.Item,
+      {
+        asChild: true,
+        ...rovingFocusGroupScope,
+        focusable: !disabled,
+        active: isSelected,
+        children: /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+          _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_7__.Primitive.button,
+          {
+            type: "button",
+            role: "tab",
+            "aria-selected": isSelected,
+            "aria-controls": contentId,
+            "data-state": isSelected ? "active" : "inactive",
+            "data-disabled": disabled ? "" : void 0,
+            disabled,
+            id: triggerId,
+            ...triggerProps,
+            ref: forwardedRef,
+            onMouseDown: (0,_radix_ui_primitive__WEBPACK_IMPORTED_MODULE_8__.composeEventHandlers)(props.onMouseDown, (event) => {
+              if (!disabled && event.button === 0 && event.ctrlKey === false) {
+                context.onValueChange(value);
+              } else {
+                event.preventDefault();
+              }
+            }),
+            onKeyDown: (0,_radix_ui_primitive__WEBPACK_IMPORTED_MODULE_8__.composeEventHandlers)(props.onKeyDown, (event) => {
+              if ([" ", "Enter"].includes(event.key)) context.onValueChange(value);
+            }),
+            onFocus: (0,_radix_ui_primitive__WEBPACK_IMPORTED_MODULE_8__.composeEventHandlers)(props.onFocus, () => {
+              const isAutomaticActivation = context.activationMode !== "manual";
+              if (!isSelected && !disabled && isAutomaticActivation) {
+                context.onValueChange(value);
+              }
+            })
+          }
+        )
+      }
+    );
+  }
+);
+TabsTrigger.displayName = TRIGGER_NAME;
+var CONTENT_NAME = "TabsContent";
+var TabsContent = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeTabs, value, forceMount, children, ...contentProps } = props;
+    const context = useTabsContext(CONTENT_NAME, __scopeTabs);
+    const triggerId = makeTriggerId(context.baseId, value);
+    const contentId = makeContentId(context.baseId, value);
+    const isSelected = value === context.value;
+    const isMountAnimationPreventedRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(isSelected);
+    react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
+      const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
+      return () => cancelAnimationFrame(rAF);
+    }, []);
+    return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_radix_ui_react_presence__WEBPACK_IMPORTED_MODULE_9__.Presence, { present: forceMount || isSelected, children: ({ present }) => /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+      _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_7__.Primitive.div,
+      {
+        "data-state": isSelected ? "active" : "inactive",
+        "data-orientation": context.orientation,
+        role: "tabpanel",
+        "aria-labelledby": triggerId,
+        hidden: !present,
+        id: contentId,
+        tabIndex: 0,
+        ...contentProps,
+        ref: forwardedRef,
+        style: {
+          ...props.style,
+          animationDuration: isMountAnimationPreventedRef.current ? "0s" : void 0
+        },
+        children: present && children
+      }
+    ) });
+  }
+);
+TabsContent.displayName = CONTENT_NAME;
+function makeTriggerId(baseId, value) {
+  return `${baseId}-trigger-${value}`;
+}
+function makeContentId(baseId, value) {
+  return `${baseId}-content-${value}`;
+}
+var Root2 = Tabs;
+var List = TabsList;
+var Trigger = TabsTrigger;
+var Content = TabsContent;
 
 //# sourceMappingURL=index.mjs.map
 

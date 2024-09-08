@@ -40,11 +40,11 @@ class REST {
 	}
 
 	/**
-	 * This is for endpoints that should be publicly accessible.
+	 * A public API request. No checks required.
 	 *
 	 * @param object $request The request that is being passed to API.
 	 */
-	public static function allow_all( $request ) {
+	public static function public_api( $request ) {
 
 		if ( empty( $request ) ) {
 			return false;
@@ -54,11 +54,11 @@ class REST {
 	}
 
 	/**
-	 * Only logged in users and admins.
+	 * Only super-admins and users with valid API key can do this.
 	 *
 	 * @param object $request The request that is being passed to API.
 	 */
-	public static function allow_super_admins( $request ) {
+	public static function private_api( $request ) {
 
 		if ( empty( $request ) ) {
 			return false;

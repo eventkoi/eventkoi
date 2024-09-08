@@ -54,7 +54,6 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
 
   const saveEvent = async (status) => {
     setSaving(true);
-
     await apiRequest({
       path: `${eventkoi_params.api}/update_event`,
       method: "post",
@@ -66,6 +65,7 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       .then((response) => {
         setSaving(false);
         setEvent(response);
+        console.log(response);
         if (response.message) {
           const toastId = toast(
             <div

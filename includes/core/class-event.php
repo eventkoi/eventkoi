@@ -81,6 +81,9 @@ class Event {
 			'wp_status'         => self::get_wp_status(),
 			'url'               => self::get_url(),
 			'tbc'               => self::get_tbc(),
+			'type'              => self::get_type(),
+			'location'          => self::get_location(),
+			'virtual_url'       => self::get_virtual_url(),
 			'timezone'          => eventkoi_timezone(),
 		);
 
@@ -158,11 +161,17 @@ class Event {
 
 		do_action( 'eventkoi_before_update_event_meta', $meta, self::$event_id, self::$event );
 
-		$tbc        = ! empty( $meta['tbc'] );
-		$start_date = ! empty( $meta['date']['start'] ) ? esc_attr( $meta['date']['start'] ) : '';
-		$end_date   = ! empty( $meta['date']['end'] ) ? esc_attr( $meta['date']['end'] ) : '';
+		$tbc         = ! empty( $meta['tbc'] );
+		$start_date  = ! empty( $meta['start_date'] ) ? esc_attr( $meta['start_date'] ) : '';
+		$end_date    = ! empty( $meta['end_date'] ) ? esc_attr( $meta['end_date'] ) : '';
+		$type        = ! empty( $meta['type'] ) ? esc_attr( $meta['type'] ) : 'inperson';
+		$location    = ! empty( $meta['location'] ) ? esc_attr( $meta['location'] ) : '';
+		$virtual_url = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
+		update_post_meta( self::$event_id, 'type', (string) $type );
+		update_post_meta( self::$event_id, 'location', (string) $location );
+		update_post_meta( self::$event_id, 'virtual_url', (string) $virtual_url );
 
 		if ( $start_date ) {
 			update_post_meta( self::$event_id, 'start_date', eventkoi_get_gmt_from_date( $start_date ) );
@@ -300,6 +309,37 @@ class Event {
 		$tbc = get_post_meta( self::$event_id, 'tbc', true );
 
 		return apply_filters( 'eventkoi_get_event_tbc', (bool) $tbc, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event type.
+	 */
+	public static function get_type() {
+		$type = get_post_meta( self::$event_id, 'type', true );
+
+		if ( empty( $type ) ) {
+			$type = 'inperson';
+		}
+
+		return apply_filters( 'eventkoi_get_event_type', (string) $type, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event location.
+	 */
+	public static function get_location() {
+		$location = get_post_meta( self::$event_id, 'location', true );
+
+		return apply_filters( 'eventkoi_get_event_location', (string) $location, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event virtual URL.
+	 */
+	public static function get_virtual_url() {
+		$virtual_url = get_post_meta( self::$event_id, 'virtual_url', true );
+
+		return apply_filters( 'eventkoi_get_event_virtual_url', (string) $virtual_url, self::$event_id, self::$event );
 	}
 
 	/**

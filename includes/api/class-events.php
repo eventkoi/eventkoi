@@ -32,7 +32,7 @@ class Events {
 			array(
 				'methods'             => 'get',
 				'callback'            => array( __CLASS__, 'get_events' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_all' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'public_api' ),
 			)
 		);
 
@@ -42,7 +42,7 @@ class Events {
 			array(
 				'methods'             => 'get',
 				'callback'            => array( __CLASS__, 'get_event_counts' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_all' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'public_api' ),
 			)
 		);
 
@@ -52,7 +52,7 @@ class Events {
 			array(
 				'methods'             => 'post',
 				'callback'            => array( __CLASS__, 'delete_events' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
 
@@ -62,7 +62,7 @@ class Events {
 			array(
 				'methods'             => 'post',
 				'callback'            => array( __CLASS__, 'remove_events' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
 
@@ -72,7 +72,7 @@ class Events {
 			array(
 				'methods'             => 'post',
 				'callback'            => array( __CLASS__, 'restore_events' ),
-				'permission_callback' => array( '\EventKoi\API\REST', 'allow_super_admins' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
 	}

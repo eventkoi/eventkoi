@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router-dom";
 
 import { Box } from "@/components/box";
 import { EventDate } from "@/components/event-date";
+import { EventLocation } from "@/components/event-location";
 import { EventName } from "@/components/event-name";
 
 export function EventEditMain() {
@@ -12,7 +13,7 @@ export function EventEditMain() {
 
   return (
     <Box>
-      <div className="max-w-[480px] space-y-8">
+      <div className="max-w-[480px] space-y-8 pb-6">
         <EventName
           event={event}
           setEvent={setEvent}
@@ -20,6 +21,7 @@ export function EventEditMain() {
           setIsTyping={setIsTyping}
         />
         <EventDate event={event} setEvent={setEvent} />
+        <EventLocation event={event} setEvent={setEvent} />
       </div>
     </Box>
   );
