@@ -44,6 +44,7 @@ class Scripts {
 
 		wp_register_script( 'eventkoi-admin', $build_url . 'index.js', $asset_file['dependencies'], $asset_file['version'], true );
 		wp_enqueue_script( 'eventkoi-admin' );
+		wp_enqueue_media();
 
 		$events = new \EventKoi\Core\Events();
 		$api    = new \EventKoi\API\REST();
