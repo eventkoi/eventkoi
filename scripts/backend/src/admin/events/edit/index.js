@@ -39,6 +39,9 @@ export function EventEdit() {
       data: {
         event_id: event?.id,
       },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key,
+      },
     })
       .then((response) => {
         setEvent(response.event);

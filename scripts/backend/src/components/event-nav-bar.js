@@ -31,6 +31,9 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       data: {
         event_id: event?.id,
       },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key,
+      },
     })
       .then((response) => {
         setLoading(false);

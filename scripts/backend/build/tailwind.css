@@ -1770,6 +1770,18 @@ body {
   background-color: rgb(255 255 255 / 0.7) !important;
 }
 
+.bg-primary\/70 {
+  background-color: hsl(var(--primary) / 0.7) !important;
+}
+
+.bg-primary\/50 {
+  background-color: hsl(var(--primary) / 0.5) !important;
+}
+
+.bg-background\/50 {
+  background-color: hsl(var(--background) / 0.5) !important;
+}
+
 .fill-current {
   fill: currentColor !important;
 }

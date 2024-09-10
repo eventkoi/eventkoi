@@ -14129,6 +14129,9 @@ function EventEdit() {
       method: "post",
       data: {
         event_id: event?.id
+      },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
       setEvent(response.event);
@@ -14939,7 +14942,10 @@ function BulkActions({
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: apiURL,
       method: "post",
-      data: data
+      data: data,
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key
+      }
     }).then(response => {
       table.setRowSelection({});
       fetchResults(response.success);
@@ -15473,14 +15479,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/media-utils */ "@wordpress/media-utils");
-/* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
-/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/repeat-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/image.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/media-utils */ "@wordpress/media-utils");
+/* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/repeat-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/image.js");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
 
 
 
@@ -15499,13 +15508,51 @@ function EventImage({
       media: []
     }));
   };
+
+  // Function to handle drag over event
+  const handleDragOver = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  // Function to handle drop event
+  const handleDrop = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const {
+      files
+    } = e.dataTransfer;
+    handleFiles(files);
+  };
+
+  // Function to handle processing of uploaded files
+  const handleFiles = files => {
+    const uploadedFile = files[0];
+    const fileSizeInKB = Math.round(uploadedFile.size / 1024); // Convert to KB
+
+    const fileList = Array.from(files).map(file => URL.createObjectURL(file));
+    const formData = new FormData();
+    formData.append("uploadedfile", uploadedFile);
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: `${eventkoi_params.api}/upload_image`,
+      method: "post",
+      body: formData,
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key
+      }
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    });
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_3__.Label, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_4__.Label, {
     htmlFor: "image"
   }, "Header banner image"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-muted-foreground"
-  }, "Ideal size: 1800px x 900px"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+  }, "Ideal size: 1800px x 900px"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     title: "Select event image",
     onSelect: media => {
       setEvent(prevState => ({
@@ -15519,19 +15566,19 @@ function EventImage({
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_4__.cn)(event.image && "relative p-0 cursor-pointer group")
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_5__.cn)(event.image && "relative p-0 cursor-pointer group")
     }, event?.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "absolute top-0 left-0 flex opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out w-full h-full bg-white/70 rounded-lg items-center justify-center gap-4 border border-dashed border-muted-foreground/80",
+      className: "absolute top-0 left-0 flex opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out w-full h-full bg-background/50 rounded-lg items-center justify-center gap-4 border border-dashed border-muted-foreground/80",
       onClick: e => e.preventDefault
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_3__.Button, {
       variant: "default",
       onClick: open
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: "mr-2 h-4 w-4"
-    }), "Replace"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }), "Replace"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_3__.Button, {
       variant: "default",
       onClick: e => deleteImage()
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: "mr-2 h-4 w-4"
     }), "Delete")), event?.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: event?.image,
@@ -15539,8 +15586,10 @@ function EventImage({
       className: "rounded-lg w-full h-auto"
     }), !event.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex items-center justify-center flex-col gap-1 p-10 cursor-pointer border border-dashed border-muted-foreground/40 bg-secondary rounded-lg cursor-default",
-      onClick: open
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      onClick: open,
+      onDragOver: handleDragOver,
+      onDrop: handleDrop
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
       className: "w-6 h-6",
       strokeWidth: 1
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15771,6 +15820,9 @@ function EventNavBar({
       method: "post",
       data: {
         event_id: event?.id
+      },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
       setLoading(false);

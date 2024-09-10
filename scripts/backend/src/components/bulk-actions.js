@@ -36,6 +36,9 @@ export function BulkActions({ table, base, fetchResults, addTo, queryStatus }) {
       path: apiURL,
       method: "post",
       data: data,
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key,
+      },
     })
       .then((response) => {
         table.setRowSelection({});

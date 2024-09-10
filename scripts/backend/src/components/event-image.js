@@ -1,3 +1,5 @@
+import apiRequest from "@wordpress/api-fetch";
+
 import { MediaUpload } from "@wordpress/media-utils";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +18,47 @@ export function EventImage({ event, setEvent }) {
       image: "",
       media: [],
     }));
+  };
+
+  // Function to handle drag over event
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  // Function to handle drop event
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const { files } = e.dataTransfer;
+    handleFiles(files);
+  };
+
+  // Function to handle processing of uploaded files
+  const handleFiles = (files) => {
+    const uploadedFile = files[0];
+
+    const fileSizeInKB = Math.round(uploadedFile.size / 1024); // Convert to KB
+
+    const fileList = Array.from(files).map((file) => URL.createObjectURL(file));
+
+    const formData = new FormData();
+    formData.append("uploadedfile", uploadedFile);
+
+    apiRequest({
+      path: `${eventkoi_params.api}/upload_image`,
+      method: "post",
+      body: formData,
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -39,7 +82,7 @@ export function EventImage({ event, setEvent }) {
           >
             {event?.image && (
               <div
-                className="absolute top-0 left-0 flex opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out w-full h-full bg-white/70 rounded-lg items-center justify-center gap-4 border border-dashed border-muted-foreground/80"
+                className="absolute top-0 left-0 flex opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out w-full h-full bg-background/50 rounded-lg items-center justify-center gap-4 border border-dashed border-muted-foreground/80"
                 onClick={(e) => e.preventDefault}
               >
                 <Button variant="default" onClick={open}>
@@ -63,6 +106,8 @@ export function EventImage({ event, setEvent }) {
               <div
                 className="flex items-center justify-center flex-col gap-1 p-10 cursor-pointer border border-dashed border-muted-foreground/40 bg-secondary rounded-lg cursor-default"
                 onClick={open}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
               >
                 <Image className="w-6 h-6" strokeWidth={1} />
                 <div className="pt-1 text-lg font-medium">
