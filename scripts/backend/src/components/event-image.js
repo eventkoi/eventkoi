@@ -1,23 +1,28 @@
-import apiRequest from "@wordpress/api-fetch";
+import { useState } from "react";
 
+import apiRequest from "@wordpress/api-fetch";
 import { MediaUpload } from "@wordpress/media-utils";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
-import { Image, Repeat2, Trash2 } from "lucide-react";
+import { Image, Loader2, Repeat2, Trash2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const ALLOWED_MEDIA_TYPES = ["image"];
 
 export function EventImage({ event, setEvent }) {
+  const [uploading, setUploading] = useState(false);
+
   const deleteImage = () => {
     setEvent((prevState) => ({
       ...prevState,
       image: "",
       image_id: "",
     }));
+
+    setUploading(false);
   };
 
   // Function to handle drag over event
@@ -36,6 +41,8 @@ export function EventImage({ event, setEvent }) {
 
   // Function to handle processing of uploaded files
   const handleFiles = (files) => {
+    setUploading(true);
+
     const uploadedFile = files[0];
 
     const fileSizeInKB = Math.round(uploadedFile.size / 1024); // Convert to KB
@@ -63,7 +70,7 @@ export function EventImage({ event, setEvent }) {
         }
       })
       .catch((error) => {
-        console.log(error);
+        setUploading(false);
       });
   };
 
@@ -79,6 +86,8 @@ export function EventImage({ event, setEvent }) {
             image: media.url,
             image_id: media.id,
           }));
+
+          setUploading(false);
         }}
         allowedTypes={ALLOWED_MEDIA_TYPES}
         value={event?.image_id}
@@ -115,7 +124,11 @@ export function EventImage({ event, setEvent }) {
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
               >
-                <Image className="w-6 h-6" strokeWidth={1} />
+                {uploading ? (
+                  <Loader2 className="animate-spin w-6 h-6" strokeWidth={1} />
+                ) : (
+                  <Image className="w-6 h-6" strokeWidth={1} />
+                )}
                 <div className="pt-1 text-lg font-medium">
                   Drag and drop your image here.
                 </div>

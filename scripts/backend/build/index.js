@@ -15487,8 +15487,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/repeat-2.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/image.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/image.js");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
 
 
 
@@ -15501,12 +15503,14 @@ function EventImage({
   event,
   setEvent
 }) {
+  const [uploading, setUploading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const deleteImage = () => {
     setEvent(prevState => ({
       ...prevState,
       image: "",
       image_id: ""
     }));
+    setUploading(false);
   };
 
   // Function to handle drag over event
@@ -15527,6 +15531,7 @@ function EventImage({
 
   // Function to handle processing of uploaded files
   const handleFiles = files => {
+    setUploading(true);
     const uploadedFile = files[0];
     const fileSizeInKB = Math.round(uploadedFile.size / 1024); // Convert to KB
 
@@ -15549,7 +15554,7 @@ function EventImage({
         }));
       }
     }).catch(error => {
-      console.log(error);
+      setUploading(false);
     });
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15566,6 +15571,7 @@ function EventImage({
         image: media.url,
         image_id: media.id
       }));
+      setUploading(false);
     },
     allowedTypes: ALLOWED_MEDIA_TYPES,
     value: event?.image_id,
@@ -15595,7 +15601,10 @@ function EventImage({
       onClick: open,
       onDragOver: handleDragOver,
       onDrop: handleDrop
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, uploading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      className: "animate-spin w-6 h-6",
+      strokeWidth: 1
+    }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
       className: "w-6 h-6",
       strokeWidth: 1
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

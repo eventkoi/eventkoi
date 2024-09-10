@@ -57,6 +57,10 @@ class Uploads {
 		$file_name = $data['uploadedfile']['name'];
 		$file_temp = $data['uploadedfile']['tmp_name'];
 
+		if ( ! file_exists( $file_temp ) || getimagesize( $file_temp ) === false ) {
+			return rest_ensure_response( new \WP_Error( 'invalid_image', __( 'Invalid image uploaded.', 'eventkoi' ) ) );
+		}
+
 		$upload_dir = wp_upload_dir();
 		$image_data = $wp_filesystem->get_contents( $file_temp );
 		$filename   = basename( $file_name );
