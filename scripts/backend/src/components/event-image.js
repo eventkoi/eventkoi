@@ -16,7 +16,7 @@ export function EventImage({ event, setEvent }) {
     setEvent((prevState) => ({
       ...prevState,
       image: "",
-      media: [],
+      image_id: "",
     }));
   };
 
@@ -54,7 +54,13 @@ export function EventImage({ event, setEvent }) {
       },
     })
       .then((response) => {
-        console.log(response);
+        if (response.id) {
+          setEvent((prevState) => ({
+            ...prevState,
+            image: response.url,
+            image_id: response.id,
+          }));
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -71,11 +77,11 @@ export function EventImage({ event, setEvent }) {
           setEvent((prevState) => ({
             ...prevState,
             image: media.url,
-            media: media,
+            image_id: media.id,
           }));
         }}
         allowedTypes={ALLOWED_MEDIA_TYPES}
-        value={event?.media?.id}
+        value={event?.image_id}
         render={({ open }) => (
           <div
             className={cn(event.image && "relative p-0 cursor-pointer group")}

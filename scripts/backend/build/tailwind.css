@@ -1053,6 +1053,10 @@ body {
   min-height: 120px !important;
 }
 
+.min-h-\[60px\] {
+  min-height: 60px !important;
+}
+
 .w-1\/6 {
   width: 16.666667% !important;
 }

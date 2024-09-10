@@ -73,7 +73,7 @@ class Event {
 			'title'             => self::get_title(),
 			'description'       => self::get_description(),
 			'image'             => self::get_image(),
-			'media'             => self::get_media(),
+			'image_id'          => self::get_image_id(),
 			'start_date'        => self::get_start_date(),
 			'start_date_gmt'    => self::get_start_date( true ),
 			'end_date'          => self::get_end_date(),
@@ -173,7 +173,7 @@ class Event {
 		$virtual_url = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
 		$description = ! empty( $meta['description'] ) ? sanitize_text_field( htmlentities( $meta['description'] ) ) : '';
 		$image       = ! empty( $meta['image'] ) ? sanitize_url( $meta['image'] ) : '';
-		$media       = ! empty( $meta['media'] ) ? $meta['media'] : array();
+		$image_id    = ! empty( $meta['image_id'] ) ? absint( $meta['image_id'] ) : 0;
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
 		update_post_meta( self::$event_id, 'type', (string) $type );
@@ -181,7 +181,7 @@ class Event {
 		update_post_meta( self::$event_id, 'virtual_url', (string) $virtual_url );
 		update_post_meta( self::$event_id, 'description', normalize_whitespace( $description ) );
 		update_post_meta( self::$event_id, 'image', (string) $image );
-		update_post_meta( self::$event_id, 'media', $media );
+		update_post_meta( self::$event_id, 'image_id', $image_id );
 
 		if ( $start_date ) {
 			update_post_meta( self::$event_id, 'start_date', eventkoi_get_gmt_from_date( $start_date ) );
@@ -235,12 +235,12 @@ class Event {
 	}
 
 	/**
-	 * Get event media array.
+	 * Get event image ID.
 	 */
-	public static function get_media() {
-		$media = get_post_meta( self::$event_id, 'media', true );
+	public static function get_image_id() {
+		$image_id = get_post_meta( self::$event_id, 'image_id', true );
 
-		return apply_filters( 'eventkoi_get_event_media', $media, self::$event_id, self::$event );
+		return apply_filters( 'eventkoi_get_event_image_id', absint( $image_id ), self::$event_id, self::$event );
 	}
 
 	/**

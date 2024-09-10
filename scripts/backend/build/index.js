@@ -15505,7 +15505,7 @@ function EventImage({
     setEvent(prevState => ({
       ...prevState,
       image: "",
-      media: []
+      image_id: ""
     }));
   };
 
@@ -15541,7 +15541,13 @@ function EventImage({
         "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
-      console.log(response);
+      if (response.id) {
+        setEvent(prevState => ({
+          ...prevState,
+          image: response.url,
+          image_id: response.id
+        }));
+      }
     }).catch(error => {
       console.log(error);
     });
@@ -15558,11 +15564,11 @@ function EventImage({
       setEvent(prevState => ({
         ...prevState,
         image: media.url,
-        media: media
+        image_id: media.id
       }));
     },
     allowedTypes: ALLOWED_MEDIA_TYPES,
-    value: event?.media?.id,
+    value: event?.image_id,
     render: ({
       open
     }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
