@@ -10,7 +10,7 @@ export function EventEditDetails() {
 
   return (
     <Box>
-      <div className="max-w-[480px] space-y-10 pb-6">
+      <div className="w-full space-y-10 pb-6">
         <Heading level={3}>Additional details</Heading>
         <EventDescription event={event} setEvent={setEvent} />
         <EventImage event={event} setEvent={setEvent} />

@@ -69,6 +69,7 @@ export function EventEdit() {
       method: "get",
     })
       .then((response) => {
+        console.log(response);
         setEvent(response);
         setLoading(false);
       })
@@ -84,7 +85,12 @@ export function EventEdit() {
   }, [location]);
 
   useEffect(() => {
-    getEvent();
+    if (!eventId) {
+      setEvent(eventkoi_params.new_event);
+      setLoading(false);
+    } else {
+      getEvent();
+    }
   }, []);
 
   if (loading || (eventId && !event?.id)) {
@@ -134,7 +140,7 @@ export function EventEdit() {
         event={event}
         setEvent={setEvent}
       />
-      <Wrapper>
+      <Wrapper className="max-w-[940px]">
         <div className="w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]">
           <EventTabs event={event} setEvent={setEvent} location={location} />
           <div className="grid">

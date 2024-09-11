@@ -14,7 +14,7 @@ export function EventEditMain() {
 
   return (
     <Box>
-      <div className="max-w-[480px] space-y-10 pb-6">
+      <div className="w-full space-y-10 pb-6">
         <EventName
           event={event}
           setEvent={setEvent}

@@ -21,5 +21,11 @@
   box-shadow: none;
   color: inherit;
 }
+.eventkoi-admin [contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  color: #999999;
+}
 
 /*# sourceMappingURL=index.css.map*/

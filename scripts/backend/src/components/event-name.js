@@ -1,43 +1,27 @@
-import { cn } from "@/lib/utils";
-
-import { Input } from "@/components/ui/input";
-
 import { PencilLine } from "lucide-react";
 
 export function EventName({ event, setEvent, isTyping, setIsTyping }) {
-  return (
-    <div>
-      {isTyping ? (
-        <Input
-          type="text"
-          value={event?.title}
-          onChange={(e) => {
-            setEvent((prevState) => ({
-              ...prevState,
-              title: e.target.value,
-            }));
-          }}
-          autoFocus
-          onBlur={() => setIsTyping(false)}
-          onKeyDown={(e) => e.key === "Enter" && setIsTyping(false)}
-        />
-      ) : (
-        <div
-          className={cn(
-            "inline-flex pr-6 relative cursor-pointer underline underline-offset-[7px] text-muted-foreground font-medium text-lg",
-            event?.title && "text-foreground no-underline"
-          )}
-          onClick={() => {
-            setIsTyping(true);
-          }}
-        >
-          {event?.title ? event?.title : "Click to add event name"}
+  const updateEventName = (e) => {
+    setEvent((prevState) => ({
+      ...prevState,
+      title: e.currentTarget.textContent,
+    }));
+  };
 
-          {event?.title && (
-            <PencilLine className="absolute top-1 right-0 w-5 h-5 text-ring" />
-          )}
-        </div>
-      )}
+  return (
+    <div className="flex items-center gap-2">
+      <div
+        className="inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-transparent hover:border-input"
+        contentEditable
+        spellCheck={false}
+        placeholder="Click to add event name"
+        dangerouslySetInnerHTML={{
+          __html: event?.title,
+        }}
+        onBlur={(e) => updateEventName(e)}
+        onKeyDown={(e) => e.key === "Enter" && updateEventName(e)}
+      />
+      <PencilLine className="w-3.5 h-3.5 text-ring" />
     </div>
   );
 }

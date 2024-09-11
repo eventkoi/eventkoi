@@ -69,7 +69,6 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       },
     })
       .then((response) => {
-        console.log(response);
         setSaving(false);
         setEvent(response);
         if (response.message) {
@@ -130,7 +129,7 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
             saveEvent("publish");
           }}
         >
-          Publish
+          {event?.wp_status === "draft" ? "Publish" : "Save"}
         </Button>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -149,6 +148,15 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
               Create duplicate event
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+            {event?.wp_status === "publish" && (
+              <DropdownMenuItem
+                onClick={() => {
+                  saveEvent("draft");
+                }}
+              >
+                Unpublish
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem
               className="text-destructive focus:text-destructive"
               onClick={() => {

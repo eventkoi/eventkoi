@@ -108,12 +108,6 @@ const columns = [
             {row.original.wp_status === "draft" && (
               <Badge variant="outline">Draft</Badge>
             )}
-            {status == "live" && (
-              <span className="relative flex h-[5px] w-[5px]">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-25"></span>
-                <span className="relative inline-flex rounded-full h-[5px] w-[5px] bg-destructive"></span>
-              </span>
-            )}
           </div>
         </div>
       );

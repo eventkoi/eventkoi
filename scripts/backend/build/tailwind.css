@@ -1021,6 +1021,10 @@ body {
   min-height: 1.5rem !important;
 }
 
+.min-h-\[110px\] {
+  min-height: 110px !important;
+}
+
 .min-h-\[2000px\] {
   min-height: 2000px !important;
 }
@@ -1037,24 +1041,8 @@ body {
   min-height: calc(100vh - 46px) !important;
 }
 
-.min-h-\[160px\] {
-  min-height: 160px !important;
-}
-
-.min-h-\[110px\] {
-  min-height: 110px !important;
-}
-
-.min-h-\[200px\] {
-  min-height: 200px !important;
-}
-
-.min-h-\[120px\] {
-  min-height: 120px !important;
-}
-
-.min-h-\[60px\] {
-  min-height: 60px !important;
+.min-h-10 {
+  min-height: 2.5rem !important;
 }
 
 .w-1\/6 {
@@ -1227,6 +1215,14 @@ body {
   max-width: max-content !important;
 }
 
+.max-w-\[1000px\] {
+  max-width: 1000px !important;
+}
+
+.max-w-\[940px\] {
+  max-width: 940px !important;
+}
+
 .flex-1 {
   flex: 1 1 0% !important;
 }
@@ -1253,14 +1249,6 @@ body {
 
 .border-collapse {
   border-collapse: collapse !important;
-}
-
-.origin-left {
-  transform-origin: left !important;
-}
-
-.origin-center {
-  transform-origin: center !important;
 }
 
 .-translate-x-1\/2 {
@@ -1290,11 +1278,6 @@ body {
 
 .rotate-90 {
   --tw-rotate: 90deg !important;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
-}
-
-.scale-x-0 {
-  --tw-scale-x: 0 !important;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 
@@ -1669,24 +1652,20 @@ body {
   border-color: hsl(var(--input)) !important;
 }
 
-.border-primary {
-  border-color: hsl(var(--primary)) !important;
-}
-
-.border-transparent {
-  border-color: transparent !important;
-}
-
-.border-muted-foreground {
-  border-color: hsl(var(--muted-foreground)) !important;
-}
-
 .border-muted-foreground\/40 {
   border-color: hsl(var(--muted-foreground) / 0.4) !important;
 }
 
 .border-muted-foreground\/80 {
   border-color: hsl(var(--muted-foreground) / 0.8) !important;
+}
+
+.border-primary {
+  border-color: hsl(var(--primary)) !important;
+}
+
+.border-transparent {
+  border-color: transparent !important;
 }
 
 .border-l-transparent {
@@ -1708,6 +1687,10 @@ body {
 
 .bg-background {
   background-color: hsl(var(--background)) !important;
+}
+
+.bg-background\/50 {
+  background-color: hsl(var(--background) / 0.5) !important;
 }
 
 .bg-black\/80 {
@@ -1762,30 +1745,6 @@ body {
   background-color: transparent !important;
 }
 
-.bg-white\/20 {
-  background-color: rgb(255 255 255 / 0.2) !important;
-}
-
-.bg-white\/80 {
-  background-color: rgb(255 255 255 / 0.8) !important;
-}
-
-.bg-white\/70 {
-  background-color: rgb(255 255 255 / 0.7) !important;
-}
-
-.bg-primary\/70 {
-  background-color: hsl(var(--primary) / 0.7) !important;
-}
-
-.bg-primary\/50 {
-  background-color: hsl(var(--primary) / 0.5) !important;
-}
-
-.bg-background\/50 {
-  background-color: hsl(var(--background) / 0.5) !important;
-}
-
 .fill-current {
   fill: currentColor !important;
 }
@@ -1796,6 +1755,10 @@ body {
 
 .p-1 {
   padding: 0.25rem !important;
+}
+
+.p-10 {
+  padding: 2.5rem !important;
 }
 
 .p-3 {
@@ -1814,8 +1777,8 @@ body {
   padding: 1px !important;
 }
 
-.p-10 {
-  padding: 2.5rem !important;
+.p-2 {
+  padding: 0.5rem !important;
 }
 
 .px-0 {
@@ -2271,10 +2234,6 @@ body {
   transition-duration: 150ms !important;
 }
 
-.delay-150 {
-  transition-delay: 150ms !important;
-}
-
 .duration-1000 {
   transition-duration: 1000ms !important;
 }
@@ -2341,10 +2300,6 @@ body {
 
 .duration-300 {
   animation-duration: 300ms !important;
-}
-
-.delay-150 {
-  animation-delay: 150ms !important;
 }
 
 .ease-in-out {
@@ -2498,6 +2453,10 @@ body {
 
 .hover\:border-muted-foreground\/50:hover {
   border-color: hsl(var(--muted-foreground) / 0.5) !important;
+}
+
+.hover\:border-input:hover {
+  border-color: hsl(var(--input)) !important;
 }
 
 .hover\:bg-\[transparent\]:hover {
@@ -2702,20 +2661,6 @@ body {
 
 .disabled\:opacity-50:disabled {
   opacity: 0.5 !important;
-}
-
-.group:hover .group-hover\:block {
-  display: block !important;
-}
-
-.group:hover .group-hover\:flex {
-  display: flex !important;
-}
-
-.group:hover .group-hover\:scale-100 {
-  --tw-scale-x: 1 !important;
-  --tw-scale-y: 1 !important;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 
 .group:hover .group-hover\:opacity-100 {

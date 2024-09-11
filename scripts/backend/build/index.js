@@ -14062,7 +14062,7 @@ __webpack_require__.r(__webpack_exports__);
 function EventEditDetails() {
   const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useOutletContext)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "max-w-[480px] space-y-10 pb-6"
+    className: "w-full space-y-10 pb-6"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_4__.Heading, {
     level: 3
   }, "Additional details"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_description__WEBPACK_IMPORTED_MODULE_2__.EventDescription, {
@@ -14153,6 +14153,7 @@ function EventEdit() {
       path: `${eventkoi_params.api}/event?id=${eventId}`,
       method: "get"
     }).then(response => {
+      console.log(response);
       setEvent(response);
       setLoading(false);
     }).catch(error => {
@@ -14165,7 +14166,12 @@ function EventEdit() {
     }
   }, [location]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    getEvent();
+    if (!eventId) {
+      setEvent(eventkoi_params.new_event);
+      setLoading(false);
+    } else {
+      getEvent();
+    }
   }, []);
   if (loading || eventId && !event?.id) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -14203,7 +14209,9 @@ function EventEdit() {
     setLoading: setLoading,
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_6__.Wrapper, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_wrapper__WEBPACK_IMPORTED_MODULE_6__.Wrapper, {
+    className: "max-w-[940px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr] min-h-[2000px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_tabs__WEBPACK_IMPORTED_MODULE_3__.EventTabs, {
     event: event,
@@ -14248,7 +14256,7 @@ function EventEditMain() {
   const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useOutletContext)();
   const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "max-w-[480px] space-y-10 pb-6"
+    className: "w-full space-y-10 pb-6"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_4__.EventName, {
     event: event,
     setEvent: setEvent,
@@ -14415,13 +14423,7 @@ const columns = [{
       className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("hover:underline hover:decoration-dotted underline-offset-4", status === "trash" && "text-muted-foreground pointer-events-none")
     }, row.getValue("title")), row.original.wp_status === "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
       variant: "outline"
-    }, "Draft"), status == "live" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "relative flex h-[5px] w-[5px]"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-25"
-    }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "relative inline-flex rounded-full h-[5px] w-[5px] bg-destructive"
-    }))));
+    }, "Draft")));
   },
   filterFn: multiColumnSearch,
   sortingFn: "alphanumeric"
@@ -15711,11 +15713,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
-
-
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
 
 
 function EventName({
@@ -15724,26 +15722,27 @@ function EventName({
   isTyping,
   setIsTyping
 }) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, isTyping ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
-    type: "text",
-    value: event?.title,
-    onChange: e => {
-      setEvent(prevState => ({
-        ...prevState,
-        title: e.target.value
-      }));
+  const updateEventName = e => {
+    setEvent(prevState => ({
+      ...prevState,
+      title: e.currentTarget.textContent
+    }));
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-transparent hover:border-input",
+    contentEditable: true,
+    spellCheck: false,
+    placeholder: "Click to add event name",
+    dangerouslySetInnerHTML: {
+      __html: event?.title
     },
-    autoFocus: true,
-    onBlur: () => setIsTyping(false),
-    onKeyDown: e => e.key === "Enter" && setIsTyping(false)
-  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("inline-flex pr-6 relative cursor-pointer underline underline-offset-[7px] text-muted-foreground font-medium text-lg", event?.title && "text-foreground no-underline"),
-    onClick: () => {
-      setIsTyping(true);
-    }
-  }, event?.title ? event?.title : "Click to add event name", event?.title && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    className: "absolute top-1 right-0 w-5 h-5 text-ring"
-  })));
+    onBlur: e => updateEventName(e),
+    onKeyDown: e => e.key === "Enter" && updateEventName(e)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "w-3.5 h-3.5 text-ring"
+  }));
 }
 
 /***/ }),
@@ -15867,7 +15866,6 @@ function EventNavBar({
         "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
-      console.log(response);
       setSaving(false);
       setEvent(response);
       if (response.message) {
@@ -15911,7 +15909,7 @@ function EventNavBar({
     onClick: () => {
       saveEvent("publish");
     }
-  }, "Publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenu, {
+  }, event?.wp_status === "draft" ? "Publish" : "Save"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenu, {
     modal: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuTrigger, {
     asChild: true
@@ -15927,7 +15925,11 @@ function EventNavBar({
     align: "end"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, null, "Schedule publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     disabled: !event?.id
-  }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+  }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), event?.wp_status === "publish" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+    onClick: () => {
+      saveEvent("draft");
+    }
+  }, "Unpublish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     className: "text-destructive focus:text-destructive",
     onClick: () => {
       trashEvent();
@@ -18036,12 +18038,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
 
 function Wrapper({
+  className,
   children
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("main", {
-    className: "flex flex-1 flex-col w-full max-w-[1280px] mx-auto py-8 px-8"
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex flex-1 flex-col w-full max-w-[1280px] mx-auto py-8 px-8", className)
   }, children);
 }
 
