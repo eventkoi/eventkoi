@@ -84,6 +84,7 @@ class Event {
 			'wp_status'         => self::get_wp_status(),
 			'url'               => self::get_url(),
 			'tbc'               => self::get_tbc(),
+			'tbc_note'          => self::get_tbc_note(),
 			'type'              => self::get_type(),
 			'location'          => self::get_location(),
 			'virtual_url'       => self::get_virtual_url(),
@@ -166,6 +167,7 @@ class Event {
 		do_action( 'eventkoi_before_update_event_meta', $meta, self::$event_id, self::$event );
 
 		$tbc         = ! empty( $meta['tbc'] );
+		$tbc_note    = ! empty( $meta['tbc_note'] ) ? esc_attr( $meta['tbc_note'] ) : '';
 		$start_date  = ! empty( $meta['start_date'] ) ? esc_attr( $meta['start_date'] ) : '';
 		$end_date    = ! empty( $meta['end_date'] ) ? esc_attr( $meta['end_date'] ) : '';
 		$type        = ! empty( $meta['type'] ) ? esc_attr( $meta['type'] ) : 'inperson';
@@ -176,6 +178,7 @@ class Event {
 		$image_id    = ! empty( $meta['image_id'] ) ? absint( $meta['image_id'] ) : 0;
 
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
+		update_post_meta( self::$event_id, 'tbc_note', (string) $tbc_note );
 		update_post_meta( self::$event_id, 'type', (string) $type );
 		update_post_meta( self::$event_id, 'location', (string) $location );
 		update_post_meta( self::$event_id, 'virtual_url', (string) $virtual_url );
@@ -282,6 +285,10 @@ class Event {
 			}
 		}
 
+		if ( self::get_tbc() ) {
+			$status = 'tbc';
+		}
+
 		return apply_filters( 'eventkoi_get_event_status', $status, self::$event_id, self::$event );
 	}
 
@@ -346,6 +353,15 @@ class Event {
 		$tbc = get_post_meta( self::$event_id, 'tbc', true );
 
 		return apply_filters( 'eventkoi_get_event_tbc', (bool) $tbc, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get to be confirmed notification.
+	 */
+	public static function get_tbc_note() {
+		$tbc_note = get_post_meta( self::$event_id, 'tbc_note', true );
+
+		return apply_filters( 'eventkoi_get_event_tbc_note', (string) $tbc_note, self::$event_id, self::$event );
 	}
 
 	/**

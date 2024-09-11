@@ -1223,6 +1223,14 @@ body {
   max-width: 940px !important;
 }
 
+.max-w-\[500px\] {
+  max-width: 500px !important;
+}
+
+.max-w-\[422px\] {
+  max-width: 422px !important;
+}
+
 .flex-1 {
   flex: 1 1 0% !important;
 }

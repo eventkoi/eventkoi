@@ -6,6 +6,7 @@ import { add, format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Popover,
@@ -206,6 +207,27 @@ export function EventDate({ event, setEvent }) {
           Date and time not confirmed.
         </label>
       </div>
+
+      {event?.tbc && (
+        <div className="flex flex-col gap-2 pt-2 pb-4">
+          <Label htmlFor="tbc_note">
+            Date and time not confirmed notification
+          </Label>
+          <Input
+            type="text"
+            id="tbc_note"
+            value={event?.tbc_note}
+            placeholder="To be confirmed"
+            className="max-w-[422px]"
+            onChange={(e) => {
+              setEvent((prevState) => ({
+                ...prevState,
+                tbc_note: e.target.value,
+              }));
+            }}
+          />
+        </div>
+      )}
 
       <div>
         Current timezone is: {event?.timezone}.{" "}

@@ -62,6 +62,11 @@ class Events {
 						'value'   => eventkoi_gmt_date(),
 						'compare' => '>',
 					),
+					array(
+						'key'     => 'tbc',
+						'value'   => true,
+						'compare' => '!=',
+					),
 				);
 			} elseif ( 'upcoming' === $args['status'] ) {
 				$query_args['post_status'] = array( 'publish' );

@@ -32,6 +32,7 @@ export function EventLocation({ event, setEvent }) {
             id="location"
             value={event?.location}
             placeholder="Venue name and address"
+            className="max-w-[422px]"
             onChange={(e) => {
               setEvent((prevState) => ({
                 ...prevState,
@@ -49,6 +50,7 @@ export function EventLocation({ event, setEvent }) {
             id="virtual_url"
             value={event?.virtual_url}
             placeholder="Web address of your event"
+            className="max-w-[422px]"
             onChange={(e) => {
               setEvent((prevState) => ({
                 ...prevState,
