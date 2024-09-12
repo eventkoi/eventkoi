@@ -26,20 +26,35 @@ export function EventLocation({ event, setEvent }) {
       </TabsList>
       <TabsContent value="inperson" className="mt-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="location">Location</Label>
-          <Input
-            type="text"
-            id="location"
-            value={event?.location}
-            placeholder="Venue name and address"
-            className="max-w-[422px]"
-            onChange={(e) => {
-              setEvent((prevState) => ({
-                ...prevState,
-                location: e.target.value,
-              }));
-            }}
-          />
+          <Label>Location</Label>
+          <div className="max-w-[422px] flex flex-col gap-3">
+            {[1, 2, 3].map(function (index, i) {
+              return (
+                <div
+                  className="flex items-center gap-2"
+                  key={`location-input-${i}`}
+                >
+                  <div className="min-w-[60px]">
+                    <Label htmlFor={`address${index}`} className="font-normal">
+                      Line {index}
+                    </Label>
+                  </div>
+                  <Input
+                    type="text"
+                    id={`address${index}`}
+                    value={event[`address${index}`]}
+                    placeholder="Venue name"
+                    onChange={(e) => {
+                      setEvent((prevState) => ({
+                        ...prevState,
+                        [`address${index}`]: e.target.value,
+                      }));
+                    }}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </TabsContent>
       <TabsContent value="virtual" className="mt-4">

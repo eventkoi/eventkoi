@@ -15683,21 +15683,30 @@ function EventLocation({
     className: "mt-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
-    htmlFor: "location"
-  }, "Location"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
-    type: "text",
-    id: "location",
-    value: event?.location,
-    placeholder: "Venue name and address",
-    className: "max-w-[422px]",
-    onChange: e => {
-      setEvent(prevState => ({
-        ...prevState,
-        location: e.target.value
-      }));
-    }
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsContent, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, null, "Location"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "max-w-[422px] flex flex-col gap-3"
+  }, [1, 2, 3].map(function (index, i) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex items-center gap-2",
+      key: `location-input-${i}`
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "min-w-[60px]"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
+      htmlFor: `address${index}`,
+      className: "font-normal"
+    }, "Line ", index)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
+      type: "text",
+      id: `address${index}`,
+      value: event[`address${index}`],
+      placeholder: "Venue name",
+      onChange: e => {
+        setEvent(prevState => ({
+          ...prevState,
+          [`address${index}`]: e.target.value
+        }));
+      }
+    }));
+  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsContent, {
     value: "virtual",
     className: "mt-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15886,6 +15895,7 @@ function EventNavBar({
         "EVENTKOI-API-KEY": eventkoi_params.api_key
       }
     }).then(response => {
+      console.log(response);
       setSaving(false);
       setEvent(response);
       if (response.message) {

@@ -86,7 +86,9 @@ class Event {
 			'tbc'               => self::get_tbc(),
 			'tbc_note'          => self::get_tbc_note(),
 			'type'              => self::get_type(),
-			'location'          => self::get_location(),
+			'address1'          => self::get_address1(),
+			'address2'          => self::get_address2(),
+			'address3'          => self::get_address3(),
 			'virtual_url'       => self::get_virtual_url(),
 			'template'          => self::get_template(),
 			'timezone'          => eventkoi_timezone(),
@@ -171,7 +173,9 @@ class Event {
 		$start_date  = ! empty( $meta['start_date'] ) ? esc_attr( $meta['start_date'] ) : '';
 		$end_date    = ! empty( $meta['end_date'] ) ? esc_attr( $meta['end_date'] ) : '';
 		$type        = ! empty( $meta['type'] ) ? esc_attr( $meta['type'] ) : 'inperson';
-		$location    = ! empty( $meta['location'] ) ? esc_attr( $meta['location'] ) : '';
+		$address1    = ! empty( $meta['address1'] ) ? esc_attr( $meta['address1'] ) : '';
+		$address2    = ! empty( $meta['address2'] ) ? esc_attr( $meta['address2'] ) : '';
+		$address3    = ! empty( $meta['address3'] ) ? esc_attr( $meta['address3'] ) : '';
 		$virtual_url = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
 		$description = ! empty( $meta['description'] ) ? sanitize_text_field( htmlentities( $meta['description'] ) ) : '';
 		$image       = ! empty( $meta['image'] ) ? sanitize_url( $meta['image'] ) : '';
@@ -180,7 +184,9 @@ class Event {
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
 		update_post_meta( self::$event_id, 'tbc_note', (string) $tbc_note );
 		update_post_meta( self::$event_id, 'type', (string) $type );
-		update_post_meta( self::$event_id, 'location', (string) $location );
+		update_post_meta( self::$event_id, 'address1', (string) $address1 );
+		update_post_meta( self::$event_id, 'address2', (string) $address2 );
+		update_post_meta( self::$event_id, 'address3', (string) $address3 );
 		update_post_meta( self::$event_id, 'virtual_url', (string) $virtual_url );
 		update_post_meta( self::$event_id, 'description', normalize_whitespace( $description ) );
 		update_post_meta( self::$event_id, 'image', (string) $image );
@@ -378,12 +384,30 @@ class Event {
 	}
 
 	/**
-	 * Get event location.
+	 * Get event address 1.
 	 */
-	public static function get_location() {
-		$location = get_post_meta( self::$event_id, 'location', true );
+	public static function get_address1() {
+		$address1 = get_post_meta( self::$event_id, 'address1', true );
 
-		return apply_filters( 'eventkoi_get_event_location', (string) $location, self::$event_id, self::$event );
+		return apply_filters( 'eventkoi_get_event_address1', (string) $address1, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event address 2.
+	 */
+	public static function get_address2() {
+		$address2 = get_post_meta( self::$event_id, 'address2', true );
+
+		return apply_filters( 'eventkoi_get_event_address2', (string) $address2, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event address 3.
+	 */
+	public static function get_address3() {
+		$address3 = get_post_meta( self::$event_id, 'address3', true );
+
+		return apply_filters( 'eventkoi_get_event_address3', (string) $address3, self::$event_id, self::$event );
 	}
 
 	/**
