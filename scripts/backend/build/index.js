@@ -14048,11 +14048,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_event_description__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-description */ "./src/components/event-description.js");
-/* harmony import */ var _components_event_image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-image */ "./src/components/event-image.js");
-/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
+/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var _components_event_description__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-description */ "./src/components/event-description.js");
+/* harmony import */ var _components_event_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-image */ "./src/components/event-image.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
 
 
 
@@ -14060,15 +14064,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventEditDetails() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useOutletContext)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full space-y-10 pb-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_4__.Heading, {
+  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useOutletContext)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid w-full"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_6__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_5__.Heading, {
     level: 3
-  }, "Additional details"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_description__WEBPACK_IMPORTED_MODULE_2__.EventDescription, {
+  }, "Additional details")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_description__WEBPACK_IMPORTED_MODULE_3__.EventDescription, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_image__WEBPACK_IMPORTED_MODULE_3__.EventImage, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_image__WEBPACK_IMPORTED_MODULE_4__.EventImage, {
     event: event,
     setEvent: setEvent
   })));
@@ -14122,6 +14126,22 @@ function EventEdit() {
   var parent = location.pathname?.split("/");
   var view = parent[3];
   let eventId = parseInt(id) || 0;
+  const showToast = response => {
+    if (!response.message) {
+      return;
+    }
+    const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_7__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
+      onClick: () => sonner__WEBPACK_IMPORTED_MODULE_7__.toast.dismiss(toastId)
+    }, response.message, " ", response.url && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      onClick: () => {
+        window.open(response.url, "_blank");
+      },
+      className: "underline underline-offset-2 hover:no-underline"
+    }, "View event")), {
+      duration: 4000
+    });
+  };
   const restoreEvent = async () => {
     setLoading(true);
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
@@ -14136,14 +14156,7 @@ function EventEdit() {
     }).then(response => {
       setEvent(response.event);
       setLoading(false);
-      if (response.success) {
-        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_7__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
-          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_7__.toast.dismiss(toastId)
-        }, response.success), {
-          duration: 4000
-        });
-      }
+      showToast(response);
     }).catch(error => {
       setLoading(false);
     });
@@ -14178,7 +14191,7 @@ function EventEdit() {
       className: "w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_4__.Loader, null));
   }
-  if (event?.status === "trash") {
+  if (event?.wp_status === "trash") {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -14221,7 +14234,9 @@ function EventEdit() {
     className: "grid"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Outlet, {
     context: [event, setEvent]
-  })))));
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "h-10"
+  })));
 }
 
 /***/ }),
@@ -14238,12 +14253,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_event_date__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-date */ "./src/components/event-date.js");
-/* harmony import */ var _components_event_location__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-location */ "./src/components/event-location.js");
-/* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
-/* harmony import */ var _components_event_template__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event-template */ "./src/components/event-template.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
+/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var _components_event_date__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-date */ "./src/components/event-date.js");
+/* harmony import */ var _components_event_location__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-location */ "./src/components/event-location.js");
+/* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
+/* harmony import */ var _components_event_template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/event-template */ "./src/components/event-template.js");
 
 
 
@@ -14253,22 +14269,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EventEditMain() {
-  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useOutletContext)();
-  const [isTyping, setIsTyping] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "w-full space-y-10 pb-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_4__.EventName, {
-    event: event,
-    setEvent: setEvent,
-    isTyping: isTyping,
-    setIsTyping: setIsTyping
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_date__WEBPACK_IMPORTED_MODULE_2__.EventDate, {
+  const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useOutletContext)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid w-full"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_5__.EventName, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_location__WEBPACK_IMPORTED_MODULE_3__.EventLocation, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_date__WEBPACK_IMPORTED_MODULE_3__.EventDate, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_template__WEBPACK_IMPORTED_MODULE_5__.EventTemplate, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_location__WEBPACK_IMPORTED_MODULE_4__.EventLocation, {
+    event: event,
+    setEvent: setEvent
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_template__WEBPACK_IMPORTED_MODULE_6__.EventTemplate, {
     event: event,
     setEvent: setEvent
   })));
@@ -14332,7 +14345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
 /* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
 /* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
-/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var _lib_toast__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/toast */ "./src/lib/toast.js");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-dot-dashed.js");
@@ -14413,17 +14426,19 @@ const columns = [{
     row
   }) => {
     const url = "#/events/" + parseInt(row.original.id) + "/main";
-    const status = row.original.status;
+    const wp_status = row.original.wp_status;
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "grid space-y-1"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "flex gap-2 items-center text-foreground"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: url,
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("hover:underline hover:decoration-dotted underline-offset-4", status === "trash" && "text-muted-foreground pointer-events-none")
-    }, row.getValue("title")), row.original.wp_status === "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("hover:underline hover:decoration-dotted underline-offset-4")
+    }, row.getValue("title")), wp_status === "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
       variant: "outline"
-    }, "Draft")));
+    }, "Draft"), wp_status === "trash" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
+      variant: "outline"
+    }, "Trash")));
   },
   filterFn: multiColumnSearch,
   sortingFn: "alphanumeric"
@@ -14553,14 +14568,7 @@ function EventsOverview() {
     }).then(response => {
       setIsLoading(false);
       setData(response);
-      if (toastMessage) {
-        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_8__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
-          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_8__.toast.dismiss(toastId)
-        }, toastMessage), {
-          duration: 4000
-        });
-      }
+      (0,_lib_toast__WEBPACK_IMPORTED_MODULE_8__.showStaticToast)(toastMessage);
     }).catch(error => {
       setIsLoading(false);
     });
@@ -14894,7 +14902,7 @@ function Box({
   children
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-full flex flex-col rounded-lg border text-sm bg-card text-card-foreground shadow-sm p-6 gap-6", className)
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-full flex flex-col rounded-lg border text-sm bg-card text-card-foreground shadow-sm gap-6", className)
   }, children);
 }
 
@@ -15211,8 +15219,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/add.mjs");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/add.mjs");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/format.mjs");
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var _components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/calendar */ "./src/components/ui/calendar.jsx");
 /* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
@@ -15220,7 +15228,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
 /* harmony import */ var _components_ui_popover__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/ui/popover */ "./src/components/ui/popover.jsx");
 /* harmony import */ var _components_time_picker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components/time-picker */ "./src/components/time-picker.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/move-right.js");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/move-right.js");
+
 
 
 
@@ -15267,7 +15277,7 @@ function EventDate({
     startDate = new Date(startDate);
     const diff = newDay.getTime() - startDate.getTime();
     const diffInDays = diff / (1000 * 60 * 60 * 24);
-    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.add)(startDate, {
+    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.add)(startDate, {
       days: Math.ceil(diffInDays)
     });
     updateStartDate(newDateFull);
@@ -15284,7 +15294,7 @@ function EventDate({
     endDate = new Date(endDate);
     const diff = newDay.getTime() - endDate.getTime();
     const diffInDays = diff / (1000 * 60 * 60 * 24);
-    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_9__.add)(endDate, {
+    const newDateFull = (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.add)(endDate, {
       days: Math.ceil(diffInDays)
     });
     updateEndDate(newDateFull);
@@ -15292,17 +15302,17 @@ function EventDate({
   const updateStartDate = date => {
     setEvent(prevState => ({
       ...prevState,
-      start_date: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.format)(date, "yyyy-MM-dd hh:mm a") : ""
+      start_date: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_11__.format)(date, "yyyy-MM-dd hh:mm a") : ""
     }));
   };
   const updateEndDate = date => {
     setEvent(prevState => ({
       ...prevState,
-      end_date: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.format)(date, "yyyy-MM-dd hh:mm a") : ""
+      end_date: date ? (0,date_fns__WEBPACK_IMPORTED_MODULE_11__.format)(date, "yyyy-MM-dd hh:mm a") : ""
     }));
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-col gap-3"
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_9__.Panel, {
+    className: "gap-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4 items-start"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15317,7 +15327,7 @@ function EventDate({
     variant: "outline",
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-auto justify-start text-left font-normal", !startDate && "text-muted-foreground/60 hover:text-muted-foreground/60", event?.tbc && "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground/60 disabled:opacity-100"),
     disabled: event?.tbc
-  }, startDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.format)(startDate, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverContent, {
+  }, startDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_11__.format)(startDate, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverContent, {
     align: "start",
     className: "w-auto p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar, {
@@ -15334,7 +15344,7 @@ function EventDate({
     setPeriod: setStartPeriod
   })))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mt-8"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"], {
     className: "text-muted-foreground w-6 h-6",
     strokeWidth: 1.5
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15349,7 +15359,7 @@ function EventDate({
     variant: "outline",
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("w-auto justify-start text-left font-normal", !endDate && "text-muted-foreground/60 hover:text-muted-foreground/60", event?.tbc && "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground/60 disabled:opacity-100"),
     disabled: event?.tbc
-  }, endDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_10__.format)(endDate, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverContent, {
+  }, endDate ? (0,date_fns__WEBPACK_IMPORTED_MODULE_11__.format)(endDate, "d MMM yyyy h:mm a") : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, date_now, " ", time_now))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_popover__WEBPACK_IMPORTED_MODULE_7__.PopoverContent, {
     align: "start",
     className: "w-auto p-0"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar, {
@@ -15416,6 +15426,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
 /* harmony import */ var _components_ui_textarea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/textarea */ "./src/components/ui/textarea.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
 
 
 
@@ -15423,9 +15435,7 @@ function EventDescription({
   event,
   setEvent
 }) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
     htmlFor: "description"
   }, "Event description"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_textarea__WEBPACK_IMPORTED_MODULE_2__.Textarea, {
     id: "description",
@@ -15505,11 +15515,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/repeat-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/image.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/repeat-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/image.js");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
 
 
 
@@ -15577,9 +15589,7 @@ function EventImage({
       setUploading(false);
     });
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_4__.Label, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_6__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_4__.Label, {
     htmlFor: "image"
   }, "Header banner image"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-muted-foreground"
@@ -15605,12 +15615,12 @@ function EventImage({
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_3__.Button, {
       variant: "default",
       onClick: open
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: "mr-2 h-4 w-4"
     }), "Replace"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_3__.Button, {
       variant: "default",
       onClick: e => deleteImage()
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
       className: "mr-2 h-4 w-4"
     }), "Delete")), event?.image && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: event?.image,
@@ -15621,10 +15631,10 @@ function EventImage({
       onClick: open,
       onDragOver: handleDragOver,
       onDrop: handleDrop
-    }, uploading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, uploading ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
       className: "animate-spin w-6 h-6",
       strokeWidth: 1
-    }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
       className: "w-6 h-6",
       strokeWidth: 1
     }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -15652,6 +15662,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
 /* harmony import */ var _components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/tabs */ "./src/components/ui/tabs.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
 
 
 
@@ -15666,9 +15678,8 @@ function EventLocation({
       type: value
     }));
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.Tabs, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.Tabs, {
     defaultValue: event?.type,
-    className: "w-auto",
     onValueChange: onTabChange
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_3__.TabsList, {
     className: "border border-input rounded-lg"
@@ -15690,15 +15701,17 @@ function EventLocation({
       className: "flex items-center gap-2",
       key: `location-input-${i}`
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "min-w-[60px]"
+      className: "min-w-[80px] w-[80px]"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
       htmlFor: `address${index}`,
       className: "font-normal"
-    }, "Line ", index)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
+    }, "Line ", index, index > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "block text-xs"
+    }, "(Optional)"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
       type: "text",
       id: `address${index}`,
       value: event[`address${index}`],
-      placeholder: "Venue name",
+      placeholder: "Address",
       onChange: e => {
         setEvent(prevState => ({
           ...prevState,
@@ -15725,7 +15738,7 @@ function EventLocation({
         virtual_url: e.target.value
       }));
     }
-  }))));
+  })))));
 }
 
 /***/ }),
@@ -15742,14 +15755,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil-line.js");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
 
 
 function EventName({
   event,
-  setEvent,
-  isTyping,
-  setIsTyping
+  setEvent
 }) {
   const updateEventName = e => {
     setEvent(prevState => ({
@@ -15757,8 +15770,8 @@ function EventName({
       title: e.currentTarget.textContent
     }));
   };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_1__.Panel, {
+    className: "flex-row items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-transparent hover:border-input",
     contentEditable: true,
@@ -15769,7 +15782,7 @@ function EventName({
     },
     onBlur: e => updateEventName(e),
     onKeyDown: e => e.key === "Enter" && updateEventName(e)
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "w-3.5 h-3.5 text-ring"
   }));
 }
@@ -15837,8 +15850,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var _components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/dropdown-menu */ "./src/components/ui/dropdown-menu.jsx");
-/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-down.js");
+/* harmony import */ var _lib_toast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/lib/toast */ "./src/lib/toast.js");
 
 
 
@@ -15870,15 +15883,34 @@ function EventNavBar({
     }).then(response => {
       setLoading(false);
       navigate("/events");
-      if (response.success) {
-        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_4__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
-          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_4__.toast.dismiss(toastId)
-        }, response.success), {
-          duration: 4000
-        });
+      (0,_lib_toast__WEBPACK_IMPORTED_MODULE_4__.showToast)(response);
+    }).catch(() => {
+      setLoading(false);
+    });
+  };
+  const duplicateEvent = async () => {
+    setSaving(true);
+    setLoading(true);
+    const originalId = event?.id;
+    await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: `${eventkoi_params.api}/duplicate_event`,
+      method: "post",
+      data: {
+        event_id: event?.id
+      },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key
+      }
+    }).then(response => {
+      setSaving(false);
+      setLoading(false);
+      setEvent(response);
+      (0,_lib_toast__WEBPACK_IMPORTED_MODULE_4__.showToast)(response);
+      if (response.update_endpoint) {
+        window.location.hash = window.location.hash.replace(originalId, response.id);
       }
     }).catch(() => {
+      setSaving(false);
       setLoading(false);
     });
   };
@@ -15898,19 +15930,7 @@ function EventNavBar({
       console.log(response);
       setSaving(false);
       setEvent(response);
-      if (response.message) {
-        const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_4__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
-          onClick: () => sonner__WEBPACK_IMPORTED_MODULE_4__.toast.dismiss(toastId)
-        }, response.message, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          onClick: () => {
-            window.open(response.url, "_blank");
-          },
-          className: "underline underline-offset-2 hover:no-underline"
-        }, "View event")), {
-          duration: 4000
-        });
-      }
+      (0,_lib_toast__WEBPACK_IMPORTED_MODULE_4__.showToast)(response);
       if (response.update_endpoint) {
         window.location.hash = window.location.hash.replace("add", response.id);
       }
@@ -15954,7 +15974,10 @@ function EventNavBar({
     className: "w-56 z-[510]",
     align: "end"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, null, "Schedule publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
-    disabled: !event?.id
+    disabled: !event?.id,
+    onClick: () => {
+      duplicateEvent();
+    }
   }, "Create duplicate event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), event?.wp_status === "publish" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     onClick: () => {
       saveEvent("draft");
@@ -16033,6 +16056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
 /* harmony import */ var _components_ui_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/select */ "./src/components/ui/select.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
 
 
 
@@ -16040,9 +16065,7 @@ function EventTemplate({
   event,
   setEvent
 }) {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-col gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
     htmlFor: "template"
   }, "Select event template"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.Select, {
     value: event?.template,
@@ -16423,6 +16446,32 @@ function Pagination(props) {
   }, "Go to last page"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_icons__WEBPACK_IMPORTED_MODULE_2__.DoubleArrowRightIcon, {
     className: "h-4 w-4"
   })));
+}
+
+/***/ }),
+
+/***/ "./src/components/panel.js":
+/*!*********************************!*\
+  !*** ./src/components/panel.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Panel: () => (/* binding */ Panel)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+
+
+function Panel({
+  className,
+  children
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex flex-col gap-2 px-6 py-8", className)
+  }, children);
 }
 
 /***/ }),
@@ -17432,6 +17481,43 @@ SelectSeparator.displayName = _radix_ui_react_select__WEBPACK_IMPORTED_MODULE_2_
 
 /***/ }),
 
+/***/ "./src/components/ui/separator.jsx":
+/*!*****************************************!*\
+  !*** ./src/components/ui/separator.jsx ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Separator: () => (/* binding */ Separator)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _radix_ui_react_separator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @radix-ui/react-separator */ "./node_modules/@radix-ui/react-separator/dist/index.mjs");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+"use client";
+
+
+
+
+
+const Separator = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  className,
+  orientation = "horizontal",
+  decorative = true,
+  ...props
+}, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_separator__WEBPACK_IMPORTED_MODULE_2__.Root, {
+  ref: ref,
+  decorative: decorative,
+  orientation: orientation,
+  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("shrink-0 bg-border", orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]", className),
+  ...props
+}));
+Separator.displayName = _radix_ui_react_separator__WEBPACK_IMPORTED_MODULE_2__.Root.displayName;
+
+
+/***/ }),
+
 /***/ "./src/components/ui/sonner.jsx":
 /*!**************************************!*\
   !*** ./src/components/ui/sonner.jsx ***!
@@ -18113,6 +18199,52 @@ const tabs = {
     title: "Event templates"
   }]
 };
+
+/***/ }),
+
+/***/ "./src/lib/toast.js":
+/*!**************************!*\
+  !*** ./src/lib/toast.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   showStaticToast: () => (/* binding */ showStaticToast),
+/* harmony export */   showToast: () => (/* binding */ showToast)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+
+
+function showToast(response) {
+  if (!response.message) {
+    return;
+  }
+  const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_1__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
+    onClick: () => sonner__WEBPACK_IMPORTED_MODULE_1__.toast.dismiss(toastId)
+  }, response.message, " ", response.url && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    onClick: () => {
+      window.open(response.url, "_blank");
+    },
+    className: "underline underline-offset-2 hover:no-underline"
+  }, "View event")), {
+    duration: 4000
+  });
+}
+function showStaticToast(message) {
+  if (!message) {
+    return;
+  }
+  const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_1__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
+    onClick: () => sonner__WEBPACK_IMPORTED_MODULE_1__.toast.dismiss(toastId)
+  }, message), {
+    duration: 4000
+  });
+}
 
 /***/ }),
 
@@ -34278,6 +34410,53 @@ var ScrollUpButton = SelectScrollUpButton;
 var ScrollDownButton = SelectScrollDownButton;
 var Separator = SelectSeparator;
 var Arrow2 = SelectArrow;
+
+//# sourceMappingURL=index.mjs.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@radix-ui/react-separator/dist/index.mjs":
+/*!***************************************************************!*\
+  !*** ./node_modules/@radix-ui/react-separator/dist/index.mjs ***!
+  \***************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Root: () => (/* binding */ Root),
+/* harmony export */   Separator: () => (/* binding */ Separator)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @radix-ui/react-primitive */ "./node_modules/@radix-ui/react-primitive/dist/index.mjs");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+// packages/react/separator/src/Separator.tsx
+
+
+
+var NAME = "Separator";
+var DEFAULT_ORIENTATION = "horizontal";
+var ORIENTATIONS = ["horizontal", "vertical"];
+var Separator = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((props, forwardedRef) => {
+  const { decorative, orientation: orientationProp = DEFAULT_ORIENTATION, ...domProps } = props;
+  const orientation = isValidOrientation(orientationProp) ? orientationProp : DEFAULT_ORIENTATION;
+  const ariaOrientation = orientation === "vertical" ? orientation : void 0;
+  const semanticProps = decorative ? { role: "none" } : { "aria-orientation": ariaOrientation, role: "separator" };
+  return /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(
+    _radix_ui_react_primitive__WEBPACK_IMPORTED_MODULE_2__.Primitive.div,
+    {
+      "data-orientation": orientation,
+      ...semanticProps,
+      ...domProps,
+      ref: forwardedRef
+    }
+  );
+});
+Separator.displayName = NAME;
+function isValidOrientation(orientation) {
+  return ORIENTATIONS.includes(orientation);
+}
+var Root = Separator;
 
 //# sourceMappingURL=index.mjs.map
 

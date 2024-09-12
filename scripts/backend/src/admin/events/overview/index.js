@@ -11,9 +11,9 @@ import { DataTable } from "@/components/data-table";
 import { Heading } from "@/components/heading";
 import { SortButton } from "@/components/sort-button";
 
-import { toast } from "sonner";
-
+import { showStaticToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
+
 import {
   Ban,
   CircleAlert,
@@ -91,23 +91,20 @@ const columns = [
     header: ({ column }) => <SortButton title="Event name" column={column} />,
     cell: ({ row }) => {
       const url = "#/events/" + parseInt(row.original.id) + "/main";
-      const status = row.original.status;
+      const wp_status = row.original.wp_status;
       return (
         <div className="grid space-y-1">
           <div className="flex gap-2 items-center text-foreground">
             <a
               href={url}
               className={cn(
-                "hover:underline hover:decoration-dotted underline-offset-4",
-                status === "trash" &&
-                  "text-muted-foreground pointer-events-none"
+                "hover:underline hover:decoration-dotted underline-offset-4"
               )}
             >
               {row.getValue("title")}
             </a>
-            {row.original.wp_status === "draft" && (
-              <Badge variant="outline">Draft</Badge>
-            )}
+            {wp_status === "draft" && <Badge variant="outline">Draft</Badge>}
+            {wp_status === "trash" && <Badge variant="outline">Trash</Badge>}
           </div>
         </div>
       );
@@ -229,18 +226,7 @@ export function EventsOverview() {
       .then((response) => {
         setIsLoading(false);
         setData(response);
-
-        if (toastMessage) {
-          const toastId = toast(
-            <div
-              className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
-              onClick={() => toast.dismiss(toastId)}
-            >
-              {toastMessage}
-            </div>,
-            { duration: 4000 }
-          );
-        }
+        showStaticToast(toastMessage);
       })
       .catch((error) => {
         setIsLoading(false);

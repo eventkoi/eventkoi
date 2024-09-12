@@ -1,6 +1,8 @@
 import { PencilLine } from "lucide-react";
 
-export function EventName({ event, setEvent, isTyping, setIsTyping }) {
+import { Panel } from "@/components/panel";
+
+export function EventName({ event, setEvent }) {
   const updateEventName = (e) => {
     setEvent((prevState) => ({
       ...prevState,
@@ -9,7 +11,7 @@ export function EventName({ event, setEvent, isTyping, setIsTyping }) {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <Panel className="flex-row items-center">
       <div
         className="inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-transparent hover:border-input"
         contentEditable
@@ -22,6 +24,6 @@ export function EventName({ event, setEvent, isTyping, setIsTyping }) {
         onKeyDown={(e) => e.key === "Enter" && updateEventName(e)}
       />
       <PencilLine className="w-3.5 h-3.5 text-ring" />
-    </div>
+    </Panel>
   );
 }

@@ -4,7 +4,7 @@ export function Box({ className, children }) {
   return (
     <div
       className={cn(
-        "w-full flex flex-col rounded-lg border text-sm bg-card text-card-foreground shadow-sm p-6 gap-6",
+        "w-full flex flex-col rounded-lg border text-sm bg-card text-card-foreground shadow-sm gap-6",
         className
       )}
     >

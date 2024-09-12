@@ -7,9 +7,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { Panel } from "@/components/panel";
+
 export function EventTemplate({ event, setEvent }) {
   return (
-    <div className="flex flex-col gap-2">
+    <Panel>
       <Label htmlFor="template">Select event template</Label>
       <Select
         value={event?.template}
@@ -27,6 +29,6 @@ export function EventTemplate({ event, setEvent }) {
           <SelectItem value="default">Default template</SelectItem>
         </SelectContent>
       </Select>
-    </div>
+    </Panel>
   );
 }

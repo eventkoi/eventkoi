@@ -31,6 +31,32 @@ export function EventEdit() {
   var view = parent[3];
   let eventId = parseInt(id) || 0;
 
+  const showToast = (response) => {
+    if (!response.message) {
+      return;
+    }
+
+    const toastId = toast(
+      <div
+        className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
+        onClick={() => toast.dismiss(toastId)}
+      >
+        {response.message}{" "}
+        {response.url && (
+          <div
+            onClick={() => {
+              window.open(response.url, "_blank");
+            }}
+            className="underline underline-offset-2 hover:no-underline"
+          >
+            View event
+          </div>
+        )}
+      </div>,
+      { duration: 4000 }
+    );
+  };
+
   const restoreEvent = async () => {
     setLoading(true);
     await apiRequest({
@@ -46,17 +72,7 @@ export function EventEdit() {
       .then((response) => {
         setEvent(response.event);
         setLoading(false);
-        if (response.success) {
-          const toastId = toast(
-            <div
-              className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
-              onClick={() => toast.dismiss(toastId)}
-            >
-              {response.success}
-            </div>,
-            { duration: 4000 }
-          );
-        }
+        showToast(response);
       })
       .catch((error) => {
         setLoading(false);
@@ -101,7 +117,7 @@ export function EventEdit() {
     );
   }
 
-  if (event?.status === "trash") {
+  if (event?.wp_status === "trash") {
     return (
       <div className="w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative">
         <div className="absolute top-4 left-4">
@@ -132,6 +148,7 @@ export function EventEdit() {
       </div>
     );
   }
+
   return (
     <>
       <EventHeader
@@ -147,6 +164,7 @@ export function EventEdit() {
             <Outlet context={[event, setEvent]} />
           </div>
         </div>
+        <div className="h-10" />
       </Wrapper>
     </>
   );

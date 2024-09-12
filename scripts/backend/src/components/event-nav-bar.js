@@ -12,9 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { toast } from "sonner";
-
 import { ChevronDown } from "lucide-react";
+
+import { showToast } from "@/lib/toast";
 
 export function EventNavBar({ loading, setLoading, event, setEvent }) {
   const navigate = useNavigate();
@@ -38,19 +38,42 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       .then((response) => {
         setLoading(false);
         navigate("/events");
-        if (response.success) {
-          const toastId = toast(
-            <div
-              className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
-              onClick={() => toast.dismiss(toastId)}
-            >
-              {response.success}
-            </div>,
-            { duration: 4000 }
+        showToast(response);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
+  const duplicateEvent = async () => {
+    setSaving(true);
+    setLoading(true);
+    const originalId = event?.id;
+    await apiRequest({
+      path: `${eventkoi_params.api}/duplicate_event`,
+      method: "post",
+      data: {
+        event_id: event?.id,
+      },
+      headers: {
+        "EVENTKOI-API-KEY": eventkoi_params.api_key,
+      },
+    })
+      .then((response) => {
+        setSaving(false);
+        setLoading(false);
+        setEvent(response);
+        showToast(response);
+
+        if (response.update_endpoint) {
+          window.location.hash = window.location.hash.replace(
+            originalId,
+            response.id
           );
         }
       })
       .catch(() => {
+        setSaving(false);
         setLoading(false);
       });
   };
@@ -72,25 +95,8 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
         console.log(response);
         setSaving(false);
         setEvent(response);
-        if (response.message) {
-          const toastId = toast(
-            <div
-              className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
-              onClick={() => toast.dismiss(toastId)}
-            >
-              {response.message}{" "}
-              <div
-                onClick={() => {
-                  window.open(response.url, "_blank");
-                }}
-                className="underline underline-offset-2 hover:no-underline"
-              >
-                View event
-              </div>
-            </div>,
-            { duration: 4000 }
-          );
-        }
+        showToast(response);
+
         if (response.update_endpoint) {
           window.location.hash = window.location.hash.replace(
             "add",
@@ -145,7 +151,12 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 z-[510]" align="end">
             <DropdownMenuItem>Schedule publish</DropdownMenuItem>
-            <DropdownMenuItem disabled={!event?.id}>
+            <DropdownMenuItem
+              disabled={!event?.id}
+              onClick={() => {
+                duplicateEvent();
+              }}
+            >
               Create duplicate event
             </DropdownMenuItem>
             <DropdownMenuSeparator />

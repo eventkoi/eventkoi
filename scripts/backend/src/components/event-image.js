@@ -10,6 +10,8 @@ import { Image, Loader2, Repeat2, Trash2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
+import { Panel } from "@/components/panel";
+
 const ALLOWED_MEDIA_TYPES = ["image"];
 
 export function EventImage({ event, setEvent }) {
@@ -75,7 +77,7 @@ export function EventImage({ event, setEvent }) {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <Panel>
       <Label htmlFor="image">Header banner image</Label>
       <div className="text-muted-foreground">Ideal size: 1800px x 900px</div>
       <MediaUpload
@@ -140,6 +142,6 @@ export function EventImage({ event, setEvent }) {
           </div>
         )}
       />
-    </div>
+    </Panel>
   );
 }

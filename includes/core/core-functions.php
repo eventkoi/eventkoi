@@ -106,7 +106,17 @@ function eventkoi_gmt_date( $format = false ) {
  * Get local timezone.
  */
 function eventkoi_timezone() {
-	$timezone = wp_timezone_string();
+	$timezone    = wp_timezone_string();
+	$wp_timezone = (array) wp_timezone();
+
+	if ( ! empty( $wp_timezone['timezone_type'] ) ) {
+		if ( 1 === $wp_timezone['timezone_type'] ) {
+			$timezone = str_replace( ':00', '', $timezone );
+			$timezone = str_replace( '+0', '+', $timezone );
+			$timezone = str_replace( '-0', '-', $timezone );
+			$timezone = 'UTC' . $timezone;
+		}
+	}
 
 	return apply_filters( 'eventkoi_timezone', $timezone );
 }

@@ -16,6 +16,8 @@ import {
 
 import { TimePicker } from "@/components/time-picker";
 
+import { Panel } from "@/components/panel";
+
 import { MoveRight } from "lucide-react";
 
 export function EventDate({ event, setEvent }) {
@@ -87,7 +89,7 @@ export function EventDate({ event, setEvent }) {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <Panel className="gap-3">
       <div className="flex gap-4 items-start">
         <div className="flex flex-col gap-2">
           <Label className={cn(event?.tbc && "text-muted-foreground")}>
@@ -235,6 +237,6 @@ export function EventDate({ event, setEvent }) {
           Change timezone.
         </a>
       </div>
-    </div>
+    </Panel>
   );
 }

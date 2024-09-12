@@ -443,7 +443,7 @@ class Event {
 
 		$result = array(
 			'event'   => self::get_event( $event_id ),
-			'success' => __( 'Event restored successfully.', 'eventkoi' ),
+			'message' => __( 'Event restored successfully.', 'eventkoi' ),
 		);
 
 		return $result;
@@ -459,7 +459,45 @@ class Event {
 		wp_trash_post( $event_id );
 
 		$result = array(
-			'success' => __( 'Event moved to Trash.', 'eventkoi' ),
+			'message' => __( 'Event moved to Trash.', 'eventkoi' ),
+		);
+
+		return $result;
+	}
+
+	/**
+	 * Duplicate a single event.
+	 */
+	public static function duplicate_event() {
+
+		$meta = self::get_meta();
+
+		/* translators: %s event title */
+		$title = sprintf( __( '[Duplicate]: %s', 'eventkoi' ), $meta['title'] );
+
+		$args = array(
+			'post_type'   => 'event',
+			'post_status' => 'draft',
+			'post_title'  => $title,
+			'post_name'   => sanitize_title_with_dashes( $title, '', 'save' ),
+			'post_author' => get_current_user_id(),
+		);
+
+		$last_id        = wp_insert_post( $args );
+		$event          = get_post( $last_id );
+		self::$event    = $event;
+		self::$event_id = ! empty( $event->ID ) ? $event->ID : 0;
+
+		wp_update_post( array( 'ID' => $last_id ) );
+
+		self::update_meta( $meta );
+
+		$result = array_merge(
+			array(
+				'update_endpoint' => true,
+				'message'         => __( 'Event duplicated.', 'eventkoi' ),
+			),
+			self::get_meta(),
 		);
 
 		return $result;

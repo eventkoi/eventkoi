@@ -1,9 +1,11 @@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { Panel } from "@/components/panel";
+
 export function EventDescription({ event, setEvent }) {
   return (
-    <div className="flex flex-col gap-2">
+    <Panel>
       <Label htmlFor="description">Event description</Label>
       <Textarea
         id="description"
@@ -17,6 +19,6 @@ export function EventDescription({ event, setEvent }) {
           }));
         }}
       />
-    </div>
+    </Panel>
   );
 }
