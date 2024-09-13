@@ -111,15 +111,17 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
 
   return (
     <div className="flex gap-2">
-      <Button
-        variant="ghost"
-        disabled={disabled}
-        onClick={() => {
-          saveEvent("draft");
-        }}
-      >
-        Save draft
-      </Button>
+      {event?.wp_status === "draft" && (
+        <Button
+          variant="ghost"
+          disabled={disabled}
+          onClick={() => {
+            saveEvent("draft");
+          }}
+        >
+          Save draft
+        </Button>
+      )}
       <Button
         variant="link"
         disabled={disabled}

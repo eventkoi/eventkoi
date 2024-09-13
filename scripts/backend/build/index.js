@@ -14566,6 +14566,7 @@ function EventsOverview() {
       path: `${eventkoi_params.api}/events?status=${queryStatus}`,
       method: "get"
     }).then(response => {
+      console.log(response);
       setIsLoading(false);
       setData(response);
       (0,_lib_toast__WEBPACK_IMPORTED_MODULE_8__.showStaticToast)(toastMessage);
@@ -15940,7 +15941,7 @@ function EventNavBar({
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, event?.wp_status === "draft" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "ghost",
     disabled: disabled,
     onClick: () => {
