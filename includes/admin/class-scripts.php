@@ -21,7 +21,7 @@ class Scripts {
 	/**
 	 * Init.
 	 */
-	public static function init() {
+	public function __construct() {
 
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ), 999 );
 	}

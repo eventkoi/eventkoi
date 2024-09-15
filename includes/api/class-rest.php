@@ -25,7 +25,7 @@ class REST {
 	/**
 	 * Init.
 	 */
-	public static function init() {
+	public function __construct() {
 
 		add_action( 'init', array( __CLASS__, 'register_api_key' ), 1 );
 		add_action( 'rest_api_init', array( __CLASS__, 'create_rest_routes' ) );

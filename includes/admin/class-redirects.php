@@ -21,7 +21,7 @@ class Redirects {
 	/**
 	 * Init.
 	 */
-	public static function init() {
+	public function __construct() {
 
 		add_action( 'admin_init', array( __CLASS__, 'admin_redirect' ) );
 	}

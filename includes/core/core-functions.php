@@ -12,6 +12,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Get template header.
+ */
+function eventkoi_get_header() {
+
+	if ( wp_is_block_theme() ) {
+		block_header_area();
+		wp_head();
+	} else {
+		get_header();
+	}
+}
+
+/**
+ * Get template footer.
+ */
+function eventkoi_get_footer() {
+
+	if ( wp_is_block_theme() ) {
+		block_footer_area();
+		wp_footer();
+	} else {
+		get_footer();
+	}
+}
+
+/**
+ * Get event template.
+ */
+function eventkoi_get_template() {
+
+	if ( file_exists( get_stylesheet_directory() . '/eventkoi/templates/single-event.php' ) ) {
+		require_once get_stylesheet_directory() . '/eventkoi/templates/single-event.php';
+	} elseif ( file_exists( get_template_directory() . '/eventkoi/templates/single-event.php' ) ) {
+		require_once get_template_directory() . '/eventkoi/templates/single-event.php';
+	} elseif ( file_exists( EVENTKOI_PLUGIN_DIR . 'templates/single-event.php' ) ) {
+		include_once EVENTKOI_PLUGIN_DIR . 'templates/single-event.php';
+	}
+}
+
+/**
  * Get permalink structure.
  */
 function eventkoi_get_permalink_structure() {

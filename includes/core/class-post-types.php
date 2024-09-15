@@ -21,7 +21,7 @@ class Post_Types {
 	/**
 	 * Init.
 	 */
-	public static function init() {
+	public function __construct() {
 
 		add_action( 'init', array( __CLASS__, 'register_post_types' ), 5 );
 		add_action( 'eventkoi_after_register_post_type', array( __CLASS__, 'maybe_flush_rewrite_rules' ) );

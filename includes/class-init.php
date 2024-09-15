@@ -26,20 +26,14 @@ class Init {
 
 		// Loaded in both frontend and backend.
 		$post_types = new \EventKoi\Core\Post_Types();
+		$template   = new \EventKoi\Core\Event\Template();
 		$api        = new \EventKoi\API\REST();
-
-		$post_types::init();
-		$api::init();
 
 		// Load inside admin only.
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 			$admin_menus     = new \EventKoi\Admin\Menus();
 			$admin_redirects = new \EventKoi\Admin\Redirects();
 			$admin_scripts   = new \EventKoi\Admin\Scripts();
-
-			$admin_menus::init();
-			$admin_redirects::init();
-			$admin_scripts::init();
 		}
 	}
 }

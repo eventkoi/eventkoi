@@ -21,7 +21,7 @@ class Menus {
 	/**
 	 * Init.
 	 */
-	public static function init() {
+	public function __construct() {
 
 		add_action( 'in_admin_header', array( __CLASS__, 'remove_admin_notices' ), 99 );
 		add_filter( 'admin_body_class', array( __CLASS__, 'admin_body_class' ), 99 );
