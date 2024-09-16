@@ -1,45 +1,7 @@
-.wp-eventkoi {
-  #wpbody-content {
-    padding-bottom: 0;
-  }
-
-  #wpcontent {
-    padding-left: 0;
-  }
-}
-
-.eventkoi-admin {
-  font-family:
-    inter,
-    -apple-system,
-    blinkmacsystemfont,
-    "Segoe UI",
-    roboto,
-    oxygen-sans,
-    ubuntu,
-    cantarell,
-    "Helvetica Neue",
-    sans-serif;
-  font-size: 16px;
-
-  p {
-    font-size: 16px;
-  }
-  li {
-    margin-bottom: 0px;
-  }
-  a {
-    &:hover,
-    &:focus {
-      box-shadow: none;
-      color: inherit;
+.eventkoi-root {
+  .eventkoi-image {
+    img {
+      max-height: 450px;
     }
-  }
-
-  [contenteditable="true"]:empty:before {
-    content: attr(placeholder);
-    pointer-events: none;
-    display: block;
-    color: #777777;
   }
 }

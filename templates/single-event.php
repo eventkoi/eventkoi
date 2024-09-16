@@ -5,7 +5,7 @@
  * @package EventKoi
  */
 
-?>
+if ( eventkoi_current_theme_support() ) : ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -19,7 +19,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
+	<?php wp_body_open(); ?>
 
 <div class="wp-site-blocks">
 
@@ -40,7 +40,27 @@
 
 </div>
 
-<?php wp_footer(); ?>
+	<?php wp_footer(); ?>
 
 </body>
 </html>
+
+	<?php
+else :
+
+	get_header();
+
+	do_action( 'eventkoi_after_event_content' );
+
+	while ( have_posts() ) :
+
+		echo wp_kses_post( eventkoi_get_content() );
+		do_action( 'eventkoi_single_event_template', the_post() );
+
+	endwhile;
+
+	do_action( 'eventkoi_after_event_content' );
+
+	get_footer();
+
+endif;

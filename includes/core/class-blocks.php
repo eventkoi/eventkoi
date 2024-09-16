@@ -49,13 +49,23 @@ class Blocks {
 		}
 
 		if ( ! empty( $block['attrs']['className'] ) && strstr( $block['attrs']['className'], 'eventkoi-image' ) ) {
-			$image_url     = wp_kses_post( $event::get_image() );
-			$block_content = str_replace( '[event_image_url]', $image_url, $block_content );
+			$image_url = wp_kses_post( $event::get_image() );
+
+			if ( ! $image_url ) {
+				$block_content = '';
+			} else {
+				$block_content = str_replace( '[event_image_url]', $image_url, $block_content );
+			}
 		}
 
 		if ( ! empty( $block['attrs']['className'] ) && strstr( $block['attrs']['className'], 'eventkoi-description' ) ) {
-			$description   = nl2br( $event::get_description() );
-			$block_content = str_replace( '[event_description]', $description, $block_content );
+			$description = nl2br( $event::get_description() );
+
+			if ( ! $description ) {
+				$block_content = '';
+			} else {
+				$block_content = str_replace( '[event_description]', $description, $block_content );
+			}
 		}
 
 		return $block_content;
