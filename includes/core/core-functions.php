@@ -16,12 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function eventkoi_get_header() {
 
-	if ( wp_is_block_theme() ) {
-		block_header_area();
-		wp_head();
-	} else {
-		get_header();
-	}
+	$content = '<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->';
+
+	return do_blocks( apply_filters( 'eventkoi_get_header', $content ) );
 }
 
 /**
@@ -29,26 +26,20 @@ function eventkoi_get_header() {
  */
 function eventkoi_get_footer() {
 
-	if ( wp_is_block_theme() ) {
-		block_footer_area();
-		wp_footer();
-	} else {
-		get_footer();
-	}
+	$content = '<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->';
+
+	return do_blocks( apply_filters( 'eventkoi_get_footer', $content ) );
 }
 
 /**
- * Get event template.
+ * Get template content.
  */
-function eventkoi_get_template() {
+function eventkoi_get_content() {
 
-	if ( file_exists( get_stylesheet_directory() . '/eventkoi/templates/single-event.php' ) ) {
-		require_once get_stylesheet_directory() . '/eventkoi/templates/single-event.php';
-	} elseif ( file_exists( get_template_directory() . '/eventkoi/templates/single-event.php' ) ) {
-		require_once get_template_directory() . '/eventkoi/templates/single-event.php';
-	} elseif ( file_exists( EVENTKOI_PLUGIN_DIR . 'templates/single-event.php' ) ) {
-		include_once EVENTKOI_PLUGIN_DIR . 'templates/single-event.php';
-	}
+	$template       = get_post( 9722 );
+	$event_template = $template->post_content;
+
+	return do_blocks( apply_filters( 'eventkoi_get_content', $event_template ) );
 }
 
 /**

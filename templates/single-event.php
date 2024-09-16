@@ -5,21 +5,42 @@
  * @package EventKoi
  */
 
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+?>
+<!doctype html>
+<html <?php language_attributes(); ?>>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<?php
+	$header  = eventkoi_get_header();
+	$content = eventkoi_get_content();
+	$footer  = eventkoi_get_footer();
+	?>
+	<?php wp_head(); ?>
+</head>
 
-do_action( 'eventkoi_before_event_content' );
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 
-while ( have_posts() ) :
+<div class="wp-site-blocks">
 
-	if ( class_exists( 'WooCommerce' ) ) {
-		wc_print_notices();
-	}
+	<?php echo wp_kses_post( $header ); ?>
 
-	do_action( 'eventkoi_single_event_template', the_post() );
+	<?php do_action( 'eventkoi_after_event_content' ); ?>
 
-endwhile; // end of the loop.
+	<?php while ( have_posts() ) : ?>
 
-do_action( 'eventkoi_after_event_content' );
+		<?php echo wp_kses_post( $content ); ?>
+		<?php do_action( 'eventkoi_single_event_template', the_post() ); ?>
+
+	<?php endwhile; ?>
+
+	<?php do_action( 'eventkoi_after_event_content' ); ?>
+
+	<?php echo wp_kses_post( $footer ); ?>
+
+</div>
+
+<?php wp_footer(); ?>
+
+</body>
+</html>
