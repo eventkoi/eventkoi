@@ -177,7 +177,7 @@ class Event {
 		$address2    = ! empty( $meta['address2'] ) ? esc_attr( $meta['address2'] ) : '';
 		$address3    = ! empty( $meta['address3'] ) ? esc_attr( $meta['address3'] ) : '';
 		$virtual_url = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
-		$description = ! empty( $meta['description'] ) ? sanitize_text_field( htmlentities( $meta['description'] ) ) : '';
+		$description = ! empty( $meta['description'] ) ? sanitize_textarea_field( htmlentities( $meta['description'] ) ) : '';
 		$image       = ! empty( $meta['image'] ) ? sanitize_url( $meta['image'] ) : '';
 		$image_id    = ! empty( $meta['image_id'] ) ? absint( $meta['image_id'] ) : 0;
 
@@ -188,7 +188,7 @@ class Event {
 		update_post_meta( self::$event_id, 'address2', (string) $address2 );
 		update_post_meta( self::$event_id, 'address3', (string) $address3 );
 		update_post_meta( self::$event_id, 'virtual_url', (string) $virtual_url );
-		update_post_meta( self::$event_id, 'description', normalize_whitespace( $description ) );
+		update_post_meta( self::$event_id, 'description', str_replace( "\n", '__NEWLINE__', $description ) );
 		update_post_meta( self::$event_id, 'image', (string) $image );
 		update_post_meta( self::$event_id, 'image_id', $image_id );
 
@@ -230,8 +230,9 @@ class Event {
 	 */
 	public static function get_description() {
 		$description = get_post_meta( self::$event_id, 'description', true );
+		$description = str_replace( '__NEWLINE__', "\n", $description );
 
-		return apply_filters( 'eventkoi_get_event_description', html_entity_decode( normalize_whitespace( $description ) ), self::$event_id, self::$event );
+		return apply_filters( 'eventkoi_get_event_description', html_entity_decode( $description ), self::$event_id, self::$event );
 	}
 
 	/**

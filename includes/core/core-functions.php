@@ -36,8 +36,15 @@ function eventkoi_get_footer() {
  */
 function eventkoi_get_content() {
 
-	$template       = get_post( 9722 );
-	$event_template = $template->post_content;
+	$template = get_post( get_option( 'eventkoi_default_template_id' ) );
+
+	$blocks = new \EventKoi\Core\Blocks();
+
+	if ( ! empty( $template ) && ! empty( $template->post_content ) ) {
+		$event_template = $template->post_content;
+	} else {
+		$event_template = $blocks::get_default_template();
+	}
 
 	return do_blocks( apply_filters( 'eventkoi_get_content', $event_template ) );
 }
