@@ -91,6 +91,7 @@ class Event {
 			'address3'          => self::get_address3(),
 			'virtual_url'       => self::get_virtual_url(),
 			'template'          => self::get_template(),
+			'show_timezone'     => self::show_timezone(),
 			'timezone'          => eventkoi_timezone(),
 		);
 
@@ -168,19 +169,21 @@ class Event {
 
 		do_action( 'eventkoi_before_update_event_meta', $meta, self::$event_id, self::$event );
 
-		$tbc         = ! empty( $meta['tbc'] );
-		$tbc_note    = ! empty( $meta['tbc_note'] ) ? esc_attr( $meta['tbc_note'] ) : '';
-		$start_date  = ! empty( $meta['start_date'] ) ? esc_attr( $meta['start_date'] ) : '';
-		$end_date    = ! empty( $meta['end_date'] ) ? esc_attr( $meta['end_date'] ) : '';
-		$type        = ! empty( $meta['type'] ) ? esc_attr( $meta['type'] ) : 'inperson';
-		$address1    = ! empty( $meta['address1'] ) ? esc_attr( $meta['address1'] ) : '';
-		$address2    = ! empty( $meta['address2'] ) ? esc_attr( $meta['address2'] ) : '';
-		$address3    = ! empty( $meta['address3'] ) ? esc_attr( $meta['address3'] ) : '';
-		$virtual_url = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
-		$description = ! empty( $meta['description'] ) ? sanitize_textarea_field( htmlentities( $meta['description'] ) ) : '';
-		$image       = ! empty( $meta['image'] ) ? sanitize_url( $meta['image'] ) : '';
-		$image_id    = ! empty( $meta['image_id'] ) ? absint( $meta['image_id'] ) : 0;
+		$show_timezone = ! empty( $meta['show_timezone'] );
+		$tbc           = ! empty( $meta['tbc'] );
+		$tbc_note      = ! empty( $meta['tbc_note'] ) ? esc_attr( $meta['tbc_note'] ) : '';
+		$start_date    = ! empty( $meta['start_date'] ) ? esc_attr( $meta['start_date'] ) : '';
+		$end_date      = ! empty( $meta['end_date'] ) ? esc_attr( $meta['end_date'] ) : '';
+		$type          = ! empty( $meta['type'] ) ? esc_attr( $meta['type'] ) : 'inperson';
+		$address1      = ! empty( $meta['address1'] ) ? esc_attr( $meta['address1'] ) : '';
+		$address2      = ! empty( $meta['address2'] ) ? esc_attr( $meta['address2'] ) : '';
+		$address3      = ! empty( $meta['address3'] ) ? esc_attr( $meta['address3'] ) : '';
+		$virtual_url   = ! empty( $meta['virtual_url'] ) ? esc_attr( $meta['virtual_url'] ) : '';
+		$description   = ! empty( $meta['description'] ) ? sanitize_textarea_field( htmlentities( $meta['description'] ) ) : '';
+		$image         = ! empty( $meta['image'] ) ? sanitize_url( $meta['image'] ) : '';
+		$image_id      = ! empty( $meta['image_id'] ) ? absint( $meta['image_id'] ) : 0;
 
+		update_post_meta( self::$event_id, 'show_timezone', (bool) $show_timezone );
 		update_post_meta( self::$event_id, 'tbc', (bool) $tbc );
 		update_post_meta( self::$event_id, 'tbc_note', (string) $tbc_note );
 		update_post_meta( self::$event_id, 'type', (string) $type );
@@ -360,6 +363,15 @@ class Event {
 		$tbc = get_post_meta( self::$event_id, 'tbc', true );
 
 		return apply_filters( 'eventkoi_get_event_tbc', (bool) $tbc, self::$event_id, self::$event );
+	}
+
+	/**
+	 * Returns whether the timezone should be shown.
+	 */
+	public static function show_timezone() {
+		$show_timezone = get_post_meta( self::$event_id, 'show_timezone', true );
+
+		return apply_filters( 'eventkoi_show_timezone', (bool) $show_timezone, self::$event_id, self::$event );
 	}
 
 	/**

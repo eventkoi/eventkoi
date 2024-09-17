@@ -15405,10 +15405,27 @@ function EventDate({
         tbc_note: e.target.value
       }));
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, "Current timezone is: ", event?.timezone, ".", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "#",
-    className: "underline"
-  }, "Change timezone.")));
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center space-x-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_4__.Checkbox, {
+    id: "show_timezone",
+    checked: event?.show_timezone,
+    onCheckedChange: bool => {
+      setEvent(prevState => ({
+        ...prevState,
+        show_timezone: bool
+      }));
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "show_timezone",
+    className: "peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  }, "Show ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "font-medium"
+  }, event?.timezone), ".", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: eventkoi_params.general_options_url,
+    className: "underline",
+    target: "_blank"
+  }, "Change timezone."))));
 }
 
 /***/ }),
@@ -15594,7 +15611,7 @@ function EventImage({
     htmlFor: "image"
   }, "Header banner image"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-muted-foreground"
-  }, "Ideal size: 1800px x 900px"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
+  }, "Ideal size: 1600px x 600px"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
     title: "Select event image",
     onSelect: media => {
       setEvent(prevState => ({
@@ -15761,20 +15778,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function EventName({
   event,
   setEvent
 }) {
+  const focusRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const updateEventName = e => {
+    var value = e.currentTarget.textContent;
     setEvent(prevState => ({
       ...prevState,
-      title: e.currentTarget.textContent
+      title: value
     }));
+    if (value) {
+      e.currentTarget.classList.remove("eventkoi-error");
+    }
+  };
+  const setEndOfContenteditable = contentEditableElement => {
+    var range, selection;
+    if (document.createRange) {
+      //Firefox, Chrome, Opera, Safari, IE 9+
+      range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+      range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+      selection = window.getSelection(); //get the selection object (allows you to change selection)
+      selection.removeAllRanges(); //remove any selections already made
+      selection.addRange(range); //make the range you have just created the visible selection
+    } else if (document.selection) {
+      //IE 8 and lower
+      range = document.body.createTextRange(); //Create a range (a range is a like the selection but invisible)
+      range.moveToElementText(contentEditableElement); //Select the entire contents of the element with the range
+      range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+      range.select(); //Select the range (make it the visible selection
+    }
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_1__.Panel, {
     className: "flex-row items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-transparent hover:border-input",
+    ref: focusRef,
+    id: "event-name",
+    className: "inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-2\tborder-transparent hover:border-input focus:border-input active:border-input",
     contentEditable: true,
     spellCheck: false,
     placeholder: "Click to add event name",
@@ -15783,9 +15826,16 @@ function EventName({
     },
     onBlur: e => updateEventName(e),
     onKeyDown: e => e.key === "Enter" && updateEventName(e)
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    onClick: () => {
+      var elem = document.getElementById("event-name");
+      setEndOfContenteditable(elem);
+      focusRef.current.focus();
+    },
+    className: "cursor-pointer"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "w-3.5 h-3.5 text-ring"
-  }));
+  })));
 }
 
 /***/ }),
@@ -15869,6 +15919,7 @@ function EventNavBar({
 }) {
   const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
   const [saving, setSaving] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const [nameError, setNameError] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   let disabled = !event?.id && !event?.title || saving;
   const trashEvent = async () => {
     setLoading(true);
@@ -15916,6 +15967,12 @@ function EventNavBar({
     });
   };
   const saveEvent = async status => {
+    if (!event.title) {
+      setNameError(true);
+      document.getElementById("event-name").focus();
+      document.getElementById("event-name").classList.add("eventkoi-error");
+      return;
+    }
     setSaving(true);
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: `${eventkoi_params.api}/update_event`,

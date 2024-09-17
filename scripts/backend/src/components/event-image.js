@@ -79,7 +79,7 @@ export function EventImage({ event, setEvent }) {
   return (
     <Panel>
       <Label htmlFor="image">Header banner image</Label>
-      <div className="text-muted-foreground">Ideal size: 1800px x 900px</div>
+      <div className="text-muted-foreground">Ideal size: 1600px x 600px</div>
       <MediaUpload
         title={"Select event image"}
         onSelect={(media) => {

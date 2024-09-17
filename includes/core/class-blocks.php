@@ -124,9 +124,9 @@ class Blocks {
 		$start_date = $event::get_start_date();
 		$start_date = date_i18n( 'D, M j, Y h:i A', strtotime( $start_date ) );
 		$end_date   = $event::get_end_date();
+
 		/* translators: %s event end date. */
 		$end_date = $end_date ? sprintf( __( 'to %s', 'eventkoi' ), date_i18n( 'D, M j, Y h:i A', strtotime( $end_date ) ) ) : '';
-
 		$timezone = eventkoi_timezone();
 
 		ob_start();
@@ -134,8 +134,19 @@ class Blocks {
 
 		<div class="eventkoi-flex">
 			<div class="eventkoi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7.688,3V5.812M20.813,3V5.812M3,22.687V8.625A2.812,2.812,0,0,1,5.813,5.812H22.688A2.812,2.812,0,0,1,25.5,8.625V22.687m-22.5,0A2.812,2.812,0,0,0,5.812,25.5H22.688A2.812,2.812,0,0,0,25.5,22.687m-22.5,0V13.312A2.812,2.812,0,0,1,5.813,10.5H22.688A2.812,2.812,0,0,1,25.5,13.312v9.375" transform="translate(-2.25 -2.25)" fill="none" stroke="#6f6f6f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></div>
-			<?php /* translators: %1$s start date, %2$s end date, %3$s timezone */ ?>
-			<div class="eventkoi-child"><?php printf( esc_html__( '%1$s %2$s %3$s', 'eventkoi' ), esc_html( $start_date ), esc_html( $end_date ), esc_html( $timezone ) ); ?></div>
+			<div class="eventkoi-child">
+				<?php
+				if ( $event::get_tbc() ) {
+					echo $event::get_tbc_note() ? esc_html( $event::get_tbc_note() ) : esc_html__( 'Date not yet confirmed.', 'eventkoi' );
+				} elseif ( $event::show_timezone() ) {
+					/* translators: %1$s start date, %2$s end date, %3$s timezone */
+					printf( esc_html__( '%1$s %2$s %3$s', 'eventkoi' ), esc_html( $start_date ), esc_html( $end_date ), esc_html( $timezone ) );
+				} else {
+					/* translators: %1$s start date, %2$s end date */
+					printf( esc_html__( '%1$s %2$s', 'eventkoi' ), esc_html( $start_date ), esc_html( $end_date ) );
+				}
+				?>
+			</div>
 		</div>
 
 		<?php
@@ -170,12 +181,16 @@ class Blocks {
 	public static function get_default_template() {
 
 		$content = '<!-- wp:group {"className":"eventkoi-root","layout":{"type":"constrained","wideSize":"900px","contentSize":"900px"}} -->
-<div class="wp-block-group eventkoi-root"><!-- wp:image {"sizeSlug":"large","className":"eventkoi-image","style":{"border":{"radius":"10px"}}} -->
-<figure class="wp-block-image size-large has-custom-border eventkoi-image"><img src="[event_image_url]" alt="" style="border-radius:10px"/></figure>
+<div class="wp-block-group eventkoi-root"><!-- wp:image {"sizeSlug":"large","className":"eventkoi-image","style":{"border":{"radius":"20px"}}} -->
+<figure class="wp-block-image size-large has-custom-border eventkoi-image"><img src="[event_image_url]" alt="" style="border-radius:20px"/></figure>
 <!-- /wp:image -->
 
-<!-- wp:columns {"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}}} -->
-<div class="wp-block-columns" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:column {"width":"66.66%"} -->
+<!-- wp:spacer {"height":"1px"} -->
+<div style="height:1px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:columns {"style":{"spacing":{"padding":{"top":"0","bottom":"0"}}}} -->
+<div class="wp-block-columns" style="padding-top:0;padding-bottom:0"><!-- wp:column {"width":"66.66%"} -->
 <div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:heading {"className":"eventkoi-heading","style":{"typography":{"fontStyle":"normal","fontWeight":"600"},"color":{"text":"#333333"},"elements":{"link":{"color":{"text":"#333333"}}}},"fontFamily":"body"} -->
 <h2 class="wp-block-heading eventkoi-heading has-text-color has-link-color has-body-font-family" style="color:#333333;font-style:normal;font-weight:600">[event_heading]</h2>
 <!-- /wp:heading --></div>
@@ -188,19 +203,27 @@ class Blocks {
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
+<!-- wp:spacer {"height":"1px"} -->
+<div style="height:1px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
 <!-- wp:columns {"style":{"border":{"radius":"20px"},"color":{"background":"#f1f1f1"},"spacing":{"blockGap":{"left":"var:preset|spacing|60"},"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} -->
-<div class="wp-block-columns has-background" style="border-radius:20px;background-color:#f1f1f1;padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:paragraph {"className":"eventkoi-date"} -->
+<div class="wp-block-columns has-background" style="border-radius:20px;background-color:#f1f1f1;padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph {"className":"eventkoi-date"} -->
 <p class="eventkoi-date">[event_date]</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:paragraph {"className":"eventkoi-location"} -->
+<!-- wp:column {"verticalAlignment":"center"} -->
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:paragraph {"className":"eventkoi-location"} -->
 <p class="eventkoi-location">[event_location]</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
+
+<!-- wp:spacer {"height":"1px"} -->
+<div style="height:1px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
 
 <!-- wp:paragraph {"className":"eventkoi-description"} -->
 <p class="eventkoi-description">[event_description]</p>

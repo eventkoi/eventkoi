@@ -27,3 +27,6 @@
   display: block;
   color: #777777;
 }
+.eventkoi-admin .eventkoi-error {
+  border-color: #d13d3d !important;
+}

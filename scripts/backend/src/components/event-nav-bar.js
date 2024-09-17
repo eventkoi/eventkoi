@@ -20,6 +20,7 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
   const navigate = useNavigate();
 
   const [saving, setSaving] = useState(false);
+  const [nameError, setNameError] = useState(false);
 
   let disabled = (!event?.id && !event?.title) || saving;
 
@@ -79,6 +80,12 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
   };
 
   const saveEvent = async (status) => {
+    if (!event.title) {
+      setNameError(true);
+      document.getElementById("event-name").focus();
+      document.getElementById("event-name").classList.add("eventkoi-error");
+      return;
+    }
     setSaving(true);
     await apiRequest({
       path: `${eventkoi_params.api}/update_event`,

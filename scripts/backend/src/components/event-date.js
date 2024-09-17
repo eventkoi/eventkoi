@@ -231,11 +231,30 @@ export function EventDate({ event, setEvent }) {
         </div>
       )}
 
-      <div>
-        Current timezone is: {event?.timezone}.{" "}
-        <a href="#" className="underline">
-          Change timezone.
-        </a>
+      <div className="flex items-center space-x-2">
+        <Checkbox
+          id="show_timezone"
+          checked={event?.show_timezone}
+          onCheckedChange={(bool) => {
+            setEvent((prevState) => ({
+              ...prevState,
+              show_timezone: bool,
+            }));
+          }}
+        />
+        <label
+          htmlFor="show_timezone"
+          className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          Show <span className="font-medium">{event?.timezone}</span>.{" "}
+          <a
+            href={eventkoi_params.general_options_url}
+            className="underline"
+            target="_blank"
+          >
+            Change timezone.
+          </a>
+        </label>
       </div>
     </Panel>
   );

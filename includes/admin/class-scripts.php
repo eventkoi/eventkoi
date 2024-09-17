@@ -51,14 +51,15 @@ class Scripts {
 		$api    = new \EventKoi\API\REST();
 
 		$eventkoi_params = array(
-			'version'   => EVENTKOI_VERSION,
-			'api'       => EVENTKOI_API,
-			'api_key'   => $api::get_api_key(),
-			'date_now'  => wp_date( 'j M Y', time() ),
-			'date_24h'  => wp_date( 'j M Y', strtotime( '+1 day', time() ) ),
-			'time_now'  => wp_date( 'g:i A', strtotime( '+1 hour', time() ) ),
-			'new_event' => $event::get_meta(),
-			'counts'    => array(
+			'version'             => EVENTKOI_VERSION,
+			'api'                 => EVENTKOI_API,
+			'general_options_url' => admin_url( 'options-general.php' ),
+			'api_key'             => $api::get_api_key(),
+			'date_now'            => wp_date( 'j M Y', time() ),
+			'date_24h'            => wp_date( 'j M Y', strtotime( '+1 day', time() ) ),
+			'time_now'            => wp_date( 'g:i A', strtotime( '+1 hour', time() ) ),
+			'new_event'           => $event::get_meta(),
+			'counts'              => array(
 				'events' => $events::get_counts(),
 			),
 		);
