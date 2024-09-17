@@ -9,3 +9,9 @@
   flex-direction: row;
   gap: 1rem;
 }
+.eventkoi-root .eventkoi-share {
+  display: flex;
+  align-items: flex-end;
+  justify-content: end;
+  min-height: 56px;
+}

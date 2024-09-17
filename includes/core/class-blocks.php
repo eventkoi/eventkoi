@@ -103,6 +103,10 @@ class Blocks {
 			$block_content = self::render_date( $event );
 		}
 
+		if ( ! empty( $block['attrs']['className'] ) && strstr( $block['attrs']['className'], 'eventkoi-share' ) ) {
+			$block_content = '<div class="eventkoi-share"></div>';
+		}
+
 		if ( ! empty( $block['attrs']['className'] ) && strstr( $block['attrs']['className'], 'eventkoi-location' ) ) {
 			$block_content = self::render_location( $event );
 		}
@@ -170,12 +174,22 @@ class Blocks {
 <figure class="wp-block-image size-large has-custom-border eventkoi-image"><img src="[event_image_url]" alt="" style="border-radius:10px"/></figure>
 <!-- /wp:image -->
 
-<!-- wp:heading {"level":2,"className":"eventkoi-heading","style":{"typography":{"fontStyle":"normal","fontWeight":"600"},"color":{"text":"#333333"},"elements":{"link":{"color":{"text":"#333333"}}}},"fontFamily":"body"} -->
+<!-- wp:columns {"style":{"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}}} -->
+<div class="wp-block-columns" style="padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><!-- wp:column {"width":"66.66%"} -->
+<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:heading {"className":"eventkoi-heading","style":{"typography":{"fontStyle":"normal","fontWeight":"600"},"color":{"text":"#333333"},"elements":{"link":{"color":{"text":"#333333"}}}},"fontFamily":"body"} -->
 <h2 class="wp-block-heading eventkoi-heading has-text-color has-link-color has-body-font-family" style="color:#333333;font-style:normal;font-weight:600">[event_heading]</h2>
-<!-- /wp:heading -->
+<!-- /wp:heading --></div>
+<!-- /wp:column -->
 
-<!-- wp:columns {"style":{"border":{"radius":"20px"},"color":{"background":"#f1f1f1"},"spacing":{"blockGap":{"left":"var:preset|spacing|60"},"padding":{"top":"var:preset|spacing|30","bottom":"var:preset|spacing|30"}}}} -->
-<div class="wp-block-columns has-background" style="border-radius:20px;background-color:#f1f1f1;padding-top:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30)"><!-- wp:column -->
+<!-- wp:column {"verticalAlignment":"center","width":"33.33%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:33.33%"><!-- wp:paragraph {"align":"right","className":"eventkoi-share"} -->
+<p class="has-text-align-right eventkoi-share"></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns {"style":{"border":{"radius":"20px"},"color":{"background":"#f1f1f1"},"spacing":{"blockGap":{"left":"var:preset|spacing|60"},"padding":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|20"}}}} -->
+<div class="wp-block-columns has-background" style="border-radius:20px;background-color:#f1f1f1;padding-top:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20)"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:paragraph {"className":"eventkoi-date"} -->
 <p class="eventkoi-date">[event_date]</p>
 <!-- /wp:paragraph --></div>
