@@ -4,3 +4,8 @@
 .eventkoi-root .eventkoi-image img {
   max-height: 450px;
 }
+.eventkoi-root .eventkoi-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
