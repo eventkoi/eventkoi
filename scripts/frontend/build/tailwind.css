@@ -122,10 +122,6 @@
   left: 0.625rem !important;
 }
 
-.left-4 {
-  left: 1rem !important;
-}
-
 .left-\[0px\] {
   left: 0px !important;
 }
@@ -253,6 +249,10 @@
   margin-left: 0.25rem !important;
 }
 
+.ml-3 {
+  margin-left: 0.75rem !important;
+}
+
 .ml-auto {
   margin-left: auto !important;
 }
@@ -283,14 +283,6 @@
 
 .mt-auto {
   margin-top: auto !important;
-}
-
-.ml-2 {
-  margin-left: 0.5rem !important;
-}
-
-.ml-3 {
-  margin-left: 0.75rem !important;
 }
 
 .block {
@@ -408,6 +400,10 @@
   height: 1px !important;
 }
 
+.h-\[56px\] {
+  height: 56px !important;
+}
+
 .h-\[var\(--radix-navigation-menu-viewport-height\)\] {
   height: var(--radix-navigation-menu-viewport-height) !important;
 }
@@ -428,10 +424,6 @@
   height: 1px !important;
 }
 
-.h-\[56px\] {
-  height: 56px !important;
-}
-
 .max-h-96 {
   max-height: 24rem !important;
 }
@@ -448,10 +440,6 @@
   max-height: 100vh !important;
 }
 
-.min-h-6 {
-  min-height: 1.5rem !important;
-}
-
 .min-h-\[110px\] {
   min-height: 110px !important;
 }
@@ -462,10 +450,6 @@
 
 .min-h-\[80px\] {
   min-height: 80px !important;
-}
-
-.min-h-\[calc\(100vh-46px\)\] {
-  min-height: calc(100vh - 46px) !important;
 }
 
 .w-1\/6 {
@@ -609,6 +593,10 @@
   min-width: 12rem !important;
 }
 
+.min-w-\[138px\] {
+  min-width: 138px !important;
+}
+
 .min-w-\[80px\] {
   min-width: 80px !important;
 }
@@ -621,20 +609,12 @@
   min-width: var(--radix-select-trigger-width) !important;
 }
 
-.min-w-\[138px\] {
-  min-width: 138px !important;
-}
-
 .max-w-\[1280px\] {
   max-width: 1280px !important;
 }
 
 .max-w-\[422px\] {
   max-width: 422px !important;
-}
-
-.max-w-\[940px\] {
-  max-width: 940px !important;
 }
 
 .max-w-lg {
@@ -758,10 +738,6 @@
   list-style-type: none !important;
 }
 
-.grid-cols-\[200px_1fr\] {
-  grid-template-columns: 200px 1fr !important;
-}
-
 .flex-row {
   flex-direction: row !important;
 }
@@ -834,16 +810,8 @@
   gap: 1.5rem !important;
 }
 
-.gap-8 {
-  gap: 2rem !important;
-}
-
 .gap-\[1px\] {
   gap: 1px !important;
-}
-
-.gap-\[80px\] {
-  gap: 80px !important;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -942,6 +910,10 @@
   border-radius: 0.25rem !important;
 }
 
+.rounded-\[20px\] {
+  border-radius: 20px !important;
+}
+
 .rounded-\[inherit\] {
   border-radius: inherit !important;
 }
@@ -964,10 +936,6 @@
 
 .rounded-xl {
   border-radius: 0.75rem !important;
-}
-
-.rounded-\[20px\] {
-  border-radius: 20px !important;
 }
 
 .rounded-l-none {
@@ -1352,6 +1320,10 @@
   font-size: 0.8rem !important;
 }
 
+.text-\[1rem\] {
+  font-size: 1rem !important;
+}
+
 .text-base {
   font-size: 1rem !important;
   line-height: 1.5rem !important;
@@ -1377,10 +1349,6 @@
   line-height: 1rem !important;
 }
 
-.text-\[1rem\] {
-  font-size: 1rem !important;
-}
-
 .font-medium {
   font-weight: 500 !important;
 }
@@ -1391,10 +1359,6 @@
 
 .font-semibold {
   font-weight: 600 !important;
-}
-
-.capitalize {
-  text-transform: capitalize !important;
 }
 
 .tabular-nums {
@@ -1416,11 +1380,6 @@
 
 .tracking-widest {
   letter-spacing: 0.1em !important;
-}
-
-.text-\[\#48BEFA\] {
-  --tw-text-opacity: 1 !important;
-  color: rgb(72 190 250 / var(--tw-text-opacity)) !important;
 }
 
 .text-accent-foreground {
@@ -1459,10 +1418,6 @@
   color: hsl(var(--muted-foreground) / 0.6) !important;
 }
 
-.text-muted-foreground\/80 {
-  color: hsl(var(--muted-foreground) / 0.8) !important;
-}
-
 .text-popover-foreground {
   color: hsl(var(--popover-foreground)) !important;
 }
@@ -1479,24 +1434,12 @@
   color: hsl(var(--primary) / 0.2) !important;
 }
 
-.text-primary\/40 {
-  color: hsl(var(--primary) / 0.4) !important;
-}
-
-.text-primary\/60 {
-  color: hsl(var(--primary) / 0.6) !important;
-}
-
 .text-ring {
   color: hsl(var(--ring)) !important;
 }
 
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground)) !important;
-}
-
-.text-success {
-  color: hsl(var(--success)) !important;
 }
 
 .underline {
@@ -1900,10 +1843,6 @@
 
 .hover\:bg-secondary\/80:hover {
   background-color: hsl(var(--secondary) / 0.8) !important;
-}
-
-.hover\:bg-transparent\/10:hover {
-  background-color: rgb(0 0 0 / 0.1) !important;
 }
 
 .hover\:bg-transparent:hover {
@@ -2667,10 +2606,6 @@
 @media (min-width: 768px) {
   .md\:absolute {
     position: absolute !important;
-  }
-
-  .md\:min-h-\[calc\(100vh-32px\)\] {
-    min-height: calc(100vh - 32px) !important;
   }
 
   .md\:w-\[var\(--radix-navigation-menu-viewport-width\)\] {
