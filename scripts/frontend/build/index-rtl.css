@@ -9,9 +9,15 @@
   flex-direction: row;
   gap: 1rem;
 }
+.eventkoi-root .eventkoi-flex .eventkoi-icon {
+  display: flex;
+}
 .eventkoi-root .eventkoi-share {
   display: flex;
   align-items: flex-end;
   justify-content: end;
   min-height: 56px;
+}
+.eventkoi-root .eventkoi-text-secondary {
+  opacity: 0.6;
 }

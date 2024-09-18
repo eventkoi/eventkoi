@@ -174,6 +174,7 @@ export function EventDate({ event, setEvent }) {
                 <Calendar
                   mode="single"
                   selected={endDate}
+                  fromDate={startDate ? startDate : new Date()}
                   onSelect={(d) => handleEndSelect(d)}
                   initialFocus
                 />

@@ -15366,6 +15366,7 @@ function EventDate({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_calendar__WEBPACK_IMPORTED_MODULE_3__.Calendar, {
     mode: "single",
     selected: endDate,
+    fromDate: startDate ? startDate : new Date(),
     onSelect: d => handleEndSelect(d),
     initialFocus: true
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

@@ -121,13 +121,37 @@ class Blocks {
 	 */
 	public static function render_date( $event ) {
 
-		$start_date = $event::get_start_date();
-		$start_date = date_i18n( 'D, M j, Y h:i A', strtotime( $start_date ) );
-		$end_date   = $event::get_end_date();
+		// Get start date.
+		if ( $event::get_start_date() ) {
+			if ( intval( date_i18n( 'i', strtotime( $event::get_start_date() ) ) ) > 0 ) {
+				$start_format_y = 'D, M j, Y • g:ia';
+				$start_format   = 'D, M j • g:ia';
+			} else {
+				$start_format_y = 'D, M j, Y • ga';
+				$start_format   = 'D, M j • ga';
+			}
+			$start_date = gmdate( 'Y', strtotime( $event::get_start_date() ) ) === gmdate( 'Y' ) ? date_i18n( $start_format, strtotime( $event::get_start_date() ) ) : date_i18n( $start_format_y, strtotime( $event::get_start_date() ) );
+		} else {
+			$start_date = '';
+		}
 
-		/* translators: %s event end date. */
-		$end_date = $end_date ? sprintf( __( 'to %s', 'eventkoi' ), date_i18n( 'D, M j, Y h:i A', strtotime( $end_date ) ) ) : '';
-		$timezone = eventkoi_timezone();
+		// Get end date.
+		if ( $event::get_end_date() ) {
+			if ( intval( date_i18n( 'i', strtotime( $event::get_end_date() ) ) ) > 0 ) {
+				$end_format_y = 'D, M j, Y • g:ia';
+				$end_format   = 'D, M j • g:ia';
+			} else {
+				$end_format_y = 'D, M j, Y • ga';
+				$end_format   = 'D, M j • ga';
+			}
+			$end_date  = '<span class="eventkoi-text-secondary">' . esc_html__( 'to', 'eventkoi' ) . '</span><br />';
+			$end_date .= gmdate( 'Y', strtotime( $event::get_end_date() ) ) === gmdate( 'Y' ) ? date_i18n( $end_format, strtotime( $event::get_end_date() ) ) : date_i18n( $end_format_y, strtotime( $event::get_end_date() ) );
+		} else {
+			$end_date = '';
+		}
+
+		// Add timezone string.
+		$timezone = '<br /><span class="eventkoi-text-secondary">' . eventkoi_timezone() . '</span>';
 
 		ob_start();
 		?>
@@ -136,14 +160,14 @@ class Blocks {
 			<div class="eventkoi-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M7.688,3V5.812M20.813,3V5.812M3,22.687V8.625A2.812,2.812,0,0,1,5.813,5.812H22.688A2.812,2.812,0,0,1,25.5,8.625V22.687m-22.5,0A2.812,2.812,0,0,0,5.812,25.5H22.688A2.812,2.812,0,0,0,25.5,22.687m-22.5,0V13.312A2.812,2.812,0,0,1,5.813,10.5H22.688A2.812,2.812,0,0,1,25.5,13.312v9.375" transform="translate(-2.25 -2.25)" fill="none" stroke="#6f6f6f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg></div>
 			<div class="eventkoi-child">
 				<?php
-				if ( $event::get_tbc() ) {
+				if ( $event::get_tbc() || ( empty( $start_date ) && empty( $end_date ) ) ) {
 					echo $event::get_tbc_note() ? esc_html( $event::get_tbc_note() ) : esc_html__( 'Date not yet confirmed.', 'eventkoi' );
 				} elseif ( $event::show_timezone() ) {
 					/* translators: %1$s start date, %2$s end date, %3$s timezone */
-					printf( esc_html__( '%1$s %2$s %3$s', 'eventkoi' ), esc_html( $start_date ), esc_html( $end_date ), esc_html( $timezone ) );
+					printf( esc_html__( '%1$s %2$s %3$s', 'eventkoi' ), wp_kses_post( $start_date ), wp_kses_post( $end_date ), wp_kses_post( $timezone ) );
 				} else {
 					/* translators: %1$s start date, %2$s end date */
-					printf( esc_html__( '%1$s %2$s', 'eventkoi' ), esc_html( $start_date ), esc_html( $end_date ) );
+					printf( esc_html__( '%1$s %2$s', 'eventkoi' ), wp_kses_post( $start_date ), wp_kses_post( $end_date ) );
 				}
 				?>
 			</div>
