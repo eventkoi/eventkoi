@@ -24,6 +24,114 @@
   --success: 158 48% 45%;
 }
 
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
 .sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -146,6 +254,10 @@
   right: 1rem !important;
 }
 
+.right-\[5px\] {
+  right: 5px !important;
+}
+
 .top-0 {
   top: 0px !important;
 }
@@ -166,6 +278,10 @@
   top: 1rem !important;
 }
 
+.top-5 {
+  top: 1.25rem !important;
+}
+
 .top-8 {
   top: 2rem !important;
 }
@@ -182,12 +298,24 @@
   top: 50% !important;
 }
 
+.top-\[5px\] {
+  top: 5px !important;
+}
+
 .top-\[60\%\] {
   top: 60% !important;
 }
 
 .top-full {
   top: 100% !important;
+}
+
+.right-\[9px\] {
+  right: 9px !important;
+}
+
+.top-\[9px\] {
+  top: 9px !important;
 }
 
 .z-10 {
@@ -216,6 +344,14 @@
 
 .z-\[510\] {
   z-index: 510 !important;
+}
+
+.z-\[100000\] {
+  z-index: 100000 !important;
+}
+
+.m-0 {
+  margin: 0px !important;
 }
 
 .-mx-1 {
@@ -283,6 +419,10 @@
 
 .mt-auto {
   margin-top: auto !important;
+}
+
+.box-border {
+  box-sizing: border-box !important;
 }
 
 .block {
@@ -424,6 +564,14 @@
   height: 1px !important;
 }
 
+.h-16 {
+  height: 4rem !important;
+}
+
+.h-14 {
+  height: 3.5rem !important;
+}
+
 .max-h-96 {
   max-height: 24rem !important;
 }
@@ -448,8 +596,16 @@
   min-height: 250px !important;
 }
 
+.min-h-\[50px\] {
+  min-height: 50px !important;
+}
+
 .min-h-\[80px\] {
   min-height: 80px !important;
+}
+
+.min-h-\[66px\] {
+  min-height: 66px !important;
 }
 
 .w-1\/6 {
@@ -583,6 +739,10 @@
 
 .w-px {
   width: 1px !important;
+}
+
+.w-16 {
+  width: 4rem !important;
 }
 
 .min-w-0 {
@@ -978,6 +1138,10 @@
   border-bottom-width: 1px !important;
 }
 
+.border-b-2 {
+  border-bottom-width: 2px !important;
+}
+
 .border-l {
   border-left-width: 1px !important;
 }
@@ -1044,6 +1208,10 @@
 
 .border-primary {
   border-color: hsl(var(--primary)) !important;
+}
+
+.border-primary\/30 {
+  border-color: hsl(var(--primary) / 0.3) !important;
 }
 
 .border-transparent {
@@ -1159,6 +1327,10 @@
   padding: 1px !important;
 }
 
+.p-2 {
+  padding: 0.5rem !important;
+}
+
 .px-0 {
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -1197,6 +1369,11 @@
 .px-8 {
   padding-left: 2rem !important;
   padding-right: 2rem !important;
+}
+
+.px-\[60px\] {
+  padding-left: 60px !important;
+  padding-right: 60px !important;
 }
 
 .py-0\.5 {
@@ -1241,6 +1418,10 @@
 
 .pb-4 {
   padding-bottom: 1rem !important;
+}
+
+.pb-\[60px\] {
+  padding-bottom: 60px !important;
 }
 
 .pl-2\.5 {
@@ -1291,6 +1472,26 @@
   padding-top: 1rem !important;
 }
 
+.pt-6 {
+  padding-top: 1.5rem !important;
+}
+
+.pb-\[30px\] {
+  padding-bottom: 30px !important;
+}
+
+.pt-\[30px\] {
+  padding-top: 30px !important;
+}
+
+.pb-\[20px\] {
+  padding-bottom: 20px !important;
+}
+
+.pb-\[10px\] {
+  padding-bottom: 10px !important;
+}
+
 .text-left {
   text-align: left !important;
 }
@@ -1309,6 +1510,10 @@
 
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+.font-sans {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 
 .text-2xl {
@@ -1442,8 +1647,16 @@
   color: hsl(var(--secondary-foreground)) !important;
 }
 
+.text-foreground\/90 {
+  color: hsl(var(--foreground) / 0.9) !important;
+}
+
 .underline {
   text-decoration-line: underline !important;
+}
+
+.no-underline {
+  text-decoration-line: none !important;
 }
 
 .decoration-dotted {
@@ -2005,6 +2218,10 @@
   opacity: 0.5 !important;
 }
 
+.group:hover .group-hover\:bg-input {
+  background-color: hsl(var(--input)) !important;
+}
+
 .group:hover .group-hover\:opacity-100 {
   opacity: 1 !important;
 }
@@ -2550,6 +2767,10 @@
 
   .sm\:mt-0 {
     margin-top: 0px !important;
+  }
+
+  .sm\:max-w-\[685px\] {
+    max-width: 685px !important;
   }
 
   .sm\:max-w-sm {

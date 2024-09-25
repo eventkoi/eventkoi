@@ -41,7 +41,11 @@ class Scripts {
 		wp_register_script( 'eventkoi-frontend', $build_url . 'index.js', $asset_file['dependencies'], $asset_file['version'], true );
 		wp_enqueue_script( 'eventkoi-frontend' );
 
-		$eventkoi_params = array();
+		$event = new \EventKoi\Core\Event( get_the_ID() );
+
+		$eventkoi_params = array(
+			'event' => $event::get_meta(),
+		);
 
 		wp_localize_script( 'eventkoi-frontend', 'eventkoi_params', apply_filters( 'eventkoi_frontend_params', $eventkoi_params ) );
 
