@@ -781,7 +781,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/icons */ "./src/icons/index.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/files.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/files.js");
 /* harmony import */ var _components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/ui/dialog */ "./src/components/ui/dialog.jsx");
 /* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
 /* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
@@ -795,22 +796,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function ShareButton() {
   const {
     event
   } = eventkoi_params;
+  const [copying, setCopying] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__.Dialog, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__.DialogTrigger, {
     asChild: true
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "outline",
     className: "bg-transparent hover:bg-transparent border border-foreground border-solid cursor-pointer rounded-[20px] h-[56px] min-w-[138px] text-[1rem] font-medium"
   }, "Share", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.ShareIcon, null))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__.DialogContent, {
-    className: "sm:max-w-[685px] p-0"
+    className: "sm:max-w-[685px] p-0",
+    onOpenAutoFocus: e => e.preventDefault()
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__.DialogHeader, {
     className: "flex items-center justify-center p-4 border-0 border-solid border-b-2 border-input"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__.DialogTitle, {
     className: "font-sans\ttext-xl m-0 text-foreground"
-  }, "Share this event")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Share this event"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dialog__WEBPACK_IMPORTED_MODULE_4__.DialogDescription, {
+    className: "hidden"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col pt-[30px] pb-[60px] px-[60px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4 items-center justify-between pb-[60px]"
@@ -846,10 +852,19 @@ function ShareButton() {
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "secondary",
     type: "submit",
-    className: "absolute h-12 right-[9px] top-[9px] border-none cursor-pointer"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    className: "absolute h-12 right-[9px] top-[9px] border-none cursor-pointer hover:bg-input",
+    onClick: () => {
+      setCopying(true);
+      navigator.clipboard.writeText(event?.url);
+      setTimeout(() => {
+        setCopying(false);
+      }, 1200);
+    }
+  }, copying ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
     className: "mr-2 h-5 w-5"
-  }), "Copy")))))));
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    className: "mr-2 h-5 w-5"
+  }), copying ? "Copied!" : "Copy")))))));
 }
 var rootElement = document.getElementsByClassName("eventkoi-share")[0];
 if (rootElement) {
@@ -983,6 +998,37 @@ var defaultAttributes = {
 
 
 //# sourceMappingURL=defaultAttributes.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/check-check.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/check-check.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CheckCheck)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const CheckCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("CheckCheck", [
+  ["path", { d: "M18 6 7 17l-5-5", key: "116fxf" }],
+  ["path", { d: "m22 10-7.5 7.5L13 16", key: "ke71qq" }]
+]);
+
+
+//# sourceMappingURL=check-check.js.map
 
 
 /***/ }),

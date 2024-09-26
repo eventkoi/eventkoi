@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { createRoot } from "react-dom/client";
 
@@ -11,11 +13,12 @@ import {
   XIcon,
 } from "@/icons";
 
-import { Files } from "lucide-react";
+import { CheckCheck, Files } from "lucide-react";
 
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -29,6 +32,8 @@ import { ShareLink } from "@/components/share-link";
 export function ShareButton() {
   const { event } = eventkoi_params;
 
+  const [copying, setCopying] = useState(false);
+
   return (
     <div>
       <Dialog>
@@ -41,11 +46,15 @@ export function ShareButton() {
             <ShareIcon />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[685px] p-0">
+        <DialogContent
+          className="sm:max-w-[685px] p-0"
+          onOpenAutoFocus={(e) => e.preventDefault()}
+        >
           <DialogHeader className="flex items-center justify-center p-4 border-0 border-solid border-b-2 border-input">
             <DialogTitle className="font-sans	text-xl m-0 text-foreground">
               Share this event
             </DialogTitle>
+            <DialogDescription className="hidden"></DialogDescription>
           </DialogHeader>
           <div className="flex flex-col pt-[30px] pb-[60px] px-[60px]">
             <div className="flex gap-4 items-center justify-between pb-[60px]">
@@ -68,10 +77,21 @@ export function ShareButton() {
                 <Button
                   variant="secondary"
                   type="submit"
-                  className="absolute h-12 right-[9px] top-[9px] border-none cursor-pointer"
+                  className="absolute h-12 right-[9px] top-[9px] border-none cursor-pointer hover:bg-input"
+                  onClick={() => {
+                    setCopying(true);
+                    navigator.clipboard.writeText(event?.url);
+                    setTimeout(() => {
+                      setCopying(false);
+                    }, 1200);
+                  }}
                 >
-                  <Files className="mr-2 h-5 w-5" />
-                  Copy
+                  {copying ? (
+                    <CheckCheck className="mr-2 h-5 w-5" />
+                  ) : (
+                    <Files className="mr-2 h-5 w-5" />
+                  )}
+                  {copying ? "Copied!" : "Copy"}
                 </Button>
               </div>
             </div>

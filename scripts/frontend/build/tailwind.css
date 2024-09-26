@@ -2062,6 +2062,10 @@
   background-color: transparent !important;
 }
 
+.hover\:bg-ring:hover {
+  background-color: hsl(var(--ring)) !important;
+}
+
 .hover\:text-accent-foreground:hover {
   color: hsl(var(--accent-foreground)) !important;
 }
