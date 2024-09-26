@@ -74,6 +74,7 @@ class Event {
 			'description'       => self::get_description(),
 			'image'             => self::get_image(),
 			'image_id'          => self::get_image_id(),
+			'thumbnail'         => get_the_post_thumbnail_url( self::get_id(), 'full' ),
 			'start_date'        => self::get_start_date(),
 			'start_date_gmt'    => self::get_start_date( true ),
 			'end_date'          => self::get_end_date(),
@@ -194,6 +195,10 @@ class Event {
 		update_post_meta( self::$event_id, 'description', str_replace( "\n", '__NEWLINE__', $description ) );
 		update_post_meta( self::$event_id, 'image', (string) $image );
 		update_post_meta( self::$event_id, 'image_id', $image_id );
+
+		if ( $image_id ) {
+			set_post_thumbnail( self::$event_id, $image_id );
+		}
 
 		if ( $start_date ) {
 			update_post_meta( self::$event_id, 'start_date', eventkoi_get_gmt_from_date( $start_date ) );

@@ -124,11 +124,11 @@ class Blocks {
 		// Get start date.
 		if ( $event::get_start_date() ) {
 			if ( intval( date_i18n( 'i', strtotime( $event::get_start_date() ) ) ) > 0 ) {
-				$start_format_y = 'D, M j, Y • g:ia';
-				$start_format   = 'D, M j • g:ia';
+				$start_format_y = 'D, M j, Y · g:ia';
+				$start_format   = 'D, M j · g:ia';
 			} else {
-				$start_format_y = 'D, M j, Y • ga';
-				$start_format   = 'D, M j • ga';
+				$start_format_y = 'D, M j, Y · ga';
+				$start_format   = 'D, M j · ga';
 			}
 			$start_date = gmdate( 'Y', strtotime( $event::get_start_date() ) ) === gmdate( 'Y' ) ? date_i18n( $start_format, strtotime( $event::get_start_date() ) ) : date_i18n( $start_format_y, strtotime( $event::get_start_date() ) );
 		} else {
@@ -138,11 +138,11 @@ class Blocks {
 		// Get end date.
 		if ( $event::get_end_date() ) {
 			if ( intval( date_i18n( 'i', strtotime( $event::get_end_date() ) ) ) > 0 ) {
-				$end_format_y = 'D, M j, Y • g:ia';
-				$end_format   = 'D, M j • g:ia';
+				$end_format_y = 'D, M j, Y · g:ia';
+				$end_format   = 'D, M j · g:ia';
 			} else {
-				$end_format_y = 'D, M j, Y • ga';
-				$end_format   = 'D, M j • ga';
+				$end_format_y = 'D, M j, Y · ga';
+				$end_format   = 'D, M j · ga';
 			}
 			$end_date  = '<span class="eventkoi-text-secondary">' . esc_html__( 'to', 'eventkoi' ) . '</span><br />';
 			$end_date .= gmdate( 'Y', strtotime( $event::get_end_date() ) ) === gmdate( 'Y' ) ? date_i18n( $end_format, strtotime( $event::get_end_date() ) ) : date_i18n( $end_format_y, strtotime( $event::get_end_date() ) );
