@@ -2,6 +2,7 @@ export function ShareLink({ event, icon, title, name }) {
   const handleShare = () => {
     const url = encodeURIComponent(event?.url);
     const text = encodeURIComponent(event?.title);
+    const subject = `RE: ${text}`;
 
     if (name === "whatsapp") {
       window.open(
@@ -36,7 +37,6 @@ export function ShareLink({ event, icon, title, name }) {
     }
 
     if (name === "email") {
-      const subject = `RE: ${text}`;
       window.open(`mailto:?&subject=${subject}&cc=&bcc=&body=${url}`, "_self");
     }
   };

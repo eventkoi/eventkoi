@@ -207,6 +207,7 @@ function ShareLink({
   const handleShare = () => {
     const url = encodeURIComponent(event?.url);
     const text = encodeURIComponent(event?.title);
+    const subject = `RE: ${text}`;
     if (name === "whatsapp") {
       window.open(`https://api.whatsapp.com/send?text=${text} ${url}`, "_blank");
     }
@@ -223,7 +224,6 @@ function ShareLink({
       window.open(`https://www.instagram.com/?url=${url}`, "_blank");
     }
     if (name === "email") {
-      const subject = `RE: ${text}`;
       window.open(`mailto:?&subject=${subject}&cc=&bcc=&body=${url}`, "_self");
     }
   };
