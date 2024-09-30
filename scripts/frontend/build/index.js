@@ -199,12 +199,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 function ShareLink({
+  event,
   icon,
-  title
+  title,
+  name
 }) {
+  const handleShare = () => {
+    const url = encodeURIComponent(event?.url);
+    const text = encodeURIComponent(event?.title);
+    if (name === "whatsapp") {
+      window.open(`https://api.whatsapp.com/send?text=${text} ${url}`, "_blank");
+    }
+    if (name === "x") {
+      window.open(`https://x.com/intent/post?url=${url}&text=${text}`, "_blank");
+    }
+    if (name === "facebook") {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "_blank");
+    }
+    if (name === "linkedin") {
+      window.open(`https://www.linkedin.com/shareArticle/?mini=true&url=${url}&text=${text}`, "_blank");
+    }
+    if (name === "instagram") {
+      window.open(`https://www.instagram.com/?url=${url}`, "_blank");
+    }
+    if (name === "email") {
+      const subject = `RE: ${text}`;
+      window.open(`mailto:?&subject=${subject}&cc=&bcc=&body=${url}`, "_self");
+    }
+  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "#",
-    className: "flex flex-col gap-1 items-center justify-center no-underline text-sm text-foreground/90 hover:text-foreground group"
+    className: "flex flex-col gap-1 items-center justify-center no-underline text-sm text-foreground/90 hover:text-foreground group",
+    onClick: e => {
+      e.preventDefault();
+      handleShare();
+    }
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "rounded-full bg-accent group-hover:bg-input flex items-center justify-center w-16 h-16"
   }, icon), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, title));
@@ -821,21 +850,33 @@ function ShareButton() {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4 items-center justify-between pb-[60px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_share_link__WEBPACK_IMPORTED_MODULE_7__.ShareLink, {
+    event: event,
+    name: "whatsapp",
     title: "Whatsapp",
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.WhatsappIcon, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_share_link__WEBPACK_IMPORTED_MODULE_7__.ShareLink, {
+    event: event,
+    name: "instagram",
     title: "Instagram",
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.InstagramIcon, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_share_link__WEBPACK_IMPORTED_MODULE_7__.ShareLink, {
+    event: event,
+    name: "email",
     title: "Email",
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.EmailIcon, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_share_link__WEBPACK_IMPORTED_MODULE_7__.ShareLink, {
+    event: event,
+    name: "facebook",
     title: "Facebook",
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.FacebookIcon, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_share_link__WEBPACK_IMPORTED_MODULE_7__.ShareLink, {
+    event: event,
+    name: "x",
     title: "X",
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.XIcon, null)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_share_link__WEBPACK_IMPORTED_MODULE_7__.ShareLink, {
+    event: event,
+    name: "linkedin",
     title: "Linkedin",
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icons__WEBPACK_IMPORTED_MODULE_3__.LinkedinIcon, null)
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

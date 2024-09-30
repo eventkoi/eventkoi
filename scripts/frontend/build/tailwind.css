@@ -254,8 +254,8 @@
   right: 1rem !important;
 }
 
-.right-\[5px\] {
-  right: 5px !important;
+.right-\[9px\] {
+  right: 9px !important;
 }
 
 .top-0 {
@@ -298,24 +298,16 @@
   top: 50% !important;
 }
 
-.top-\[5px\] {
-  top: 5px !important;
-}
-
 .top-\[60\%\] {
   top: 60% !important;
 }
 
-.top-full {
-  top: 100% !important;
-}
-
-.right-\[9px\] {
-  right: 9px !important;
-}
-
 .top-\[9px\] {
   top: 9px !important;
+}
+
+.top-full {
+  top: 100% !important;
 }
 
 .z-10 {
@@ -326,8 +318,8 @@
   z-index: 50 !important;
 }
 
-.z-\[10000\] {
-  z-index: 10000 !important;
+.z-\[100000\] {
+  z-index: 100000 !important;
 }
 
 .z-\[100\] {
@@ -344,10 +336,6 @@
 
 .z-\[510\] {
   z-index: 510 !important;
-}
-
-.z-\[100000\] {
-  z-index: 100000 !important;
 }
 
 .m-0 {
@@ -488,6 +476,10 @@
   height: 3rem !important;
 }
 
+.h-16 {
+  height: 4rem !important;
+}
+
 .h-2 {
   height: 0.5rem !important;
 }
@@ -564,14 +556,6 @@
   height: 1px !important;
 }
 
-.h-16 {
-  height: 4rem !important;
-}
-
-.h-14 {
-  height: 3.5rem !important;
-}
-
 .max-h-96 {
   max-height: 24rem !important;
 }
@@ -596,16 +580,12 @@
   min-height: 250px !important;
 }
 
-.min-h-\[50px\] {
-  min-height: 50px !important;
+.min-h-\[66px\] {
+  min-height: 66px !important;
 }
 
 .min-h-\[80px\] {
   min-height: 80px !important;
-}
-
-.min-h-\[66px\] {
-  min-height: 66px !important;
 }
 
 .w-1\/6 {
@@ -618,6 +598,10 @@
 
 .w-11 {
   width: 2.75rem !important;
+}
+
+.w-16 {
+  width: 4rem !important;
 }
 
 .w-2 {
@@ -739,10 +723,6 @@
 
 .w-px {
   width: 1px !important;
-}
-
-.w-16 {
-  width: 4rem !important;
 }
 
 .min-w-0 {
@@ -1327,10 +1307,6 @@
   padding: 1px !important;
 }
 
-.p-2 {
-  padding: 0.5rem !important;
-}
-
 .px-0 {
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -1420,6 +1396,10 @@
   padding-bottom: 1rem !important;
 }
 
+.pb-\[10px\] {
+  padding-bottom: 10px !important;
+}
+
 .pb-\[60px\] {
   padding-bottom: 60px !important;
 }
@@ -1472,24 +1452,8 @@
   padding-top: 1rem !important;
 }
 
-.pt-6 {
-  padding-top: 1.5rem !important;
-}
-
-.pb-\[30px\] {
-  padding-bottom: 30px !important;
-}
-
 .pt-\[30px\] {
   padding-top: 30px !important;
-}
-
-.pb-\[20px\] {
-  padding-bottom: 20px !important;
-}
-
-.pb-\[10px\] {
-  padding-bottom: 10px !important;
 }
 
 .text-left {
@@ -1615,6 +1579,10 @@
   color: hsl(var(--foreground) / 0.5) !important;
 }
 
+.text-foreground\/90 {
+  color: hsl(var(--foreground) / 0.9) !important;
+}
+
 .text-muted-foreground {
   color: hsl(var(--muted-foreground)) !important;
 }
@@ -1645,10 +1613,6 @@
 
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground)) !important;
-}
-
-.text-foreground\/90 {
-  color: hsl(var(--foreground) / 0.9) !important;
 }
 
 .underline {
@@ -2060,10 +2024,6 @@
 
 .hover\:bg-transparent:hover {
   background-color: transparent !important;
-}
-
-.hover\:bg-ring:hover {
-  background-color: hsl(var(--ring)) !important;
 }
 
 .hover\:text-accent-foreground:hover {

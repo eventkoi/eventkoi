@@ -58,12 +58,37 @@ export function ShareButton() {
           </DialogHeader>
           <div className="flex flex-col pt-[30px] pb-[60px] px-[60px]">
             <div className="flex gap-4 items-center justify-between pb-[60px]">
-              <ShareLink title="Whatsapp" icon={<WhatsappIcon />} />
-              <ShareLink title="Instagram" icon={<InstagramIcon />} />
-              <ShareLink title="Email" icon={<EmailIcon />} />
-              <ShareLink title="Facebook" icon={<FacebookIcon />} />
-              <ShareLink title="X" icon={<XIcon />} />
-              <ShareLink title="Linkedin" icon={<LinkedinIcon />} />
+              <ShareLink
+                event={event}
+                name="whatsapp"
+                title="Whatsapp"
+                icon={<WhatsappIcon />}
+              />
+              <ShareLink
+                event={event}
+                name="instagram"
+                title="Instagram"
+                icon={<InstagramIcon />}
+              />
+              <ShareLink
+                event={event}
+                name="email"
+                title="Email"
+                icon={<EmailIcon />}
+              />
+              <ShareLink
+                event={event}
+                name="facebook"
+                title="Facebook"
+                icon={<FacebookIcon />}
+              />
+              <ShareLink event={event} name="x" title="X" icon={<XIcon />} />
+              <ShareLink
+                event={event}
+                name="linkedin"
+                title="Linkedin"
+                icon={<LinkedinIcon />}
+              />
             </div>
             <div className="flex flex-col gap-3 pb-[10px]">
               <Label className="text-base">Event link</Label>
