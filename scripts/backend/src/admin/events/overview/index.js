@@ -256,6 +256,12 @@ export function EventsOverview() {
         fetchResults={fetchResults}
         queryStatus={queryStatus}
         hideCategories
+        defaultSort={[
+          {
+            id: "status",
+            desc: false,
+          },
+        ]}
       />
     </div>
   );

@@ -7,6 +7,8 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import { Calendars } from "@/admin/calendars";
+import { CalendarsOverview } from "@/admin/calendars/overview";
 import { Dashboard } from "@/admin/dashboard";
 import { DashboardOverview } from "@/admin/dashboard/overview";
 import { Events } from "@/admin/events";
@@ -84,6 +86,10 @@ export function Admin() {
             <Route path="details" element={<EventEditDetails />} />
           </Route>
           <Route path="*" element={<Home />} />
+        </Route>
+        <Route path="calendars" element={<Calendars />}>
+          <Route index element={<CalendarsOverview />} />
+          <Route path="" element={<CalendarsOverview />} />
         </Route>
         <Route path="settings" element={<Settings />}>
           <Route index element={<SettingsOverview />} />

@@ -86,10 +86,14 @@ class Menus {
 			'25.8765'
 		);
 
-		$items = array(
-			'dashboard' => __( 'Dashboard', 'eventkoi' ),
-			'events'    => __( 'Events', 'eventkoi' ),
-			'settings'  => __( 'Settings', 'eventkoi' ),
+		$items = apply_filters(
+			'eventkoi_admin_menu_items',
+			array(
+				'dashboard' => __( 'Dashboard', 'eventkoi' ),
+				'events'    => __( 'Events', 'eventkoi' ),
+				'calendars' => __( 'Calendars', 'eventkoi' ),
+				'settings'  => __( 'Settings', 'eventkoi' ),
+			)
 		);
 
 		foreach ( $items as $slug => $name ) {

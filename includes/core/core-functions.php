@@ -59,6 +59,7 @@ function eventkoi_get_permalink_structure() {
 		array_filter( $saved_permalinks ),
 		array(
 			'event_base'             => _x( 'event', 'slug', 'eventkoi' ),
+			'category_base'          => _x( 'calendar', 'slug', 'eventkoi' ),
 			'use_verbose_page_rules' => false,
 		)
 	);
@@ -67,7 +68,8 @@ function eventkoi_get_permalink_structure() {
 		update_option( 'eventkoi_permalinks', $permalinks );
 	}
 
-	$permalinks['event_rewrite_slug'] = untrailingslashit( $permalinks['event_base'] );
+	$permalinks['event_rewrite_slug']    = untrailingslashit( $permalinks['event_base'] );
+	$permalinks['category_rewrite_slug'] = untrailingslashit( $permalinks['category_base'] );
 
 	return $permalinks;
 }
@@ -157,4 +159,16 @@ function eventkoi_timezone() {
 	}
 
 	return apply_filters( 'eventkoi_timezone', $timezone );
+}
+
+/**
+ * Define a constant if it is not already defined.
+ *
+ * @param string $name  Constant name.
+ * @param mixed  $value Value.
+ */
+function eventkoi_maybe_define_constant( $name, $value ) {
+	if ( ! defined( $name ) ) {
+		define( $name, $value );
+	}
 }

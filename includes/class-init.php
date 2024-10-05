@@ -25,6 +25,7 @@ class Init {
 		include_once EVENTKOI_PLUGIN_DIR . 'includes/core/core-functions.php';
 
 		// Loaded in both frontend and backend.
+		$install    = new \EventKoi\Core\Install();
 		$post_types = new \EventKoi\Core\Post_Types();
 		$template   = new \EventKoi\Core\Event\Template();
 		$blocks     = new \EventKoi\Core\Blocks();

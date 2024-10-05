@@ -47,13 +47,9 @@ export function DataTable({
   filterName,
   addTo,
   queryStatus,
+  defaultSort,
 }) {
-  const [sorting, setSorting] = useState([
-    {
-      id: "status",
-      desc: false,
-    },
-  ]);
+  const [sorting, setSorting] = useState(defaultSort);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = React.useState({});
@@ -130,7 +126,8 @@ export function DataTable({
                         header.id === "start_date" && "w-1/6",
                         header.id === "end_date" && "w-1/6",
                         header.id === "modified_date" && "w-1/6 text-right",
-                        header.id === "status" && "w-1/6"
+                        header.id === "status" && "w-1/6",
+                        header.id === "count" && "text-right"
                       )}
                     >
                       {header.isPlaceholder

@@ -23,9 +23,68 @@ class Post_Types {
 	 */
 	public function __construct() {
 
+		add_action( 'init', array( __CLASS__, 'register_taxonomies' ), 5 );
 		add_action( 'init', array( __CLASS__, 'register_post_types' ), 5 );
 		add_action( 'eventkoi_after_register_post_type', array( __CLASS__, 'maybe_flush_rewrite_rules' ) );
+		add_action( 'eventkoi_flush_rewrite_rules', array( __CLASS__, 'flush_rewrite_rules' ) );
 		add_action( 'get_edit_post_link', array( __CLASS__, 'update_edit_event_link' ), 10, 2 );
+	}
+
+	/**
+	 * Register taxonomy.
+	 */
+	public static function register_taxonomies() {
+		if ( ! is_blog_installed() ) {
+			return;
+		}
+
+		if ( taxonomy_exists( 'event_cal' ) ) {
+			return;
+		}
+
+		do_action( 'eventkoi_register_taxonomy' );
+
+		$permalinks = eventkoi_get_permalink_structure();
+
+		register_taxonomy(
+			'event_cal',
+			apply_filters( 'eventkoi_taxonomy_objects_event_cal', array( 'post', 'event' ) ),
+			apply_filters(
+				'eventkoi_taxonomy_args_event_cal',
+				array(
+					'hierarchical'          => true,
+					'update_count_callback' => '_update_post_term_count',
+					'label'                 => __( 'Calendars', 'eventkoi' ),
+					'labels'                => array(
+						'name'                  => __( 'Event calendars', 'eventkoi' ),
+						'singular_name'         => __( 'Calendar', 'eventkoi' ),
+						'menu_name'             => _x( 'Calendars', 'Admin menu name', 'eventkoi' ),
+						'search_items'          => __( 'Search calendars', 'eventkoi' ),
+						'all_items'             => __( 'All calendars', 'eventkoi' ),
+						'parent_item'           => __( 'Parent calendar', 'eventkoi' ),
+						'parent_item_colon'     => __( 'Parent calendar:', 'eventkoi' ),
+						'edit_item'             => __( 'Edit calendar', 'eventkoi' ),
+						'update_item'           => __( 'Update calendar', 'eventkoi' ),
+						'add_new_item'          => __( 'Add new calendar', 'eventkoi' ),
+						'new_item_name'         => __( 'New calendar name', 'eventkoi' ),
+						'not_found'             => __( 'No calendars found', 'eventkoi' ),
+						'item_link'             => __( 'Event Calendar Link', 'eventkoi' ),
+						'item_link_description' => __( 'A link to a event calendar.', 'eventkoi' ),
+						'template_name'         => _x( 'Events by Calendar', 'Template name', 'eventkoi' ),
+					),
+					'show_in_rest'          => true,
+					'show_ui'               => true,
+					'query_var'             => true,
+					'rewrite'               => array(
+						'slug'         => $permalinks['category_rewrite_slug'],
+						'with_front'   => false,
+						'hierarchical' => true,
+					),
+				)
+			)
+		);
+
+		do_action( 'eventkoi_after_register_taxonomy' );
 	}
 
 	/**
