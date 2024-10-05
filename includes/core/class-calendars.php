@@ -23,7 +23,7 @@ class Calendars {
 	 *
 	 * @param array $args Array of arguments to pass.
 	 */
-	public static function get_calendars( $args = array() ) {
+	public static function get_calendars() {
 
 		$terms = get_terms(
 			array(
