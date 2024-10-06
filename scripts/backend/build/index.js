@@ -14176,7 +14176,8 @@ function CalendarsOverview() {
     hideStatusFilters: true,
     isLoading: isLoading,
     fetchResults: fetchResults,
-    hideCategories: true
+    hideCategories: true,
+    hideDateRange: true
   }));
 }
 
@@ -14711,6 +14712,24 @@ const columns = [{
   sortUndefined: "last",
   invertSorting: true
 }, {
+  accessorKey: "calendar",
+  header: ({
+    column
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Calendar"),
+  cell: ({
+    row
+  }) => {
+    const calendar = row.original.calendar;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "text-foreground"
+    }, calendar && calendar.map((item, i) => {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        key: `calendar-${i}`
+      }, item.name, i > 0 && ", ");
+    }));
+  },
+  filterFn: multiColumnSearch
+}, {
   accessorKey: "modified_date",
   header: ({
     column
@@ -15205,7 +15224,7 @@ function BulkActions({
     onClick: () => {
       runAction("delete");
     }
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, ["categories"].includes(base) ? "Delete" : "Move to trash")), addTo && table.getFilteredSelectedRowModel().rows.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSub, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSubTrigger, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, addTo)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuPortal, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSubContent, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuCheckboxItem, null, "Panel")))), addTo && table.getFilteredSelectedRowModel().rows.length == 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, ["calendars"].includes(base) ? "Delete" : "Move to trash")), addTo && table.getFilteredSelectedRowModel().rows.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSub, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSubTrigger, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, addTo)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuPortal, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSubContent, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuCheckboxItem, null, "Panel")))), addTo && table.getFilteredSelectedRowModel().rows.length == 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     disabled: table.getFilteredSelectedRowModel().rows.length == 0
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, addTo)))));
 }
@@ -15331,7 +15350,7 @@ function DataTable({
   }, headerGroup.headers.map(header => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableHead, {
       key: header.id,
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("h-10", header.id === "select" && "w-[50px]", header.id === "title" && "w-auto", header.id === "start_date" && "w-1/6", header.id === "end_date" && "w-1/6", header.id === "modified_date" && "w-1/6 text-right", header.id === "status" && "w-1/6", header.id === "count" && "text-right")
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("h-10", header.id === "select" && "w-[50px]", header.id === "title" && "w-auto", header.id === "start_date" && "w-[16%]", header.id === "end_date" && "w-[16%]", header.id === "modified_date" && "w-[16%] text-right", header.id === "status" && "w-[12%]", header.id === "count" && "text-right")
     }, header.isPlaceholder ? null : (0,_tanstack_react_table__WEBPACK_IMPORTED_MODULE_11__.flexRender)(header.column.columnDef.header, header.getContext()));
   })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableBody, null, table.getRowModel().rows?.length ? table.getRowModel().rows.map(row => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_table__WEBPACK_IMPORTED_MODULE_2__.TableRow, {
     key: row.id,
@@ -18512,7 +18531,7 @@ function showStaticToast(message) {
     return;
   }
   const toastId = (0,sonner__WEBPACK_IMPORTED_MODULE_1__.toast)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60",
+    className: "flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-72",
     onClick: () => sonner__WEBPACK_IMPORTED_MODULE_1__.toast.dismiss(toastId)
   }, message), {
     duration: 4000

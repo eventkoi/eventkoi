@@ -123,10 +123,10 @@ export function DataTable({
                         "h-10",
                         header.id === "select" && "w-[50px]",
                         header.id === "title" && "w-auto",
-                        header.id === "start_date" && "w-1/6",
-                        header.id === "end_date" && "w-1/6",
-                        header.id === "modified_date" && "w-1/6 text-right",
-                        header.id === "status" && "w-1/6",
+                        header.id === "start_date" && "w-[16%]",
+                        header.id === "end_date" && "w-[16%]",
+                        header.id === "modified_date" && "w-[16%] text-right",
+                        header.id === "status" && "w-[12%]",
                         header.id === "count" && "text-right"
                       )}
                     >

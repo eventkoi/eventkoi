@@ -33,7 +33,7 @@ export function showStaticToast(message) {
 
   const toastId = toast(
     <div
-      className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-60"
+      className="flex items-center cursor-pointer active:ring-2 active:ring-ring active:ring-offset-2 bg-[#222222] rounded-sm border-0 font-medium justify-between p-4 gap-4 text-sm leading-5 text-primary-foreground w-72"
       onClick={() => toast.dismiss(toastId)}
     >
       {message}

@@ -144,6 +144,7 @@ export function CalendarsOverview() {
         isLoading={isLoading}
         fetchResults={fetchResults}
         hideCategories
+        hideDateRange
       />
     </div>
   );

@@ -92,7 +92,7 @@ export function BulkActions({ table, base, fetchResults, addTo, queryStatus }) {
               }}
             >
               <span>
-                {["categories"].includes(base) ? "Delete" : "Move to trash"}
+                {["calendars"].includes(base) ? "Delete" : "Move to trash"}
               </span>
             </DropdownMenuItem>
             {addTo && table.getFilteredSelectedRowModel().rows.length > 0 && (

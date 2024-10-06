@@ -185,6 +185,27 @@ const columns = [
     invertSorting: true,
   },
   {
+    accessorKey: "calendar",
+    header: ({ column }) => <>Calendar</>,
+    cell: ({ row }) => {
+      const calendar = row.original.calendar;
+      return (
+        <div className="text-foreground">
+          {calendar &&
+            calendar.map((item, i) => {
+              return (
+                <div key={`calendar-${i}`}>
+                  {item.name}
+                  {i > 0 && ", "}
+                </div>
+              );
+            })}
+        </div>
+      );
+    },
+    filterFn: multiColumnSearch,
+  },
+  {
     accessorKey: "modified_date",
     header: ({ column }) => (
       <SortButton title="Last modified" column={column} />

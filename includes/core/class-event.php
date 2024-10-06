@@ -75,6 +75,7 @@ class Event {
 			'image'             => self::get_image(),
 			'image_id'          => self::get_image_id(),
 			'thumbnail'         => get_the_post_thumbnail_url( self::get_id(), 'full' ),
+			'calendar'          => self::get_calendar(),
 			'start_date'        => self::get_start_date(),
 			'start_date_gmt'    => self::get_start_date( true ),
 			'end_date'          => self::get_end_date(),
@@ -212,6 +213,12 @@ class Event {
 			delete_post_meta( self::$event_id, 'end_date' );
 		}
 
+		if ( empty( $meta['calendar'] ) ) {
+			$default_event_cal = (int) get_option( 'default_event_cal', 0 );
+
+			wp_set_post_terms( self::$event_id, array( $default_event_cal ), 'event_cal' );
+		}
+
 		do_action( 'eventkoi_after_update_event_meta', $meta, self::$event_id, self::$event );
 	}
 
@@ -259,6 +266,17 @@ class Event {
 		$image_id = get_post_meta( self::$event_id, 'image_id', true );
 
 		return apply_filters( 'eventkoi_get_event_image_id', absint( $image_id ), self::$event_id, self::$event );
+	}
+
+	/**
+	 * Get event calendar.
+	 */
+	public static function get_calendar() {
+		$args = array( 'fields' => 'all' );
+
+		$calendar = wp_get_post_terms( self::$event_id, 'event_cal', $args );
+
+		return apply_filters( 'eventkoi_get_event_calendar', $calendar, self::$event_id, self::$event );
 	}
 
 	/**
