@@ -13,6 +13,8 @@ import { SortButton } from "@/components/sort-button";
 import { showStaticToast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
+import { Link2 } from "lucide-react";
+
 /**
  * Support multi-column search.
  */
@@ -66,6 +68,12 @@ const columns = [
               )}
             >
               {row.getValue("name")}
+            </a>
+            <a
+              href={row.original.url}
+              className="flex w-5 h-5 items-center justify-center"
+            >
+              <Link2 className="w-full h-full" />
             </a>
           </div>
         </div>

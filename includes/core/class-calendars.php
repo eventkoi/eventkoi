@@ -39,6 +39,7 @@ class Calendars {
 				'slug'  => $term->slug,
 				'name'  => $term->name,
 				'count' => $term->count,
+				'url'   => get_term_link( $term->slug, 'event_cal' ),
 			);
 		}
 

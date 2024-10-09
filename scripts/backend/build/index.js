@@ -14029,7 +14029,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
@@ -14039,6 +14039,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
 /* harmony import */ var _lib_toast__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/lib/toast */ "./src/lib/toast.js");
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/link-2.js");
+
 
 
 
@@ -14099,7 +14101,12 @@ const columns = [{
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: url,
       className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_8__.cn)("hover:underline hover:decoration-dotted underline-offset-4")
-    }, row.getValue("name"))));
+    }, row.getValue("name")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      href: row.original.url,
+      className: "flex w-5 h-5 items-center justify-center"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      className: "w-full h-full"
+    }))));
   },
   filterFn: multiColumnSearch,
   sortingFn: "alphanumeric"
@@ -14142,7 +14149,7 @@ const columns = [{
 function CalendarsOverview() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useSearchParams)();
+  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useSearchParams)();
   const fetchResults = async (toastMessage = null) => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: `${eventkoi_params.api}/calendars`,
