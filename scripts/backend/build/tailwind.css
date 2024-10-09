@@ -1029,10 +1029,6 @@ body {
   min-height: calc(100vh - 46px) !important;
 }
 
-.w-1\/6 {
-  width: 16.666667% !important;
-}
-
 .w-10 {
   width: 2.5rem !important;
 }
@@ -1109,8 +1105,16 @@ body {
   width: 100px !important;
 }
 
+.w-\[12\%\] {
+  width: 12% !important;
+}
+
 .w-\[150px\] {
   width: 150px !important;
+}
+
+.w-\[16\%\] {
+  width: 16% !important;
 }
 
 .w-\[180px\] {
@@ -1160,38 +1164,6 @@ body {
 
 .w-px {
   width: 1px !important;
-}
-
-.w-1\/12 {
-  width: 8.333333% !important;
-}
-
-.w-40 {
-  width: 10rem !important;
-}
-
-.w-32 {
-  width: 8rem !important;
-}
-
-.w-48 {
-  width: 12rem !important;
-}
-
-.w-\[10\%\] {
-  width: 10% !important;
-}
-
-.w-\[14\%\] {
-  width: 14% !important;
-}
-
-.w-\[16\%\] {
-  width: 16% !important;
-}
-
-.w-\[12\%\] {
-  width: 12% !important;
 }
 
 .min-w-0 {
@@ -1521,6 +1493,10 @@ body {
 
 .whitespace-nowrap {
   white-space: nowrap !important;
+}
+
+.whitespace-pre-line {
+  white-space: pre-line !important;
 }
 
 .break-words {

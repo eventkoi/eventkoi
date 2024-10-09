@@ -20,6 +20,7 @@ import {
   CircleCheck,
   CircleDotDashed,
   Clock3,
+  Link2,
 } from "lucide-react";
 
 const statuses = {
@@ -103,6 +104,12 @@ const columns = [
             >
               {row.getValue("title")}
             </a>
+            <a
+              href={row.original.url}
+              className="flex w-5 h-5 items-center justify-center"
+            >
+              <Link2 className="w-full h-full" />
+            </a>
             {wp_status === "draft" && <Badge variant="outline">Draft</Badge>}
             {wp_status === "trash" && <Badge variant="outline">Trash</Badge>}
           </div>
@@ -151,11 +158,11 @@ const columns = [
       return (
         <div
           className={cn(
-            "text-foreground",
+            "text-foreground whitespace-pre-line",
             row.original.tbc && "text-muted-foreground/80"
           )}
         >
-          {row.getValue("start_date")}
+          {row.getValue("start_date").replace(/ /, "\n")}
         </div>
       );
     },
@@ -171,11 +178,11 @@ const columns = [
       return (
         <div
           className={cn(
-            "text-foreground",
+            "text-foreground whitespace-pre-line",
             row.original.tbc && "text-muted-foreground/80"
           )}
         >
-          {row.getValue("end_date")}
+          {row.getValue("end_date").replace(/ /, "\n")}
         </div>
       );
     },
@@ -213,7 +220,9 @@ const columns = [
     cell: ({ row }) => {
       const event = row.original;
       return (
-        <div className="text-foreground">{row.getValue("modified_date")}</div>
+        <div className="text-foreground whitespace-pre-line">
+          {row.getValue("modified_date").replace(/ /, "\n")}
+        </div>
       );
     },
     filterFn: multiColumnSearch,

@@ -12,7 +12,7 @@ import { Panel } from "@/components/panel";
 export function EventTemplate({ event, setEvent }) {
   return (
     <Panel>
-      <Label htmlFor="template">Select event template</Label>
+      <Label htmlFor="template">Event template</Label>
       <Select
         value={event?.template}
         onValueChange={(value) => {

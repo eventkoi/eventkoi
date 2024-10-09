@@ -213,11 +213,18 @@ class Event {
 			delete_post_meta( self::$event_id, 'end_date' );
 		}
 
-		if ( empty( $meta['calendar'] ) ) {
-			$default_event_cal = (int) get_option( 'default_event_cal', 0 );
+		// Set selected calendars.
+		$calendars = array();
 
-			wp_set_post_terms( self::$event_id, array( $default_event_cal ), 'event_cal' );
+		if ( empty( $meta['selectedCalendars'] ) ) {
+			$default_event_cal = (int) get_option( 'default_event_cal', 0 );
+			$calendars         = array( $default_event_cal );
+		} else {
+			foreach ( $meta['selectedCalendars'] as $calendar ) {
+				$calendars[] = $calendar['value'];
+			}
 		}
+		wp_set_post_terms( self::$event_id, $calendars, 'event_cal' );
 
 		do_action( 'eventkoi_after_update_event_meta', $meta, self::$event_id, self::$event );
 	}
@@ -272,9 +279,19 @@ class Event {
 	 * Get event calendar.
 	 */
 	public static function get_calendar() {
+		$calendar = array();
+
 		$args = array( 'fields' => 'all' );
 
-		$calendar = wp_get_post_terms( self::$event_id, 'event_cal', $args );
+		$terms = wp_get_post_terms( self::$event_id, 'event_cal', $args );
+
+		foreach ( $terms as $term ) {
+			$calendar[] = array(
+				'id'   => $term->term_id,
+				'name' => $term->name,
+				'slug' => $term->slug,
+			);
+		}
 
 		return apply_filters( 'eventkoi_get_event_calendar', $calendar, self::$event_id, self::$event );
 	}
