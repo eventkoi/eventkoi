@@ -12,6 +12,7 @@ use EventKoi\API\Events;
 use EventKoi\API\Event;
 use EventKoi\API\Uploads;
 use EventKoi\API\Calendars;
+use EventKoi\API\Calendar;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -68,6 +69,7 @@ class REST {
 		Event::init();
 		Uploads::init();
 		Calendars::init();
+		Calendar::init();
 	}
 
 	/**

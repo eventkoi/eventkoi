@@ -1105,16 +1105,12 @@ body {
   width: 100px !important;
 }
 
-.w-\[12\%\] {
-  width: 12% !important;
+.w-\[15\%\] {
+  width: 15% !important;
 }
 
 .w-\[150px\] {
   width: 150px !important;
-}
-
-.w-\[16\%\] {
-  width: 16% !important;
 }
 
 .w-\[180px\] {
@@ -1125,8 +1121,16 @@ body {
   width: 1px !important;
 }
 
+.w-\[25\%\] {
+  width: 25% !important;
+}
+
 .w-\[250px\] {
   width: 250px !important;
+}
+
+.w-\[40\%\] {
+  width: 40% !important;
 }
 
 .w-\[48px\] {
@@ -2617,6 +2621,10 @@ body {
 
 .disabled\:opacity-50:disabled {
   opacity: 0.5 !important;
+}
+
+.group:hover .group-hover\:flex {
+  display: flex !important;
 }
 
 .group:hover .group-hover\:opacity-100 {

@@ -71,7 +71,7 @@ const columns = [
             </a>
             <a
               href={row.original.url}
-              className="flex w-5 h-5 items-center justify-center"
+              className="hidden group-hover:flex w-5 h-5 items-center justify-center"
             >
               <Link2 className="w-full h-full" />
             </a>

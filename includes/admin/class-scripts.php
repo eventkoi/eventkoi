@@ -59,6 +59,7 @@ class Scripts {
 			'date_24h'            => wp_date( 'j M Y', strtotime( '+1 day', time() ) ),
 			'time_now'            => wp_date( 'g:i A', strtotime( '+1 hour', time() ) ),
 			'new_event'           => $event::get_meta(),
+			'default_cal'         => (int) get_option( 'default_event_cal', 0 ),
 			'counts'              => array(
 				'events' => $events::get_counts(),
 			),

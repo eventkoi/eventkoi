@@ -6,15 +6,27 @@ import { Navbar } from "@/components/nav-bar";
 
 import { tabs } from "@/data/tabs";
 
-export function Nav({ isEvent = false }) {
+export function Nav({ isEvent = false, isCalendar = false }) {
   const location = useLocation();
 
-  const split = location.pathname.split("events/");
-  if (split[1] && (parseInt(split[1]) > 0 || split[1].includes("add"))) {
+  const event = location.pathname.split("events/");
+  if (event[1] && (parseInt(event[1]) > 0 || event[1].includes("add"))) {
     isEvent = true;
   }
 
   if (isEvent) {
+    return null;
+  }
+
+  const calendar = location.pathname.split("calendars/");
+  if (
+    calendar[1] &&
+    (parseInt(calendar[1]) > 0 || calendar[1].includes("add"))
+  ) {
+    isCalendar = true;
+  }
+
+  if (isCalendar) {
     return null;
   }
 

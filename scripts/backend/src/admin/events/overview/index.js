@@ -104,14 +104,14 @@ const columns = [
             >
               {row.getValue("title")}
             </a>
+            {wp_status === "draft" && <Badge variant="outline">Draft</Badge>}
+            {wp_status === "trash" && <Badge variant="outline">Trash</Badge>}
             <a
               href={row.original.url}
-              className="flex w-5 h-5 items-center justify-center"
+              className="hidden group-hover:flex w-5 h-5 items-center justify-center"
             >
               <Link2 className="w-full h-full" />
             </a>
-            {wp_status === "draft" && <Badge variant="outline">Draft</Badge>}
-            {wp_status === "trash" && <Badge variant="outline">Trash</Badge>}
           </div>
         </div>
       );

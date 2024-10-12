@@ -122,12 +122,17 @@ export function DataTable({
                       className={cn(
                         "h-10",
                         header.id === "select" && "w-[50px]",
-                        header.id === "title" && "w-auto",
-                        header.id === "start_date" && "w-[16%]",
-                        header.id === "end_date" && "w-[16%]",
-                        header.id === "modified_date" && "w-[16%] text-right",
-                        header.id === "status" && "w-[12%]",
-                        header.id === "count" && "text-right"
+                        [
+                          "start_date",
+                          "end_date",
+                          "modified_date",
+                          "status",
+                        ].includes(header.id) && "w-[15%]",
+                        ["modified_date", "count"].includes(header.id) &&
+                          "text-right",
+                        ["calendar", "count"].includes(header.id) && "w-auto",
+                        header.id === "title" && "w-[25%]",
+                        header.id === "name" && "w-[40%]"
                       )}
                     >
                       {header.isPlaceholder
@@ -148,6 +153,7 @@ export function DataTable({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="group"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

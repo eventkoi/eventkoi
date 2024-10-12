@@ -8,6 +8,9 @@ import {
 } from "react-router-dom";
 
 import { Calendars } from "@/admin/calendars";
+import { CalendarEdit } from "@/admin/calendars/edit";
+import { CalendarEditDetails } from "@/admin/calendars/edit/details";
+import { CalendarEditMain } from "@/admin/calendars/edit/main";
 import { CalendarsOverview } from "@/admin/calendars/overview";
 import { Dashboard } from "@/admin/dashboard";
 import { DashboardOverview } from "@/admin/dashboard/overview";
@@ -90,6 +93,11 @@ export function Admin() {
         <Route path="calendars" element={<Calendars />}>
           <Route index element={<CalendarsOverview />} />
           <Route path="" element={<CalendarsOverview />} />
+          <Route path=":id" element={<CalendarEdit />}>
+            <Route path="main" element={<CalendarEditMain />} />
+            <Route path="details" element={<CalendarEditDetails />} />
+          </Route>
+          <Route path="*" element={<Home />} />
         </Route>
         <Route path="settings" element={<Settings />}>
           <Route index element={<SettingsOverview />} />
