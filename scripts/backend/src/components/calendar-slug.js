@@ -1,0 +1,36 @@
+import { useState } from "react";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+import { Panel } from "@/components/panel";
+
+export function CalendarSlug({ calendar, setCalendar }) {
+  const [url, setURL] = useState(calendar.url.replace(calendar.slug + "/", ""));
+  const [slug, setSlug] = useState(calendar.slug);
+
+  return (
+    <Panel>
+      <Label htmlFor="slug">Slug</Label>
+      <Input
+        type="text"
+        id={"slug"}
+        value={calendar?.slug}
+        placeholder={"Address"}
+        className="max-w-[422px]"
+        onChange={(e) => {
+          setSlug(e.target.value);
+          setCalendar((prevState) => ({
+            ...prevState,
+            slug: e.target.value,
+          }));
+        }}
+      />
+      <div className="pt-1 text-muted-foreground">
+        This determines the URL of your calendar:
+        <br />
+        {`${url}${slug}`}
+      </div>
+    </Panel>
+  );
+}

@@ -14,7 +14,7 @@ import {
 
 import { ChevronDown } from "lucide-react";
 
-import { showToast } from "@/lib/toast";
+import { showToast, showToastError } from "@/lib/toast";
 
 export function CalendarNavBar({ loading, setLoading, calendar, setCalendar }) {
   const navigate = useNavigate();
@@ -101,14 +101,18 @@ export function CalendarNavBar({ loading, setLoading, calendar, setCalendar }) {
       .then((response) => {
         console.log(response);
         setSaving(false);
-        setCalendar(response);
-        showToast(response);
+        if (!response.error) {
+          setCalendar(response);
+          showToast(response);
 
-        if (response.update_endpoint) {
-          window.location.hash = window.location.hash.replace(
-            "add",
-            response.id
-          );
+          if (response.update_endpoint) {
+            window.location.hash = window.location.hash.replace(
+              "add",
+              response.id
+            );
+          }
+        } else {
+          showToastError(response.error);
         }
       })
       .catch((error) => {

@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 
 import { Box } from "@/components/box";
 
-export function CalendarEditDetails() {
+export function CalendarEditEmbed() {
   const [calendar, setCalendar] = useOutletContext();
 
   return (

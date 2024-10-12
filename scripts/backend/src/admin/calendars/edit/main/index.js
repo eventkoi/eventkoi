@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { Box } from "@/components/box";
 import { CalendarName } from "@/components/calendar-name";
+import { CalendarSlug } from "@/components/calendar-slug";
 
 export function CalendarEditMain() {
   const [calendar, setCalendar] = useOutletContext();
@@ -13,6 +14,7 @@ export function CalendarEditMain() {
       <div className="grid w-full">
         <CalendarName calendar={calendar} setCalendar={setCalendar} />
         <Separator />
+        <CalendarSlug calendar={calendar} setCalendar={setCalendar} />
       </div>
     </Box>
   );

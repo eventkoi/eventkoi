@@ -35,6 +35,16 @@ class Calendar {
 				'permission_callback' => array( '\EventKoi\API\REST', 'public_api' ),
 			)
 		);
+
+		register_rest_route(
+			EVENTKOI_API,
+			'/update_calendar',
+			array(
+				'methods'             => 'post',
+				'callback'            => array( __CLASS__, 'update_calendar' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
+			)
+		);
 	}
 
 	/**
@@ -51,6 +61,27 @@ class Calendar {
 		$id       = $request->get_param( 'id' );
 		$calendar = new SingleCal( $id );
 		$response = $calendar::get_meta();
+
+		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Update a single calendar.
+	 *
+	 * @param object $request The request that is being passed to API.
+	 */
+	public static function update_calendar( $request ) {
+
+		if ( empty( $request ) ) {
+			die( -1 );
+		}
+
+		$data = json_decode( $request->get_body(), true );
+
+		$calendar = ! empty( $data['calendar'] ) ? $data['calendar'] : null;
+
+		$query    = new SingleCal( $calendar['id'] );
+		$response = $query::update( $calendar );
 
 		return rest_ensure_response( $response );
 	}

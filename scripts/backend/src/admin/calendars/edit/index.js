@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { CalendarHeader } from "@/components/calendar-header";
-import { EventTabs } from "@/components/event-tabs";
+import { CalendarTabs } from "@/components/calendar-tabs";
 import { Loader } from "@/components/loader";
 import { Wrapper } from "@/components/wrapper";
 
@@ -96,7 +96,7 @@ export function CalendarEdit() {
       />
       <Wrapper className="max-w-[940px]">
         <div className="w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr]">
-          <EventTabs
+          <CalendarTabs
             calendar={calendar}
             setCalendar={setCalendar}
             location={location}

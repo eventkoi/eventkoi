@@ -10,6 +10,7 @@ import {
 import { Calendars } from "@/admin/calendars";
 import { CalendarEdit } from "@/admin/calendars/edit";
 import { CalendarEditDetails } from "@/admin/calendars/edit/details";
+import { CalendarEditEmbed } from "@/admin/calendars/edit/embed";
 import { CalendarEditMain } from "@/admin/calendars/edit/main";
 import { CalendarsOverview } from "@/admin/calendars/overview";
 import { Dashboard } from "@/admin/dashboard";
@@ -96,6 +97,7 @@ export function Admin() {
           <Route path=":id" element={<CalendarEdit />}>
             <Route path="main" element={<CalendarEditMain />} />
             <Route path="details" element={<CalendarEditDetails />} />
+            <Route path="embed" element={<CalendarEditEmbed />} />
           </Route>
           <Route path="*" element={<Home />} />
         </Route>
