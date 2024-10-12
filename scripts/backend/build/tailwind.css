@@ -763,6 +763,22 @@ body {
   top: 100% !important;
 }
 
+.right-\[9px\] {
+  right: 9px !important;
+}
+
+.top-\[9px\] {
+  top: 9px !important;
+}
+
+.right-\[5px\] {
+  right: 5px !important;
+}
+
+.top-\[4px\] {
+  top: 4px !important;
+}
+
 .z-10 {
   z-index: 10 !important;
 }
@@ -1209,6 +1225,22 @@ body {
 .max-w-max {
   max-width: -moz-max-content !important;
   max-width: max-content !important;
+}
+
+.max-w-\[350px\] {
+  max-width: 350px !important;
+}
+
+.max-w-\[300px\] {
+  max-width: 300px !important;
+}
+
+.max-w-\[250px\] {
+  max-width: 250px !important;
+}
+
+.max-w-\[260px\] {
+  max-width: 260px !important;
 }
 
 .flex-1 {
@@ -1858,6 +1890,16 @@ body {
 .py-8 {
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
+}
+
+.px-\[0\.3rem\] {
+  padding-left: 0.3rem !important;
+  padding-right: 0.3rem !important;
+}
+
+.py-\[0\.2rem\] {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
 }
 
 .pb-4 {

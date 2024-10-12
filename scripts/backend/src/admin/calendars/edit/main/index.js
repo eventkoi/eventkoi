@@ -3,8 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 
 import { Box } from "@/components/box";
-import { CalendarName } from "@/components/calendar-name";
-import { CalendarSlug } from "@/components/calendar-slug";
+import { CalendarName } from "@/components/calendar/calendar-name";
+import { CalendarSlug } from "@/components/calendar/calendar-slug";
 
 export function CalendarEditMain() {
   const [calendar, setCalendar] = useOutletContext();

@@ -13998,16 +13998,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
+/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var _components_calendar_calendar_display__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-display */ "./src/components/calendar/calendar-display.js");
+/* harmony import */ var _components_calendar_calendar_start_day__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/calendar/calendar-start-day */ "./src/components/calendar/calendar-start-day.js");
+/* harmony import */ var _components_calendar_calendar_time_frame__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/calendar/calendar-time-frame */ "./src/components/calendar/calendar-time-frame.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+
+
+
 
 
 
 function CalendarEditDetails() {
-  const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useOutletContext)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useOutletContext)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid w-full"
-  }, "test"));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_7__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_6__.Heading, {
+    level: 3
+  }, "Additional details")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_display__WEBPACK_IMPORTED_MODULE_3__.CalendarDisplay, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_time_frame__WEBPACK_IMPORTED_MODULE_5__.CalendarTimeFrame, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_start_day__WEBPACK_IMPORTED_MODULE_4__.CalendarStartDay, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  })));
 }
 
 /***/ }),
@@ -14024,16 +14047,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
+/* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
+/* harmony import */ var _components_calendar_calendar_block__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-block */ "./src/components/calendar/calendar-block.js");
+/* harmony import */ var _components_calendar_calendar_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/calendar/calendar-link */ "./src/components/calendar/calendar-link.js");
+/* harmony import */ var _components_calendar_calendar_shortcode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/calendar/calendar-shortcode */ "./src/components/calendar/calendar-shortcode.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+
+
+
 
 
 
 function CalendarEditEmbed() {
-  const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useOutletContext)();
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_1__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useOutletContext)();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid w-full"
-  }, "test"));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_7__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_6__.Heading, {
+    level: 3
+  }, "Embed")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_link__WEBPACK_IMPORTED_MODULE_4__.CalendarLink, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_shortcode__WEBPACK_IMPORTED_MODULE_5__.CalendarShortcode, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_block__WEBPACK_IMPORTED_MODULE_3__.CalendarBlock, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  })));
 }
 
 /***/ }),
@@ -14053,8 +14099,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _components_calendar_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/calendar-header */ "./src/components/calendar-header.js");
-/* harmony import */ var _components_calendar_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar-tabs */ "./src/components/calendar-tabs.js");
+/* harmony import */ var _components_calendar_calendar_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/calendar/calendar-header */ "./src/components/calendar/calendar-header.js");
+/* harmony import */ var _components_calendar_calendar_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-tabs */ "./src/components/calendar/calendar-tabs.js");
 /* harmony import */ var _components_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/loader */ "./src/components/loader.js");
 /* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/wrapper */ "./src/components/wrapper.js");
 /* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
@@ -14124,7 +14170,7 @@ function CalendarEdit() {
       className: "w-full flex-1 flex items-center justify-center text-sm flex-col gap-4 relative"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_loader__WEBPACK_IMPORTED_MODULE_4__.Loader, null));
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_header__WEBPACK_IMPORTED_MODULE_2__.CalendarHeader, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_header__WEBPACK_IMPORTED_MODULE_2__.CalendarHeader, {
     loading: loading,
     setLoading: setLoading,
     calendar: calendar,
@@ -14133,7 +14179,7 @@ function CalendarEdit() {
     className: "max-w-[940px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_tabs__WEBPACK_IMPORTED_MODULE_3__.CalendarTabs, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_tabs__WEBPACK_IMPORTED_MODULE_3__.CalendarTabs, {
     calendar: calendar,
     setCalendar: setCalendar,
     location: location
@@ -14163,8 +14209,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_calendar_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar-name */ "./src/components/calendar-name.js");
-/* harmony import */ var _components_calendar_slug__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/calendar-slug */ "./src/components/calendar-slug.js");
+/* harmony import */ var _components_calendar_calendar_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-name */ "./src/components/calendar/calendar-name.js");
+/* harmony import */ var _components_calendar_calendar_slug__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/calendar/calendar-slug */ "./src/components/calendar/calendar-slug.js");
 
 
 
@@ -14175,10 +14221,10 @@ function CalendarEditMain() {
   const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useOutletContext)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid w-full"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_name__WEBPACK_IMPORTED_MODULE_3__.CalendarName, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_name__WEBPACK_IMPORTED_MODULE_3__.CalendarName, {
     calendar: calendar,
     setCalendar: setCalendar
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_slug__WEBPACK_IMPORTED_MODULE_4__.CalendarSlug, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_slug__WEBPACK_IMPORTED_MODULE_4__.CalendarSlug, {
     calendar: calendar,
     setCalendar: setCalendar
   })));
@@ -14229,17 +14275,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
-/* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
-/* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
-/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
-/* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
-/* harmony import */ var _lib_toast__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/lib/toast */ "./src/lib/toast.js");
-/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/link-2.js");
+/* harmony import */ var _components_ui_badge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/badge */ "./src/components/ui/badge.jsx");
+/* harmony import */ var _components_ui_checkbox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/checkbox */ "./src/components/ui/checkbox.jsx");
+/* harmony import */ var _components_add_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/add-button */ "./src/components/add-button.js");
+/* harmony import */ var _components_data_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/data-table */ "./src/components/data-table.js");
+/* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
+/* harmony import */ var _components_sort_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/sort-button */ "./src/components/sort-button.js");
+/* harmony import */ var _lib_toast__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/lib/toast */ "./src/lib/toast.js");
+/* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/link-2.js");
+
 
 
 
@@ -14266,7 +14314,7 @@ const columns = [{
     table
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-center min-h-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_2__.Checkbox, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_3__.Checkbox, {
     checked: table.getIsAllPageRowsSelected() || table.getIsSomePageRowsSelected() && "indeterminate",
     onCheckedChange: value => table.toggleAllPageRowsSelected(!!value),
     "aria-label": "Select all"
@@ -14275,7 +14323,7 @@ const columns = [{
     row
   }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center justify-center min-h-6"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_2__.Checkbox, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_checkbox__WEBPACK_IMPORTED_MODULE_3__.Checkbox, {
     checked: row.getIsSelected(),
     onCheckedChange: value => row.toggleSelected(!!value),
     "aria-label": "Select row"
@@ -14286,13 +14334,14 @@ const columns = [{
   accessorKey: "name",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_6__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
     title: "Calendar name",
     column: column
   }),
   cell: ({
     row
   }) => {
+    const isDefaultCal = parseInt(row.original.id) === parseInt(eventkoi_params.default_cal);
     const url = "#/calendars/" + parseInt(row.original.id) + "/main";
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "grid space-y-1"
@@ -14300,11 +14349,13 @@ const columns = [{
       className: "flex gap-2 items-center text-foreground"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: url,
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_8__.cn)("hover:underline hover:decoration-dotted underline-offset-4")
-    }, row.getValue("name")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("hover:underline hover:decoration-dotted underline-offset-4")
+    }, row.getValue("name")), isDefaultCal && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_badge__WEBPACK_IMPORTED_MODULE_2__.Badge, {
+      variant: "outline"
+    }, "Default"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       href: row.original.url,
       className: "hidden group-hover:flex w-5 h-5 items-center justify-center"
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
       className: "w-full h-full"
     }))));
   },
@@ -14314,7 +14365,7 @@ const columns = [{
   accessorKey: "slug",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_6__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
     title: "Slug",
     column: column
   }),
@@ -14322,7 +14373,7 @@ const columns = [{
     row
   }) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_8__.cn)("text-foreground")
+      className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_9__.cn)("text-foreground")
     }, row.getValue("slug"));
   },
   filterFn: multiColumnSearch,
@@ -14331,7 +14382,7 @@ const columns = [{
   accessorKey: "count",
   header: ({
     column
-  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_6__.SortButton, {
+  }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_sort_button__WEBPACK_IMPORTED_MODULE_7__.SortButton, {
     title: "Events count",
     column: column
   }),
@@ -14349,7 +14400,7 @@ const columns = [{
 function CalendarsOverview() {
   const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [data, setData] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
-  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useSearchParams)();
+  const [searchParams, setSearchParams] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useSearchParams)();
   const fetchResults = async (toastMessage = null) => {
     await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
       path: `${eventkoi_params.api}/calendars`,
@@ -14358,7 +14409,7 @@ function CalendarsOverview() {
       console.log(response);
       setIsLoading(false);
       setData(response);
-      (0,_lib_toast__WEBPACK_IMPORTED_MODULE_7__.showStaticToast)(toastMessage);
+      (0,_lib_toast__WEBPACK_IMPORTED_MODULE_8__.showStaticToast)(toastMessage);
     }).catch(error => {
       setIsLoading(false);
     });
@@ -14372,10 +14423,10 @@ function CalendarsOverview() {
     className: "flex flex-col gap-8"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "mx-auto flex w-full gap-2 justify-between"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_5__.Heading, null, "Calendars"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_add_button__WEBPACK_IMPORTED_MODULE_3__.AddButton, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_6__.Heading, null, "Calendars"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_add_button__WEBPACK_IMPORTED_MODULE_4__.AddButton, {
     title: "Create calendar",
     url: "/calendars/add"
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_data_table__WEBPACK_IMPORTED_MODULE_4__.DataTable, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_data_table__WEBPACK_IMPORTED_MODULE_5__.DataTable, {
     data: data,
     columns: columns,
     empty: "No calendars are found.",
@@ -14455,10 +14506,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_event_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-calendar */ "./src/components/event-calendar.js");
-/* harmony import */ var _components_event_description__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-description */ "./src/components/event-description.js");
-/* harmony import */ var _components_event_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event-image */ "./src/components/event-image.js");
-/* harmony import */ var _components_event_template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/event-template */ "./src/components/event-template.js");
+/* harmony import */ var _components_event_event_calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event/event-calendar */ "./src/components/event/event-calendar.js");
+/* harmony import */ var _components_event_event_description__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event/event-description */ "./src/components/event/event-description.js");
+/* harmony import */ var _components_event_event_image__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event/event-image */ "./src/components/event/event-image.js");
+/* harmony import */ var _components_event_event_template__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/event/event-template */ "./src/components/event/event-template.js");
 /* harmony import */ var _components_heading__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/components/heading */ "./src/components/heading.js");
 /* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
 
@@ -14477,16 +14528,16 @@ function EventEditDetails() {
     className: "grid w-full"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_8__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_heading__WEBPACK_IMPORTED_MODULE_7__.Heading, {
     level: 3
-  }, "Additional details")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_description__WEBPACK_IMPORTED_MODULE_4__.EventDescription, {
+  }, "Additional details")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_description__WEBPACK_IMPORTED_MODULE_4__.EventDescription, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_template__WEBPACK_IMPORTED_MODULE_6__.EventTemplate, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_template__WEBPACK_IMPORTED_MODULE_6__.EventTemplate, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_calendar__WEBPACK_IMPORTED_MODULE_3__.EventCalendar, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_calendar__WEBPACK_IMPORTED_MODULE_3__.EventCalendar, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_image__WEBPACK_IMPORTED_MODULE_5__.EventImage, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_image__WEBPACK_IMPORTED_MODULE_5__.EventImage, {
     event: event,
     setEvent: setEvent
   })));
@@ -14510,8 +14561,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var _components_event_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-header */ "./src/components/event-header.js");
-/* harmony import */ var _components_event_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-tabs */ "./src/components/event-tabs.js");
+/* harmony import */ var _components_event_event_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event/event-header */ "./src/components/event/event-header.js");
+/* harmony import */ var _components_event_event_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event/event-tabs */ "./src/components/event/event-tabs.js");
 /* harmony import */ var _components_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/loader */ "./src/components/loader.js");
 /* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
 /* harmony import */ var _components_wrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/components/wrapper */ "./src/components/wrapper.js");
@@ -14631,7 +14682,7 @@ function EventEdit() {
       }
     }, "Restore event")));
   }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_header__WEBPACK_IMPORTED_MODULE_2__.EventHeader, {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_header__WEBPACK_IMPORTED_MODULE_2__.EventHeader, {
     loading: loading,
     setLoading: setLoading,
     event: event,
@@ -14640,7 +14691,7 @@ function EventEdit() {
     className: "max-w-[940px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "w-full flex-1 mx-auto items-start gap-[80px] grid grid-cols-[200px_1fr]"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_tabs__WEBPACK_IMPORTED_MODULE_3__.EventTabs, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_tabs__WEBPACK_IMPORTED_MODULE_3__.EventTabs, {
     event: event,
     setEvent: setEvent,
     location: location
@@ -14670,9 +14721,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_event_date__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-date */ "./src/components/event-date.js");
-/* harmony import */ var _components_event_location__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event-location */ "./src/components/event-location.js");
-/* harmony import */ var _components_event_name__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event-name */ "./src/components/event-name.js");
+/* harmony import */ var _components_event_event_date__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event/event-date */ "./src/components/event/event-date.js");
+/* harmony import */ var _components_event_event_location__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/event/event-location */ "./src/components/event/event-location.js");
+/* harmony import */ var _components_event_event_name__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/event/event-name */ "./src/components/event/event-name.js");
 
 
 
@@ -14684,13 +14735,13 @@ function EventEditMain() {
   const [event, setEvent] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useOutletContext)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid w-full"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_name__WEBPACK_IMPORTED_MODULE_5__.EventName, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_name__WEBPACK_IMPORTED_MODULE_5__.EventName, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_date__WEBPACK_IMPORTED_MODULE_3__.EventDate, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_date__WEBPACK_IMPORTED_MODULE_3__.EventDate, {
     event: event,
     setEvent: setEvent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_location__WEBPACK_IMPORTED_MODULE_4__.EventLocation, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_location__WEBPACK_IMPORTED_MODULE_4__.EventLocation, {
     event: event,
     setEvent: setEvent
   })));
@@ -15472,10 +15523,90 @@ function BulkActions({
 
 /***/ }),
 
-/***/ "./src/components/calendar-header.js":
-/*!*******************************************!*\
-  !*** ./src/components/calendar-header.js ***!
-  \*******************************************/
+/***/ "./src/components/calendar/calendar-block.js":
+/*!***************************************************!*\
+  !*** ./src/components/calendar/calendar-block.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarBlock: () => (/* binding */ CalendarBlock)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+function CalendarBlock({
+  calendar,
+  setCalendar
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_2__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, null, "Block"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "relative max-w-[422px] space-y-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-base text-muted-foreground"
+  }, "1. In the block editor, add", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
+    className: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono font-semibold"
+  }, "/EK Calendar"), " ", "block."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-base text-muted-foreground"
+  }, "2. In the right hand side Settings panel, select the relevant calendar from the dropdown menu.")));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-display.js":
+/*!*****************************************************!*\
+  !*** ./src/components/calendar/calendar-display.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarDisplay: () => (/* binding */ CalendarDisplay)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/tabs */ "./src/components/ui/tabs.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+
+function CalendarDisplay({
+  calendar,
+  setCalendar
+}) {
+  const onTabChange = value => {
+    setCalendar(prevState => ({
+      ...prevState,
+      display: value
+    }));
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, null, "Default display type"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.Tabs, {
+    defaultValue: calendar?.display,
+    onValueChange: onTabChange,
+    className: "pt-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.TabsList, {
+    className: "border border-input rounded-lg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.TabsTrigger, {
+    value: "calendar",
+    className: "rounded-lg"
+  }, "Calendar"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.TabsTrigger, {
+    value: "list",
+    className: "rounded-lg"
+  }, "List"))));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-header.js":
+/*!****************************************************!*\
+  !*** ./src/components/calendar/calendar-header.js ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15485,8 +15616,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var _components_calendar_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/calendar-nav-back */ "./src/components/calendar-nav-back.js");
-/* harmony import */ var _components_calendar_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar-nav-bar */ "./src/components/calendar-nav-bar.js");
+/* harmony import */ var _components_calendar_calendar_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/calendar/calendar-nav-back */ "./src/components/calendar/calendar-nav-back.js");
+/* harmony import */ var _components_calendar_calendar_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-nav-bar */ "./src/components/calendar/calendar-nav-bar.js");
 /* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
 
 
@@ -15501,12 +15632,12 @@ function CalendarHeader({
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-b")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_nav_back__WEBPACK_IMPORTED_MODULE_2__.CalendarNavBack, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_nav_back__WEBPACK_IMPORTED_MODULE_2__.CalendarNavBack, {
     calendar: calendar,
     setCalendar: setCalendar
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full justify-end"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_nav_bar__WEBPACK_IMPORTED_MODULE_3__.CalendarNavBar, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_nav_bar__WEBPACK_IMPORTED_MODULE_3__.CalendarNavBar, {
     loading: loading,
     setLoading: setLoading,
     calendar: calendar,
@@ -15516,10 +15647,67 @@ function CalendarHeader({
 
 /***/ }),
 
-/***/ "./src/components/calendar-name.js":
-/*!*****************************************!*\
-  !*** ./src/components/calendar-name.js ***!
-  \*****************************************/
+/***/ "./src/components/calendar/calendar-link.js":
+/*!**************************************************!*\
+  !*** ./src/components/calendar/calendar-link.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarLink: () => (/* binding */ CalendarLink)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/files.js");
+
+
+
+
+
+
+
+function CalendarLink({
+  calendar,
+  setCalendar
+}) {
+  const [copying, setCopying] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_3__.Label, null, "Calendar link"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "relative max-w-[422px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
+    type: "text",
+    value: calendar?.url,
+    className: "w-full",
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    variant: "secondary",
+    type: "submit",
+    className: "absolute h-8 px-2 right-[5px] top-[4px] border-none cursor-pointer hover:bg-input",
+    onClick: () => {
+      setCopying(true);
+      navigator.clipboard.writeText(calendar?.url);
+      setTimeout(() => {
+        setCopying(false);
+      }, 1200);
+    }
+  }, copying ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: "mr-2 h-5 w-5"
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: "mr-2 h-5 w-5"
+  }), copying ? "Copied!" : "Copy")));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-name.js":
+/*!**************************************************!*\
+  !*** ./src/components/calendar/calendar-name.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15595,10 +15783,10 @@ function CalendarName({
 
 /***/ }),
 
-/***/ "./src/components/calendar-nav-back.js":
-/*!*********************************************!*\
-  !*** ./src/components/calendar-nav-back.js ***!
-  \*********************************************/
+/***/ "./src/components/calendar/calendar-nav-back.js":
+/*!******************************************************!*\
+  !*** ./src/components/calendar/calendar-nav-back.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15639,10 +15827,10 @@ function CalendarNavBack({
 
 /***/ }),
 
-/***/ "./src/components/calendar-nav-bar.js":
-/*!********************************************!*\
-  !*** ./src/components/calendar-nav-bar.js ***!
-  \********************************************/
+/***/ "./src/components/calendar/calendar-nav-bar.js":
+/*!*****************************************************!*\
+  !*** ./src/components/calendar/calendar-nav-bar.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15800,10 +15988,67 @@ function CalendarNavBar({
 
 /***/ }),
 
-/***/ "./src/components/calendar-slug.js":
-/*!*****************************************!*\
-  !*** ./src/components/calendar-slug.js ***!
-  \*****************************************/
+/***/ "./src/components/calendar/calendar-shortcode.js":
+/*!*******************************************************!*\
+  !*** ./src/components/calendar/calendar-shortcode.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarShortcode: () => (/* binding */ CalendarShortcode)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var _components_ui_input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/input */ "./src/components/ui/input.jsx");
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/files.js");
+
+
+
+
+
+
+
+function CalendarShortcode({
+  calendar,
+  setCalendar
+}) {
+  const [copying, setCopying] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_4__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_3__.Label, null, "Shortcode"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "relative max-w-[260px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_2__.Input, {
+    type: "text",
+    value: calendar?.shortcode,
+    className: "w-full",
+    readOnly: true
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    variant: "secondary",
+    type: "submit",
+    className: "absolute h-8 px-2 right-[5px] top-[4px] border-none cursor-pointer hover:bg-input",
+    onClick: () => {
+      setCopying(true);
+      navigator.clipboard.writeText(calendar?.shortcode);
+      setTimeout(() => {
+        setCopying(false);
+      }, 1200);
+    }
+  }, copying ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    className: "mr-2 h-5 w-5"
+  }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: "mr-2 h-5 w-5"
+  }), copying ? "Copied!" : "Copy")));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-slug.js":
+/*!**************************************************!*\
+  !*** ./src/components/calendar/calendar-slug.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15848,10 +16093,67 @@ function CalendarSlug({
 
 /***/ }),
 
-/***/ "./src/components/calendar-tabs.js":
-/*!*****************************************!*\
-  !*** ./src/components/calendar-tabs.js ***!
-  \*****************************************/
+/***/ "./src/components/calendar/calendar-start-day.js":
+/*!*******************************************************!*\
+  !*** ./src/components/calendar/calendar-start-day.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarStartDay: () => (/* binding */ CalendarStartDay)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/select */ "./src/components/ui/select.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+
+const days = {
+  monday: "Monday",
+  tuesday: "Tuesday",
+  wednesday: "Wednesday",
+  thursday: "Thursday",
+  friday: "Friday",
+  saturday: "Saturday",
+  sunday: "Sunday"
+};
+function CalendarStartDay({
+  calendar,
+  setCalendar
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "startday"
+  }, "Week starts on"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.Select, {
+    value: calendar?.startday,
+    onValueChange: value => {
+      setCalendar(prevState => ({
+        ...prevState,
+        startday: value
+      }));
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectTrigger, {
+    id: "startday",
+    className: "w-[250px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectValue, {
+    placeholder: "Select a day"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectContent, null, Object.keys(days).map(function (key, index) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectItem, {
+      key: `option-${key}`,
+      value: key
+    }, days[key]);
+  }))));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-tabs.js":
+/*!**************************************************!*\
+  !*** ./src/components/calendar/calendar-tabs.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -15897,6 +16199,52 @@ function CalendarTabs({
       className: activeTabClass
     }, item.title);
   }));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-time-frame.js":
+/*!********************************************************!*\
+  !*** ./src/components/calendar/calendar-time-frame.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarTimeFrame: () => (/* binding */ CalendarTimeFrame)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/tabs */ "./src/components/ui/tabs.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+
+function CalendarTimeFrame({
+  calendar,
+  setCalendar
+}) {
+  const onTabChange = value => {
+    setCalendar(prevState => ({
+      ...prevState,
+      timeframe: value
+    }));
+  };
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, null, "Default time frame to display"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.Tabs, {
+    defaultValue: calendar?.timeframe,
+    onValueChange: onTabChange,
+    className: "pt-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.TabsList, {
+    className: "border border-input rounded-lg"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.TabsTrigger, {
+    value: "month",
+    className: "rounded-lg"
+  }, "Month"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_tabs__WEBPACK_IMPORTED_MODULE_2__.TabsTrigger, {
+    value: "week",
+    className: "rounded-lg"
+  }, "Week"))));
 }
 
 /***/ }),
@@ -16108,10 +16456,10 @@ function DateWithRange() {
 
 /***/ }),
 
-/***/ "./src/components/event-calendar.js":
-/*!******************************************!*\
-  !*** ./src/components/event-calendar.js ***!
-  \******************************************/
+/***/ "./src/components/event/event-calendar.js":
+/*!************************************************!*\
+  !*** ./src/components/event/event-calendar.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16183,10 +16531,10 @@ function EventCalendar({
 
 /***/ }),
 
-/***/ "./src/components/event-date.js":
-/*!**************************************!*\
-  !*** ./src/components/event-date.js ***!
-  \**************************************/
+/***/ "./src/components/event/event-date.js":
+/*!********************************************!*\
+  !*** ./src/components/event/event-date.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16407,10 +16755,10 @@ function EventDate({
 
 /***/ }),
 
-/***/ "./src/components/event-description.js":
-/*!*********************************************!*\
-  !*** ./src/components/event-description.js ***!
-  \*********************************************/
+/***/ "./src/components/event/event-description.js":
+/*!***************************************************!*\
+  !*** ./src/components/event/event-description.js ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16448,10 +16796,10 @@ function EventDescription({
 
 /***/ }),
 
-/***/ "./src/components/event-header.js":
-/*!****************************************!*\
-  !*** ./src/components/event-header.js ***!
-  \****************************************/
+/***/ "./src/components/event/event-header.js":
+/*!**********************************************!*\
+  !*** ./src/components/event/event-header.js ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16461,8 +16809,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/utils */ "./src/lib/utils.js");
-/* harmony import */ var _components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event-nav-back */ "./src/components/event-nav-back.js");
-/* harmony import */ var _components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event-nav-bar */ "./src/components/event-nav-bar.js");
+/* harmony import */ var _components_event_event_nav_back__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/event/event-nav-back */ "./src/components/event/event-nav-back.js");
+/* harmony import */ var _components_event_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/event/event-nav-bar */ "./src/components/event/event-nav-bar.js");
 /* harmony import */ var _components_logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/logo */ "./src/components/logo.js");
 
 
@@ -16477,12 +16825,12 @@ function EventHeader({
 }) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("header", {
     className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex text-sm h-12 items-center border-b gap-6 px-8", "sticky top-8 z-[500] bg-muted h-20 shadow-sm border-b")
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_logo__WEBPACK_IMPORTED_MODULE_4__.Logo, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_nav_back__WEBPACK_IMPORTED_MODULE_2__.EventNavBack, {
     event: event,
     setEvent: setEvent
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full justify-end"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_event_event_nav_bar__WEBPACK_IMPORTED_MODULE_3__.EventNavBar, {
     loading: loading,
     setLoading: setLoading,
     event: event,
@@ -16492,10 +16840,10 @@ function EventHeader({
 
 /***/ }),
 
-/***/ "./src/components/event-image.js":
-/*!***************************************!*\
-  !*** ./src/components/event-image.js ***!
-  \***************************************/
+/***/ "./src/components/event/event-image.js":
+/*!*********************************************!*\
+  !*** ./src/components/event/event-image.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16642,10 +16990,10 @@ function EventImage({
 
 /***/ }),
 
-/***/ "./src/components/event-location.js":
-/*!******************************************!*\
-  !*** ./src/components/event-location.js ***!
-  \******************************************/
+/***/ "./src/components/event/event-location.js":
+/*!************************************************!*\
+  !*** ./src/components/event/event-location.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16738,10 +17086,10 @@ function EventLocation({
 
 /***/ }),
 
-/***/ "./src/components/event-name.js":
-/*!**************************************!*\
-  !*** ./src/components/event-name.js ***!
-  \**************************************/
+/***/ "./src/components/event/event-name.js":
+/*!********************************************!*\
+  !*** ./src/components/event/event-name.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16817,10 +17165,10 @@ function EventName({
 
 /***/ }),
 
-/***/ "./src/components/event-nav-back.js":
-/*!******************************************!*\
-  !*** ./src/components/event-nav-back.js ***!
-  \******************************************/
+/***/ "./src/components/event/event-nav-back.js":
+/*!************************************************!*\
+  !*** ./src/components/event/event-nav-back.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16861,10 +17209,10 @@ function EventNavBack({
 
 /***/ }),
 
-/***/ "./src/components/event-nav-bar.js":
-/*!*****************************************!*\
-  !*** ./src/components/event-nav-bar.js ***!
-  \*****************************************/
+/***/ "./src/components/event/event-nav-bar.js":
+/*!***********************************************!*\
+  !*** ./src/components/event/event-nav-bar.js ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -17027,10 +17375,10 @@ function EventNavBar({
 
 /***/ }),
 
-/***/ "./src/components/event-tabs.js":
-/*!**************************************!*\
-  !*** ./src/components/event-tabs.js ***!
-  \**************************************/
+/***/ "./src/components/event/event-tabs.js":
+/*!********************************************!*\
+  !*** ./src/components/event/event-tabs.js ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -17077,10 +17425,10 @@ function EventTabs({
 
 /***/ }),
 
-/***/ "./src/components/event-template.js":
-/*!******************************************!*\
-  !*** ./src/components/event-template.js ***!
-  \******************************************/
+/***/ "./src/components/event/event-template.js":
+/*!************************************************!*\
+  !*** ./src/components/event/event-template.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -20334,6 +20682,37 @@ const Calendar = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/check-check.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/check-check.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CheckCheck)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const CheckCheck = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("CheckCheck", [
+  ["path", { d: "M18 6 7 17l-5-5", key: "116fxf" }],
+  ["path", { d: "m22 10-7.5 7.5L13 16", key: "ke71qq" }]
+]);
+
+
+//# sourceMappingURL=check-check.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/check.js":
 /*!***********************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/check.js ***!
@@ -20701,6 +21080,38 @@ const EllipsisVertical = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["d
 
 
 //# sourceMappingURL=ellipsis-vertical.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/files.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/files.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Files)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.367.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Files = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Files", [
+  ["path", { d: "M20 7h-3a2 2 0 0 1-2-2V2", key: "x099mo" }],
+  ["path", { d: "M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z", key: "18t6ie" }],
+  ["path", { d: "M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8", key: "1nja0z" }]
+]);
+
+
+//# sourceMappingURL=files.js.map
 
 
 /***/ }),

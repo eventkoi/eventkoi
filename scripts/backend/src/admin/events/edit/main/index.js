@@ -3,9 +3,9 @@ import { useOutletContext } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 
 import { Box } from "@/components/box";
-import { EventDate } from "@/components/event-date";
-import { EventLocation } from "@/components/event-location";
-import { EventName } from "@/components/event-name";
+import { EventDate } from "@/components/event/event-date";
+import { EventLocation } from "@/components/event/event-location";
+import { EventName } from "@/components/event/event-name";
 
 export function EventEditMain() {
   const [event, setEvent] = useOutletContext();

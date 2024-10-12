@@ -9,8 +9,8 @@ import {
   useParams,
 } from "react-router-dom";
 
-import { EventHeader } from "@/components/event-header";
-import { EventTabs } from "@/components/event-tabs";
+import { EventHeader } from "@/components/event/event-header";
+import { EventTabs } from "@/components/event/event-tabs";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { Wrapper } from "@/components/wrapper";

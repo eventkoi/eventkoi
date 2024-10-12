@@ -1,0 +1,41 @@
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+import { Panel } from "@/components/panel";
+
+import { CheckCheck, Files } from "lucide-react";
+
+export function CalendarLink({ calendar, setCalendar }) {
+  const [copying, setCopying] = useState(false);
+
+  return (
+    <Panel>
+      <Label>Calendar link</Label>
+      <div className="relative max-w-[422px]">
+        <Input type="text" value={calendar?.url} className="w-full" readOnly />
+        <Button
+          variant="secondary"
+          type="submit"
+          className="absolute h-8 px-2 right-[5px] top-[4px] border-none cursor-pointer hover:bg-input"
+          onClick={() => {
+            setCopying(true);
+            navigator.clipboard.writeText(calendar?.url);
+            setTimeout(() => {
+              setCopying(false);
+            }, 1200);
+          }}
+        >
+          {copying ? (
+            <CheckCheck className="mr-2 h-5 w-5" />
+          ) : (
+            <Files className="mr-2 h-5 w-5" />
+          )}
+          {copying ? "Copied!" : "Copy"}
+        </Button>
+      </div>
+    </Panel>
+  );
+}

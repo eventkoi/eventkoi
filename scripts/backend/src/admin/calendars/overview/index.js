@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 import apiRequest from "@wordpress/api-fetch";
 
+import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import { AddButton } from "@/components/add-button";
@@ -57,6 +58,8 @@ const columns = [
       <SortButton title="Calendar name" column={column} />
     ),
     cell: ({ row }) => {
+      const isDefaultCal =
+        parseInt(row.original.id) === parseInt(eventkoi_params.default_cal);
       const url = "#/calendars/" + parseInt(row.original.id) + "/main";
       return (
         <div className="grid space-y-1">
@@ -69,6 +72,7 @@ const columns = [
             >
               {row.getValue("name")}
             </a>
+            {isDefaultCal && <Badge variant="outline">Default</Badge>}
             <a
               href={row.original.url}
               className="hidden group-hover:flex w-5 h-5 items-center justify-center"

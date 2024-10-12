@@ -3,8 +3,8 @@ import apiRequest from "@wordpress/api-fetch";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { CalendarHeader } from "@/components/calendar-header";
-import { CalendarTabs } from "@/components/calendar-tabs";
+import { CalendarHeader } from "@/components/calendar/calendar-header";
+import { CalendarTabs } from "@/components/calendar/calendar-tabs";
 import { Loader } from "@/components/loader";
 import { Wrapper } from "@/components/wrapper";
 

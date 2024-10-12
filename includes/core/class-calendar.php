@@ -53,10 +53,15 @@ class Calendar {
 	public static function get_meta() {
 
 		$meta = array(
-			'id'   => self::get_id(),
-			'name' => self::get_name(),
-			'slug' => self::get_slug(),
-			'url'  => self::get_url(),
+			'id'        => self::get_id(),
+			'name'      => self::get_name(),
+			'slug'      => self::get_slug(),
+			'url'       => self::get_url(),
+			'count'     => self::get_count(),
+			'display'   => self::get_display(),
+			'timeframe' => self::get_timeframe(),
+			'startday'  => self::get_startday(),
+			'shortcode' => self::get_shortcode(),
 		);
 
 		return apply_filters( 'eventkoi_get_calendar_meta', $meta, self::$calendar_id, self::$calendar );
@@ -96,6 +101,63 @@ class Calendar {
 		$url = get_term_link( self::get_slug(), 'event_cal' );
 
 		return apply_filters( 'eventkoi_get_calendar_url', $url, self::$calendar_id, self::$calendar );
+	}
+
+	/**
+	 * Get count.
+	 */
+	public static function get_count() {
+		$count = self::$calendar->count;
+
+		return apply_filters( 'eventkoi_get_calendar_count', $count, self::$calendar_id, self::$calendar );
+	}
+
+	/**
+	 * Get display type.
+	 */
+	public static function get_display() {
+		$display = get_term_meta( self::$calendar_id, 'display', true );
+
+		if ( empty( $display ) ) {
+			$display = 'calendar';
+		}
+
+		return apply_filters( 'eventkoi_get_calendar_display', $display, self::$calendar_id, self::$calendar );
+	}
+
+	/**
+	 * Get timeframe display.
+	 */
+	public static function get_timeframe() {
+		$timeframe = get_term_meta( self::$calendar_id, 'timeframe', true );
+
+		if ( empty( $timeframe ) ) {
+			$timeframe = 'month';
+		}
+
+		return apply_filters( 'eventkoi_get_calendar_timeframe', $timeframe, self::$calendar_id, self::$calendar );
+	}
+
+	/**
+	 * Get week start day.
+	 */
+	public static function get_startday() {
+		$startday = get_term_meta( self::$calendar_id, 'startday', true );
+
+		if ( empty( $startday ) ) {
+			$startday = 'monday';
+		}
+
+		return apply_filters( 'eventkoi_get_calendar_startday', $startday, self::$calendar_id, self::$calendar );
+	}
+
+	/**
+	 * Get shortcode.
+	 */
+	public static function get_shortcode() {
+		$shortcode = '[ek_calendar id=' . absint( self::get_id() ) . ']';
+
+		return apply_filters( 'eventkoi_get_calendar_shortcode', $shortcode, self::$calendar_id, self::$calendar );
 	}
 
 	/**
@@ -169,6 +231,14 @@ class Calendar {
 		$meta = apply_filters( 'eventkoi_update_event_meta', $meta, self::$calendar_id, self::$calendar );
 
 		do_action( 'eventkoi_before_update_calendar_meta', $meta, self::$calendar_id, self::$calendar );
+
+		$display   = ! empty( $meta['display'] ) ? sanitize_text_field( $meta['display'] ) : 'calendar';
+		$timeframe = ! empty( $meta['timeframe'] ) ? sanitize_text_field( $meta['timeframe'] ) : 'month';
+		$startday  = ! empty( $meta['startday'] ) ? sanitize_text_field( $meta['startday'] ) : 'monday';
+
+		update_term_meta( self::$calendar_id, 'display', (string) $display );
+		update_term_meta( self::$calendar_id, 'timeframe', (string) $timeframe );
+		update_term_meta( self::$calendar_id, 'startday', (string) $startday );
 
 		do_action( 'eventkoi_after_update_calendar_meta', $meta, self::$calendar_id, self::$calendar );
 	}

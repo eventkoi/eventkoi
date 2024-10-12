@@ -3,10 +3,10 @@ import { useOutletContext } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 
 import { Box } from "@/components/box";
-import { EventCalendar } from "@/components/event-calendar";
-import { EventDescription } from "@/components/event-description";
-import { EventImage } from "@/components/event-image";
-import { EventTemplate } from "@/components/event-template";
+import { EventCalendar } from "@/components/event/event-calendar";
+import { EventDescription } from "@/components/event/event-description";
+import { EventImage } from "@/components/event/event-image";
+import { EventTemplate } from "@/components/event/event-template";
 import { Heading } from "@/components/heading";
 import { Panel } from "@/components/panel";
 

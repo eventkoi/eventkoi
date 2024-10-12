@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
-import { EventNavBack } from "@/components/event-nav-back";
-import { EventNavBar } from "@/components/event-nav-bar";
+import { CalendarNavBack } from "@/components/calendar/calendar-nav-back";
+import { CalendarNavBar } from "@/components/calendar/calendar-nav-bar";
 import { Logo } from "@/components/logo";
 
-export function EventHeader({ loading, setLoading, event, setEvent }) {
+export function CalendarHeader({ loading, setLoading, calendar, setCalendar }) {
   return (
     <header
       className={cn(
@@ -13,13 +13,13 @@ export function EventHeader({ loading, setLoading, event, setEvent }) {
       )}
     >
       <Logo />
-      <EventNavBack event={event} setEvent={setEvent} />
+      <CalendarNavBack calendar={calendar} setCalendar={setCalendar} />
       <div className="flex w-full justify-end">
-        <EventNavBar
+        <CalendarNavBar
           loading={loading}
           setLoading={setLoading}
-          event={event}
-          setEvent={setEvent}
+          calendar={calendar}
+          setCalendar={setCalendar}
         />
       </div>
     </header>
