@@ -1780,6 +1780,11 @@ body {
   background-color: hsl(var(--destructive) / 0.05) !important;
 }
 
+.bg-\[\#578CA7\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(87 140 167 / var(--tw-bg-opacity)) !important;
+}
+
 .fill-current {
   fill: currentColor !important;
 }

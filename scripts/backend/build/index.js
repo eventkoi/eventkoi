@@ -14207,11 +14207,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_ui_separator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/separator */ "./src/components/ui/separator.jsx");
 /* harmony import */ var _components_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/box */ "./src/components/box.js");
-/* harmony import */ var _components_calendar_calendar_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-name */ "./src/components/calendar/calendar-name.js");
-/* harmony import */ var _components_calendar_calendar_slug__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/calendar/calendar-slug */ "./src/components/calendar/calendar-slug.js");
+/* harmony import */ var _components_calendar_calendar_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/calendar/calendar-color */ "./src/components/calendar/calendar-color.js");
+/* harmony import */ var _components_calendar_calendar_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/calendar/calendar-name */ "./src/components/calendar/calendar-name.js");
+/* harmony import */ var _components_calendar_calendar_slug__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/calendar/calendar-slug */ "./src/components/calendar/calendar-slug.js");
+
 
 
 
@@ -14219,13 +14221,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function CalendarEditMain() {
-  const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useOutletContext)();
+  const [calendar, setCalendar] = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useOutletContext)();
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_box__WEBPACK_IMPORTED_MODULE_2__.Box, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid w-full"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_name__WEBPACK_IMPORTED_MODULE_3__.CalendarName, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_name__WEBPACK_IMPORTED_MODULE_4__.CalendarName, {
     calendar: calendar,
     setCalendar: setCalendar
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_slug__WEBPACK_IMPORTED_MODULE_4__.CalendarSlug, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_slug__WEBPACK_IMPORTED_MODULE_5__.CalendarSlug, {
+    calendar: calendar,
+    setCalendar: setCalendar
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_separator__WEBPACK_IMPORTED_MODULE_1__.Separator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_calendar_calendar_color__WEBPACK_IMPORTED_MODULE_3__.CalendarColor, {
     calendar: calendar,
     setCalendar: setCalendar
   })));
@@ -15554,6 +15559,62 @@ function CalendarBlock({
   }, "/EK Calendar"), " ", "block."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-base text-muted-foreground"
   }, "2. In the right hand side Settings panel, select the relevant calendar from the dropdown menu.")));
+}
+
+/***/ }),
+
+/***/ "./src/components/calendar/calendar-color.js":
+/*!***************************************************!*\
+  !*** ./src/components/calendar/calendar-color.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CalendarColor: () => (/* binding */ CalendarColor)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_ui_label__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/ui/label */ "./src/components/ui/label.jsx");
+/* harmony import */ var _components_ui_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/ui/select */ "./src/components/ui/select.jsx");
+/* harmony import */ var _components_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/panel */ "./src/components/panel.js");
+
+
+
+
+const colors = {
+  accent: "Accent color"
+};
+const values = {
+  accent: "#578CA7"
+};
+function CalendarColor({
+  calendar,
+  setCalendar
+}) {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_1__.Label, {
+    htmlFor: "color"
+  }, "Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.Select, {
+    value: calendar?.color,
+    onValueChange: value => {
+      setCalendar(prevState => ({
+        ...prevState,
+        startday: value
+      }));
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectTrigger, {
+    id: "color",
+    className: "w-[250px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `flex rounded-full w-5 h-5 bg-[${values[calendar?.color]}]`
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectValue, {
+    placeholder: "Select a color"
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectContent, null, Object.keys(colors).map(function (key, index) {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectItem, {
+      key: `option-${key}`,
+      value: key
+    }, colors[key]);
+  }))));
 }
 
 /***/ }),
@@ -19137,14 +19198,14 @@ const SelectTrigger = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
   ...props
 }, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_select__WEBPACK_IMPORTED_MODULE_2__.Trigger, {
   ref: ref,
-  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
+  className: (0,_lib_utils__WEBPACK_IMPORTED_MODULE_1__.cn)("flex h-10 w-full items-center gap-4 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
   ...props
 }, children, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_radix_ui_react_select__WEBPACK_IMPORTED_MODULE_2__.Icon, {
   asChild: true
 }, props.isalternate ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
-  className: "h-3.5 w-3.5 opacity-50"
+  className: "ml-auto h-3.5 w-3.5 opacity-50"
 }) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-  className: "h-4 w-4 opacity-50"
+  className: "ml-auto h-4 w-4 opacity-50"
 }))));
 SelectTrigger.displayName = _radix_ui_react_select__WEBPACK_IMPORTED_MODULE_2__.Trigger.displayName;
 const SelectScrollUpButton = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({

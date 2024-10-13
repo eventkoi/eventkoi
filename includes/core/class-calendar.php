@@ -62,6 +62,7 @@ class Calendar {
 			'timeframe' => self::get_timeframe(),
 			'startday'  => self::get_startday(),
 			'shortcode' => self::get_shortcode(),
+			'color'     => self::get_color(),
 		);
 
 		return apply_filters( 'eventkoi_get_calendar_meta', $meta, self::$calendar_id, self::$calendar );
@@ -156,6 +157,19 @@ class Calendar {
 	}
 
 	/**
+	 * Get color.
+	 */
+	public static function get_color() {
+		$color = get_term_meta( self::$calendar_id, 'color', true );
+
+		if ( empty( $color ) ) {
+			$color = 'accent';
+		}
+
+		return apply_filters( 'eventkoi_get_calendar_color', $color, self::$calendar_id, self::$calendar );
+	}
+
+	/**
 	 * Get shortcode.
 	 */
 	public static function get_shortcode() {
@@ -241,10 +255,12 @@ class Calendar {
 		$display   = ! empty( $meta['display'] ) ? sanitize_text_field( $meta['display'] ) : 'calendar';
 		$timeframe = ! empty( $meta['timeframe'] ) ? sanitize_text_field( $meta['timeframe'] ) : 'month';
 		$startday  = ! empty( $meta['startday'] ) ? sanitize_text_field( $meta['startday'] ) : 'monday';
+		$color     = ! empty( $meta['color'] ) ? sanitize_text_field( $meta['color'] ) : 'accent';
 
 		update_term_meta( self::$calendar_id, 'display', (string) $display );
 		update_term_meta( self::$calendar_id, 'timeframe', (string) $timeframe );
 		update_term_meta( self::$calendar_id, 'startday', (string) $startday );
+		update_term_meta( self::$calendar_id, 'color', (string) $color );
 
 		do_action( 'eventkoi_after_update_calendar_meta', $meta, self::$calendar_id, self::$calendar );
 	}
