@@ -45,6 +45,26 @@ class Calendar {
 				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
 			)
 		);
+
+		register_rest_route(
+			EVENTKOI_API,
+			'/duplicate_calendar',
+			array(
+				'methods'             => 'post',
+				'callback'            => array( __CLASS__, 'duplicate_calendar' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
+			)
+		);
+
+		register_rest_route(
+			EVENTKOI_API,
+			'/delete_calendar',
+			array(
+				'methods'             => 'post',
+				'callback'            => array( __CLASS__, 'delete_calendar' ),
+				'permission_callback' => array( '\EventKoi\API\REST', 'private_api' ),
+			)
+		);
 	}
 
 	/**
@@ -82,6 +102,36 @@ class Calendar {
 
 		$query    = new SingleCal( $calendar['id'] );
 		$response = $query::update( $calendar );
+
+		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Duplicate a single calendar.
+	 *
+	 * @param object $request The request that is being passed to API.
+	 */
+	public static function duplicate_calendar( $request ) {
+
+		$data        = json_decode( $request->get_body(), true );
+		$calendar_id = ! empty( $data['calendar_id'] ) ? absint( $data['calendar_id'] ) : 0;
+
+		$calendar = new SingleCal( $calendar_id );
+		$response = $calendar::duplicate_calendar();
+
+		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * Delete a single calendar.
+	 *
+	 * @param object $request The request that is being passed to API.
+	 */
+	public static function delete_calendar( $request ) {
+
+		$data        = json_decode( $request->get_body(), true );
+		$calendar_id = ! empty( $data['calendar_id'] ) ? absint( $data['calendar_id'] ) : 0;
+		$response    = SingleCal::delete_calendar( $calendar_id );
 
 		return rest_ensure_response( $response );
 	}

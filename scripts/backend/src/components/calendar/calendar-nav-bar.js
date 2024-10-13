@@ -124,7 +124,7 @@ export function CalendarNavBar({ loading, setLoading, calendar, setCalendar }) {
     <div className="flex gap-2">
       <Button
         variant="link"
-        disabled={disabled}
+        disabled={disabled || !calendar.url}
         onClick={() => window.open(calendar?.url, "_blank")}
       >
         Preview
@@ -138,7 +138,7 @@ export function CalendarNavBar({ loading, setLoading, calendar, setCalendar }) {
             saveCalendar("publish");
           }}
         >
-          {calendar.id ? "Save" : "Publish"}
+          {calendar?.id ? "Save" : "Publish"}
         </Button>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -163,7 +163,7 @@ export function CalendarNavBar({ loading, setLoading, calendar, setCalendar }) {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="text-destructive focus:text-destructive"
-              disabled={calendar.id === parseInt(eventkoi_params.default_cal)}
+              disabled={calendar?.id === parseInt(eventkoi_params.default_cal)}
               onClick={() => {
                 deleteCalendar();
               }}

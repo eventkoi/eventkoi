@@ -46,9 +46,15 @@ class Scripts {
 		wp_enqueue_script( 'eventkoi-admin' );
 		wp_enqueue_media();
 
-		$events = new \EventKoi\Core\Events();
-		$event  = new \EventKoi\Core\Event( 0 );
-		$api    = new \EventKoi\API\REST();
+		$events   = new \EventKoi\Core\Events();
+		$event    = new \EventKoi\Core\Event( 0 );
+		$calendar = new \EventKoi\Core\Calendar( 0 );
+		$api      = new \EventKoi\API\REST();
+
+		$default_cal_id = (int) get_option( 'default_event_cal', 0 );
+		$default_cal    = get_term_by( 'id', $default_cal_id, 'event_cal' );
+		$cal_url        = get_term_link( $default_cal, 'event_cal' );
+		$cal_url        = str_replace( $default_cal->slug, '[calendar-name]', $cal_url );
 
 		$eventkoi_params = array(
 			'version'             => EVENTKOI_VERSION,
@@ -59,7 +65,9 @@ class Scripts {
 			'date_24h'            => wp_date( 'j M Y', strtotime( '+1 day', time() ) ),
 			'time_now'            => wp_date( 'g:i A', strtotime( '+1 hour', time() ) ),
 			'new_event'           => $event::get_meta(),
+			'new_calendar'        => $calendar::get_meta(),
 			'default_cal'         => (int) get_option( 'default_event_cal', 0 ),
+			'default_cal_url'     => untrailingslashit( $cal_url ),
 			'counts'              => array(
 				'events' => $events::get_counts(),
 			),

@@ -48,7 +48,7 @@ class Post_Types {
 
 		register_taxonomy(
 			'event_cal',
-			apply_filters( 'eventkoi_taxonomy_objects_event_cal', array( 'post', 'event' ) ),
+			apply_filters( 'eventkoi_taxonomy_objects_event_cal', array( 'event' ) ),
 			apply_filters(
 				'eventkoi_taxonomy_args_event_cal',
 				array(

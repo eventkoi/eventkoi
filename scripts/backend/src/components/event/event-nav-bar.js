@@ -131,7 +131,7 @@ export function EventNavBar({ loading, setLoading, event, setEvent }) {
       )}
       <Button
         variant="link"
-        disabled={disabled}
+        disabled={disabled || !event.url}
         onClick={() => window.open(event?.url, "_blank")}
       >
         Preview

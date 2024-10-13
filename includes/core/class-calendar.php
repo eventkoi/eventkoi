@@ -100,6 +100,10 @@ class Calendar {
 	public static function get_url() {
 		$url = get_term_link( self::get_slug(), 'event_cal' );
 
+		if ( is_wp_error( $url ) ) {
+			$url = '';
+		}
+
 		return apply_filters( 'eventkoi_get_calendar_url', $url, self::$calendar_id, self::$calendar );
 	}
 
@@ -107,7 +111,7 @@ class Calendar {
 	 * Get count.
 	 */
 	public static function get_count() {
-		$count = self::$calendar->count;
+		$count = isset( self::$calendar->count ) ? self::$calendar->count : 0;
 
 		return apply_filters( 'eventkoi_get_calendar_count', $count, self::$calendar_id, self::$calendar );
 	}
@@ -175,12 +179,14 @@ class Calendar {
 		$slug = ! empty( $meta['slug'] ) ? sanitize_text_field( $meta['slug'] ) : '';
 
 		if ( 0 === $id ) {
-			$args = array();
+			$args = array(
+				'slug' => ! empty( $slug ) ? $slug : '',
+			);
 
 			$last_id           = wp_insert_term( $name, 'event_cal', $args );
 			$calendar          = get_term_by( 'id', $last_id['term_id'], 'event_cal' );
 			self::$calendar    = $calendar;
-			self::$calendar_id = ! empty( $calendar->term_id ) ? $event->term_id : 0;
+			self::$calendar_id = ! empty( $calendar->term_id ) ? $calendar->term_id : 0;
 
 			self::update_meta( $meta );
 
@@ -241,5 +247,61 @@ class Calendar {
 		update_term_meta( self::$calendar_id, 'startday', (string) $startday );
 
 		do_action( 'eventkoi_after_update_calendar_meta', $meta, self::$calendar_id, self::$calendar );
+	}
+
+	/**
+	 * Delete a single calendar.
+	 *
+	 * @param int $calendar_id ID of calendar.
+	 */
+	public static function delete_calendar( $calendar_id = 0 ) {
+
+		if ( (int) get_option( 'default_event_cal', 0 ) === (int) $calendar_id ) {
+			return;
+		}
+
+		wp_delete_term( $calendar_id, 'event_cal' );
+
+		$result = array(
+			'message' => __( 'Calendar deleted.', 'eventkoi' ),
+		);
+
+		return $result;
+	}
+
+	/**
+	 * Duplicate a single calendar.
+	 */
+	public static function duplicate_calendar() {
+
+		$meta = self::get_meta();
+
+		$calendar = get_term_by( 'id', self::get_id(), 'event_cal' );
+
+		/* translators: %s: calendar name */
+		$name = sprintf( __( '[Duplicate] %s', 'eventkoi' ), $calendar->name );
+
+		$args = array(
+			'slug'        => wp_unique_term_slug( $calendar->name, $calendar ),
+			'description' => $calendar->description,
+		);
+
+		$new_term = wp_insert_term( $name, 'event_cal', $args );
+		$new_cal  = get_term_by( 'id', $new_term['term_id'], 'event_cal' );
+
+		self::$calendar    = $new_cal;
+		self::$calendar_id = ! empty( $new_cal->term_id ) ? $new_cal->term_id : 0;
+
+		self::update_meta( $meta );
+
+		$result = array_merge(
+			array(
+				'update_endpoint' => true,
+				'message'         => __( 'Calendar duplicated.', 'eventkoi' ),
+			),
+			self::get_meta(),
+		);
+
+		return $result;
 	}
 }

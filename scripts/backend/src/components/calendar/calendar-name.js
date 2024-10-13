@@ -46,7 +46,7 @@ export function CalendarName({ calendar, setCalendar }) {
         className="inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-2	border-transparent hover:border-input focus:border-input active:border-input"
         contentEditable
         spellCheck={false}
-        placeholder="Click to add event name"
+        placeholder="Click to add calendar name"
         dangerouslySetInnerHTML={{
           __html: calendar?.name,
         }}

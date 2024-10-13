@@ -9,7 +9,7 @@ export function CalendarBlock({ calendar, setCalendar }) {
       <div className="relative max-w-[422px] space-y-4">
         <div className="text-base text-muted-foreground">
           1. In the block editor, add{" "}
-          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono font-semibold">
+          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] text-sm font-mono font-semibold">
             /EK Calendar
           </code>{" "}
           block.

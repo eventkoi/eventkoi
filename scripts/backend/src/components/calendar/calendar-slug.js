@@ -29,7 +29,8 @@ export function CalendarSlug({ calendar, setCalendar }) {
       <div className="pt-1 text-muted-foreground">
         This determines the URL of your calendar:
         <br />
-        {`${url}${slug}`}
+        {calendar.url && <>{`${url}${slug}`}</>}
+        {!calendar.url && <>{eventkoi_params.default_cal_url}</>}
       </div>
     </Panel>
   );

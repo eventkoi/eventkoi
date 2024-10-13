@@ -71,6 +71,7 @@ export function CalendarEdit() {
 
   useEffect(() => {
     if (!calendarId) {
+      console.log(eventkoi_params.new_calendar);
       setCalendar(eventkoi_params.new_calendar);
       setLoading(false);
     } else {

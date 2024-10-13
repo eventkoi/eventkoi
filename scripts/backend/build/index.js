@@ -14159,6 +14159,7 @@ function CalendarEdit() {
   }, [location]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     if (!calendarId) {
+      console.log(eventkoi_params.new_calendar);
       setCalendar(eventkoi_params.new_calendar);
       setLoading(false);
     } else {
@@ -15549,7 +15550,7 @@ function CalendarBlock({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-base text-muted-foreground"
   }, "1. In the block editor, add", " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", {
-    className: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono font-semibold"
+    className: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] text-sm font-mono font-semibold"
   }, "/EK Calendar"), " ", "block."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-base text-muted-foreground"
   }, "2. In the right hand side Settings panel, select the relevant calendar from the dropdown menu.")));
@@ -15763,7 +15764,7 @@ function CalendarName({
     className: "inline-flex rounded-md items-center px-2 py-1 cursor-pointer font-medium text-lg border border-2\tborder-transparent hover:border-input focus:border-input active:border-input",
     contentEditable: true,
     spellCheck: false,
-    placeholder: "Click to add event name",
+    placeholder: "Click to add calendar name",
     dangerouslySetInnerHTML: {
       __html: calendar?.name
     },
@@ -15947,7 +15948,7 @@ function CalendarNavBar({
     className: "flex gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "link",
-    disabled: disabled,
+    disabled: disabled || !calendar.url,
     onClick: () => window.open(calendar?.url, "_blank")
   }, "Preview"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-[1px]"
@@ -15958,7 +15959,7 @@ function CalendarNavBar({
     onClick: () => {
       saveCalendar("publish");
     }
-  }, calendar.id ? "Save" : "Publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenu, {
+  }, calendar?.id ? "Save" : "Publish"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenu, {
     modal: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuTrigger, {
     asChild: true
@@ -15979,7 +15980,7 @@ function CalendarNavBar({
     }
   }, "Create duplicate calendar"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuSeparator, null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_dropdown_menu__WEBPACK_IMPORTED_MODULE_3__.DropdownMenuItem, {
     className: "text-destructive focus:text-destructive",
-    disabled: calendar.id === parseInt(eventkoi_params.default_cal),
+    disabled: calendar?.id === parseInt(eventkoi_params.default_cal),
     onClick: () => {
       deleteCalendar();
     }
@@ -16088,7 +16089,7 @@ function CalendarSlug({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pt-1 text-muted-foreground"
-  }, "This determines the URL of your calendar:", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), `${url}${slug}`));
+  }, "This determines the URL of your calendar:", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), calendar.url && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, `${url}${slug}`), !calendar.url && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, eventkoi_params.default_cal_url)));
 }
 
 /***/ }),
@@ -17331,7 +17332,7 @@ function EventNavBar({
     }
   }, "Save draft"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "link",
-    disabled: disabled,
+    disabled: disabled || !event.url,
     onClick: () => window.open(event?.url, "_blank")
   }, "Preview"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center gap-[1px]"
