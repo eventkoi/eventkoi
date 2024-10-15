@@ -54,7 +54,7 @@ class Scripts {
 		$default_cal_id = (int) get_option( 'default_event_cal', 0 );
 		$default_cal    = get_term_by( 'id', $default_cal_id, 'event_cal' );
 		$cal_url        = get_term_link( $default_cal, 'event_cal' );
-		$cal_url        = str_replace( $default_cal->slug, '[calendar-name]', $cal_url );
+		$cal_url        = str_replace( $default_cal->slug, '', $cal_url );
 
 		$eventkoi_params = array(
 			'version'             => EVENTKOI_VERSION,
@@ -67,7 +67,7 @@ class Scripts {
 			'new_event'           => $event::get_meta(),
 			'new_calendar'        => $calendar::get_meta(),
 			'default_cal'         => (int) get_option( 'default_event_cal', 0 ),
-			'default_cal_url'     => untrailingslashit( $cal_url ),
+			'default_cal_url'     => trailingslashit( $cal_url ),
 			'counts'              => array(
 				'events' => $events::get_counts(),
 			),

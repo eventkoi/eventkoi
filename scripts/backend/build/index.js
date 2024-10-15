@@ -15606,7 +15606,10 @@ function CalendarColor({
     id: "color",
     className: "w-[250px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `flex rounded-full w-5 h-5 bg-[${values[calendar?.color]}]`
+    style: {
+      backgroundColor: values[calendar?.color]
+    },
+    className: `flex rounded-full w-5 h-5`
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectValue, {
     placeholder: "Select a color"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_select__WEBPACK_IMPORTED_MODULE_2__.SelectContent, null, Object.keys(colors).map(function (key, index) {
@@ -16126,13 +16129,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function CalendarSlug({
   calendar,
   setCalendar
 }) {
-  const [url, setURL] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(calendar.url.replace(calendar.slug + "/", ""));
-  const [slug, setSlug] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(calendar.slug);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
     htmlFor: "slug"
   }, "Slug"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
@@ -16142,7 +16142,6 @@ function CalendarSlug({
     placeholder: "Address",
     className: "max-w-[422px]",
     onChange: e => {
-      setSlug(e.target.value);
       setCalendar(prevState => ({
         ...prevState,
         slug: e.target.value
@@ -16150,7 +16149,7 @@ function CalendarSlug({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pt-1 text-muted-foreground"
-  }, "This determines the URL of your calendar:", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), calendar.url && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, `${url}${slug}`), !calendar.url && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, eventkoi_params.default_cal_url)));
+  }, "This determines the URL of your calendar:", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, eventkoi_params.default_cal_url, calendar?.slug)));
 }
 
 /***/ }),

@@ -32,9 +32,8 @@ export function CalendarColor({ calendar, setCalendar }) {
       >
         <SelectTrigger id="color" className="w-[250px]">
           <div
-            className={`flex rounded-full w-5 h-5 bg-[${
-              values[calendar?.color]
-            }]`}
+            style={{ backgroundColor: values[calendar?.color] }}
+            className={`flex rounded-full w-5 h-5`}
           />
           <SelectValue placeholder="Select a color" />
         </SelectTrigger>
