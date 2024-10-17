@@ -15748,11 +15748,13 @@ function CalendarLink({
     type: "text",
     value: calendar?.url,
     className: "w-full",
-    readOnly: true
+    readOnly: true,
+    disabled: !calendar.url
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "secondary",
     type: "submit",
     className: "absolute h-8 px-2 right-[5px] top-[4px] border-none cursor-pointer hover:bg-input",
+    disabled: !calendar.url,
     onClick: () => {
       setCopying(true);
       navigator.clipboard.writeText(calendar?.url);
@@ -16089,11 +16091,13 @@ function CalendarShortcode({
     type: "text",
     value: calendar?.shortcode,
     className: "w-full",
-    readOnly: true
+    readOnly: true,
+    disabled: !calendar.url
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_button__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "secondary",
     type: "submit",
     className: "absolute h-8 px-2 right-[5px] top-[4px] border-none cursor-pointer hover:bg-input",
+    disabled: !calendar.url,
     onClick: () => {
       setCopying(true);
       navigator.clipboard.writeText(calendar?.shortcode);
@@ -16133,12 +16137,13 @@ function CalendarSlug({
   calendar,
   setCalendar
 }) {
+  let sanitizedSlug = calendar.name ? calendar.name.replace(/\s+/g, "-").toLowerCase() : "";
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_panel__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_label__WEBPACK_IMPORTED_MODULE_2__.Label, {
     htmlFor: "slug"
   }, "Slug"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_ui_input__WEBPACK_IMPORTED_MODULE_1__.Input, {
     type: "text",
     id: "slug",
-    value: calendar?.slug,
+    value: calendar.slug ? calendar.slug : sanitizedSlug,
     placeholder: "Address",
     className: "max-w-[422px]",
     onChange: e => {
@@ -16149,7 +16154,7 @@ function CalendarSlug({
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pt-1 text-muted-foreground"
-  }, "This determines the URL of your calendar:", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, eventkoi_params.default_cal_url, calendar?.slug)));
+  }, "This determines the URL of your calendar:", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("br", null), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, eventkoi_params.default_cal_url, calendar.slug ? calendar.slug : sanitizedSlug)));
 }
 
 /***/ }),

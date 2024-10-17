@@ -20,11 +20,13 @@ export function CalendarShortcode({ calendar, setCalendar }) {
           value={calendar?.shortcode}
           className="w-full"
           readOnly
+          disabled={!calendar.url}
         />
         <Button
           variant="secondary"
           type="submit"
           className="absolute h-8 px-2 right-[5px] top-[4px] border-none cursor-pointer hover:bg-input"
+          disabled={!calendar.url}
           onClick={() => {
             setCopying(true);
             navigator.clipboard.writeText(calendar?.shortcode);
